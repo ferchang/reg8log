@@ -1,0 +1,10 @@
+- Jim Wigginton <terrafrost -=At=- php -=Dot=- net>, the author of phpseclib, for his precious helps regarding cryptography, specially secure random number generation and the request entropy ghathering mechanism.
+
+- Yousha Aleayoub <Yousha -=At=- YPY -=Dot=- ir>, for poiting some problems and suggesting improvements including: MySQL error messages, turning on secure flag for cookies when connection is HTTPS, $_SERVER['SCRIPT_NAME'] not set on IIS, turning off session.use_trans_sid, inet_pton not available on some versions of PHP.
+Yousha's username in iranphp.org is Y.P.Y
+
+- some other memebers of forum.iranphp.org, specially Vahid Sohrabloo (username: admin)
+
+=============================
+
+I am not good at remembering people, so if anyone is omitted please tell me to add him/you.
