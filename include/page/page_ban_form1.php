@@ -91,7 +91,7 @@ if($_POST['which']=='username') echo ' checked="true" '; } else echo ' checked="
 <input type="submit" name="ban_form1" value="Submit" onClick="return validate()" /></td>
 </tr></table>
 </form>
-<a href="admin_operations.php">Admin operations</a><br><br>
+<a href="index.php">Admin operations</a><br><br>
 <a href="../index.php">Login page</a>
 </td></tr></table>
 </body>

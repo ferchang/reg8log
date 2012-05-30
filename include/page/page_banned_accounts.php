@@ -107,7 +107,7 @@ if($total>$per_pages[0]) {
 
 ?>
 </form>
-<a href="admin_operations.php">Admin operations</a><br><br>
+<a href="index.php">Admin operations</a><br><br>
 <a href="../index.php">Login page</a>
 </center>
 </body>

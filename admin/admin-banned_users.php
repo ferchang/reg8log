@@ -37,7 +37,7 @@ require_once '../include/code/code_db_object.php';
 
 $query='select * from `accounts` where `banned`!=0';
 
-if(!$total=$reg8log_db->result_num($query)) exit('<center><h3>No banned users found.</h3></h3><a href="../index.php">Login page</a></center>');
+if(!$total=$reg8log_db->result_num($query)) exit('<center><h3>No banned users found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 
 if(($page-1)*$per_page>=$total) {
 	$tmp3=floor($total/$per_page);

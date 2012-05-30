@@ -55,7 +55,7 @@ $query="select * from `pending_accounts` where (`email_verification_key`='' or `
 if(!$total=$reg8log_db->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
 	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">Info: ', $nonexistent_records, ' record(s) did not exist.</center>';
-	exit('<center><h3>No pending accounts eligible for admin confirmation (Query returned 0 rows).</h3><a href="admin_operations.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
+	exit('<center><h3>No pending accounts eligible for admin confirmation (Query returned 0 rows).</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 }
 
 if(($page-1)*$per_page>=$total) {
