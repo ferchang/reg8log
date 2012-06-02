@@ -50,7 +50,7 @@ require '../include/info/info_register.php';
 $expired1=time()-$email_verification_time;
 $expired2=time()-$admin_confirmation_time;
 
-$query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.') order by `timestamp` desc';
+$query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.')';
 
 if(!$total=$reg8log_db->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
@@ -68,7 +68,7 @@ if(($page-1)*$per_page>=$total) {
 
 $offset=($page-1)*$per_page;
 
-$query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.') order by `timestamp` desc limit '."$per_page offset $offset";
+$query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.') order by `auto` desc limit '."$per_page offset $offset";
 
 $reg8log_db->query($query);
 
