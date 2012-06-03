@@ -51,8 +51,18 @@ require '../include/page/page_sections.php';
 <table bgcolor="#7587b0">
 <tr><td>
 <ul>
-<li><a class="li_item" href="admin-accounts.php">Show/delete accounts</a><br><br>
-<li><a class="li_item" href="admin-pending_accounts.php">Approve/delete pending accounts</a><br><br>
+<li>Accounts:
+<ul>
+<li><a class="li_item" href="admin-accounts.php">Show/delete accounts</a>
+<li><a class="li_item" href="admin-search.php">Show/delete accounts by criteria</a>
+</ul>
+<br>
+<li>Pending accounts:
+<ul>
+<li><a class="li_item" href="admin-pending_accounts.php">Approve/delete pending accounts</a></ul>
+<br>
+<li>Ban:
+<ul>
 <li><a class="li_item" href="admin-ban_user.php">Ban a user</a>
 <li><a class="li_item" href="admin-unban_user.php">Unban a user</a>
 <li><a class="li_item" href="admin-banned_users.php">Show banned users</a>
