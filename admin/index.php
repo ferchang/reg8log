@@ -48,13 +48,12 @@ require '../include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0">
+<table bgcolor="#7587b0" style="position: relative; top: -100px">
 <tr><td>
 <ul>
 <li>Accounts:
 <ul>
 <li><a class="li_item" href="admin-accounts.php">Show/delete accounts</a>
-<li><a class="li_item" href="admin-search.php">Show/delete accounts by criteria</a>
 </ul>
 <br>
 <li>Pending accounts:
