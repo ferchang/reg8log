@@ -27,6 +27,7 @@ if(isset($_POST['delete'])) {
 $query="select * from `accounts` where `username`!='Admin'";
 
 if(!$total=$reg8log_db->result_num($query)) {
+	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
 	exit('<center><h3>No accounts (Query returned 0 rows).</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 }
 

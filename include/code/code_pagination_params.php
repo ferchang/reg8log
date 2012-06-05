@@ -10,7 +10,7 @@ $per_pages=array(10, 15, 20, 30, 40, 50, 70, 100, 150, 200, 300);
 
 $per_page=(isset($_GET['per_page']) and is_numeric($_GET['per_page']))? $_GET['per_page'] : $per_pages[0];
 
-if(isset($_GET['sort_by']) and in_array($_GET['sort_by'], array('uid', 'auto', 'username', 'email', 'gender', 'banned')))  $sort_by=$_GET['sort_by'];
+if(isset($_GET['sort_by']) and in_array($_GET['sort_by'], array('uid', 'auto', 'username', 'email', 'gender', 'banned', 'emails_sent', 'email_verified', 'notify_user')))  $sort_by=$_GET['sort_by'];
 else $sort_by='auto';
 
 if(isset($_GET['sort_dir']) and ($_GET['sort_dir']=='asc' or $_GET['sort_dir']=='desc')) $sort_dir=$_GET['sort_dir'];
