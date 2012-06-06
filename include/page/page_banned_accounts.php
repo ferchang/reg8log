@@ -4,8 +4,6 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 if(!isset($index_dir)) $index_dir='';
 
-$parent_page=true;
-
 $color1='#aaa';
 $color2='#ccc';
 
@@ -23,15 +21,30 @@ $num=$last-$first+1;
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+<link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
 <title>Banned users</title>
 <style>
-.page {
-	font-weight: bold;
-	color: #fff;
-	padding: 3px;
-	border: 1px solid #fff;
-}
 </style>
+<script>
+function is_digit(e) {
+	code = e.keyCode ? e.keyCode : e.which;
+	if(code<48 || code>57) return false;
+	else return true;
+}
+
+function validate_goto() {
+<?php
+echo '	last_page=', ceil($total/$per_page), ";\n";
+?>
+	page=document.getElementById('page').value;
+	if(page<1 || page>last_page ) {
+		alert('Page number must be between (including) 1 and '+last_page+'.');
+		document.getElementById('page').value='';
+		return false;
+	}
+	else return true;
+}
+</script>
 </head>
 <body bgcolor="#7587b0">
 <center>
@@ -47,18 +60,83 @@ require $index_dir.'include/code/code_generate_form_id.php';
 echo 'Records ', $first, ' - ', $last, ' of ', $total;
 echo '<table border cellpadding="3">';
 
-if(isset($err_msgs)) {
-	echo '<tr align="center"><td colspan="2"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">Errors:</span><br />';
-	foreach($err_msgs as $err_msg) {
-		$err_msg[0]=strtoupper($err_msg[0]);
-		echo "<span style=\"color: yellow\" >$err_msg</span><br />";
-	}
-	echo '</td></tr>';
-}
-
 require_once $index_dir.'include/func/func_duration2msg.php';
 
-echo '<tr style="background: brown; color: #fff"><th></th><th>Username</th><th>uid</th><th>Gender</th><th>Email</th><th>Member for</th><th>Ban until</th></tr>';
+echo '<tr style="background: brown; color: #fff"><th></th>';
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
+if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Username</a>";
+if($sort_by=='username') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=uid&sort_dir=";
+if($sort_by=='uid' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Uid</a>";
+if($sort_by=='uid') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=gender&sort_dir=";
+if($sort_by=='gender' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Gender</a>";
+if($sort_by=='gender') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=email&sort_dir=";
+if($sort_by=='email' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Email</a>";
+if($sort_by=='email') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=auto&sort_dir=";
+if($sort_by=='auto' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Member for</a>";
+if($sort_by=='auto') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=banned&sort_dir=";
+if($sort_by=='banned' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Ban until</a>";
+if($sort_by=='banned') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '</tr>';
 
 $i=0;
 $r=false;
@@ -82,15 +160,7 @@ while($rec=$reg8log_db->fetch_row()) {
 }
 echo '</table>';
 
-if($total>$per_page) {
-	echo '<br>';
-	for($i=1; $i<=ceil($total/$per_page); $i++) {
-		echo '<a class="page" href="admin-banned_users.php?per_page=', $per_page, '&page=', $i,'" style="';
-		if($page==$i) echo ' background: #fff; color: #000; border: 1px solid #000';
-		echo '">', $i, '</a>&nbsp;&nbsp;';
-	}
-	echo '<br>';
-}
+require '../include/page/page_gen_paginated_page_links.php';
 
 if($total>$per_pages[0]) {
 	if($total<=$per_page) echo '<br>';
