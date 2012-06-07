@@ -12,7 +12,7 @@ $password_refill=2; //0: disabled / 1: enabled if client javascript on / 2: enab
 
 $email_verification_needed=false;
 
-$admin_confirmation_needed=true;
+$admin_confirmation_needed=false;
 
 $email_verification_time=24*60*60; //in seconds
 
