@@ -70,6 +70,7 @@ require '../include/code/code_set_submitted_forms_cookie.php';
 
 echo '</td></tr></table></body></html>';
 unset($_SESSION['setup_key']);
+require $index_dir.'include/code/code_sess_destroy.php';
 exit;
 } while(false);
 

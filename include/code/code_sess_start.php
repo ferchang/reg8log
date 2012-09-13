@@ -31,7 +31,7 @@ if(!session_start()) {
 
 session_regenerate_id(true);
 
-require_once $index_dir.'include/info/info_crypto.php';
+if(!isset($encrypt_session_files_contents)) require $index_dir.'include/info/info_crypto.php';
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;

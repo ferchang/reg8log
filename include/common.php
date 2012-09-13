@@ -49,8 +49,6 @@ if(!isset($_COOKIE['reg8log_antixsrf_token'])) {
 	$_COOKIE['reg8log_antixsrf_token']=$antixsrf_token;
 }
 
-if(!isset($encrypt_session_files_contents)) require $index_dir.'include/info/info_crypto.php';
-
 if(!$db_installed) {
 	if(isset($setup_page)) return;
 	require $index_dir.'include/page/page_not_setup.php';

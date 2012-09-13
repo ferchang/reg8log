@@ -35,7 +35,6 @@ function captcha_show_image() {
 	global $index_dir;
 	global $session1;
 	global $session0;
-	global $encrypt_session_files_contents;
 	global $https;
 	
 	// Let's create an image
@@ -149,7 +148,6 @@ function captcha_verify_word() {
 	global $index_dir;
 	global $session1;
 	global $session0;
-	global $encrypt_session_files_contents;
 	global $https;
 
 	require $index_dir.'include/code/code_sess_start.php';

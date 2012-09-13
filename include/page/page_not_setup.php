@@ -16,7 +16,7 @@ if(!isset($index_dir)) $index_dir='';
 </head>
 <body bgcolor="#7587b0">
 <table width="100%" height="100%"><tr><td align="center">
-<h3>It seems that database tables are not installed.<br><small><a href="setup/db_setup.php" style="color: #fff">Go for installing database tables with the installer</a></small></h3>
+<h3>It seems that database tables are not installed.<br><small><a href="<?php echo $index_dir; ?>setup/db_setup.php" style="color: #fff">Go for installing database tables with the installer</a></small></h3>
 </td></tr></table>
 </body>
 </html>
