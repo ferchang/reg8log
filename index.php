@@ -56,7 +56,7 @@ else $remember=false;
 
 if(!isset($captcha_err)) {
 	require 'include/code/code_identify.php';
-	if($identify_error) {
+	if(isset($identify_error)) {
 		$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
 		require 'include/page/page_failure.php';
 		exit;
@@ -69,20 +69,20 @@ else {
 
 if(isset($manual_identify)) require 'include/code/code_record_login_attempt.php';
 
-if(!is_null($identified_username)) {//Identified
+if(isset($identified_user)) {//Identified
 
 if(isset($manual_identify)) {
 
-$_identified_username=$identified_username;
+$_identified_username=$identified_user;
 require 'include/code/code_dec_failed_logins.php';
 
 if($remember) $user->save_identity('permanent');
 else $user->save_identity('session');
 
-$msg='<h1>You logged in successfully <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_username, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
+$msg='<h1>You logged in successfully <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
 
 }
-else $msg='<h1>Hello <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_username, ENT_QUOTES, 'UTF-8').'</span>.<br />You are logged in.</h1>';
+else $msg='<h1>Hello <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.<br />You are logged in.</h1>';
 
 require 'include/page/page_members_area.php';
 

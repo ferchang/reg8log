@@ -14,16 +14,18 @@ unset($user);
 
 $user=new hm_user($identify_structs);
 
-$identified_username=null;
-$identify_error=false;
+unset($identified_user);
+unset($identify_error);
 
 if(isset($manual_identify)) {
 	require_once $index_dir.'include/func/func_secure_hash.php';
 	if($user->identify($manual_identify['username'], $manual_identify['password']))
-	$identified_username=$user->user_info['username'];
+	$identified_user=$user->user_info['username'];
 }
-else if($user->identify()) $identified_username=$user->user_info['username'];
+else if($user->identify()) $identified_user=$user->user_info['username'];
 
 if($user->err_msg) $identify_error=true;
+
+if($log_last_activity and (isset($identified_user) or isset($banned_user))) require_once $index_dir.'include/code/code_log_last_activity.php';
 
 ?>

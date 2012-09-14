@@ -50,20 +50,20 @@ $key=$rec['key'];
 
 if($_GET['key']!==$key) exit('<h3 align="center">Error: Your lockdown bypass link was not verified!</h3>');
 
-$identify_error=null;
-$identified_username=null;
+unset($identified_user);
+unset($identify_error);
 
 require 'include/code/code_identify.php';
 
-if($identify_error) {
+if(isset($identify_error)) {
 $failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
 require 'include/page/page_failure.php';
 exit;
 }
 
-if(!is_null($identified_username)) {//2
+if(isset($identified_user)) {//2
 
-$_identified_username=$identified_username;
+$_identified_username=$identified_user;
 require 'include/code/code_dec_failed_logins.php';
 
 if($remember) $user->save_identity('permanent');

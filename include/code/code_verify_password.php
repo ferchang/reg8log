@@ -7,7 +7,7 @@ if(!isset($index_dir)) $index_dir='';
 require_once $index_dir.'include/code/code_db_object.php';
 require_once $index_dir.'include/func/func_secure_hash.php';
 
-$query='select `password_hash` from `accounts` where `username`='.$reg8log_db->quote_smart($identified_username).' limit 1';
+$query='select `password_hash` from `accounts` where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 
 $reg8log_db->query($query);
 

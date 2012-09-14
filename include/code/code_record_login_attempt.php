@@ -6,13 +6,13 @@ if(!isset($index_dir)) $index_dir='';
 
 if($ip_lockdown_threshold==-1 and $ip_captcha_threshold==-1) return;
 
-if(!$ip_lockdown_proportional and (isset($identified_username) or isset($pending_user) or isset($banned_user))) return;
+if(!$ip_lockdown_proportional and (isset($identified_user) or isset($pending_user) or isset($banned_user))) return;
 
 require_once $index_dir.'include/func/func_inet_pton.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-if(isset($identified_username) or isset($pending_user) or isset($banned_user)) {
+if(isset($identified_user) or isset($pending_user) or isset($banned_user)) {
 	$username_hash=$reg8log_db->quote_smart(substr(md5($manual_identify['username'], true), 12));
 	$query='replace into `correct_logins` (`ip`, `username_hash`, `timestamp`) values ('.$ip.', '.$username_hash.', '.time().')';
 }

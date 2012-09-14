@@ -8,7 +8,7 @@ require 'include/code/code_encoding8anticache_headers.php';
 
 require 'include/code/code_identify.php';
 
-if(is_null($identified_username)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
+if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
 require 'include/info/info_register_fields.php';
 
@@ -52,7 +52,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 			require 'include/code/code_update_user_last_ch_try.php';
 		}
 		else if(isset($_COOKIE['reg8log_ch_pswd_try'])) {
-			$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$reg8log_db->quote_smart($_COOKIE['reg8log_ch_pswd_try']).' where `username`='.$reg8log_db->quote_smart($identified_username).' limit 1';
+			$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$reg8log_db->quote_smart($_COOKIE['reg8log_ch_pswd_try']).' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 			$reg8log_db->query($query);
 			setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 		}
@@ -69,7 +69,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 		$try_type='email';
 		require 'include/code/code_update_user_last_ch_try.php';
 		$field_name='email';
-		$except_user=$identified_username;
+		$except_user=$identified_user;
 		$field_value=$_POST['newemail'];
 		require 'include/code/code_check_field_uniqueness.php';
 	}

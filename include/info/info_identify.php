@@ -50,4 +50,6 @@ Note: with this option, a database update operation is needed every time the use
 
 */
 
+$log_last_activity=true;
+
 ?>

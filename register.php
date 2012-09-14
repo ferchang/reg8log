@@ -22,7 +22,7 @@ $captcha_verified=isset($_SESSION['captcha_verified']);
 
 require 'include/code/code_identify.php';
 
-if(!is_null($identified_username)) exit('<center><h3>Error: You are logged in!</h3><a href="index.php">Login page</a></center>');
+if(isset($identified_user)) exit('<center><h3>Error: You are logged in!</h3><a href="index.php">Login page</a></center>');
 
 require 'include/info/info_register_fields.php';
 

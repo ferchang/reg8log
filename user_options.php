@@ -8,7 +8,7 @@ require 'include/code/code_encoding8anticache_headers.php';
 
 require 'include/code/code_identify.php';
 
-if(is_null($identified_username)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
+if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
 ?>
 

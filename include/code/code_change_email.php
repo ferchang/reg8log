@@ -5,7 +5,7 @@ $parent_page=true;
 
 if(!isset($index_dir)) $index_dir='';
 
-$query='update `accounts` set `email`='.$reg8log_db->quote_smart($_POST['newemail']).' where `username`='.$reg8log_db->quote_smart($identified_username).' limit 1';
+$query='update `accounts` set `email`='.$reg8log_db->quote_smart($_POST['newemail']).' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 
 $reg8log_db->query($query);
 
