@@ -21,8 +21,9 @@ if(isset($_POST['admin_action'])) {
 
 	foreach($_POST as $auto=>$action) {
 		if($action=='del') $del[]=$auto;
-		else if($action=='unblock') $unblock[]=$auto;
+		else if($action=='unblock') $unblock[]=substr($auto, 3);
 	}
+	
 	if(isset($unblock)) require '../include/code/code_unblock_accounts.php';
 	if(isset($del)) require '../include/code/code_delete_account_block_log_records.php';
 }

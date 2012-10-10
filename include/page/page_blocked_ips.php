@@ -22,7 +22,7 @@ $num=$last-$first+1;
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
-<title>Blocked accounts</title>
+<title>Blocked IPs</title>
 <style>
 </style>
 <script>
@@ -146,7 +146,7 @@ echo '	last_page=', ceil($total/$per_page), ";\n";
 </head>
 <body bgcolor="#7587b0">
 <center>
-<form action="" method="post" name="blocked_accounts_form">
+<form action="" method="post" name="blocked_ips_form">
 <?php
 echo 'Records ', $first, ' - ', $last, ' of ', $total;
 echo '<table border cellpadding="3">';
@@ -159,11 +159,11 @@ require_once $index_dir.'include/func/func_duration2msg.php';
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
-echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
-if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=ip&sort_dir=";
+if($sort_by=='ip' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Username</a>";
-if($sort_by=='username') {
+echo "'>IP</a>";
+if($sort_by=='ip') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
@@ -183,11 +183,11 @@ if($sort_by=='last_attempt') {
 echo "</th>";
 
 echo '<th>';
-echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=ip&sort_dir=";
-if($sort_by=='ip' and $sort_dir=='asc') echo 'desc';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_username&sort_dir=";
+if($sort_by=='last_username' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Last IP</a>";
-if($sort_by=='ip') {
+echo "'>Last username</a>";
+if($sort_by=='last_username') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
@@ -214,9 +214,9 @@ while($rec=$reg8log_db->fetch_row()) {
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
-	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
-	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
 	echo '<td>', inet_ntop($rec['ip']), '</td>';
+	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
+	echo '<td>', htmlspecialchars($rec['last_username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
@@ -226,7 +226,9 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: red" ';
 		echo 'title="Blocked lift: ', duration2friendly_str($lockdown_period-(time()-$rec['last_attempt']), 2), ' later';
 		echo '">Blocked</span>';
-		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
+		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
+		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
+		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
 	}
 	else {
 		echo '<span style="color: #000" title="Block period elapsed">Not blocked</span>';
@@ -253,14 +255,14 @@ require '../include/page/page_gen_paginated_page_links.php';
 
 if($total>$per_pages[0]) {
 	if($total<=$per_page) echo '<br>';
-	echo '<br>Records per page: <select name="per_page" onchange="document.blocked_accounts_form.change_per_page.click()">';
+	echo '<br>Records per page: <select name="per_page" onchange="document.blocked_ips_form.change_per_page.click()">';
 	foreach($per_pages as $value) {
 		if($value!=$per_page) echo "<option>$value</option>";
 		else echo "<option selected>$value</option>";
 	}
 	echo '</select>&nbsp;<input type="submit" value="Show" name="change_per_page" style="display: visible">';
 	echo  '<script>
-	document.blocked_accounts_form.change_per_page.style.display="none";
+	document.blocked_ips_form.change_per_page.style.display="none";
 	</script>';
 }
 
