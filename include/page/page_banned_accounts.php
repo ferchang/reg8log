@@ -113,11 +113,11 @@ if($sort_by=='email') {
 echo "</th>";
 
 echo '<th>';
-echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=auto&sort_dir=";
-if($sort_by=='auto' and $sort_dir=='asc') echo 'desc';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=timestamp&sort_dir=";
+if($sort_by=='timestamp' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
 echo "'>Member for</a>";
-if($sort_by=='auto') {
+if($sort_by=='timestamp') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';

@@ -10,6 +10,7 @@ require '../include/code/code_encoding8anticache_headers.php';
 
 require '../include/code/code_require_admin.php';
 
+$sort_fields=array('uid', 'username', 'email', 'gender', 'banned', 'timestamp');
 require '../include/code/code_pagination_params.php';
 
 require_once '../include/code/code_db_object.php';

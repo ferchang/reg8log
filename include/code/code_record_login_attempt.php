@@ -16,7 +16,13 @@ if(isset($identified_user) or isset($pending_user) or isset($banned_user)) {
 	$username_hash=$reg8log_db->quote_smart(substr(md5($manual_identify['username'], true), 12));
 	$query='replace into `correct_logins` (`ip`, `username_hash`, `timestamp`) values ('.$ip.', '.$username_hash.', '.time().')';
 }
-else $query='insert into `incorrect_logins` (`ip`, `timestamp`) values ('."$ip, ".time().')';
+else {
+	if($count+1>=$ip_lockdown_threshold) {
+		$ip_lockdown=$_SERVER['REMOTE_ADDR'];
+		require_once $index_dir.'include/code/code_log_ip_block.php';
+	}
+	$query='insert into `incorrect_logins` (`ip`, `timestamp`) values ('."$ip, ".time().')';
+}
 
 $reg8log_db->query($query);
 

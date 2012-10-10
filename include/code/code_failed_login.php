@@ -43,6 +43,8 @@ $field_values="$_username, $username_exists, $attempts, $pos, $req_time";
 $query="insert into `failed_logins` (`username`, `username_exists`, `attempts`, `pos`, `last_attempt`) values($field_values)";
 $reg8log_db->query($query);
 
+$insert_id=mysql_insert_id();
+
 $cookie_contents=$cookie->get();
 $tmp12=strtolower($manual_identify['username']);
 if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
@@ -51,8 +53,9 @@ $cookie_contents=implode("\n", array_slice(explode("\n", $cookie_contents), -2*2
 $cookie->set(null, $cookie_contents);
 
 if($lockdown_threshold==1) {
-$lockdown=$manual_identify['username'];
-$lockdown_duration=$req_time+$lockdown_period-time();
+	$lockdown=$manual_identify['username'];
+	$lockdown_duration=$req_time+$lockdown_period-time();
+	require_once $index_dir.'include/code/code_log_account_lockdown.php';
 }
 else if($captcha_threshold==1) $captcha_needed=true;
 
@@ -62,6 +65,8 @@ return;
 }
 
 $rec=$reg8log_db->fetch_row();
+
+$insert_id=$rec['auto'];
 
 $attempts = unpack("l10", $rec['attempts']);
 
@@ -75,8 +80,9 @@ if($value<$oldest) $oldest=$value;
 $failed_attempts=$count;
 
 if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
-$lockdown=$manual_identify['username'];
-$lockdown_duration=$oldest+$lockdown_period-$req_time;
+	$lockdown=$manual_identify['username'];
+	$lockdown_duration=$oldest+$lockdown_period-$req_time;
+	require_once $index_dir.'include/code/code_log_account_lockdown.php';
 }
 else if($captcha_threshold!=-1 and $count>=$captcha_threshold) $captcha_needed=true;
 

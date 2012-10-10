@@ -51,18 +51,21 @@ require '../include/page/page_sections.php';
 <ul>
 <li>Accounts:
 <ul>
-<li><a class="li_item" href="admin-accounts.php">Show/delete accounts</a>
+<li><a class="li_item" href="admin-accounts.php">Accounts</a>
+<br><br>
+<li><a class="li_item" href="admin-ban_user.php">Ban a user</a>
+<li><a class="li_item" href="admin-unban_user.php">Unban a user</a>
+<li><a class="li_item" href="admin-banned_users.php">Banned users</a>
 </ul>
 <br>
 <li>Pending accounts:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts.php">Approve/delete pending accounts</a></ul>
+<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a></ul>
 <br>
-<li>Ban:
+<li>Security logs:
 <ul>
-<li><a class="li_item" href="admin-ban_user.php">Ban a user</a>
-<li><a class="li_item" href="admin-unban_user.php">Unban a user</a>
-<li><a class="li_item" href="admin-banned_users.php">Show banned users</a>
+<li><a class="li_item" href="admin-blocked_accounts.php">Blocked accounts</a>
+<li><a class="li_item" href="admin-blocked_ips.php">Blocked IPs</a>
 </ul>
 </td></tr>
 </table>

@@ -93,13 +93,18 @@ else if(isset($pending_user)) {
 	require 'include/code/code_detect8fix_failed_activation.php';
 	require 'include/page/page_pending_user.php';
 }
-else if(isset($banned_user)) require 'include/page/page_banned_user.php';
+else if(isset($banned_user)) {
+	$_identified_username=$banned_user;
+	require 'include/code/code_dec_failed_logins.php';
+	require 'include/page/page_banned_user.php';
+}
 else {//Not identified
 	if(isset($manual_identify)) {
 		require 'include/code/code_set_submitted_forms_cookie.php';
 		$err_msg='You are not authenticated!<br />Check your login information.';
 		require 'include/code/code_failed_login.php';
 	}
-	if(isset($lockdown)) require 'include/page/page_lockdown.php';
+	if(isset($ip_lockdown)) require 'include/page/page_ip_lockdown.php';
+	else if(isset($lockdown)) require 'include/page/page_lockdown.php';
 	else require 'include/page/page_login_form.php';
 }//Not identified

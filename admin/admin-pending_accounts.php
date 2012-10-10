@@ -12,6 +12,7 @@ require '../include/code/code_encoding8anticache_headers.php';
 
 require '../include/code/code_require_admin.php';
 
+$sort_fields=array('username', 'email', 'gender', 'emails_sent', 'email_verified', 'notify_user', 'timestamp');
 require '../include/code/code_pagination_params.php';
 
 require_once '../include/code/code_db_object.php';
@@ -41,7 +42,7 @@ $query="select * from `pending_accounts` where (`email_verification_key`='' or `
 if(!$total=$reg8log_db->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
 	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">Info: ', $nonexistent_records, ' record(s) did not exist.</center>';
-	exit('<center><h3>No pending accounts eligible for admin confirmation (Query returned 0 rows).</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
+	exit('<center><h3>No pending accounts eligible for admin confirmation found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 }
 
 require '../include/code/code_pagination_params2.php';
