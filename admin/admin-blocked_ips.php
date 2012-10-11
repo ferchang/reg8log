@@ -24,7 +24,7 @@ if(isset($_POST['admin_action'])) {
 		if($action=='del') $del[]=$auto;
 		else if($action=='unblock') {
 			$auto=substr($auto, 2);
-			$unblock[$i]['ip']=hex2bin($_POST['ip'.$auto]);
+			$unblock[$i]['ip']=pack('H*', $_POST['ip'.$auto]);
 			$unblock[$i]['auto']=$auto;
 			$unblock[$i]['last_attempt']=$_POST['t'.$auto];
 			$i++;
