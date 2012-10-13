@@ -29,6 +29,9 @@ if($_GET['new_ip_blocks']) {
 	$reg8log_db->query($query);
 }
 
+/* $query='update `admin_alerts` set `last_alert`='.time()." where `for`='visit' limit 1";
+$reg8log_db->query($query); */
+
 echo 'ok';
 
 ?>

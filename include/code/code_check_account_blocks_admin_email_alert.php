@@ -12,7 +12,7 @@ $reg8log_db->query($query);
 
 $rec=$reg8log_db->fetch_row();
 
-$last_alert_email=$rec['last_email'];
+$last_alert_email=$rec['last_alert'];
 
 if(!(!$alert_emails_min_interval or time()>=($last_alert_email+$alert_emails_min_interval)) and !$no_alert_limits) {
 	$reg8log_db->query("select release_lock('$lock_name2')");
@@ -30,7 +30,7 @@ if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
 	$admin_alert_email_msg.='- There were '.$new_account_blocks." new account block(s).\n";
 	
-	$query='update `admin_alerts` set `last_email`='.time()." where `for`='email' limit 1";
+	$query='update `admin_alerts` set `last_alert`='.time()." where `for`='email' limit 1";
 	$reg8log_db->query($query);
 
 	$query="update `admin_alerts` set `new_account_blocks`=0 where `for`='email' and  `new_account_blocks`=$new_account_blocks limit 1";

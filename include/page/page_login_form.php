@@ -68,7 +68,7 @@ return true;
 </script>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" >
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" >
 
 <table width="100%"  cellpadding="5" cellspacing="0">
 <tr>
@@ -151,5 +151,6 @@ if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
 <?php
 require $index_dir.'include/page/page_foot_codes.php';
 ?>
+<script>
 </body>
 </html>

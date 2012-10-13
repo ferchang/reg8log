@@ -32,7 +32,7 @@ $alert_admin_about_ip_blocks=3;
 $ip_blocks_alert_threshold=1;
 //alert only when this minimum number of IP blocks has accured in the past 24 hours
 
-$alert_emails_min_interval=60*60;
+$alert_emails_min_interval=30*60;
 //don't send alert emails with less than this interval (in seconds)
 
 $exempt_admin_account_from_alert_limits=true;

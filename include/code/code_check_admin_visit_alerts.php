@@ -6,6 +6,8 @@ require_once $index_dir.'include/info/info_security_logs.php';
 
 if(!$alert_admin_about_account_blocks and !$alert_admin_about_ip_blocks) return;
 
+if(isset($_COOKIE['reg8log_dont_disturb']) and $_COOKIE['reg8log_dont_disturb']==='1') return;
+
 require_once $index_dir.'include/code/code_db_object.php';
 
 $query="select * from `admin_alerts` where `for`='visit' limit 1";
@@ -27,7 +29,5 @@ if($rec['new_ip_blocks'] and in_array($alert_admin_about_ip_blocks, array(1, 3))
 	require $index_dir.'include/code/code_check_ip_blocks_alert_threshold.php';
 	if(isset($ip_blocks_alert_threshold_reached)) $admin_alert_visit_msg.='- There were '.$new_ip_blocks.' new IP block(s).';
 }
-
-if($admin_alert_visit_msg) $admin_alert_visit_msg="Account/IP Block report:\n\n".$admin_alert_visit_msg;
 
 ?>

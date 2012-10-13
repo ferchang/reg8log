@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2012 at 02:51 PM
+-- Generation Time: Oct 13, 2012 at 09:38 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS `admin_alerts` (
   `for` char(5) CHARACTER SET big5 COLLATE big5_bin NOT NULL,
   `new_account_blocks` int(10) unsigned NOT NULL DEFAULT '0',
   `new_ip_blocks` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_email` int(10) unsigned NOT NULL DEFAULT '0'
+  `last_alert` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
