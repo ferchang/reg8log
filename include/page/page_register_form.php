@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 require $index_dir.'include/code/code_sess_start.php';
 
@@ -201,9 +201,9 @@ return true;
 }
 
 function report(val, bg) {
-report_field.innerHTML=val;
-if(bg) report_field.style.background=bg;
-else report_field.style.background='brown';
+	report_field.innerHTML=val;
+	if(bg) report_field.style.background=bg;
+	else report_field.style.background='brown';
 }
 
 //end ajax
@@ -291,10 +291,10 @@ var report_field=document.getElementById('report_field');
 report(ws, '');
 
 if(captcha_exists) {
-document.getElementById('re_captcha_msg').style.visibility='visible';
-captcha_img_style=document.getElementById('captcha_image').style;
-captcha_img_style.cursor='hand';
-if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
+	document.getElementById('re_captcha_msg').style.visibility='visible';
+	captcha_img_style=document.getElementById('captcha_image').style;
+	captcha_img_style.cursor='hand';
+	if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
 }
 
 </script>
@@ -317,5 +317,8 @@ if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
 </tr></table>
 </form>
 </td></tr></table>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

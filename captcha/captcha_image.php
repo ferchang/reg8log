@@ -4,9 +4,9 @@ $parent_page=true;
 
 $index_dir='../';
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require_once '../include/func/func_captcha.php';
+require_once $index_dir.'include/func/func_captcha.php';
 
 captcha_show_image();
 

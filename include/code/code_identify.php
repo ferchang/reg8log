@@ -3,7 +3,7 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 $parent_page=true;
 
-if(!isset($index_dir)) $index_dir='';
+
 
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
@@ -27,5 +27,7 @@ else if($user->identify()) $identified_user=$user->user_info['username'];
 if($user->err_msg) $identify_error=true;
 
 if($log_last_activity and (isset($identified_user) or isset($banned_user))) require_once $index_dir.'include/code/code_log_last_activity.php';
+
+if(isset($identified_user) and $identified_user=='Admin' and !isset($ajax)) require $index_dir.'include/code/code_check_admin_visit_alerts.php';
 
 ?>

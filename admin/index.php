@@ -6,11 +6,11 @@ $index_dir='../';
 
 $store_request_entropy_probability2=1;
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require '../include/code/code_encoding8anticache_headers.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require '../include/code/code_require_admin.php';
+require $index_dir.'include/code/code_require_admin.php';
 
 ?>
 
@@ -40,7 +40,7 @@ color: white;
 </td>
 <td  width="100%" align="left" valign="top">
 <?php
-require '../include/page/page_sections.php';
+require $index_dir.'include/page/page_sections.php';
 ?>
 </td>
 </tr>
@@ -64,11 +64,14 @@ require '../include/page/page_sections.php';
 <br>
 <li>Security logs:
 <ul>
-<li><a class="li_item" href="admin-blocked_accounts.php">Blocked accounts</a>
-<li><a class="li_item" href="admin-blocked_ips.php">Blocked IPs</a>
+<li><a class="li_item" href="admin-blocked_accounts.php">Account blocks</a>
+<li><a class="li_item" href="admin-blocked_ips.php">IP blocks</a>
 </ul>
 </td></tr>
 </table>
 </center>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

@@ -4,13 +4,13 @@ $parent_page=true;
 
 $index_dir='../';
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require '../include/code/code_encoding8anticache_headers.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require '../include/code/code_require_admin.php';
+require $index_dir.'include/code/code_require_admin.php';
 
-if(!empty($_POST)) require '../include/code/code_prevent_xsrf.php';
+if(!empty($_POST)) require $index_dir.'include/code/code_prevent_xsrf.php';
 
 //----------------------------
 
@@ -25,7 +25,7 @@ if(isset($err_msgs)) break;
 
 $_POST['user']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['user']);
 
-require_once '../include/code/code_db_object.php';
+require_once $index_dir.'include/code/code_db_object.php';
 	
 $user=$reg8log_db->quote_smart($_POST['user']);
 
@@ -57,7 +57,7 @@ if($rec['banned']) {
 	}
 }
 
-require '../include/page/page_unban_form.php';
+require $index_dir.'include/page/page_unban_form.php';
 
 exit;
 
@@ -74,10 +74,10 @@ if(strtolower($_POST['username'])==='admin') {
 	break;
 }
 
-require '../include/code/code_unban_user.php';
+require $index_dir.'include/code/code_unban_user.php';
 
 } while(false);
 
-require '../include/page/page_ban_form1.php';
+require $index_dir.'include/page/page_ban_form1.php';
 
 ?>

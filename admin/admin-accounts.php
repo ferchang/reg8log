@@ -4,24 +4,24 @@ $parent_page=true;
 
 $index_dir='../';
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require '../include/code/code_encoding8anticache_headers.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require '../include/code/code_require_admin.php';
+require $index_dir.'include/code/code_require_admin.php';
 
 $sort_fields=array('uid', 'username', 'email', 'gender', 'banned', 'timestamp');
-require '../include/code/code_pagination_params.php';
+require $index_dir.'include/code/code_pagination_params.php';
 
-require_once '../include/code/code_db_object.php';
+require_once $index_dir.'include/code/code_db_object.php';
 
 if(isset($_POST['delete'])) {
 
-	require '../include/code/code_prevent_xsrf.php';
+	require $index_dir.'include/code/code_prevent_xsrf.php';
 
 	foreach($_POST as $auto=>$action) if($action=='del') $del[]=$auto;
 	
-	if(isset($del)) require '../include/code/code_delete_accounts.php';
+	if(isset($del)) require $index_dir.'include/code/code_delete_accounts.php';
 
 }
 
@@ -32,12 +32,12 @@ if(!$total=$reg8log_db->result_num($query)) {
 	exit('<center><h3>No accounts found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 }
 
-require '../include/code/code_pagination_params2.php';
+require $index_dir.'include/code/code_pagination_params2.php';
 
 $query="select * from `accounts` where `username`!='Admin' order by `$sort_by` $sort_dir, `auto` limit "."$per_page offset $offset";
 
 $reg8log_db->query($query);
 
-require '../include/page/page_accounts.php';
+require $index_dir.'include/page/page_accounts.php';
 
 ?>

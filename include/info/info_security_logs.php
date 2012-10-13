@@ -12,4 +12,30 @@ $keep_expired_block_log_records_for=0;
 a positive integer: keep up to this number of seconds after block expiration
 */
 
+$alert_admin_about_account_blocks=3;
+//0: no
+//1: when he visits
+//2: with email
+//3: with both methods
+//if u want to alert admin only when his own account is blocked, add 3 to the above numbers
+//example: 4 means inform admin when he visits and only when his own account was blocked
+
+$account_blocks_alert_threshold=1;
+//alert only when this minimum number of account blocks has occured in the past 24 hours
+
+$alert_admin_about_ip_blocks=3;
+//0: no
+//1: when admin visits
+//2: with email
+//3: with both methods
+
+$ip_blocks_alert_threshold=1;
+//alert only when this minimum number of IP blocks has accured in the past 24 hours
+
+$alert_emails_min_interval=60*60;
+//don't send alert emails with less than this interval (in seconds)
+
+$exempt_admin_account_from_alert_limits=true;
+//whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations
+
 ?>

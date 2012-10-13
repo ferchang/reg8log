@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 ?>
 
@@ -31,5 +31,8 @@ if($log_last_activity and $user->user_info['last_activity']) require $index_dir.
 <br /><a href="logout.php?antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token']; ?>" >Log out</a></td>
 </tr>
 </table>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

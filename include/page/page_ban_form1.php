@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 if(isset($ban_page)) $form_color='#f55750';
 else $form_color='#55a750';
@@ -94,5 +94,8 @@ if($_POST['which']=='username') echo ' checked="true" '; } else echo ' checked="
 <a href="index.php">Admin operations</a><br><br>
 <a href="../index.php">Login page</a>
 </td></tr></table>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

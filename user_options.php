@@ -2,11 +2,13 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 $parent_page=true;
 
-require 'include/common.php';
+$index_dir='';
 
-require 'include/code/code_encoding8anticache_headers.php';
+require $index_dir.'include/common.php';
 
-require 'include/code/code_identify.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
+
+require $index_dir.'include/code/code_identify.php';
 
 if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
@@ -38,7 +40,7 @@ color: white;
 </td>
 <td  width="100%" align="left" valign="top">
 <?php
-require 'include/page/page_sections.php';
+require $index_dir.'include/page/page_sections.php';
 ?>
 </td>
 </tr>
@@ -53,5 +55,8 @@ require 'include/page/page_sections.php';
 </td></tr>
 </table>
 </center>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

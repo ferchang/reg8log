@@ -6,13 +6,13 @@ $index_dir='../';
 
 $ban_page=true;
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require '../include/code/code_encoding8anticache_headers.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require '../include/code/code_require_admin.php';
+require $index_dir.'include/code/code_require_admin.php';
 
-if(!empty($_POST)) require '../include/code/code_prevent_xsrf.php';
+if(!empty($_POST)) require $index_dir.'include/code/code_prevent_xsrf.php';
 
 do {
 
@@ -25,7 +25,7 @@ if(isset($err_msgs)) break;
 
 $_POST['user']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['user']);
 
-require_once '../include/code/code_db_object.php';
+require_once $index_dir.'include/code/code_db_object.php';
 
 $user=$reg8log_db->quote_smart($_POST['user']);
 
@@ -43,7 +43,7 @@ if(strtolower($rec['username'])==='admin') {
 	break;
 }
 
-require '../include/page/page_ban_form2.php';
+require $index_dir.'include/page/page_ban_form2.php';
 
 exit;
 
@@ -62,22 +62,22 @@ if(!$_POST['years'] and !$_POST['months'] and !$_POST['days'] and !$_POST['hours
 
 	$err_msgs[]='no ban duration specified!';
 
-	require_once '../include/code/code_db_object.php';
+	require_once $index_dir.'include/code/code_db_object.php';
 
 	$query='select * from `accounts` where `username`='.$reg8log_db->quote_smart($_POST['username']).' limit 1';
 	$reg8log_db->query($query);
 	$rec=$reg8log_db->fetch_row();
 
-	require '../include/page/page_ban_form2.php';
+	require $index_dir.'include/page/page_ban_form2.php';
 	
 	exit;
 
 }//no ban duration
 
-require '../include/code/code_ban_user.php';
+require $index_dir.'include/code/code_ban_user.php';
 
 } while(false);
 
-require '../include/page/page_ban_form1.php';
+require $index_dir.'include/page/page_ban_form1.php';
 
 ?>

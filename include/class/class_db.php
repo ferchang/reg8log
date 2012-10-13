@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 class reg8log_db {
 
@@ -122,11 +122,11 @@ else return $value;
 //=======================================
 function query($query)
 {
-$this->err_msg='';
-$this->result= @ mysql_query($query, $this->link);
-if($this->result) return $this->result;
-$this->error();
-return false;
+	$this->err_msg='';
+	$this->result= @ mysql_query($query, $this->link);
+	if($this->result) return $this->result;
+	$this->error();
+	return false;
 }
 //=======================================
 function fetch_row($type=MYSQL_ASSOC)

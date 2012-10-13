@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 $parent_page=true;
 
@@ -128,5 +128,8 @@ if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checke
 <a href="index.php">Admin operations</a><br><br>
 <a href="../index.php">Login page</a>
 </td></tr></table>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

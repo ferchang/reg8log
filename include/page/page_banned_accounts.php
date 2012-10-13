@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 $color1='#aaa';
 $color2='#ccc';
@@ -26,6 +26,16 @@ $num=$last-$first+1;
 <style>
 </style>
 <script>
+
+var tmp;
+function highlight(row) {
+tmp=row.style.background;
+row.style.background="#fff";
+}
+function unhighlight(row) {
+row.style.background=tmp;
+}
+
 function is_digit(e) {
 	code = e.keyCode ? e.keyCode : e.which;
 	if(code<48 || code>57) return false;
@@ -141,9 +151,10 @@ echo '</tr>';
 $i=0;
 $r=false;
 while($rec=$reg8log_db->fetch_row()) {
-	if(!$r) echo '<tr align="center" style="background: ', $color1,'">';
-	else echo '<tr align="center" style="background: ', $color2,'">';
+	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
+	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	$i++;
+	echo ' id="', $i, '">';
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
@@ -160,7 +171,7 @@ while($rec=$reg8log_db->fetch_row()) {
 }
 echo '</table>';
 
-require '../include/page/page_gen_paginated_page_links.php';
+require $index_dir.'include/page/page_gen_paginated_page_links.php';
 
 if($total>$per_pages[0]) {
 	if($total<=$per_page) echo '<br>';
@@ -180,5 +191,8 @@ if($total>$per_pages[0]) {
 <a href="index.php">Admin operations</a><br><br>
 <a href="../index.php">Login page</a>
 </center>
+<?php
+require $index_dir.'include/page/page_foot_codes.php';
+?>
 </body>
 </html>

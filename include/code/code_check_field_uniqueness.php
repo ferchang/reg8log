@@ -2,14 +2,14 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 require_once $index_dir.'include/code/code_db_object.php';
 
 require_once $index_dir.'include/code/code_fetch_site_vars.php';
 
-$lockname='reg8log--register--'.$site_key;
-$reg8log_db->query("select get_lock('$lockname', -1)");
+$lock_name='reg8log--register--'.$site_key;
+$reg8log_db->query("select get_lock('$lock_name', -1)");
 
 $tmp8=$reg8log_db->quote_smart($field_value);
 $query1='select * from `accounts` where `'.$field_name.'`='.$tmp8;
@@ -19,7 +19,7 @@ if(isset($except_user)) {
 }
 $query1.=' limit 1';
 
-require 'include/info/info_register.php';
+require $index_dir.'include/info/info_register.php';
 
 $expired1=time()-$email_verification_time;
 $expired2=time()-$admin_confirmation_time;

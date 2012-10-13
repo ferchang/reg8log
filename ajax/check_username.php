@@ -4,26 +4,26 @@ $parent_page=true;
 
 $index_dir='../';
 
-require_once '../include/common.php';
+require_once $index_dir.'include/common.php';
 
-require '../include/info/info_register.php';
+require $index_dir.'include/code/code_encoding8anticache_headers.php';
+
+require $index_dir.'include/info/info_register.php';
 
 if(!$ajax_check_username or !$registeration_enabled) exit('ajax username check or registeration is disabled!');
 
-require '../include/code/code_encoding8anticache_headers.php';
-
 if(!isset($_GET['value'])) {
 $failure_msg="No value specified";
-require '../include/page/page_failure.php';
+require $index_dir.'include/page/page_failure.php';
 exit;
 }
 
 $value=$_GET['value'];
 
 //username format validity is checked on the client side, so these should not be necessary.
-/* require '../include/info/info_register_fields.php';
+/* require $index_dir.'include/info/info_register_fields.php';
 $username_format=$fields['username'];
-require '../include/func/func_utf8.php';
+require $index_dir.'include/func/func_utf8.php';
 if(utf8_strlen($value)<$username_format['minlength']) $invalid=true;
 else if(utf8_strlen($value)>$username_format['maxlength'])	$invalid=true;
 else if($username_format['php_re'] and $value!=='' and !preg_match($username_format['php_re'], $value)) $invalid=true;
@@ -32,7 +32,7 @@ if(isset($invalid)) {
 	exit;
 } */
 
-require_once '../include/code/code_db_object.php';
+require_once $index_dir.'include/code/code_db_object.php';
 
 $value=$reg8log_db->quote_smart($value);
 

@@ -7,9 +7,9 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 // per account anti-'login brute-force' settings
 
-$captcha_threshold=3; //1-10 / -1: disabled (no captcha) / 0: always
+$captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$lockdown_threshold=6; //1-10 / -1: disabled (no lockdown)
+$lockdown_threshold=1; //1-10 / -1: disabled (no lockdown)
 
 $lockdown_period=12*60*60; //in seconds
 
@@ -22,9 +22,9 @@ $max_lockdown_bypass_emails=10; //1-255 / -1: infinite
 
 // per IP anti-'login brute-force' settings
 
-$ip_captcha_threshold=7; // -1: disabled (no captcha) / 0: always
+$ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$ip_lockdown_threshold=14; // -1: disabled (no ip lockdown)
+$ip_lockdown_threshold=-1; // -1: disabled (no ip lockdown)
 
 $ip_lockdown_period=30*60; //in seconds
 

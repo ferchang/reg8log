@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($index_dir)) $index_dir='';
+
 
 require_once $index_dir.'include/code/code_db_object.php';
 
@@ -70,7 +70,7 @@ require $index_dir.'include/info/info_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	require_once $index_dir.'include/code/code_fetch_site_vars.php';
-	$reg8log_db->query("select release_lock('$lockname')");
+	$reg8log_db->query("select release_lock('$lock_name')");
 	require $index_dir.'include/code/code_pending_accounts_expired_cleanup.php';
 }
 
