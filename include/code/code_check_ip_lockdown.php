@@ -2,10 +2,9 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if($ip_lockdown_threshold==-1  and $ip_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $ip_lockdown_threshold==-1) return;
+if($ip_captcha_threshold==-1 and $dont_block_admin_account==2 and strtolower($manual_identify['username'])==='admin') return;
 
 if($ip_lockdown_threshold==0) {
 	$ip_lockdown=true;
@@ -19,7 +18,7 @@ if($ip_captcha_threshold==0) {
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-require_once $index_dir.'include/func/func_inet_pton.php';
+require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
@@ -43,7 +42,7 @@ else {
 	$count=$rec['n'];
 }
 
-if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold) {
+if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold and ($dont_block_admin_account!=2 or strtolower($manual_identify['username'])!=='admin')) {
 	$ip_lockdown=$_SERVER['REMOTE_ADDR'];
 	return;
 }

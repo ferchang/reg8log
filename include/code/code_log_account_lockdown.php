@@ -8,7 +8,7 @@ require_once $index_dir.'include/info/info_security_logs.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-require_once $index_dir.'include/func/func_inet_pton.php';
+require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 

@@ -1,6 +1,6 @@
-alert_box=document.getElementById('alert_div');
-alert_contents=document.getElementById('alert_contents_div');
-alert_title=document.getElementById('alert_title_div');
+var alert_box=document.getElementById('alert_div');
+var alert_contents=document.getElementById('alert_contents_div');
+var alert_title=document.getElementById('alert_title_div');
 
 function hide_alert() {
 	alert_box.style.visibility='hidden';

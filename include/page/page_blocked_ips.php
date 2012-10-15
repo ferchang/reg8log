@@ -204,6 +204,8 @@ echo '</tr>';
 
 require $index_dir.'include/info/info_lockdown.php';
 
+require_once $index_dir.'include/func/func_inet.php';
+
 $i=0;
 $r=false;
 while($rec=$reg8log_db->fetch_row()) {
@@ -214,7 +216,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
-	echo '<td>', inet_ntop($rec['ip']), '</td>';
+	echo '<td>', inet_ntop2($rec['ip']), '</td>';
 	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
 	echo '<td>', htmlspecialchars($rec['last_username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';

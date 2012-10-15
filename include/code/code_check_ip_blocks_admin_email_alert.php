@@ -38,6 +38,6 @@ if(isset($ip_blocks_alert_threshold_reached)) {
 
 $reg8log_db->query("select release_lock('$lock_name3')");
 
-if($admin_alert_email_msg) echo $admin_alert_email_msg;
+if($admin_alert_email_msg) require_once $index_dir.'include/code/code_email_admin_alert_msg.php';
 
 ?>

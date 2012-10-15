@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $max_page_links=20;
 
 $per_pages=array(10, 15, 20, 30, 40, 50, 70, 100, 150, 200, 300);
@@ -14,7 +12,7 @@ if(isset($_GET['sort_by']) and in_array($_GET['sort_by'], $sort_fields))  $sort_
 else $sort_by='auto';
 
 if(isset($_GET['sort_dir']) and ($_GET['sort_dir']=='asc' or $_GET['sort_dir']=='desc')) $sort_dir=$_GET['sort_dir'];
-else $sort_dir='asc';
+else $sort_dir='desc';
 
 $page=(isset($_GET['page']) and is_numeric($_GET['page']))? $_GET['page'] : 1;
 

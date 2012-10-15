@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if(($page-1)*$per_page>=$total) {
 	$tmp27=floor($total/$per_page);
 	if($tmp27*$per_page<$total) $page=$tmp27+1;

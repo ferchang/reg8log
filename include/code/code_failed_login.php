@@ -2,9 +2,8 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if($lockdown_threshold==-1  and $captcha_threshold==-1) return;
+if($captcha_threshold==-1 and $dont_block_admin_account and strtolower($manual_identify['username'])==='admin') return;
 
 $req_time=time();
 
@@ -52,7 +51,7 @@ else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
 $cookie_contents=implode("\n", array_slice(explode("\n", $cookie_contents), -2*20));
 $cookie->set(null, $cookie_contents);
 
-if($lockdown_threshold==1) {
+if($lockdown_threshold==1 and (!$dont_block_admin_account or strtolower($manual_identify['username'])!=='admin')) {
 	$lockdown=$manual_identify['username'];
 	$lockdown_duration=$req_time+$lockdown_period-time();
 	require_once $index_dir.'include/code/code_log_account_lockdown.php';
@@ -79,7 +78,7 @@ if($value<$oldest) $oldest=$value;
 
 $failed_attempts=$count;
 
-if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
+if($lockdown_threshold!=-1 and $count>=$lockdown_threshold and (!$dont_block_admin_account or strtolower($manual_identify['username'])!=='admin')) {
 	$lockdown=$manual_identify['username'];
 	$lockdown_duration=$oldest+$lockdown_period-$req_time;
 	require_once $index_dir.'include/code/code_log_account_lockdown.php';

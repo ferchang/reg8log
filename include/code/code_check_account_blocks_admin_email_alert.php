@@ -39,6 +39,6 @@ if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
 $reg8log_db->query("select release_lock('$lock_name2')");
 
-if($admin_alert_email_msg) echo $admin_alert_email_msg;
+if($admin_alert_email_msg) require_once $index_dir.'include/code/code_email_admin_alert_msg.php';
 
 ?>

@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if($lockdown_threshold==-1  and $captcha_threshold==-1) return;
 if(isset($captcha_needed) and $lockdown_threshold==-1) return;
 
@@ -42,7 +40,7 @@ foreach($attempts as $value) if(($req_time-$value)<$lockdown_period) {
 	if($value<$oldest) $oldest=$value;
 }
 
-if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
+if($lockdown_threshold!=-1 and $count>=$lockdown_threshold and (!$dont_block_admin_account or strtolower($manual_identify['username'])!=='admin')) {
 	$lockdown=$_username;
 	$lockdown_duration=$oldest+$lockdown_period-$req_time;
 	return;
