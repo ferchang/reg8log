@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 if($ip_lockdown_threshold==-1  and $ip_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $ip_lockdown_threshold==-1) return;
-if($ip_captcha_threshold==-1 and $dont_block_admin_account==2 and strtolower($manual_identify['username'])==='admin') return;
+if($ip_captcha_threshold==-1 and ($dont_block_admin_account==2 or $dont_block_admin_account==3) and strtolower($manual_identify['username'])==='admin') return;
 
 if($ip_lockdown_threshold==0) {
 	$ip_lockdown=true;
@@ -42,7 +42,7 @@ else {
 	$count=$rec['n'];
 }
 
-if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold and ($dont_block_admin_account!=2 or strtolower($manual_identify['username'])!=='admin')) {
+if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold and (($dont_block_admin_account!=2 and $dont_block_admin_account!=3) or strtolower($manual_identify['username'])!=='admin')) {
 	$ip_lockdown=$_SERVER['REMOTE_ADDR'];
 	return;
 }

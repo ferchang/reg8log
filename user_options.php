@@ -51,6 +51,12 @@ require $index_dir.'include/page/page_sections.php';
 <ul>
 <li><a class="li_item" href="change_password.php">Change password</a><br>
 <li><a class="li_item" href="change_email.php">Change email</a>
+<?php
+require_once $index_dir.'include/info/info_lockdown.php';
+
+if($allow_users2disable_account_block) echo '<li><a class="li_item" href="block_system_settings.php">Change brute-force protection settings</a>';
+
+?>
 </ul>
 </td></tr>
 </table>

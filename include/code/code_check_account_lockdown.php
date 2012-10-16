@@ -40,7 +40,7 @@ foreach($attempts as $value) if(($req_time-$value)<$lockdown_period) {
 	if($value<$oldest) $oldest=$value;
 }
 
-if($lockdown_threshold!=-1 and $count>=$lockdown_threshold and (!$dont_block_admin_account or strtolower($manual_identify['username'])!=='admin')) {
+if($lockdown_threshold!=-1 and $count>=$lockdown_threshold and (($dont_block_admin_account!=1 and $dont_block_admin_account!=3) or strtolower($manual_identify['username'])!=='admin')) {
 	$lockdown=$_username;
 	$lockdown_duration=$oldest+$lockdown_period-$req_time;
 	return;

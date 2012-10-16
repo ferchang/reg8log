@@ -128,7 +128,7 @@ if(isset($captcha_needed) or $captcha_threshold==0) require $index_dir.'include/
 <input type="submit" value="Log in" onClick="return validate()" /></td>
 </tr>
 <?php
-if(isset($err_msg) and $lockdown_threshold!=-1 and !isset($captcha_err) and !isset($lockdown_bypass_mode) and !isset($no_pretend_user)) {
+if(isset($err_msg) and ($lockdown_threshold!=-1 and $dont_block_admin_account!=1 and $dont_block_admin_account!=3) and !isset($captcha_err) and !isset($lockdown_bypass_mode) and !isset($no_pretend_user)) {
 require_once $index_dir.'include/func/func_duration2msg.php';
 $lockdown_period_msg=duration2friendly_str($lockdown_period, 0);
 $tmp20=$lockdown_threshold-$failed_attempts;
