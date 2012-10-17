@@ -54,7 +54,7 @@ require $index_dir.'include/page/page_sections.php';
 <?php
 require_once $index_dir.'include/info/info_lockdown.php';
 
-if($allow_users2disable_account_block) echo '<li><a class="li_item" href="block_system_settings.php">Change brute-force protection settings</a>';
+if($allow_users2disable_account_block or $identified_user=='Admin') echo '<li><a class="li_item" href="brute_force_protection_setting.php">Change brute-force protection setting</a>';
 
 ?>
 </ul>

@@ -3,8 +3,6 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 $parent_page=true;
 
-
-
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
 require $index_dir.'include/info/info_identify.php';
@@ -22,7 +20,16 @@ if(isset($manual_identify)) {
 	if($user->identify($manual_identify['username'], $manual_identify['password']))
 	$identified_user=$user->user_info['username'];
 }
-else if($user->identify()) $identified_user=$user->user_info['username'];
+else if($user->identify()) {
+	$identified_user=$user->user_info['username'];
+	require_once $index_dir.'include/info/info_lockdown.php';
+	if($allow_users2disable_account_block) {
+		$brute_force_protection=$user->user_info['brute_force_protection'];
+		if($allow_users2disable_account_block==1 and $brute_force_protection!=3 and $brute_force_protection!=2) $brute_force_protection=2;
+		if($allow_users2disable_account_block==2 and $brute_force_protection!=3 and $brute_force_protection!=1) $brute_force_protection=1;
+	}
+	else $brute_force_protection=3;
+}
 
 if($user->err_msg) $identify_error=true;
 

@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $debug_mode=true;
 
 $db_installed=false;
@@ -36,14 +34,12 @@ require $index_dir.'include/code/code_gather_request_entropy.php';
 if(isset($_COOKIE['reg8log_client_sess_key'])) $client_sess_key=$_COOKIE['reg8log_client_sess_key'];
 else {
 	require_once $index_dir.'include/func/func_random.php';
-	
 	$client_sess_key=random_string(22);
 	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, $https, true);
 }
 
 if(!isset($_COOKIE['reg8log_antixsrf_token'])) {
 	require_once $index_dir.'include/func/func_random.php';
-	
 	$antixsrf_token=random_string(22);
 	setcookie('reg8log_antixsrf_token', $antixsrf_token, 0, '/', null, $https, true);
 	$_COOKIE['reg8log_antixsrf_token']=$antixsrf_token;

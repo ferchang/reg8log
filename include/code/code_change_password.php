@@ -3,8 +3,6 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 $parent_page=true;
 
-
-
 if($change_autologin_key_upon_new_password) {
 
 	$new_autologin_key=random_string(43);
