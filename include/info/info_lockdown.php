@@ -1,5 +1,4 @@
 <?php
-
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
@@ -7,27 +6,39 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 // per account anti-'login brute-force' settings
 
+//for normal users accounts >
+
 $captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
 $lockdown_threshold=-1; //1-10 / -1: disabled (no lockdown)
 
 $lockdown_period=12*60*60; //in seconds
 
-$lockdown_bypass_system_enabled=true;
+//< for normal users accounts
+
+//for Admin account >
+
+$admin_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
+
+$admin_lockdown_threshold=-1; //1-10 / -1: disabled (no lockdown)
+
+$admin_lockdown_period=12*60*60; //in seconds
+
+//< for Admin account
+
+$lockdown_bypass_system_enabled=0;
 //with lockdown bypass system, owner of a locked down account can attempt to login via a special link sent to the account's email
+//0: disabled
+//1: enabled only for admin account
+//2: enabled only for accounts other than admin
+//3: enabled for all accounts
+
+$lockdown_bypass_system_also4ip_lockdown=true;
+//if enabled, users can also bypass ip blocks with the lockdown bypass system
 
 $max_lockdown_bypass_emails=10; //1-255 / -1: infinite
 
-$dont_block_admin_account=0;
-//this setting can be useful e.g. if bad guys try to prevent admin's access to the system by frequently causing his account/IP to be blocked. but be aware that enabling this setting opens the admin account to login brute force attacks, so his account password must be  strong enough to resist attacks.
-//see below for possible values for this setting.
-//note that some degree of protection with captcha can still be in place with all these settings; only complete blocks are prevented.
-//0: admin account is fully protected with the lockdown system (of course, if the lockdown system itself is enabled)
-//1: admin account is not protected by the account lockdown system, but can still be protected by the IP block system (if enabled) to some degree.
-//2: login to the admin account is exempt from IP blocks, but can still be protected by the account block system (if enabled).
-//3: admin account is not protected against brute-force attacks at all (it is excluded from both account and IP based blocks). use this setting only if u have a good reason for it and u know what u r doing. with this setting, your only defence against brute force attacks will be a really strong password.
-
-$allow_users2disable_account_block=3;
+$allow_users2disable_account_block=1;
 //this setting can be useful e.g. if bad guys try to prevent some users' access to the system by frequently causing their accounts/IPs to be blocked. but be aware that enabling this setting opens the account to login brute force attacks, so their account password must be strong enough to resist attacks.
 //see below for possible values for this setting.
 //note that some degree of protection with captcha can still be in place with all these settings; only complete blocks are prevented.
@@ -40,11 +51,25 @@ $allow_users2disable_account_block=3;
 
 // per IP anti-'login brute-force' settings
 
+//for normal users accounts >
+
 $ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$ip_lockdown_threshold=-1; // -1: disabled (no ip lockdown)
+$ip_lockdown_threshold=3; // -1: disabled (no ip lockdown)
 
 $ip_lockdown_period=30*60; //in seconds
+
+//< for normal users accounts
+
+//for Admin account >
+
+$admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
+
+$admin_ip_lockdown_threshold=3; // -1: disabled (no ip lockdown)
+
+$admin_ip_lockdown_period=30*60; //in seconds
+
+//< for Admin account
 
 $ip_lockdown_proportional=true;
 // true: incorrect logins count='incorrect logins' divided by 'correct logins'

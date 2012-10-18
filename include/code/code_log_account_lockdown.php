@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 require_once $index_dir.'include/info/info_security_logs.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
@@ -16,7 +14,7 @@ $query='insert into `account_lockdown_log` (`ext_auto`, `username`, `last_attemp
 
 $reg8log_db->query($query);
 
-if($exempt_admin_account_from_alert_limits and strtolower($manual_identify['username'])=='admin') $no_alert_limits=true;
+if($exempt_admin_account_from_alert_limits and strtolower($_POST['username'])=='admin') $no_alert_limits=true;
 else $no_alert_limits=false;
 
 if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 and !$no_alert_limits)) {

@@ -29,16 +29,30 @@ if(isset($_POST['username']) and isset($_POST['password'])) {//1
 
 require $index_dir.'include/code/code_prevent_repost.php';
 
+$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
+	
+$_POST['username']=strtolower($_POST['username']);
+
 if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
-$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
-
 $manual_identify=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
+
+if($lockdown_bypass_system_enabled==1 and $_POST['username']!='admin') exit('<h3 align="center">Currently, lockdown bypass system is enabled only for the admin account!</h3>');
+
+if($lockdown_bypass_system_enabled==2 and $_POST['username']=='admin') exit('<h3 align="center">Currently, lockdown bypass system is disabled for the admin account!</h3>');
 
 $_username=$_POST['username'];
 require $index_dir.'include/code/code_check_account_lockdown.php';
 
-if(!isset($lockdown)) exit('<h3 align=center><span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span>\'s account is not locked!</h3><center><a href="index.php">Login page</a></center>');
+if(!isset($lockdown)) {
+
+	if(!$lockdown_bypass_system_also4ip_lockdown) exit('<h3 align=center><span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span>\'s account is not locked!</h3><center><a href="index.php">Login page</a></center>');
+	
+	require $index_dir.'include/code/code_check_ip_lockdown.php';
+	
+	if(!isset($ip_lockdown)) exit('<h3 align=center>Neither of the account <span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> and IP <span style="white-space: pre; color: #0a8;">'.$_SERVER['REMOTE_ADDR'].'</span> are locked!</h3><center><a href="index.php">Login page</a></center>');
+
+}
 
 require_once $index_dir.'include/code/code_db_object.php';
 
@@ -58,9 +72,9 @@ unset($identify_error);
 require $index_dir.'include/code/code_identify.php';
 
 if(isset($identify_error)) {
-$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
-require $index_dir.'include/page/page_failure.php';
-exit;
+	$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
+	require $index_dir.'include/page/page_failure.php';
+	exit;
 }
 
 if(isset($identified_user)) {//2
@@ -77,11 +91,11 @@ exit;
 
 }//2
 else if(isset($pending_user)) {
-$_identified_username=$pending_user;
-require $index_dir.'include/code/code_dec_failed_logins.php';
-require $index_dir.'include/code/code_detect8fix_failed_activation.php';
-require $index_dir.'include/page/page_pending_user.php';
-exit;
+	$_identified_username=$pending_user;
+	require $index_dir.'include/code/code_dec_failed_logins.php';
+	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
+	require $index_dir.'include/page/page_pending_user.php';
+	exit;
 }
 else {
 	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
@@ -93,6 +107,5 @@ else {
 $lockdown_bypass_mode=true;
 
 require $index_dir.'include/page/page_login_form.php';
-
 
 ?>

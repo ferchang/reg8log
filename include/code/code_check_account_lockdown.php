@@ -2,6 +2,15 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
+if(isset($_POST['username']) and strtolower($_POST['username'])=='admin') {
+	$lockdown_threshold=$admin_lockdown_threshold;
+	$captcha_threshold=$admin_captcha_threshold;
+	$lockdown_period=$admin_lockdown_period;
+	$ip_lockdown_threshold=$admin_ip_lockdown_threshold;
+	$ip_captcha_threshold=$admin_ip_captcha_threshold;
+	$ip_lockdown_period=$admin_ip_lockdown_period;
+}
+
 if($lockdown_threshold==-1  and $captcha_threshold==-1) return;
 if(isset($captcha_needed) and $lockdown_threshold==-1) return;
 
@@ -31,7 +40,7 @@ $rec=$reg8log_db->fetch_row();
 
 $last_attempt=$rec['last_attempt'];
 
-$attempts = unpack("l10", $rec['attempts']);
+$attempts = unpack("l10", $rec['attempts']); //it's not 110. it is L10 (lowercase L).
 
 $count=0;
 $oldest=$req_time;
@@ -40,7 +49,7 @@ foreach($attempts as $value) if(($req_time-$value)<$lockdown_period) {
 	if($value<$oldest) $oldest=$value;
 }
 
-if($lockdown_threshold!=-1 and $count>=$lockdown_threshold and (($dont_block_admin_account!=1 and $dont_block_admin_account!=3) or strtolower($manual_identify['username'])!=='admin')) {
+if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
 	$lockdown=$_username;
 	$lockdown_duration=$oldest+$lockdown_period-$req_time;
 	return;

@@ -26,6 +26,8 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 	if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
 	$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
+	
+	$_POST['username']=strtolower($_POST['username']);
 
 	$manual_identify=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 

@@ -10,16 +10,16 @@ $query="select * from `admin_alerts` where `for`='email' limit 1";
 
 $reg8log_db->query($query);
 
-$rec=$reg8log_db->fetch_row();
+$rec2=$reg8log_db->fetch_row();
 
-$last_alert_email=$rec['last_alert'];
+$last_alert_email=$rec2['last_alert'];
 
 if(!(!$alert_emails_min_interval or time()>=($last_alert_email+$alert_emails_min_interval)) and !$no_alert_limits) {
 	$reg8log_db->query("select release_lock('$lock_name2')");
 	return;
 }
 
-$new_account_blocks=$rec['new_account_blocks'];
+$new_account_blocks=$rec2['new_account_blocks'];
 require $index_dir.'include/code/code_check_account_blocks_alert_threshold.php';
 
 $admin_alert_email_msg='';

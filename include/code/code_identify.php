@@ -25,8 +25,8 @@ else if($user->identify()) {
 	require_once $index_dir.'include/info/info_lockdown.php';
 	if($allow_users2disable_account_block) {
 		$brute_force_protection=$user->user_info['brute_force_protection'];
-		if($allow_users2disable_account_block==1 and $brute_force_protection!=3 and $brute_force_protection!=2) $brute_force_protection=2;
-		if($allow_users2disable_account_block==2 and $brute_force_protection!=3 and $brute_force_protection!=1) $brute_force_protection=1;
+		if($allow_users2disable_account_block==1 and $brute_force_protection!=3 and $brute_force_protection!=2 and $identified_user!='Admin') $brute_force_protection=2;
+		if($allow_users2disable_account_block==2 and $brute_force_protection!=3 and $brute_force_protection!=1 and $identified_user!='Admin') $brute_force_protection=1;
 	}
 	else $brute_force_protection=3;
 }

@@ -2,9 +2,17 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
+if(isset($_POST['username']) and strtolower($_POST['username'])=='admin') {
+	$lockdown_threshold=$admin_lockdown_threshold;
+	$captcha_threshold=$admin_captcha_threshold;
+	$lockdown_period=$admin_lockdown_period;
+	$ip_lockdown_threshold=$admin_ip_lockdown_threshold;
+	$ip_captcha_threshold=$admin_ip_captcha_threshold;
+	$ip_lockdown_period=$admin_ip_lockdown_period;
+}
+
 if($ip_lockdown_threshold==-1  and $ip_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $ip_lockdown_threshold==-1) return;
-if($ip_captcha_threshold==-1 and ($dont_block_admin_account==2 or $dont_block_admin_account==3) and strtolower($manual_identify['username'])==='admin') return;
 
 if($ip_lockdown_threshold==0) {
 	$ip_lockdown=true;
@@ -42,8 +50,14 @@ else {
 	$count=$rec['n'];
 }
 
-if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold and (($dont_block_admin_account!=2 and $dont_block_admin_account!=3) or strtolower($manual_identify['username'])!=='admin')) {
+if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold) {
 	$ip_lockdown=$_SERVER['REMOTE_ADDR'];
+	if(isset($set_last_attempt)) {
+		$query='select * from `incorrect_logins` where `ip`='.$ip.' order by `timestamp` desc limit 1';
+		$reg8log_db->query($query);
+		$rec=$reg8log_db->fetch_row();
+		$last_attempt=$rec['timestamp'];
+	}
 	return;
 }
 
