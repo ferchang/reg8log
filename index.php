@@ -33,21 +33,19 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	require $index_dir.'include/info/info_lockdown.php';
 
+	require $index_dir.'include/code/code_check_ip_lockdown.php';
+	if(isset($ip_lockdown)) {
+		require $index_dir.'include/page/page_ip_lockdown.php';
+		exit;
+	}
+	
 	$_username=$_POST['username'];
 	require $index_dir.'include/code/code_check_account_lockdown.php';
-
 	if(isset($lockdown)) {
 		require $index_dir.'include/page/page_lockdown.php';
 		exit;
 	}
 	
-	require $index_dir.'include/code/code_check_ip_lockdown.php';
-	
-	if(isset($ip_lockdown)) {
-		require $index_dir.'include/page/page_ip_lockdown.php';
-		exit;
-	}
-
 	if(isset($captcha_needed)) {
 		require $index_dir.'include/code/code_verify_captcha.php';
 		if(isset($captcha_err)) if(!isset($captcha_msg)) $err_msg=$err_msgs[0];

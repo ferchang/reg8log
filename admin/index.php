@@ -33,8 +33,8 @@ color: white;
 }
 </style>
 </head>
-<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" >
-<table width="100%"  cellpadding="5" cellspacing="0">
+<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;">
+<table width="100%"  cellpadding="5" cellspacing="0" style="">
 <tr>
 <td valign="top">
 </td>
@@ -46,7 +46,7 @@ require $index_dir.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; top: -100px">
+<table bgcolor="#7587b0" style="position: relative; top: -150px;">
 <tr><td>
 <ul>
 <li>Accounts:
@@ -60,12 +60,14 @@ require $index_dir.'include/page/page_sections.php';
 <br>
 <li>Pending accounts:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a></ul>
+<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a>
+</ul>
 <br>
 <li>Security logs:
 <ul>
 <li><a class="li_item" href="admin-blocked_accounts.php">Account blocks</a>
 <li><a class="li_item" href="admin-blocked_ips.php">IP blocks</a>
+</ul>
 </ul>
 </td></tr>
 </table>

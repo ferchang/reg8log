@@ -12,7 +12,21 @@ require $index_dir.'include/code/code_identify.php';
 
 if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
-if(!$allow_users2disable_account_block and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
+require_once $index_dir.'include/info/info_lockdown.php';
+
+if(!$allow_users2disable_blocks and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
+
+if($identified_user=='Admin') {
+	$lockdown_threshold=$admin_lockdown_threshold;
+	$captcha_threshold=$admin_captcha_threshold;
+	$lockdown_period=$admin_lockdown_period;
+	$ip_lockdown_threshold=$admin_ip_lockdown_threshold;
+	$ip_captcha_threshold=$admin_ip_captcha_threshold;
+	$ip_lockdown_period=$admin_ip_lockdown_period;
+}
+
+require $index_dir.'include/code/code_check_block_options.php';
+if(count($block_options)<2) exit('No block options are available!');
 
 if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
 else {
@@ -28,13 +42,13 @@ if(isset($captcha_needed)) {
 	$captcha_verified=isset($_SESSION['captcha_verified']);
 }
 
-if(isset($_POST['protection'], $_POST['password'])) {
+if(isset($_POST['disables'], $_POST['password'])) {
 
 require $index_dir.'include/code/code_prevent_repost.php';
 require $index_dir.'include/code/code_prevent_xsrf.php';
 
-$protection=$_POST['protection'];
-if(!in_array($protection, array(0, 1, 2, 3))) exit('Invalid protection value!');
+$disables=$_POST['disables'];
+if(!in_array($disables, array(0, 1, 2, 3))) exit('Invalid block_disable value!');
 
 if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/code/code_verify_captcha.php';
 
@@ -55,7 +69,8 @@ else if(!isset($captcha_err)) {
 	}
 
 if(!isset($err_msgs)) {
-	require $index_dir.'include/code/code_change_brute_force_protection.php';
+	$block_disable=$_POST['disables'];
+	require $index_dir.'include/code/code_change_block_disable.php';
 	$success_msg='<h3>Brute-force protection setting changed successfully.</h3>';
 	$no_specialchars=true;
 	require $index_dir.'include/page/page_success.php';

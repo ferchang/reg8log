@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2012 at 08:22 PM
+-- Generation Time: Oct 24, 2012 at 11:50 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -38,8 +38,11 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `last_ch_email_try` int(10) unsigned NOT NULL DEFAULT '0',
   `ch_pswd_tries` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `last_ch_pswd_try` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_activity` int(10) unsigned DEFAULT NULL,
-  `brute_force_protection` tinyint(3) unsigned NOT NULL DEFAULT '3',
+  `last_login` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_activity` int(10) unsigned DEFAULT '0',
+  `last_logout` int(10) unsigned NOT NULL DEFAULT '0',
+  `block_disable` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `last_protection` tinyint(4) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`auto`),
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `username` (`username`)

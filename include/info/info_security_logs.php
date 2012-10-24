@@ -12,7 +12,7 @@ $keep_expired_block_log_records_for=0;
 a positive integer: keep up to this number of seconds after block expiration
 */
 
-$alert_admin_about_account_blocks=3;
+$alert_admin_about_account_blocks=1;
 //0: no
 //1: when he visits
 //2: with email
@@ -22,6 +22,7 @@ $alert_admin_about_account_blocks=3;
 
 $account_blocks_alert_threshold=1;
 //alert only when this minimum number of account blocks has occured in the past 24 hours
+//u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $account_blocks_alert_threshold='%10';
 
 $alert_admin_about_ip_blocks=3;
 //0: no
@@ -31,8 +32,9 @@ $alert_admin_about_ip_blocks=3;
 
 $ip_blocks_alert_threshold=1;
 //alert only when this minimum number of IP blocks has accured in the past 24 hours
+//u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $ip_blocks_alert_threshold='%10';
 
-$alert_emails_min_interval=60*60;
+$alert_emails_min_interval=0;
 //don't send alert emails with less than this interval (in seconds)
 
 $exempt_admin_account_from_alert_limits=true;

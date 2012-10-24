@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 echo '<table cellpadding="5" style="border: thin solid black">';
 
 if($debug_mode) echo '<tr bgcolor="#e1cfa0" ><td><div style="border: medium solid #f00; padding: 2px; color: #f00; font-weight: bold; background: yellow">Warning: Debug mode on!</div></td></tr>';

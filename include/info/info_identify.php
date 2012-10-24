@@ -50,6 +50,13 @@ Note: with this option, a database update operation is needed every time the use
 
 */
 
+$change_autologin_key_upon_logout=true;
+//recommended for higher security
+
 $log_last_activity=true;
+
+$log_last_logout=true;
+
+$log_last_login=false;
 
 ?>

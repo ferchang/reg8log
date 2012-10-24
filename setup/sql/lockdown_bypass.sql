@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2012 at 09:57 PM
+-- Generation Time: Oct 24, 2012 at 04:41 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `lockdown_bypass` (
   `emails_sent` tinyint(3) unsigned NOT NULL,
   `key` varchar(22) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
   `last_attempt` int(11) unsigned NOT NULL COMMENT 'last failed login attempt (copied from the failed_logins table)',
+  `incorrect_logins` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
   KEY `last_attempt` (`last_attempt`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

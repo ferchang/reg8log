@@ -33,7 +33,6 @@ $_username=$reg8log_db->quote_smart($manual_identify['username']);
 
 if(!isset($site_key)) require $index_dir.'include/code/code_fetch_site_vars.php';
 
-
 $lock_name=$reg8log_db->quote_smart('reg8log--failed_login-'.$manual_identify['username']."--$site_key");
 $reg8log_db->query("select get_lock($lock_name, -1)");
 
@@ -58,9 +57,13 @@ if(!$reg8log_db->result_num()) {
 	$cookie->set(null, $cookie_contents);
 
 	if($lockdown_threshold==1) {
-		$lockdown=$manual_identify['username'];
-		$lockdown_duration=$req_time+$lockdown_period-time();
-		require_once $index_dir.'include/code/code_log_account_lockdown.php';
+		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+		if($block_disable!=2 and $block_disable!=3) {
+			$lockdown=$manual_identify['username'];
+			$lockdown_duration=$req_time+$lockdown_period-time();
+			require_once $index_dir.'include/code/code_log_account_lockdown.php';
+		}
+		else if($captcha_threshold==1) $captcha_needed=true;
 	}
 	else if($captcha_threshold==1) $captcha_needed=true;
 
@@ -85,9 +88,13 @@ foreach($attempts as $value) if(($req_time-$value)<$lockdown_period) {
 $failed_attempts=$count;
 
 if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
-	$lockdown=$manual_identify['username'];
-	$lockdown_duration=$oldest+$lockdown_period-$req_time;
-	require_once $index_dir.'include/code/code_log_account_lockdown.php';
+	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+	if($block_disable!=2 and $block_disable!=3) {
+		$lockdown=$manual_identify['username'];
+		$lockdown_duration=$oldest+$lockdown_period-$req_time;
+		require_once $index_dir.'include/code/code_log_account_lockdown.php';
+	}
+	else if($captcha_threshold!=-1 and $count>=$captcha_threshold) $captcha_needed=true;
 }
 else if($captcha_threshold!=-1 and $count>=$captcha_threshold) $captcha_needed=true;
 

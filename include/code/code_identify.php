@@ -5,7 +5,7 @@ $parent_page=true;
 
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
-require $index_dir.'include/info/info_identify.php';
+require_once $index_dir.'include/info/info_identify.php';
 require_once $index_dir.'include/func/func_random.php';
 
 unset($user);
@@ -20,20 +20,13 @@ if(isset($manual_identify)) {
 	if($user->identify($manual_identify['username'], $manual_identify['password']))
 	$identified_user=$user->user_info['username'];
 }
-else if($user->identify()) {
-	$identified_user=$user->user_info['username'];
-	require_once $index_dir.'include/info/info_lockdown.php';
-	if($allow_users2disable_account_block) {
-		$brute_force_protection=$user->user_info['brute_force_protection'];
-		if($allow_users2disable_account_block==1 and $brute_force_protection!=3 and $brute_force_protection!=2 and $identified_user!='Admin') $brute_force_protection=2;
-		if($allow_users2disable_account_block==2 and $brute_force_protection!=3 and $brute_force_protection!=1 and $identified_user!='Admin') $brute_force_protection=1;
-	}
-	else $brute_force_protection=3;
-}
-
+else if($user->identify()) $identified_user=$user->user_info['username'];
+	
 if($user->err_msg) $identify_error=true;
 
 if($log_last_activity and (isset($identified_user) or isset($banned_user))) require_once $index_dir.'include/code/code_log_last_activity.php';
+
+if($log_last_login and isset($manual_identify) and (isset($identified_user) or isset($banned_user))) require_once $index_dir.'include/code/code_log_last_login.php';
 
 if(isset($identified_user) and $identified_user=='Admin' and !isset($ajax)) require $index_dir.'include/code/code_check_admin_visit_alerts.php';
 

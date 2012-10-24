@@ -27,7 +27,9 @@ if(isset($identified_user) or isset($pending_user) or isset($banned_user)) {
 }
 else {
 	if($ip_lockdown_threshold!=-1 and $count+1>=$ip_lockdown_threshold) {
-		$ip_lockdown=$_SERVER['REMOTE_ADDR'];
+		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+		if($block_disable!=1 and $block_disable!=3) $ip_lockdown=$_SERVER['REMOTE_ADDR'];
+		else if($ip_captcha_threshold!=-1 and $count+1>=$ip_captcha_threshold) $captcha_needed=true;
 		require_once $index_dir.'include/code/code_log_ip_block.php';
 	}
 	else if($ip_captcha_threshold!=-1 and $count+1>=$ip_captcha_threshold) $captcha_needed=true;

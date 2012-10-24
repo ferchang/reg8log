@@ -52,10 +52,13 @@ require $index_dir.'include/page/page_sections.php';
 <li><a class="li_item" href="change_password.php">Change password</a><br>
 <li><a class="li_item" href="change_email.php">Change email</a>
 <?php
-require_once $index_dir.'include/info/info_lockdown.php';
 
-if($allow_users2disable_account_block) echo '<li><a class="li_item" href="brute_force_protection_setting.php">Change brute-force protection setting</a>';
-else if($identified_user=='Admin') echo '<li><a class="li_item" href="brute_force_protection_setting.php">Change brute-force protection setting</a><small> (Admin only)<small>';
+require_once $index_dir.'include/info/info_lockdown.php';
+require $index_dir.'include/code/code_check_block_options.php';
+if(count($block_options)>1)  {
+	echo '<li><a class="li_item" href="block_disable_setting.php">Change brute-force protection setting</a>';
+	if(!$allow_users2disable_blocks) echo '<small> (Admin only)<small>';
+}
 
 ?>
 </ul>

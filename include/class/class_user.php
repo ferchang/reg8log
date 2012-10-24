@@ -29,7 +29,11 @@ function identify($username=null, $password=null)
 	global $change_autologin_key_upon_login;
 	global $index_dir;
 	global $https;
-
+	global $block_disable;
+	$block_disable=0;
+	global $last_protection;
+	$last_protection=-1;
+	
 	$this->err_msg='';
 	$this->user_info=null;
 
@@ -58,6 +62,8 @@ function identify($username=null, $password=null)
 		if($reg8log_db->result_num($query1)) {
 			$username_exists=1;
 			$this->user_info=$reg8log_db->fetch_row();
+			$block_disable=$this->user_info['block_disable'];
+			$last_protection=$this->user_info['last_protection'];
 			if(verify_secure_hash($password, $this->user_info['password_hash'])) {
 				if($change_autologin_key_upon_login) {
 					$new_autologin_key=random_string(43);
@@ -132,6 +138,8 @@ function identify($username=null, $password=null)
 	
 	if($reg8log_db->result_num($query)) {
 		$this->user_info=$reg8log_db->fetch_row();
+		$block_disable=$this->user_info['block_disable'];
+		$last_protection=$this->user_info['last_protection'];
 		$this->autologin_durability=($cookie->values[$key+1])? 'permanent' : 'session';
 		if($change_autologin_key_upon_login===2) {
 			$new_autologin_key=random_string(43);

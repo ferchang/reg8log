@@ -126,7 +126,7 @@ if(isset($captcha_needed) or $captcha_threshold==0) require $index_dir.'include/
 <input type="submit" value="Log in" onClick="return validate()" /></td>
 </tr>
 <?php
-if(isset($err_msg) and $lockdown_threshold!=-1 and !isset($captcha_err) and !isset($lockdown_bypass_mode) and !isset($no_pretend_user)) {
+if(isset($err_msg) and $lockdown_threshold!=-1 and !isset($captcha_err) and !isset($lockdown_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
 	require_once $index_dir.'include/func/func_duration2msg.php';
 	$lockdown_period_msg=duration2friendly_str($lockdown_period, 0);
 	$tmp20=$lockdown_threshold-$failed_attempts;
@@ -134,16 +134,17 @@ if(isset($err_msg) and $lockdown_threshold!=-1 and !isset($captcha_err) and !iss
 	echo "<span style=\"color: #a32\" >Only $lockdown_threshold failed login attempts are permitted in every $lockdown_period_msg.<br>Number of failed login attempts in the past $lockdown_period_msg: $failed_attempts<br>Number of tries left: $tmp20</span>";
 	echo '</td></tr>';
 }
+echo '</table>';
+if(isset($lockdown_bypass_mode) and $lockdown_bypass_max_incorrect_logins) echo '<br>Note: Maximum number of incorrect logins is limited to <span style="color: red">', $lockdown_bypass_max_incorrect_logins, '</span>.';
 ?>
-</table>
 </center>
 </form>
 <script>
 if(captcha_exists) {
-document.getElementById('re_captcha_msg').style.visibility='visible';
-captcha_img_style=document.getElementById('captcha_image').style;
-captcha_img_style.cursor='hand';
-if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
+	document.getElementById('re_captcha_msg').style.visibility='visible';
+	captcha_img_style=document.getElementById('captcha_image').style;
+	captcha_img_style.cursor='hand';
+	if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
 }
 </script>
 <?php

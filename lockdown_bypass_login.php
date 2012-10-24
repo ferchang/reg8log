@@ -37,9 +37,9 @@ if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hash
 
 $manual_identify=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
-if($lockdown_bypass_system_enabled==1 and $_POST['username']!='admin') exit('<h3 align="center">Currently, lockdown bypass system is enabled only for the admin account!</h3>');
+if($lockdown_bypass_system_enabled==1 and strtolower($_POST['username'])!='admin') exit('<h3 align="center">Currently, lockdown bypass system is enabled only for the admin account!</h3>');
 
-if($lockdown_bypass_system_enabled==2 and $_POST['username']=='admin') exit('<h3 align="center">Currently, lockdown bypass system is disabled for the admin account!</h3>');
+if($lockdown_bypass_system_enabled==2 and strtolower($_POST['username'])=='admin') exit('<h3 align="center">Currently, lockdown bypass system is disabled for the admin account!</h3>');
 
 $_username=$_POST['username'];
 require $index_dir.'include/code/code_check_account_lockdown.php';
@@ -63,8 +63,11 @@ if(!$reg8log_db->result_num($query)) exit('<h3 align="center">Error: No record f
 
 $rec=$reg8log_db->fetch_row();
 $key=$rec['key'];
+$incorrect_logins=$rec['incorrect_logins'];
 
-if($_GET['key']!==$key) exit('<h3 align="center">Error: Your lockdown bypass link was not verified!</h3>');
+if($_GET['key']!==$key) exit('<h3 align="center">Error: Lockdown-bypass key is incorrect!</h3>');
+
+if($lockdown_bypass_max_incorrect_logins and $incorrect_logins>=$lockdown_bypass_max_incorrect_logins) exit('<center><h3>Maximum number of incorrect logins is reached.<br>You cannot use lockdown-bypass system until next lockdown.</h3><br><a href="index.php">Login page</a></center>');
 
 unset($identified_user);
 unset($identify_error);
@@ -79,26 +82,29 @@ if(isset($identify_error)) {
 
 if(isset($identified_user)) {//2
 
-$_identified_username=$identified_user;
-require $index_dir.'include/code/code_dec_failed_logins.php';
+	$_identified_username=$identified_user;
+	require $index_dir.'include/code/code_dec_failed_logins.php';
+	require_once $index_dir.'include/code/code_lockdown_bypass_dec_failed_logins.php';
 
-if($remember) $user->save_identity('permanent');
-else $user->save_identity('session');
+	if($remember) $user->save_identity('permanent');
+	else $user->save_identity('session');
 
-header('Location: index.php');
+	header('Location: index.php');
 
-exit;
+	exit;
 
 }//2
 else if(isset($pending_user)) {
 	$_identified_username=$pending_user;
 	require $index_dir.'include/code/code_dec_failed_logins.php';
+	require_once $index_dir.'include/code/code_lockdown_bypass_dec_failed_logins.php';
 	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
 	require $index_dir.'include/page/page_pending_user.php';
 	exit;
 }
 else {
 	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
+	require $index_dir.'include/code/code_lockdown_bypass_failed_login.php';
 	$err_msg='You are not authenticated!<br />Check your login information.';
 }
 
