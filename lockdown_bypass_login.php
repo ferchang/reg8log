@@ -48,6 +48,7 @@ if(!isset($lockdown)) {
 
 	if(!$lockdown_bypass_system_also4ip_lockdown) exit('<h3 align=center><span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span>\'s account is not locked!</h3><center><a href="index.php">Login page</a></center>');
 	
+	$_username=$_POST['username'];
 	require $index_dir.'include/code/code_check_ip_lockdown.php';
 	
 	if(!isset($ip_lockdown)) exit('<h3 align=center>Neither of the account <span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> and IP <span style="white-space: pre; color: #0a8;">'.$_SERVER['REMOTE_ADDR'].'</span> are locked!</h3><center><a href="index.php">Login page</a></center>');

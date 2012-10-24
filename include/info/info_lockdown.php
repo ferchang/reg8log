@@ -20,7 +20,7 @@ $lockdown_period=12*60*60; //in seconds
 
 $admin_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$admin_lockdown_threshold=1; //1-10 / -1: disabled (no lockdown)
+$admin_lockdown_threshold=-1; //1-10 / -1: disabled (no lockdown)
 
 $admin_lockdown_period=12*60*60; //in seconds
 
@@ -36,7 +36,7 @@ $lockdown_bypass_system_enabled=3;
 $lockdown_bypass_max_incorrect_logins=6;//1-255 / 0: infinite
 //even with the lockdown-bypass system, number of incorrect logins can be limited for security reasons.
 
-$lockdown_bypass_system_also4ip_lockdown=false;
+$lockdown_bypass_system_also4ip_lockdown=true;
 //if enabled, users can also bypass ip blocks with the lockdown bypass system
 
 $max_lockdown_bypass_emails=10; //1-255 / -1: infinite
@@ -68,7 +68,7 @@ $ip_lockdown_period=30*60; //in seconds
 
 $admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$admin_ip_lockdown_threshold=-1; // -1: disabled (no ip lockdown)
+$admin_ip_lockdown_threshold=1; // -1: disabled (no ip lockdown)
 
 $admin_ip_lockdown_period=30*60; //in seconds
 

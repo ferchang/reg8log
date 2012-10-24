@@ -33,6 +33,7 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	require $index_dir.'include/info/info_lockdown.php';
 
+	$_username=$_POST['username'];
 	require $index_dir.'include/code/code_check_ip_lockdown.php';
 	if(isset($ip_lockdown)) {
 		require $index_dir.'include/page/page_ip_lockdown.php';

@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or ((isset($_GET['username']) and strtolower($_GET['username'])=='admin'))) {
+if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or isset($is_admin)) {
 	$lockdown_threshold=$admin_lockdown_threshold;
 	$captcha_threshold=$admin_captcha_threshold;
 	$lockdown_period=$admin_lockdown_period;
