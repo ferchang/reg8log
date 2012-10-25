@@ -6,10 +6,26 @@ require $index_dir.'include/code/code_calc_protection.php';
 
 //echo '<hr>', $last_protection, ' ', $protection, ' ',$block_disable, '<hr>';
 
-if(($protection>$last_protection and !($protection>=($last_protection+2))) or $protection<$last_protection) {
-	if($block_disable==3) $block_disable=($ip_lockdown_threshold!=-1)? 2 : 1;
-	else if($block_disable==2) $block_disable=($lockdown_threshold!=-1)? 1 : 0;
-	else if($block_disable==1) $block_disable=0;
+$tmp35=$block_disable;
+
+if(($protection>$last_protection and !($protection>=($last_protection+2))) or $protection<$last_protection)
+	switch($block_disable) {
+		case 3:
+			if($ip_lockdown_threshold!=-1) $block_disable=2;
+			else if($lockdown_threshold!=-1) $block_disable=1;
+		break;
+		case 2:
+			if($lockdown_threshold!=-1) $block_disable=1;
+		break;
+		case 1:
+			if($ip_lockdown_threshold!=-1) $block_disable=0;
+		break;
+	}
+
+if($block_disable!=$tmp35) {
+	//echo 'block disable update';
+	$query='update `accounts` set `block_disable`='.$block_disable.' where `username`='.$reg8log_db->quote_smart($_username2).' limit 1';
+	$reg8log_db->query($query);
 }
 
 //echo '<hr>', $block_disable, '<hr>';

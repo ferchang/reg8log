@@ -10,7 +10,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 $captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$lockdown_threshold=-1; //1-10 / -1: disabled (no lockdown)
+$lockdown_threshold=1; //1-10 / -1: disabled (no lockdown)
 
 $lockdown_period=12*60*60; //in seconds
 
@@ -20,7 +20,7 @@ $lockdown_period=12*60*60; //in seconds
 
 $admin_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$admin_lockdown_threshold=-1; //1-10 / -1: disabled (no lockdown)
+$admin_lockdown_threshold=1; //1-10 / -1: disabled (no lockdown)
 
 $admin_lockdown_period=12*60*60; //in seconds
 

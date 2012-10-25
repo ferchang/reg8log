@@ -77,8 +77,9 @@ function identify($username=null, $password=null)
 					require $index_dir.'include/code/code_check_ban_status.php';
 				}
 				$reg8log_db->query("select release_lock($lock_name)");
-				if(!isset($banned_user)) return true;
-				else $this->user_info=null;
+				return true;
+				//if(!isset($banned_user)) return true;
+				//else $this->user_info=null;
 			}
 			else $this->user_info=null;
 		}
@@ -154,13 +155,14 @@ function identify($username=null, $password=null)
 			require $index_dir.'include/code/code_check_ban_status.php';
 		}
 		$reg8log_db->query("select release_lock($lock_name)");
-		if(!isset($banned_user)) return true;
-		else $this->user_info=null;
+		return true;
+		//if(!isset($banned_user)) return true;
+		//else $this->user_info=null;
 	}
 
 	$reg8log_db->query("select release_lock($lock_name)");
 	
-	$cookie->erase();//erase auto-login cookie in case of the user is not authenticated with it.
+	if(!isset($banned_user)) $cookie->erase();//erase auto-login cookie in case of the user is not authenticated with it.
 
 	return false;
 

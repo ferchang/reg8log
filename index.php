@@ -58,6 +58,7 @@ if(isset($_POST['remember'])) $remember=true;
 else $remember=false;
 
 if(!isset($captcha_err)) {
+	$pass_banned_user=true;
 	require $index_dir.'include/code/code_identify.php';
 	if(isset($identify_error)) {
 		$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
@@ -97,6 +98,10 @@ else if(isset($pending_user)) {
 	require $index_dir.'include/page/page_pending_user.php';
 }
 else if(isset($banned_user)) {
+	if(isset($manual_identify)) {
+		if($remember) $user->save_identity('permanent');
+		else $user->save_identity('session');
+	}
 	$_identified_username=$banned_user;
 	require $index_dir.'include/code/code_dec_failed_logins.php';
 	require $index_dir.'include/page/page_banned_user.php';

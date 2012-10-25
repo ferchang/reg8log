@@ -9,19 +9,29 @@ if($ip_lockdown_threshold!=-1) if($lockdown_threshold!=-1) $possible_protection+
 else $possible_protection+=7;
 if($lockdown_threshold!=-1) $possible_protection+=15;
 
+//echo $possible_protection;
+
 $protection=$possible_protection;
 
 if($block_disable) switch($block_disable) {
 	case 1:
-		if($lockdown_threshold!=-1) $protection-=8;
-		else	$protection-=7;
+		if($ip_lockdown_threshold!=-1) {
+			if($lockdown_threshold!=-1) $protection-=8;
+			else $protection-=7;
+		}
 	break;
 	case 2:
-		$protection-=15;
+		if($lockdown_threshold!=-1) $protection-=15;
 	break;
 	case 3:
-		$protection-=8+15;
+		if($lockdown_threshold!=-1) {
+			$protection-=15;
+			if($ip_lockdown_threshold!=-1) $protection-=8;
+		}
+		else if($ip_lockdown_threshold!=-1) $protection-=7;
 	break;
 }
+
+//echo ' - ', $protection;
 
 ?>

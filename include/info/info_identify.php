@@ -57,6 +57,6 @@ $log_last_activity=true;
 
 $log_last_logout=true;
 
-$log_last_login=false;
+$log_last_login=true;
 
 ?>

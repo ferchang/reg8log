@@ -32,7 +32,9 @@ if($ban_until!=1) {
 	echo '<h4>Ban will be lifted at:  <span style="color: #84f;">', duration2friendly_str($ban_until-time(), 2), '</span> later.</h4>';
 }
 else echo '<h4>Ban will be lifted at:  <span style="color: #84f;">Not specified.</span></h4>';
-echo '<br><a href="index.php">Login page</a>';
+echo '<br>';
+
+echo '<a href="logout.php?antixsrf_token=', $_COOKIE['reg8log_antixsrf_token'], '">Log out</a>';
 
 ?>
 

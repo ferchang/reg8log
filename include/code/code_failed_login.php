@@ -57,6 +57,7 @@ if(!$reg8log_db->result_num()) {
 	$cookie->set(null, $cookie_contents);
 
 	if($lockdown_threshold==1) {
+		$_username2=$_POST['username'];
 		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 		if($block_disable!=2 and $block_disable!=3) {
 			$lockdown=$manual_identify['username'];
@@ -88,6 +89,7 @@ foreach($attempts as $value) if(($req_time-$value)<$lockdown_period) {
 $failed_attempts=$count;
 
 if($lockdown_threshold!=-1 and $count>=$lockdown_threshold) {
+	$_username2=$_POST['username'];
 	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
 		$lockdown=$manual_identify['username'];

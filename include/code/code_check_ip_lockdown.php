@@ -59,6 +59,7 @@ else {
 }
 
 if($ip_lockdown_threshold!=-1 and $count>=$ip_lockdown_threshold) {
+	$_username2=$_username;
 	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=1 and $block_disable!=3) {
 		$ip_lockdown=$_SERVER['REMOTE_ADDR'];
