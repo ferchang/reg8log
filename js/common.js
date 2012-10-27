@@ -1,6 +1,6 @@
-captcha_focus=false;
+var captcha_focus=false;
 
-captcha_exists=false;
+var captcha_exists=false;
 
 function clear_cap(br)
 {

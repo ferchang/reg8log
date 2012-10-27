@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $parent_page=true;
 
 ?>
@@ -94,7 +92,7 @@ echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['user
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>', $rec['gender'], '</td>';
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 echo '<td>', duration2friendly_str(time()-$rec['timestamp']), '</td>';
 ?>
 </tr></table><br>

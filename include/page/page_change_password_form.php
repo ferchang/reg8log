@@ -36,9 +36,9 @@ echo ";\n";
 echo "\nsite_salt='$site_salt';\n";
 ?>
 
-auto_filled=false;
-password_value='';
-password_edited=false;
+var auto_filled=false;
+var password_value='';
+var password_edited=false;
 
 function hash_password() {
 	document.change_pass_form.curpass.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.change_pass_form.curpass.value);

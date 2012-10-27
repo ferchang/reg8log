@@ -15,14 +15,14 @@ $dir=str_replace('\\', '/', $dir);
 
 if(strlen($dir)==1) $dir='';
 
-$link='http://'.$_SERVER['HTTP_HOST'].$dir.'/lockdown_bypass_login.php?key='.$key;
+$link='http://'.$_SERVER['HTTP_HOST'].$dir.'/block_bypass_login.php?key='.$key;
 
-$body="Your lockdown bypass link: $link";
-$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\nYour lockdown bypass link: $link";
+$body="Your block-bypass link: $link";
+$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\nYour block-bypass link: $link";
 $body.="\n--==boundary\nContent-Type: text/html; charset=\"utf-8\"";
-$body.="\n\n<html><body><a href=\"$link\">Your lockdown bypass link</a></body> </html>\n--==boundary--";
+$body.="\n\n<html><body><a href=\"$link\">Your block-bypass link</a></body> </html>\n--==boundary--";
 
-mail($email, 'Lockdown bypass link', $body, $headers);
+mail($email, 'Block-bypass link', $body, $headers);
 
 if($debug_mode) echo $link;
 

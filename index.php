@@ -27,23 +27,21 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
 	
-	$_POST['username']=strtolower($_POST['username']);
-
 	$manual_identify=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
-	require $index_dir.'include/info/info_lockdown.php';
+	require $index_dir.'include/info/info_brute_force_protection.php';
 
 	$_username=$_POST['username'];
-	require $index_dir.'include/code/code_check_ip_lockdown.php';
-	if(isset($ip_lockdown)) {
-		require $index_dir.'include/page/page_ip_lockdown.php';
+	require $index_dir.'include/code/code_check_ip_block.php';
+	if(isset($ip_block)) {
+		require $index_dir.'include/page/page_ip_block.php';
 		exit;
 	}
 	
 	$_username=$_POST['username'];
-	require $index_dir.'include/code/code_check_account_lockdown.php';
-	if(isset($lockdown)) {
-		require $index_dir.'include/page/page_lockdown.php';
+	require $index_dir.'include/code/code_check_account_block.php';
+	if(isset($account_block)) {
+		require $index_dir.'include/page/page_account_block.php';
 		exit;
 	}
 	
@@ -78,7 +76,7 @@ if(isset($identified_user)) {//Identified
 if(isset($manual_identify)) {
 
 $_identified_username=$identified_user;
-require $index_dir.'include/code/code_dec_failed_logins.php';
+require $index_dir.'include/code/code_dec_incorrect_logins.php';
 
 if($remember) $user->save_identity('permanent');
 else $user->save_identity('session');
@@ -92,27 +90,29 @@ require $index_dir.'include/page/page_members_area.php';
 
 }//Identified
 else if(isset($pending_user)) {
-	$_identified_username=$pending_user;
-	require $index_dir.'include/code/code_dec_failed_logins.php';
+	if(isset($manual_identify)) {
+		$_identified_username=$pending_user;
+		require $index_dir.'include/code/code_dec_incorrect_logins.php';	
+	}
 	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
 	require $index_dir.'include/page/page_pending_user.php';
 }
 else if(isset($banned_user)) {
 	if(isset($manual_identify)) {
+		$_identified_username=$banned_user;
+		require $index_dir.'include/code/code_dec_incorrect_logins.php';
 		if($remember) $user->save_identity('permanent');
 		else $user->save_identity('session');
 	}
-	$_identified_username=$banned_user;
-	require $index_dir.'include/code/code_dec_failed_logins.php';
 	require $index_dir.'include/page/page_banned_user.php';
 }
 else {//Not identified
 	if(isset($manual_identify)) {
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		$err_msg='You are not authenticated!<br />Check your login information.';
-		require $index_dir.'include/code/code_failed_login.php';
+		require $index_dir.'include/code/account_incorrect_login.php';
 	}
-	if(isset($ip_lockdown)) require $index_dir.'include/page/page_ip_lockdown.php';
-	else if(isset($lockdown)) require $index_dir.'include/page/page_lockdown.php';
+	if(isset($ip_block)) require $index_dir.'include/page/page_ip_block.php';
+	else if(isset($account_block)) require $index_dir.'include/page/page_account_block.php';
 	else require $index_dir.'include/page/page_login_form.php';
 }//Not identified

@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
 
 foreach($fields as $field_name=>$specs) {//validate post data
@@ -71,7 +69,7 @@ force the client to do a captcha test again.
 this is to prevent misusing the system with bots to get knowledge about registered
 unique field values in our members database.
 */
-if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !$ajax_check_username)) {
+if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !$ajax_check_username or $max_ajax_check_usernames)) {
 		if(isset($_SESSION['passed'][$field_name]) and $_SESSION['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
 				unset($_SESSION['captcha_verified']);
 				$err_msgs[]='You need to enter a security code again.';

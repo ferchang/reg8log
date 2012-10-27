@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/info/info_lockdown.php';
+require_once $index_dir.'include/info/info_brute_force_protection.php';
 
 ?>
 
@@ -90,7 +90,7 @@ echo '">';
 
 require $index_dir.'include/code/code_generate_form_id.php';
 
-if(isset($lockdown_bypass_mode)) echo '<tr><td colspan="3" align="center"><div style="color: #fff; border: thick solid orange; padding: 5px; font-size: 13pt; font-weight: bold">Lockdown bypass mode</div></td></tr>';
+if(isset($block_bypass_mode)) echo '<tr><td colspan="3" align="center"><div style="color: #fff; border: thick solid orange; padding: 5px; font-size: 13pt; font-weight: bold">Block-bypass mode</div></td></tr>';
 
 if(isset($err_msg)) {//a login attempt with login form occured and was unsuccessful; $err_msg contains error message that are to be inserted in top of login form
 echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">Login error:</span><br />';
@@ -114,28 +114,28 @@ echo '</td></tr>';
 </tr>
 <!-- -->
 <?php
-if(isset($captcha_needed) or $captcha_threshold==0) require $index_dir.'include/page/page_captcha_form.php';
+if(isset($captcha_needed) or $account_captcha_threshold==0) require $index_dir.'include/page/page_captcha_form.php';
 ?>
 <!-- -->
 <tr>
 <td></td><td colspan="2"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
-<td><a href="send_password_reset_link.php" title="Forgot password/username">Forgot password</a></td>
+<td><a href="password_reset_request.php" title="Forgot password/username">Forgot password</a></td>
 <td align="center" colspan="2"><input type="reset" value="Clear" onClick="return clear_form()" />
 <input type="submit" value="Log in" onClick="return validate()" /></td>
 </tr>
 <?php
-if(isset($err_msg) and $lockdown_threshold!=-1 and !isset($captcha_err) and !isset($lockdown_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
-	require_once $index_dir.'include/func/func_duration2msg.php';
-	$lockdown_period_msg=duration2friendly_str($lockdown_period, 0);
-	$tmp20=$lockdown_threshold-$failed_attempts;
+if(isset($err_msg) and $account_block_threshold!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
+	require_once $index_dir.'include/func/duration2friendly_str.php';
+	$account_block_period_msg=duration2friendly_str($account_block_period, 0);
+	$tmp20=$account_block_threshold-$incorrect_attempts;
 	echo '<tr align="left"><td colspan="3"  style="border: solid thin yellow; font-style: italic">';
-	echo "<span style=\"color: #a32\" >Only $lockdown_threshold failed login attempts are permitted in every $lockdown_period_msg.<br>Number of failed login attempts in the past $lockdown_period_msg: $failed_attempts<br>Number of tries left: $tmp20</span>";
+	echo "<span style=\"color: #a32\" >Only $account_block_threshold incorrect login attempts are permitted in every $account_block_period_msg.<br>Number of incorrect login attempts in the past $account_block_period_msg: $incorrect_attempts<br>Number of tries left: $tmp20</span>";
 	echo '</td></tr>';
 }
 echo '</table>';
-if(isset($lockdown_bypass_mode) and $lockdown_bypass_max_incorrect_logins) echo '<br>Note: Maximum number of incorrect logins is limited to <span style="color: red">', $lockdown_bypass_max_incorrect_logins, '</span>.';
+if(isset($block_bypass_mode) and $block_bypass_max_incorrect_logins) echo '<br>Note: Maximum number of incorrect logins is limited to <span style="color: red">', $block_bypass_max_incorrect_logins, '</span>.';
 ?>
 </center>
 </form>

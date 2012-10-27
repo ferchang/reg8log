@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 require $index_dir.'include/code/code_sess_start.php';
 
 $captcha_verified=isset($_SESSION['captcha_verified']);
@@ -56,9 +54,9 @@ echo "\n);\n";
 echo "\nsite_salt='$site_salt';\n";
 ?>
 
-auto_filled=false;
-password_value='';
-password_edited=false;
+var auto_filled=false;
+var password_value='';
+var password_edited=false;
 
 function hash_password() {
 	if(document.register_form.password.value.indexOf('encrypted-'+site_salt)==0 || document.register_form.password.value.indexOf('hashed-'+site_salt)==0) return;
@@ -142,25 +140,34 @@ return true;
 
 //ajax for checking username availibility
 
-ws='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+var ws='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
-xhr=null;
+var xhr=null;
 
 function create_xhr() {
-var xhr;
-if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
-else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	var xhr;
+	if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+	else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
 
-return xhr;
+	return xhr;
 }
 
+var username_change=false;
+var report_args={'1':ws, '2':''};
+
 function check_username(uname) {
+
 <?php
 if(!$ajax_check_username) echo "
 //ajax username check is disabled on the server!
 return;
 //ajax username check is disabled on the server!\n\n";
 ?>
+
+if(!username_change) {
+	report(report_args['1'], report_args['2']);
+	return;
+}
 
 for(j in fields) {
 	if(fields[j][0]!='username') continue;
@@ -180,19 +187,25 @@ for(j in fields) {
 }
 
 if(!xhr) {
-xhr=create_xhr();
-if(!xhr) return false;
+	xhr=create_xhr();
+	if(!xhr) return false;
 }
 
-xhr.open('GET', 'ajax/check_username.php?value='+encodeURIComponent(uname), true);
+xhr.open('GET', 'ajax/check_username_availability.php?value='+encodeURIComponent(uname), true);
 
 xhr.onreadystatechange=function() {
-if(xhr.readyState == 4) if(xhr.status == 200) {
-if(xhr.responseText=='y') report('Not available!', 'orange');
-else if(xhr.responseText=='n') report('Is available.', 'green');
-else if(xhr.responseText=='i') report('&nbsp;&nbsp;Invalid.&nbsp;&nbsp;', 'red');
-else report(ws, '');
-} else report(ws, '');
+	if(xhr.readyState == 4) if(xhr.status == 200) {
+	if(xhr.responseText=='y') {
+		report('Not available!', 'orange');
+		username_change=false;
+	}
+	else if(xhr.responseText=='n') {
+		report('Is available.', 'green');
+		username_change=false;
+	}
+	else if(xhr.responseText=='i') report('&nbsp;&nbsp;Invalid.&nbsp;&nbsp;', 'red');
+	else report(ws, '');
+	} else report(ws, '');
 }
 
 xhr.send(null);
@@ -201,6 +214,8 @@ return true;
 }
 
 function report(val, bg) {
+	if(val=='onkeypress') val=ws;
+	else report_args={'1':val, '2':bg};
 	report_field.innerHTML=val;
 	if(bg) report_field.style.background=bg;
 	else report_field.style.background='brown';
@@ -238,8 +253,8 @@ require $index_dir.'include/code/code_generate_form_id.php';
 <tr>
 <td align="right" style="">Username:</td>
 <td style=""><input
-onkeypress="report(ws, '');"
-onblur="if(this.value!='') check_username(this.value);" type="text" name="username" style="" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30"></td>
+onkeypress="report('onkeypress', '');"
+onblur="if(this.value!='') check_username(this.value);" type="text" name="username" style="" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30" onchange="username_change=true;"></td>
 <td>
 <div id="report_field" style="background: brown; border: thin solid black; padding: 0 2pt 0 2pt"></div>
 </td>

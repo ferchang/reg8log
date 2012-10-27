@@ -33,7 +33,7 @@ if($log_activity) require_once $index_dir.'include/code/code_log_last_login8acti
 
 if(isset($banned_user) and !isset($pass_banned_user)) {
 	$_identified_username=$banned_user;
-	require $index_dir.'include/code/code_dec_failed_logins.php';
+	require $index_dir.'include/code/code_dec_incorrect_logins.php';
 	require $index_dir.'include/page/page_banned_user.php';
 	exit;
 }

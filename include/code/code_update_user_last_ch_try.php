@@ -30,7 +30,7 @@ if(!isset($trec)) {
 
 //--------------------------------
 
-if(time()-$trec['last_ch_pswd_try']>$lockdown_period) {
+if(time()-$trec['last_ch_pswd_try']>$account_block_period) {
 	$query='update `accounts` set `ch_pswd_tries`=1, `last_ch_pswd_try`='.time().' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=1) {

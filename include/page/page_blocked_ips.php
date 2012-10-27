@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $color1='#aaa';
 $color2='#ccc';
 
@@ -27,8 +25,8 @@ $num=$last-$first+1;
 </style>
 <script>
 
-del_all_toggle_stat=false;
-unblock_all_toggle_stat=false;
+var del_all_toggle_stat=false;
+var unblock_all_toggle_stat=false;
 
 var tmp;
 function highlight(row) {
@@ -154,7 +152,7 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token'];
 echo '">';
 
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
@@ -202,7 +200,7 @@ echo '<th  class="admin_action">Delete log record</th>';
 
 echo '</tr>';
 
-require $index_dir.'include/info/info_lockdown.php';
+require $index_dir.'include/info/info_brute_force_protection.php';
 
 require_once $index_dir.'include/func/func_inet.php';
 
@@ -224,9 +222,9 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if(time()-$rec['last_attempt']<$lockdown_period) {
+	else if(time()-$rec['last_attempt']<$account_block_period) {
 		echo '<span style="color: red" ';
-		echo 'title="Blocked lift: ', duration2friendly_str($lockdown_period-(time()-$rec['last_attempt']), 2), ' later';
+		echo 'title="Blocked lift: ', duration2friendly_str($account_block_period-(time()-$rec['last_attempt']), 2), ' later';
 		echo '">Blocked</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';

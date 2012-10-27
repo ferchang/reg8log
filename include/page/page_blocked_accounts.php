@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $color1='#aaa';
 $color2='#ccc';
 
@@ -27,8 +25,8 @@ $num=$last-$first+1;
 </style>
 <script>
 
-del_all_toggle_stat=false;
-unblock_all_toggle_stat=false;
+var del_all_toggle_stat=false;
+var unblock_all_toggle_stat=false;
 
 var tmp;
 function highlight(row) {
@@ -154,7 +152,7 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token'];
 echo '">';
 
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
@@ -164,6 +162,18 @@ if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
 echo "'>Username</a>";
 if($sort_by=='username') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username_exists&sort_dir=";
+if($sort_by=='username_exists' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Username exists</a>";
+if($sort_by=='username_exists') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
@@ -202,7 +212,7 @@ echo '<th  class="admin_action">Delete log record</th>';
 
 echo '</tr>';
 
-require $index_dir.'include/info/info_lockdown.php';
+require $index_dir.'include/info/info_brute_force_protection.php';
 
 require_once $index_dir.'include/func/func_inet.php';
 
@@ -217,6 +227,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
+	echo '<td>', ($rec['username_exists'])? 'Yes' : 'No', '</td>';
 	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
 	echo '<td>', inet_ntop2($rec['ip']), '</td>';
 	echo '<td>';
@@ -224,9 +235,9 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if(time()-$rec['last_attempt']<$lockdown_period) {
+	else if(time()-$rec['last_attempt']<$account_block_period) {
 		echo '<span style="color: red" ';
-		echo 'title="Blocked lift: ', duration2friendly_str($lockdown_period-(time()-$rec['last_attempt']), 2), ' later';
+		echo 'title="Blocked lift: ', duration2friendly_str($account_block_period-(time()-$rec['last_attempt']), 2), ' later';
 		echo '">Blocked</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 	}
@@ -243,7 +254,7 @@ echo '<tr align="center"';
 if(!$r) echo ' style="background: ', $color1;
 else echo ' style="background: ', $color2;
 echo '">';
-echo '<td colspan="5" align="left"><input type="submit" value="Execute admin commands" style="color: #000;" name="admin_action"></td><td><input type="button" onclick="check_all(\'unblock\')" value="All" disabled id="check_all2"></td><td><input type="button" onclick="check_all(\'del\')" value="All" disabled id="check_all3"></td></tr>';
+echo '<td colspan="6" align="left"><input type="submit" value="Execute admin commands" style="color: #000;" name="admin_action"></td><td><input type="button" onclick="check_all(\'unblock\')" value="All" disabled id="check_all2"></td><td><input type="button" onclick="check_all(\'del\')" value="All" disabled id="check_all3"></td></tr>';
 echo '</table>';
 
 echo '<script>';

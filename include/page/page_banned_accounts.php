@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $color1='#aaa';
 $color2='#ccc';
 
@@ -70,7 +68,7 @@ require $index_dir.'include/code/code_generate_form_id.php';
 echo 'Records ', $first, ' - ', $last, ' of ', $total;
 echo '<table border cellpadding="3">';
 
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 

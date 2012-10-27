@@ -45,8 +45,8 @@ require_once $index_dir.'include/func/func_random.php';
 
 if(isset($_COOKIE['reg8log_register_sess_salt'])) $session_salt=$_COOKIE['reg8log_register_sess_salt'];
 else {
-$session_salt=random_string(22);
-setcookie('reg8log_register_sess_salt', $session_salt, 0, '/', null, $https, true);
+	$session_salt=random_string(22);
+	setcookie('reg8log_register_sess_salt', $session_salt, 0, '/', null, $https, true);
 }
 
 require $index_dir.'include/code/code_validate_register_submit.php';
@@ -71,6 +71,8 @@ else {
 }
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
+
+require $index_dir.'include/code/code_reset_ajax_check_usernames.php';
 
 require $index_dir.'include/page/page_success.php';
 

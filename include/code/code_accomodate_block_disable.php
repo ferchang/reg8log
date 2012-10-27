@@ -11,14 +11,14 @@ $tmp35=$block_disable;
 if(($protection>$last_protection and !($protection>=($last_protection+2))) or $protection<$last_protection)
 	switch($block_disable) {
 		case 3:
-			if($ip_lockdown_threshold!=-1) $block_disable=2;
-			else if($lockdown_threshold!=-1) $block_disable=1;
+			if($ip_block_threshold!=-1) $block_disable=2;
+			else if($account_block_threshold!=-1) $block_disable=1;
 		break;
 		case 2:
-			if($lockdown_threshold!=-1) $block_disable=1;
+			if($account_block_threshold!=-1) $block_disable=1;
 		break;
 		case 1:
-			if($ip_lockdown_threshold!=-1) $block_disable=0;
+			if($ip_block_threshold!=-1) $block_disable=0;
 		break;
 	}
 

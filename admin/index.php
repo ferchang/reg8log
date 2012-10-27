@@ -46,7 +46,7 @@ require $index_dir.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; top: -150px;">
+<table bgcolor="#7587b0" style="position: relative; top: -200px;">
 <tr><td>
 <ul>
 <li>Accounts:
@@ -67,6 +67,11 @@ require $index_dir.'include/page/page_sections.php';
 <ul>
 <li><a class="li_item" href="admin-blocked_accounts.php">Account blocks</a>
 <li><a class="li_item" href="admin-blocked_ips.php">IP blocks</a>
+</ul>
+<br>
+<li>Database:
+<ul>
+<li><a class="li_item" href="admin-tables_status.php">Tables status</a>
 </ul>
 </ul>
 </td></tr>

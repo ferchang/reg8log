@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 ?>
 
 <html>
@@ -16,7 +14,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <script src="js/common.js"></script>
 <script>
 
-email_re=/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i;
+var email_re=/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i;
 
 function clear_form() {
 document.reset_email_form.email.value='';
@@ -84,7 +82,7 @@ Check your email carefully because, for security reasons, the system will not in
 You can of course make other tries in case you made a typo or you don't remember certainly which of your emails you had chosen for your account.
 <?php
 if($max_password_reset_emails!=-1) {
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 $period_msg=duration2friendly_str($password_reset_period, 0);
 echo '<hr width="90%">Maximum number of password reset emails that can be sent in every ', $period_msg, ' : ', $max_password_reset_emails, '<br>';
 echo 'Note that the system will not, for security reasons, tell you if the maximum number of emails is reached.';

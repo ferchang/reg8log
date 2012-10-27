@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 
 
-$expired=time()-$ip_lockdown_period;
+$expired=time()-$ip_block_period;
 
 if($keep_expired_block_log_records_for!=-1) $expired-=$keep_expired_block_log_records_for;
 

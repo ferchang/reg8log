@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if(isset($ban_page)) $form_color='#f55750';
 else $form_color='#55a750';
 
@@ -77,8 +75,8 @@ require $index_dir.'include/code/code_generate_form_id.php';
 
 ?>
 <tr>
-<td align="left" style="">username<input type="radio" name="which" value="username" <?php if(isset($_POST['which'])) {
-if($_POST['which']=='username') echo ' checked="true" '; } else echo ' checked="true" '; ?>>&nbsp;&nbsp;uid<input type="radio" name="which" value="uid" <?php if(isset($_POST['which']) and $_POST['which']=='uid') echo ' checked="true" '; ?>></td>
+<td align="left" style=""><input type="radio" name="which" value="username" <?php if(isset($_POST['which'])) {
+if($_POST['which']=='username') echo ' checked="true" '; } else echo ' checked="true" '; ?>>username&nbsp;&nbsp;<input type="radio" name="which" value="uid" <?php if(isset($_POST['which']) and $_POST['which']=='uid') echo ' checked="true" '; ?>>uid</td>
 </tr>
 <tr>
 <td style="">User:&nbsp;<input type="text" name="user" style="" <?php if(isset($_POST['user'])) echo 'value="', htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30"></td></tr>

@@ -12,17 +12,17 @@ require $index_dir.'include/code/code_identify.php';
 
 if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
-require_once $index_dir.'include/info/info_lockdown.php';
+require_once $index_dir.'include/info/info_brute_force_protection.php';
 
 if(!$allow_users2disable_blocks and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
 
 if($identified_user=='Admin') {
-	$lockdown_threshold=$admin_lockdown_threshold;
-	$captcha_threshold=$admin_captcha_threshold;
-	$lockdown_period=$admin_lockdown_period;
-	$ip_lockdown_threshold=$admin_ip_lockdown_threshold;
+	$account_block_threshold=$admin_account_block_threshold;
+	$account_captcha_threshold=$admin_account_captcha_threshold;
+	$account_block_period=$admin_account_block_period;
+	$ip_block_threshold=$admin_ip_block_threshold;
 	$ip_captcha_threshold=$admin_ip_captcha_threshold;
-	$ip_lockdown_period=$admin_ip_lockdown_period;
+	$ip_block_period=$admin_ip_block_period;
 }
 
 require $index_dir.'include/code/code_check_block_options.php';

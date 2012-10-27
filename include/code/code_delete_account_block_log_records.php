@@ -12,7 +12,7 @@ foreach($del as $auto) {
 	$autos.=", ";
 }
 
-$query='delete from `account_lockdown_log` where `auto` in ('.$autos.")";
+$query='delete from `account_block_log` where `auto` in ('.$autos.")";
 
 $reg8log_db->query($query);
 

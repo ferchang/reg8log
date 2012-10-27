@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 require_once $index_dir.'include/code/code_db_object.php';
 
 if($_POST['ban_type']==='duration') $until=time()+$_POST['years']*(365*24*60*60)+$_POST['months']*(30*24*60*60)+$_POST['days']*(24*60*60)+$_POST['hours']*(60*60);
@@ -13,7 +11,7 @@ if(!is_numeric($until)) exit("<center><h3>Error: Duration not a number!</h3></ce
 
 require_once $index_dir.'include/code/code_fetch_site_vars.php';
 
-$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.$_POST['username']."--$site_key");
+$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.strtolower($_POST['username'])."--$site_key");
 $reg8log_db->query("select get_lock($lock_name, -1)");
 
 $username=$reg8log_db->quote_smart($_POST['username']);

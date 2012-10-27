@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2012 at 04:41 PM
+-- Generation Time: Oct 10, 2012 at 10:56 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -22,17 +22,18 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lockdown_bypass`
+-- Table structure for table `account_incorrect_logins`
 --
 
-CREATE TABLE IF NOT EXISTS `lockdown_bypass` (
+CREATE TABLE IF NOT EXISTS `account_incorrect_logins` (
+  `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `username_exists` tinyint(1) NOT NULL,
-  `num_requests` tinyint(4) unsigned DEFAULT NULL,
-  `emails_sent` tinyint(3) unsigned NOT NULL,
-  `key` varchar(22) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
-  `last_attempt` int(11) unsigned NOT NULL COMMENT 'last failed login attempt (copied from the failed_logins table)',
-  `incorrect_logins` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`username`),
+  `username_exists` tinyint(1) DEFAULT NULL,
+  `attempts` binary(40) NOT NULL,
+  `pos` tinyint(4) NOT NULL COMMENT 'new attempt''s time insert position in the attempts field',
+  `last_attempt` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`auto`),
+  UNIQUE KEY `username` (`username`),
+  KEY `username_exists` (`username_exists`),
   KEY `last_attempt` (`last_attempt`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

@@ -13,26 +13,18 @@ require $index_dir.'include/info/info_register.php';
 if(!$ajax_check_username or !$registeration_enabled) exit('ajax username check or registeration is disabled!');
 
 if(!isset($_GET['value'])) {
-$failure_msg="No value specified";
-require $index_dir.'include/page/page_failure.php';
-exit;
+	$failure_msg="No value specified";
+	require $index_dir.'include/page/page_failure.php';
+	exit;
 }
 
 $value=$_GET['value'];
 
-//username format validity is checked on the client side, so these should not be necessary.
-/* require $index_dir.'include/info/info_register_fields.php';
-$username_format=$fields['username'];
-require $index_dir.'include/func/func_utf8.php';
-if(utf8_strlen($value)<$username_format['minlength']) $invalid=true;
-else if(utf8_strlen($value)>$username_format['maxlength'])	$invalid=true;
-else if($username_format['php_re'] and $value!=='' and !preg_match($username_format['php_re'], $value)) $invalid=true;
-if(isset($invalid)) {
-	echo 'i';
-	exit;
-} */
-
 require_once $index_dir.'include/code/code_db_object.php';
+
+require $index_dir.'include/code/code_check_max_ajax_check_usernames.php';
+
+require $index_dir.'include/code/code_record_ajax_check_username.php';
 
 $value=$reg8log_db->quote_smart($value);
 

@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 $parent_page=true;
 
 ?>
@@ -56,12 +54,12 @@ echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>', $rec['gender'], '</td>';
-require_once $index_dir.'include/func/func_duration2msg.php';
+require_once $index_dir.'include/func/duration2friendly_str.php';
 echo '<td>', duration2friendly_str(time()-$rec['timestamp']), '</td>';
 echo '</tr></table><br></td></tr><tr><td align="left">';
 if($ban_reason!=='') echo 'Ban reason: <span style="color: #8fd;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span><br>';
 if($ban_until!=1) {
-	require_once $index_dir.'include/func/func_duration2msg.php';
+	require_once $index_dir.'include/func/duration2friendly_str.php';
 	echo 'Ban until:  <span style="color: #8fd;">', duration2friendly_str($ban_until-time(), 2), '</span> later.';
 }
 else echo 'Ban until:  <span style="color: #8fd;">Not specified.</span>';

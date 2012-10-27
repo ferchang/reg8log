@@ -12,11 +12,11 @@ foreach($unblock as $auto) {
 	$autos.=", ";
 }
 
-$query='delete from `failed_logins` where `auto` in ('.$autos.")";
+$query='delete from `account_incorrect_logins` where `auto` in ('.$autos.")";
 
 $reg8log_db->query($query);
 
-$query='update `account_lockdown_log` set `unblocked`=1 where `ext_auto` in ('.$autos.")";
+$query='update `account_block_log` set `unblocked`=1 where `ext_auto` in ('.$autos.")";
 
 $reg8log_db->query($query);
 

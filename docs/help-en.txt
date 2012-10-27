@@ -52,7 +52,7 @@ ajax_check_username:
 
 enable/disable ajax check username availability in the register form.
 maybe someone wants to disable it in high security scenarios.
-note: when this var is set to false or registration in disabled, the system tries to pretend non-existent usernames entered in the login form and other subsystems to be existent (for example they can be lockdowned like existent accounts).
+note: when this var is set to false or registration in disabled, the system tries to pretend non-existent usernames entered in the login form and other subsystems to be existent (for example they can be blocked like existent accounts).
 
 registeration_enabled:
 
@@ -97,45 +97,45 @@ can_notify_user_about_admin_action:
 specifies whether the user can request be notified (via email) when admin approves or rejects/deletes his pending account.
 
 ------------------------------------------------
-config vars in info_lockdown.php:
+config vars in info_brute_force_protection.php:
 ------------------------------------------------
 
-lockdown_period:
+block_period:
 
 the time period in which a defined maximum number of incorrect login attempts can occur.
 
-lockdown_threshold:
+block_threshold:
 
-maximum number of incorrect login tries in each lockdown_period period.
-after that the account is locked until getting out of lockdown_threshold in lockdown_period.
+maximum number of incorrect login tries in each block_period period.
+after that the account is locked until getting out of block_threshold in block_period.
 
 captcha_threshold:
 
-after this number of incorrect login tries in the lockdown_period, passing a captcha test is needed for each subsequent try.
+after this number of incorrect login tries in the block_period, passing a captcha test is needed for each subsequent try.
 this can be very benefical as it can prevent many brute-force bots or guys from causing accounts be locked down (got this idea by testing on the yahoo mail login).
 
-lockdown_bypass_system_enabled:
+block_bypass_system_enabled:
 
 if set to true, the owner of a locked down account can request a special link be sent to his email via which he can try to login to his account immediately and unrestricted.
-this can be benefical if an attacker tries to lockdown accounts to cause DOS or for any other malevolent purposes.
+this can be benefical if an attacker tries to block accounts to cause DOS or for any other malevolent purposes.
 
-max_lockdown_bypass_emails:
+max_block_bypass_emails:
 
-maximum number of lockdown bypass emails that can be sent to the email of the owner of a locked down account.
+maximum number of block-bypass emails that can be sent to the email of the owner of a locked down account.
 this is to prevent using this system to email bomb users or to cause the site domain be black listed by email servers, etc.
 
 ip_captcha_threshold:
 
 after this number of incorrect login tries from a certain ip, for subsequent login tries via that ip, passing a captcha test is required.
 
-ip_lockdown_threshold:
+ip_block_threshold:
 
-an ip will be prevented from login tries after this number of incorrect login tries in each ip_lockdown_period period.
+an ip will be prevented from login tries after this number of incorrect login tries in each ip_block_period period.
 
-ip_lockdown_proportional:
+ip_block_proportional:
 
-as an ip may be shared among possibly many users at the same time (or short times), this variable is set to true by default that causes that the proportion of incorrect logins to the correct logins be the criteria for ip lockdown.
-note: correct login tries to any specific account are counted only once in each ip_lockdown_period period, but every incorrect login try is counted. this is because if we count every correct login try, an attacker can easily create an account in our system and after each certain number of incorrect login tries, login into his account to keep the proportion of incorrect and correct login tries under the lockdown threshoulds.
+as an ip may be shared among possibly many users at the same time (or short times), this variable is set to true by default that causes that the proportion of incorrect logins to the correct logins be the criteria for ip block.
+note: correct login tries to any specific account are counted only once in each ip_block_period period, but every incorrect login try is counted. this is because if we count every correct login try, an attacker can easily create an account in our system and after each certain number of incorrect login tries, login into his account to keep the proportion of incorrect and correct login tries under the block threshoulds.
 
 ch_pswd_captcha_threshold:
 
@@ -236,7 +236,7 @@ probability with which cleanup codes are run in each part of the program and ope
 
 max_nonexistent_users_records:
 
-when public registration is disabled or ajax check username facility in the register form is disabled, the system tries to pretend non-existent usernames to be existent in different parts like the login form. for this, the system needs to store some records (for example the number of failed login attempts in a specified time period) for non-existent usernames in the project tables too (of course temporarily). but we can limit the maximum number of such records after which some of the oldest of such records will be deleted when the cleanup codes are run, so this feature (pretend) cannot probably be misused by attackers to consume all of our available disk space.
+when public registration is disabled or ajax check username facility in the register form is disabled, the system tries to pretend non-existent usernames to be existent in different parts like the login form. for this, the system needs to store some records (for example the number of incorrect login attempts in a specified time period) for non-existent usernames in the project tables too (of course temporarily). but we can limit the maximum number of such records after which some of the oldest of such records will be deleted when the cleanup codes are run, so this feature (pretend) cannot probably be misused by attackers to consume all of our available disk space.
 
 max_login_attempt_records:
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2012 at 10:56 PM
+-- Generation Time: Oct 26, 2012 at 11:31 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -22,18 +22,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_logins`
+-- Table structure for table `ip_ajax_check_usernames`
 --
 
-CREATE TABLE IF NOT EXISTS `failed_logins` (
+CREATE TABLE IF NOT EXISTS `ip_ajax_check_usernames` (
   `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `username_exists` tinyint(1) DEFAULT NULL,
-  `attempts` binary(40) NOT NULL,
-  `pos` tinyint(4) NOT NULL COMMENT 'new attempt''s time insert position in the attempts field',
-  `last_attempt` int(11) unsigned NOT NULL,
+  `ip` varbinary(16) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL,
   PRIMARY KEY (`auto`),
-  UNIQUE KEY `username` (`username`),
-  KEY `username_exists` (`username_exists`),
-  KEY `last_attempt` (`last_attempt`)
+  KEY `ip` (`ip`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

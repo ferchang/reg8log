@@ -15,13 +15,13 @@ require $index_dir.'include/code/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$query='select * from `accounts` where `banned`!=0';
+$query='select * from `accounts` where `banned`=1 or `banned`>'.time();
 
 if(!$total=$reg8log_db->result_num($query)) exit('<center><h3>No banned users found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 
 require $index_dir.'include/code/code_pagination_params2.php';
 
-$query='select * from `accounts` where `banned`!=0'." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
+$query='select * from `accounts` where `banned`=1 or `banned`>'.time()." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
 
 $reg8log_db->query($query);
 

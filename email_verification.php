@@ -58,7 +58,7 @@ $query="update `pending_accounts` set `email_verified`=1 where `record_id`=$rid 
 $reg8log_db->query($query);
 
 if(!$rec['admin_confirmed']) {
-  require_once $index_dir.'include/func/func_duration2msg.php';
+  require_once $index_dir.'include/func/duration2friendly_str.php';
   $success_msg='<h3>Your email is verified successfully.<br>Your account is waiting for admin confirmation in '.duration2friendly_str($admin_confirmation_time, 0).' from your registeration date.</h3>';
   $no_specialchars=true;
   require $index_dir.'include/page/page_success.php';

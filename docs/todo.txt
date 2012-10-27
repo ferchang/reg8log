@@ -1,3 +1,0 @@
-- Password strength checker?
-- somehow restricting ajax check username (for register) from being used by robots?
-- non-php implementation of inet_ntop is needed

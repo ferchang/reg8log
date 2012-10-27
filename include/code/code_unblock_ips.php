@@ -5,7 +5,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 
 foreach($unblock as $item) {
-	$query='delete from `incorrect_logins` where `ip`=';
+	$query='delete from `ip_incorrect_logins` where `ip`=';
 	$query.=$reg8log_db->quote_smart($item['ip']);
 	$query.=' and `timestamp`<='.$item['last_attempt'];
 	$reg8log_db->query($query);

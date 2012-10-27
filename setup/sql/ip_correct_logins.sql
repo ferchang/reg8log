@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2012 at 10:55 PM
+-- Generation Time: Apr 20, 2012 at 11:12 AM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -22,15 +22,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `account_lockdown_log`
+-- Table structure for table `ip_correct_logins`
 --
 
-CREATE TABLE IF NOT EXISTS `account_lockdown_log` (
-  `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ext_auto` int(10) unsigned NOT NULL,
-  `username` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `last_attempt` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `ip_correct_logins` (
   `ip` varbinary(16) NOT NULL,
-  `unblocked` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`auto`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+  `username_hash` binary(4) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL,
+  UNIQUE KEY `username_hash` (`username_hash`),
+  KEY `ip` (`ip`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
