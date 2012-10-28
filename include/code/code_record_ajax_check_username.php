@@ -17,7 +17,7 @@ if($reset_clients_ajax_check_usernames_upon_register) {
 	if(!isset($_COOKIE['reg8log_ajax_check_usernames'])) $cookie_contents=$insert_id;
 	else {
 		$cookie_contents=$_COOKIE['reg8log_ajax_check_usernames'].",".$insert_id;
-		$cookie_contents=implode(",", array_slice(explode(",", $cookie_contents), -4));
+		$cookie_contents=implode(",", array_slice(explode(",", $cookie_contents), -20));
 	}
 	setcookie('reg8log_ajax_check_usernames', $cookie_contents, 0, '/', null, $https, true);	
 }

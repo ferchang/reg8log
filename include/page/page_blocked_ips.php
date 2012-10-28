@@ -229,6 +229,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
 		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
+		$currently_blocked=true;
 	}
 	else {
 		echo '<span style="color: #000" title="Block period elapsed">Not blocked</span>';
@@ -247,7 +248,7 @@ echo '<td colspan="5" align="left"><input type="submit" value="Execute admin com
 echo '</table>';
 
 echo '<script>';
-echo "\ndocument.getElementById('check_all2').disabled=false;\n";
+if(isset($currently_blocked)) echo "\ndocument.getElementById('check_all2').disabled=false;\n";
 echo "\ndocument.getElementById('check_all3').disabled=false;\n";
 echo '</script>';
 

@@ -12,10 +12,10 @@ installation:
 database name can be changed in the include/info/info_dbms.php file.
 - set the MySQL username and password in the include/info/info_dbms.php file.
 - then open the project in your web browser. it detects automatically that database tables and initial variables are not setup and guides u to the installation page.
-- in installation page, u should copy and paste and save a random string shown there into the setup/setup.txt file. this is to verify that u r the real owner of the site.
+- in installation page, u should copy and paste and save a random string shown there into the setup/setup.txt file. this is to verify that u r the real owner of the website.
 - then click on the continue button.
 - then fill in the Admin account info (his password and email).
-the admin account is used for operations like banning/unbanning users, approving pending registrations, etc.
+the admin account is used for various management operations like banning/unbanning users, approving pending registrations, etc.
 - submit admin info form.
 - tables, site special variables, and the admin account will be created automatically.
 
@@ -24,7 +24,7 @@ the admin account is used for operations like banning/unbanning users, approving
 self critisism:
 
 - using tables for HTML layout.
-- not using standard software engineering methods like MVC.
+- not using design patterns like MVC.
 
 =================================
 
@@ -37,12 +37,14 @@ note that users passwords hashes are dependent on site variables stored in site_
 developing and testing environment of this program:
 
 OS: MS Windows XP SP3
-Browser: FF 10 and IE 7
+Browser: FF 14 and IE 8
 EasyPHP 5.3.1.0 (MySQL 5.1.43, PHP 5.3.2, Apache 2.2.14)
 
 =================================
 
-configuration variables (all reside in include/info/info_?...?.php files)
+configuration variables (all reside in include/info/info_....php files - except common.php that is directly in the include dir)
+
+note: in addition to reading this help, see the comments of each config variable in the relevant config file too. there r more info/details there.
 
 ------------------------------------------------
 config vars in info_register.php:
@@ -52,7 +54,7 @@ ajax_check_username:
 
 enable/disable ajax check username availability in the register form.
 maybe someone wants to disable it in high security scenarios.
-note: when this var is set to false or registration in disabled, the system tries to pretend non-existent usernames entered in the login form and other subsystems to be existent (for example they can be blocked like existent accounts).
+note: when this var is set to false or registration in disabled, the system tries to pretend non-existent usernames entered in the login form and other subsystems to be existent (for example they can be blocked like existent accounts); this is to prevent 'information leackage'.
 
 registeration_enabled:
 
@@ -60,14 +62,14 @@ u can disable public registeration by setting this variable to false.
 
 password_refill:
 
-whether to refill password field values in places like register form when the form data r not accepted and the form is returned to the user again. passwords received by the server are first encrypted (AES128+HMAC) with a private key automatically generated at the database setup step and only this encrypted password is resent to the user and filled in the password fields.
+whether to refill password field values in places like register form when the form data r not accepted and the form is returned to the user again. passwords received by the server are first encrypted (AES128+HMAC) with a private key automatically generated at the database setup and only this encrypted password is resent to the user and filled in the password fields.
 
-note that also the first time forms containing passwords are submitted, passwords are first hashed with SHA256 + a salt automatically generated at database setup step, and only these hashes are communicated over the unsecure HTTP.
+note that also the first time forms containing passwords are submitted, passwords are first hashed with SHA256 + a salt automatically generated at the database setup, and only these hashes are communicated over the unsecure HTTP. obviously this is not done if the client's javascript is not enabled.
 
 email_verification_needed:
 
 whether email verification by opening a special link sent to the email of users is necessary to complete their registrations.
-temprary account info are stored in the pending_accounts table until their email is verified in the specified time, otherwise they expire and deleted by the cleanup code sooner or later.
+temprary accounts information are stored in the pending_accounts table until their email is verified in the specified time, otherwise they expire and r deleted by the cleanup code sooner or later.
 
 email_verification_time:
 
@@ -76,7 +78,7 @@ note that all time values in this program are specified in seconds.
 
 admin_confirmation_needed:
 
-whether admin approval is needed for every new registration. if set to true, the admin must see and confirm all registrations manually. of course he can also delete any of such pending accounts.
+whether admin approval is needed for every new registration. if set to true, the admin must see and confirm all registrations manually. of course he can also delete any of such pending accounts that he wants to.
 
 admin_confirmation_time:
 
@@ -96,33 +98,62 @@ can_notify_user_about_admin_action:
 
 specifies whether the user can request be notified (via email) when admin approves or rejects/deletes his pending account.
 
+max_ajax_check_usernames:
+
+number of ajax check username availability requests can be limited for security purposes (mitigating information leackage).
+this is the maximum number of requests per each IP.
+
+max_ajax_check_usernames_period:
+
+the time period (in secondes) in which $max_ajax_check_usernames ajax check username availability requests r possible (per IP).
+
+reset_clients_ajax_check_usernames_upon_register:
+
+with this set to true, a client's ajax username availability check records will be deleted from the ip_ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
+
 ------------------------------------------------
 config vars in info_brute_force_protection.php:
 ------------------------------------------------
 
-block_period:
+account_block_period:
 
-the time period in which a defined maximum number of incorrect login attempts can occur.
+the time period in which a defined maximum number of incorrect login attempts (per account) can occur.
 
-block_threshold:
+account_block_threshold:
 
-maximum number of incorrect login tries in each block_period period.
-after that the account is locked until getting out of block_threshold in block_period.
+maximum number of incorrect login tries (per account) in each account_block_period period.
 
-captcha_threshold:
+account_captcha_threshold:
 
-after this number of incorrect login tries in the block_period, passing a captcha test is needed for each subsequent try.
-this can be very benefical as it can prevent many brute-force bots or guys from causing accounts be locked down (got this idea by testing on the yahoo mail login).
+after this number of incorrect login tries in the account_block_period, passing a captcha test is needed for each subsequent try.
+this can be very benefical as it can prevent many brute-force bots or guys from causing accounts be locked (got this idea by testing on the yahoo mail login).
 
 block_bypass_system_enabled:
 
-if set to true, the owner of a locked down account can request a special link be sent to his email via which he can try to login to his account immediately and unrestricted.
+if enabled, the owner of a lock account can request a special link be sent to his email via which he can try to login to his account immediately.
 this can be benefical if an attacker tries to block accounts to cause DOS or for any other malevolent purposes.
+u can enable this feature only for admin account, accounts other than admin, or all accounts of the system. see its comments in the config file.
 
 max_block_bypass_emails:
 
 maximum number of block-bypass emails that can be sent to the email of the owner of a locked down account.
 this is to prevent using this system to email bomb users or to cause the site domain be black listed by email servers, etc.
+
+block_bypass_max_incorrect_logins:
+
+even with the block-bypass system, number of incorrect logins can be limited for security reasons. imagine an attacker that has obtained access to the user's email account but wants to discover the original user's password for his malicious purposes; if we didn't limit the number of incorrect logins, he can use the block-bypass login for discovering the password.
+
+block_bypass_system_also4ip_block:
+
+if this is set to true, block-bypass system can be used in case of IP blocks too.
+
+allow_users2disable_blocks:
+
+with this config var, we can allow users to disable the brute-force protection system blocks for their our account. this can be benifical in some situations (frequent access blocks - note that the block-bypass system can be probably disabled for some reason).
+
+we can, with various possible values of this config var, specify what block type(s) the users can disable: IP blocks, account blocks, or both.
+
+note that the Admin account can always disable both block types for his own account regardless of the value of this config var.
 
 ip_captcha_threshold:
 
@@ -134,8 +165,18 @@ an ip will be prevented from login tries after this number of incorrect login tr
 
 ip_block_proportional:
 
-as an ip may be shared among possibly many users at the same time (or short times), this variable is set to true by default that causes that the proportion of incorrect logins to the correct logins be the criteria for ip block.
-note: correct login tries to any specific account are counted only once in each ip_block_period period, but every incorrect login try is counted. this is because if we count every correct login try, an attacker can easily create an account in our system and after each certain number of incorrect login tries, login into his account to keep the proportion of incorrect and correct login tries under the block threshoulds.
+as an ip may be shared among possibly many users at the same time (or short times), this variable is set to true by default that causes the proportion of incorrect logins to the correct logins be the criteria for ip block.
+note: correct login tries to any specific account are counted only once in each ip_block_period period, but every incorrect login try is counted. this is because if we count every correct login try, an attacker can easily create an account in our system and after each certain number of incorrect login tries, logins into his account to keep the proportion of incorrect and correct login tries under the captcha/block threshould.
+
+admin_account_captcha_threshold:
+admin_account_block_threshold:
+admin_account_block_period:
+admin_ip_captcha_threshold:
+admin_ip_block_threshold:
+admin_ip_block_period:
+
+these r config vars of the brute-force protection system for the Admin account.
+for explanations refer to the explanations of similar config vars for ordinary users above.
 
 ch_pswd_captcha_threshold:
 
@@ -172,7 +213,7 @@ the time period in which special password reset link sent to the email of accoun
 change_autologin_key_upon_new_password:
 
 whether to change the account autologin key upon password change (via password reset or password change forms).
-highly recommended to be on, because it is very probable that a password change/reset is related to the compromise of a previous password, so an attacker can be logged in currently, and merely changing the password is not enough for ensuring immediately ending his access to the user account.
+highly recommended to be On, because it is very probable that a password change/reset is related to the compromise of a previous password, so an attacker can be logged in currently (or recorded the autologin key), and merely changing the password is not enough for ensuring immediately ending his access to the user account.
 
 ------------------------------------------------
 config vars in info_dbms.php:
@@ -189,14 +230,26 @@ but there exists some config vars in it interesting for other guys too:
 
 long_age:
 
-specifies, in seconds, how long users can be autologined when they login with 'remember me' option checked. the default value is 1 year.
+specifies, in seconds, how long users can be autologined when they login with the 'remember me' option checked. the default value is 1 year.
 
 change_autologin_key_upon_login:
 
 whether to change user's autologin key upon each manual login.
-this causes other machines that the user is currently logged in on them to logout.
-recommended to enable this option for higher security.
+this causes the other machines that the user is currently logged in on them to be logged out.
+it is recommended to enable this option for security.
 also see the comments of the other mode in which the login key is changed even on every page view too.
+
+change_autologin_key_upon_logout:
+
+seems no explanations r needed if u have read this help from several lines upper.
+i also recommend to enable this for secuity.
+
+log_last_activity:
+log_last_logout:
+log_last_login:
+
+with these options various actions of the users r logged.
+the admin can view this information in admin/admin-accounts.php page.
 
 ------------------------------------------------
 config vars in info_crypto.php:
@@ -209,7 +262,7 @@ note that the actual number of rounds is 2^secure_hash_rounds.
 
 pepper:
 
-this is a random string composed of upper and lowercase letters + digits with length 22 that should be set by hand before installing the tables and variables of the program. changing it is recommended for maximum security, but the program doesn't rely vitally on it being changed for its security.
+this is a random string composed of upper and lowercase letters + digits and of length 22 that should be set by hand before installing the tables and variables of the program. changing it is recommended for maximum security, but the program doesn't rely crucially on it being changed for its security.
 this random string is used in several subsystems: password hashing, (secure) random number generation, and encryption.
 highly recommended to change it when more than ordinary security is needed.
 
@@ -218,8 +271,8 @@ encrypt_session_files_contents:
 whether to encrypt session files contents on the server.
 this causes complete confidentiality and authenticity.
 the encryption is done with a key created from program's private encryption key + a temporary key for each client's session stored on the client browser, so even if an attacker steals the session id via the server side, he can not impersonate himself as other users. (note: pepper is used as another part of the encryption key too)
-anyway this program doesn't use session storage for authentication purposes and so there is no important danger regarding session storage security.
-note: session contents are not encrypted at the automatic database installation step, because the program vars (including encryption key) are not created yet. (maybe i should fix this in the future somehow).
+anyway this register and login system doesn't use session storage for authentication purposes and so there is no important danger regarding session storage security.
+note: session contents are not encrypted at the automatic database installation step, because the program vars (including encryption key) are not created yet. (maybe i should fix this in the future somehow)
 
 store_request_entropy_probability:
 
@@ -232,11 +285,11 @@ config vars in info_cleanup.php:
 
 cleanup_probability:
 
-probability with which cleanup codes are run in each part of the program and operation that stores records in the tables that may need cleanup to get rid of expired or more than maximum records.
+probability with which cleanup codes are run in each part of the program and operation that stores records in the tables that may need cleanup to get rid of expired or more than specified maximum capacity records.
 
 max_nonexistent_users_records:
 
-when public registration is disabled or ajax check username facility in the register form is disabled, the system tries to pretend non-existent usernames to be existent in different parts like the login form. for this, the system needs to store some records (for example the number of incorrect login attempts in a specified time period) for non-existent usernames in the project tables too (of course temporarily). but we can limit the maximum number of such records after which some of the oldest of such records will be deleted when the cleanup codes are run, so this feature (pretend) cannot probably be misused by attackers to consume all of our available disk space.
+when public registration is disabled or ajax check username facility in the register form is disabled or max_ajax_check_usernames limits the number of ajax check username availability requests per ip, the system tries to pretend non-existent usernames to be existent in different parts like the login form. for this, the system needs to store some records (for example the number of incorrect login attempts in a specified time period) for non-existent usernames in the database tables too (of course temporarily). but we can limit the maximum number of such records, after which some of the oldest of such records will be deleted when the cleanup codes are run, so this feature (pretend) cannot probably cause to consume all of our available disk space.
 
 max_login_attempt_records:
 
@@ -244,6 +297,14 @@ the maximum number of login tries recorded with their ip for limiting attacks ac
 we limit this to prevent consuming all available disk space or related tables getting too big under heavy attacks (botnet attacks).
 some of the oldest records will be deleted if this maximum is reached when cleanup codes are run.
 u can set this to a bigger number if u have plenty of disk space and want to be able to counter bigger attacks.
+
+max_security_logs_records:
+
+maximum number of security log records (note that this is used in two tables).
+security log records r regarding account and ip block events.
+
+max_ip_ajax_check_usernames_records:
+maximum number of records that r stored for tracking and limiting the number of ajax check username availability requests per ip.
 
 ------------------------------------------------
 config vars in common.php:
@@ -260,3 +321,42 @@ db_installed:
 when the tables and variables (and also the Admin account) of the program are installed successfully, u can set this var to true to increase the overal performance of the system if needed.
 i don't know if this can have a significant effect, but it is there in case it can.
 when this var is set to false (default), the program itself decides if database is setup fully/successfully by executing a probing query on a dummy table; anyway this should be very fast and have little overhead.
+
+------------------------------------------------
+config vars in info_security_logs.php:
+------------------------------------------------
+
+keep_expired_block_log_records_for:
+
+u can, with this config var, specify for the system whether keep (unlimitedly or for a duration) or don't keep log records corresponding to the account/ip blocks that r expired.
+
+log_non_existent_accounts_blocks:
+
+if enabled, the system logs the blocking event of non-existent accounts that it pretends to be existent.
+
+alert_admin_about_account_blocks:
+
+admin can be alerted about new account block events when he visits and/or via email.
+see the comments in the config file for details.
+
+account_blocks_alert_threshold:
+
+see the comments in the config file.
+
+alert_admin_about_ip_blocks:
+
+see the comments in the config file.
+
+ip_blocks_alert_threshold:
+
+see the comments in the config file.
+
+alert_emails_min_interval:
+
+see the comments in the config file.
+
+exempt_admin_account_from_alert_limits:
+
+specifies whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations.
+
+=================================

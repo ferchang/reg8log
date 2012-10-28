@@ -10,7 +10,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_require_admin.php';
 
-$sort_fields=array('uid', 'username', 'email', 'gender', 'banned', 'timestamp');
+$sort_fields=array('uid', 'username', 'email', 'gender', 'banned', 'timestamp', 'reason');
 require $index_dir.'include/code/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
@@ -21,7 +21,7 @@ if(!$total=$reg8log_db->result_num($query)) exit('<center><h3>No banned users fo
 
 require $index_dir.'include/code/code_pagination_params2.php';
 
-$query='select * from `accounts` where `banned`=1 or `banned`>'.time()." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
+$query='select accounts.*, ban_info.reason from `accounts` left join `ban_info` on accounts.username=ban_info.username where `banned`=1 or `banned`>'.time()." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
 
 $reg8log_db->query($query);
 

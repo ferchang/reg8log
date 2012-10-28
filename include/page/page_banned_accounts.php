@@ -144,6 +144,18 @@ if($sort_by=='banned') {
 }
 echo "</th>";
 
+echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=reason&sort_dir=";
+if($sort_by=='reason' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>Ban reason</a>";
+if($sort_by=='reason') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
 echo '</tr>';
 
 $i=0;
@@ -164,6 +176,11 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>';
 	if($rec['banned']==1) echo 'Not specified';
 	else echo duration2friendly_str($rec['banned']-time(), 2), ' later';
+	echo '</td>';
+	if(is_null($rec['reason'])) echo '<td title="No corresponding ban_info record found"><span style="color: yellow">?</span>';
+	else echo '<td>';
+	if($rec['reason']!=='') echo $rec['reason'];
+	else echo '&nbsp;';
 	echo '</td>';
 	echo '</tr>';
 }

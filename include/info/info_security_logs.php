@@ -13,7 +13,7 @@ a positive integer: keep up to this number of seconds after block expiration
 */
 
 $log_non_existent_accounts_blocks=true;
-//if enabled, the system logs non-existent accounts that it pretends to block too.
+//if enabled, the system logs the blocking event of non-existent accounts that it pretends to be existent.
 
 $alert_admin_about_account_blocks=1;
 //0: no
@@ -41,6 +41,6 @@ $alert_emails_min_interval=0;
 //don't send alert emails with less than this interval (in seconds)
 
 $exempt_admin_account_from_alert_limits=true;
-//whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations
+//whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations.
 
 ?>

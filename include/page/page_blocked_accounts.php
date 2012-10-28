@@ -240,6 +240,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo 'title="Blocked lift: ', duration2friendly_str($account_block_period-(time()-$rec['last_attempt']), 2), ' later';
 		echo '">Blocked</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
+		$currently_blocked=true;
 	}
 	else {
 		echo '<span style="color: #000" title="Block period elapsed">Not blocked</span>';
@@ -258,7 +259,7 @@ echo '<td colspan="6" align="left"><input type="submit" value="Execute admin com
 echo '</table>';
 
 echo '<script>';
-echo "\ndocument.getElementById('check_all2').disabled=false;\n";
+if(isset($currently_blocked)) echo "\ndocument.getElementById('check_all2').disabled=false;\n";
 echo "\ndocument.getElementById('check_all3').disabled=false;\n";
 echo '</script>';
 
