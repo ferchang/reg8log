@@ -22,7 +22,7 @@ if($reset_clients_ajax_check_usernames_upon_register) {
 	setcookie('reg8log_ajax_check_usernames', $cookie_contents, 0, '/', null, $https, true);	
 }
 
-require_once $index_dir.'include/info/info_cleanup.php';
+require_once $index_dir.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_ajax_check_usernames_expired_cleanup.php';
 

@@ -6,7 +6,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 require_once $index_dir.'include/func/func_random.php';
 
-require_once $index_dir.'include/info/info_crypto.php';
+require_once $index_dir.'include/config/config_crypto.php';
 
 //==================================
 

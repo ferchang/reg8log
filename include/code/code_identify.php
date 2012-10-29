@@ -5,7 +5,7 @@ $parent_page=true;
 
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
-require_once $index_dir.'include/info/info_identify.php';
+require_once $index_dir.'include/config/config_identify.php';
 require_once $index_dir.'include/func/func_random.php';
 
 unset($user);

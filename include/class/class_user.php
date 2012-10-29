@@ -45,7 +45,7 @@ function identify($username=null, $password=null)
 
 		$query1='select * from `accounts` where `username`='.$tmp7.' limit 1';
 
-		require $index_dir.'include/info/info_register.php';
+		require $index_dir.'include/config/config_register.php';
 		
 		$expired1=time()-$email_verification_time;
 		$expired2=time()-$admin_confirmation_time;
@@ -96,7 +96,7 @@ function identify($username=null, $password=null)
 				}
 			}
 			else {
-				require $index_dir.'include/info/info_crypto.php';
+				require $index_dir.'include/config/config_crypto.php';
 				verify_secure_hash($password, $secure_hash_rounds.'*111111111111111111111111111111111111111111111111');
 				$username_exists=0;
 			}

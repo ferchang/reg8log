@@ -17,7 +17,7 @@ if(isset($except_user)) {
 }
 $query1.=' limit 1';
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 $expired1=time()-$email_verification_time;
 $expired2=time()-$admin_confirmation_time;
@@ -27,7 +27,7 @@ if(isset($except_user)) $query2.=' and `username`!='.$except_user;
 $query2.=' limit 1';
 
 if($field_name=='username' and (!$ajax_check_username or $max_ajax_check_usernames)) {
-	require_once $index_dir.'include/info/info_brute_force_protection.php';
+	require_once $index_dir.'include/config/config_brute_force_protection.php';
 	$expired=time()-$account_block_period;
 	$query3="select * from `account_incorrect_logins` where `username`=$tmp8 and `last_attempt` > $expired limit 1";
 }

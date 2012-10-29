@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 
 
-require $index_dir.'include/info/info_crypto.php';
+require $index_dir.'include/config/config_crypto.php';
 
 if(isset($store_request_entropy_probability2)) $store_request_entropy_probability=$store_request_entropy_probability2;
 

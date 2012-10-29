@@ -60,20 +60,20 @@ function delete_click(id, checked) {
 }
 
 function orange(id) {
-tmp=document.getElementById(id).style.background="orange";
+tmp=document.getElementById('row'+id).style.background="orange";
 }
 function green(id) {
-tmp=document.getElementById(id).style.background="green";
+tmp=document.getElementById('row'+id).style.background="green";
 }
 function red(id) {
-tmp=document.getElementById(id).style.background="red";
+tmp=document.getElementById('row'+id).style.background="red";
 }
 function yellow(id) {
-tmp=document.getElementById(id).style.background="yellow";
+tmp=document.getElementById('row'+id).style.background="yellow";
 }
 function normal(id) {
-if(id%2) tmp=document.getElementById(id).style.background='<?php echo $color1 ?>';
-else tmp=document.getElementById(id).style.background='<?php echo $color2 ?>';
+if(id%2) tmp=document.getElementById('row'+id).style.background='<?php echo $color1 ?>';
+else tmp=document.getElementById('row'+id).style.background='<?php echo $color2 ?>';
 }
 function check_all(action) {
 	if(action=='unblock') toggle_stat=unblock_all_toggle_stat;
@@ -200,7 +200,7 @@ echo '<th  class="admin_action">Delete log record</th>';
 
 echo '</tr>';
 
-require $index_dir.'include/info/info_brute_force_protection.php';
+require $index_dir.'include/config/config_brute_force_protection.php';
 
 require_once $index_dir.'include/func/func_inet.php';
 
@@ -210,7 +210,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	$i++;
-	echo ' id="', $i, '">';
+	echo ' id="row', $i, '">';
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';

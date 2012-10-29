@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(strtolower($_POST['username'])=='admin') require $index_dir.'include/info/info_brute_force_protection.php';
+if(strtolower($_POST['username'])=='admin') require $index_dir.'include/config/config_brute_force_protection.php';
 
 $expired=time()-$ip_block_period;
 

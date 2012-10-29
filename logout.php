@@ -11,7 +11,7 @@ require $index_dir.'include/code/code_prevent_xsrf.php';
 
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
-require_once $index_dir.'include/info/info_identify.php';
+require_once $index_dir.'include/config/config_identify.php';
 
 if($log_last_activity) $flag=true;
 $log_last_activity=false;

@@ -14,7 +14,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_prevent_repost.php';
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 if(!$registeration_enabled) exit('<center><h3>Registration is disabled!</h3></center>');
 
@@ -26,7 +26,7 @@ require $index_dir.'include/code/code_identify.php';
 
 if(isset($identified_user)) exit('<center><h3>Error: You are logged in!</h3><a href="index.php">Login page</a></center>');
 
-require $index_dir.'include/info/info_register_fields.php';
+require $index_dir.'include/config/config_register_fields.php';
 
 $err_msgs=null;
 

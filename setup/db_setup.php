@@ -29,7 +29,7 @@ if(empty($_SESSION['setup_key']) or strpos($file_contents, $_SESSION['setup_key'
 	exit;
 }
 
-require $index_dir.'include/info/info_register_fields.php';
+require $index_dir.'include/config/config_register_fields.php';
 
 require $index_dir.'include/code/code_fetch_site_vars.php';
 

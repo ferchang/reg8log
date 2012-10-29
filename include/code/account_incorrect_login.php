@@ -15,7 +15,7 @@ if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
 
 $req_time=time();
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 if(!$username_exists and $registeration_enabled and $ajax_check_username and !$max_ajax_check_usernames) {
 	$no_pretend_user=true;
@@ -119,7 +119,7 @@ if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
 else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
 $cookie->set(null, $cookie_contents);
 
-require_once $index_dir.'include/info/info_cleanup.php';
+require_once $index_dir.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	$table_name='account_incorrect_logins';

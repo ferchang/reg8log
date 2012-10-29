@@ -13,7 +13,7 @@ if(!empty($_POST)) {
 	require $index_dir.'include/code/code_prevent_repost.php';
 }
 
-require $index_dir.'include/info/info_password_change_or_reset.php';
+require $index_dir.'include/config/config_password_change_or_reset.php';
 
 $captcha_needed=true;
 
@@ -112,7 +112,7 @@ $no_specialchars=true;
 require $index_dir.'include/page/page_success.php';
 
 if(isset($cleanup)) {
-	require $index_dir.'include/info/info_cleanup.php';
+	require $index_dir.'include/config/config_cleanup.php';
 	if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_password_reset_expired_cleanup.php';
 }
 

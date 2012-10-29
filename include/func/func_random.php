@@ -38,7 +38,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 if(!isset($entropy) and $db_installed) require $index_dir.'include/code/code_fetch_site_vars.php';
 
-require_once $index_dir.'include/info/info_crypto.php';
+require_once $index_dir.'include/config/config_crypto.php';
 
 @$entropy=sha1($pepper.$request_entropy.$entropy);
 

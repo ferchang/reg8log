@@ -5,7 +5,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 
 require_once $index_dir.'include/class/class_db.php';
-require $index_dir.'include/info/info_dbms.php';
+require $index_dir.'include/config/config_dbms.php';
 
 $reg8log_db=new reg8log_db($reg8log_dbms_info['host'], $reg8log_dbms_info['user'], $reg8log_dbms_info['pass'], $reg8log_dbms_info['db'], true);
 

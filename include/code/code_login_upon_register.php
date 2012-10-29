@@ -8,7 +8,7 @@ $reg8log_db->query($query);
 
 require_once $index_dir.'include/class/class_cookie.php';
 require_once $index_dir.'include/class/class_user.php';
-require $index_dir.'include/info/info_identify.php';
+require $index_dir.'include/config/config_identify.php';
 
 $tmp13=new hm_user($identify_structs);
 

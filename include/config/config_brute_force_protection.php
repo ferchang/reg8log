@@ -20,7 +20,7 @@ $account_block_period=12*60*60; //in seconds
 
 $admin_account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$admin_account_block_threshold=-1; //1-10 / -1: disabled (no block)
+$admin_account_block_threshold=1; //1-10 / -1: disabled (no block)
 
 $admin_account_block_period=12*60*60; //in seconds
 

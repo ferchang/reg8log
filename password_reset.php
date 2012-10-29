@@ -26,13 +26,13 @@ if(!$reg8log_db->result_num($query)) exit('<center><h3>Error: No such record fou
 $rec=$reg8log_db->fetch_row();
 $_username=$rec['username'];
 
-require $index_dir.'include/info/info_password_change_or_reset.php';
+require $index_dir.'include/config/config_password_change_or_reset.php';
 
 $expired=time()-$password_reset_period;
 
 if($rec['timestamp']<$expired) exit('<center><h3>Error: Password reset link is expired!</h3><a href="index.php">Login page</a></center>');
 
-require $index_dir.'include/info/info_register_fields.php';
+require $index_dir.'include/config/config_register_fields.php';
 
 $password_format=$fields['password'];
 

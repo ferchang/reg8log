@@ -9,8 +9,8 @@ also that doesn't mean that it can be properly run on a weak/small hosting plan.
 installation:
 
 - first create a MySQL database named 'reg8log' manually.
-database name can be changed in the include/info/info_dbms.php file.
-- set the MySQL username and password in the include/info/info_dbms.php file.
+database name can be changed in the include/config/config_dbms.php file.
+- set the MySQL username and password in the include/config/config_dbms.php file.
 - then open the project in your web browser. it detects automatically that database tables and initial variables are not setup and guides u to the installation page.
 - in installation page, u should copy and paste and save a random string shown there into the setup/setup.txt file. this is to verify that u r the real owner of the website.
 - then click on the continue button.
@@ -30,7 +30,7 @@ self critisism:
 
 important notes about users accounts backup and restore:
 
-note that users passwords hashes are dependent on site variables stored in site_vars table and also on the pepper variable stored in the include/info/info_crypto.php file. so u must restore site_vars table data and the $pepper value if u want your users be able to login into their accounts again.
+note that users passwords hashes are dependent on site variables stored in site_vars table and also on the pepper variable stored in the include/config/config_crypto.php file. so u must restore site_vars table data and the $pepper value if u want your users be able to login into their accounts again.
 
 =================================
 
@@ -42,12 +42,12 @@ EasyPHP 5.3.1.0 (MySQL 5.1.43, PHP 5.3.2, Apache 2.2.14)
 
 =================================
 
-configuration variables (all reside in include/info/info_....php files - except common.php that is directly in the include dir)
+configuration variables (all reside in include/config/info_....php files - except common.php that is directly in the include dir)
 
 note: in addition to reading this help, see the comments of each config variable in the relevant config file too. there r more info/details there.
 
 ------------------------------------------------
-config vars in info_register.php:
+config vars in config_register.php:
 ------------------------------------------------
 
 ajax_check_username:
@@ -112,7 +112,7 @@ reset_clients_ajax_check_usernames_upon_register:
 with this set to true, a client's ajax username availability check records will be deleted from the ip_ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
 
 ------------------------------------------------
-config vars in info_brute_force_protection.php:
+config vars in config_brute_force_protection.php:
 ------------------------------------------------
 
 account_block_period:
@@ -191,7 +191,7 @@ ch_pswd_period:
 number of wrong current passwords entered in the change email/password forms are counted in this time period.
 
 ------------------------------------------------
-config vars in info_register_fields.php:
+config vars in config_register_fields.php:
 ------------------------------------------------
 
 registeration fields values' limits/formats/regular expressions are stored in this file.
@@ -199,7 +199,7 @@ see it.
 it configs mainly affect the register system but not only that. for example, email format or password format are enforced in the change email/password subsystems too.
 
 ------------------------------------------------
-config vars in info_password_change_or_reset.php:
+config vars in config_password_change_or_reset.php:
 ------------------------------------------------
 
 max_password_reset_emails:
@@ -216,13 +216,13 @@ whether to change the account autologin key upon password change (via password r
 highly recommended to be On, because it is very probable that a password change/reset is related to the compromise of a previous password, so an attacker can be logged in currently (or recorded the autologin key), and merely changing the password is not enough for ensuring immediately ending his access to the user account.
 
 ------------------------------------------------
-config vars in info_dbms.php:
+config vars in config_dbms.php:
 ------------------------------------------------
 
 you easily see in this file, the information for connecting to MySQL.
 
 ------------------------------------------------
-config vars in info_identify.php:
+config vars in config_identify.php:
 ------------------------------------------------
 
 this file contains some program internal config vars (related to identification/authentication of users)
@@ -252,7 +252,7 @@ with these options various actions of the users r logged.
 the admin can view this information in admin/admin-accounts.php page.
 
 ------------------------------------------------
-config vars in info_crypto.php:
+config vars in config_crypto.php:
 ------------------------------------------------
 
 secure_hash_rounds:
@@ -280,7 +280,7 @@ the propability with which each request parameters entropy is added to the entro
 this entropy is used in random number generation in addition to other entropy sources.
 
 ------------------------------------------------
-config vars in info_cleanup.php:
+config vars in config_cleanup.php:
 ------------------------------------------------
 
 cleanup_probability:
@@ -323,7 +323,7 @@ i don't know if this can have a significant effect, but it is there in case it c
 when this var is set to false (default), the program itself decides if database is setup fully/successfully by executing a probing query on a dummy table; anyway this should be very fast and have little overhead.
 
 ------------------------------------------------
-config vars in info_security_logs.php:
+config vars in config_security_logs.php:
 ------------------------------------------------
 
 keep_expired_block_log_records_for:
@@ -359,4 +359,4 @@ exempt_admin_account_from_alert_limits:
 
 specifies whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations.
 
-=================================
+################ High security register and login system ###################

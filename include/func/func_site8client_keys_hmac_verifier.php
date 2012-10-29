@@ -11,7 +11,7 @@ if(!isset($hamc_verifier)) {
 
 require_once $index_dir.'include/code/code_fetch_site_vars.php';
 
-require_once $index_dir.'include/info/info_crypto.php';
+require_once $index_dir.'include/config/config_crypto.php';
 
 $hamc_verifier->setKey(pack('H*', md5($pepper.$site_encr_key.$client_sess_key)));
 

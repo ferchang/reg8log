@@ -13,7 +13,7 @@ require_once $index_dir.'include/code/code_fetch_site_vars.php';
 
 if(!isset($_COOKIE['reg8log_site_salt'])) setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
 
-require_once $index_dir.'include/info/info_crypto.php';
+require_once $index_dir.'include/config/config_crypto.php';
 
 $aes->setKey(pack('H*', md5($pepper.$site_encr_key.$client_sess_key)));
 

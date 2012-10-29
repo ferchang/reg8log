@@ -20,7 +20,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <script>
 captcha_exists=true;
 <?php
-require_once $index_dir.'include/info/info_register_fields.php';
+require_once $index_dir.'include/config/config_register_fields.php';
 echo "captcha_min_len={$fields['captcha']['minlength']};\n";
 echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
 echo "captcha_re=";

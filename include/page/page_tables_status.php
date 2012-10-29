@@ -100,7 +100,7 @@ foreach($tables as $key=>$value) {
 	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	$i++;
-	echo ' id="', $i, '">';
+	echo ' id="row', $i, '">';
 	$r=!$r;
 	echo "<td>$i</td>";
 	echo "<td align='left' style='padding-left: 7px'>$key</td>";

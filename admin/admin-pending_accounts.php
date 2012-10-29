@@ -17,7 +17,7 @@ require $index_dir.'include/code/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 if(isset($_POST['admin_action'])) {
 
@@ -32,7 +32,7 @@ if(isset($_POST['admin_action'])) {
 	if(isset($del)) require $index_dir.'include/code/code_delete_pending_accounts.php';
 }
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 $expired1=time()-$email_verification_time;
 $expired2=time()-$admin_confirmation_time;

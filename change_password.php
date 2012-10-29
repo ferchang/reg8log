@@ -12,9 +12,9 @@ require $index_dir.'include/code/code_identify.php';
 
 if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
-require $index_dir.'include/info/info_register.php'; //for password_refill
+require $index_dir.'include/config/config_register.php'; //for password_refill
 
-require $index_dir.'include/info/info_register_fields.php';
+require $index_dir.'include/config/config_register_fields.php';
 
 $password_format=$fields['password'];
 
@@ -51,8 +51,10 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 			require $index_dir.'include/code/code_update_user_last_ch_try.php';
 		}
 		else if(isset($_COOKIE['reg8log_ch_pswd_try'])) {
-			$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$reg8log_db->quote_smart($_COOKIE['reg8log_ch_pswd_try']).' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
-			$reg8log_db->query($query);
+			if(is_numeric($_COOKIE['reg8log_ch_pswd_try'])) {
+				$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$_COOKIE['reg8log_ch_pswd_try'].' where `username`='.$reg8log_db->quote_smart($identified_user)." and `ch_pswd_tries`>={$_COOKIE['reg8log_ch_pswd_try']} limit 1";
+				$reg8log_db->query($query);
+			}
 			setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 		}
 	}
@@ -96,7 +98,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		}
 		else if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
 		$_username=$identified_user;
-		require $index_dir.'include/info/info_password_change_or_reset.php';
+		require $index_dir.'include/config/config_password_change_or_reset.php';
 		require $index_dir.'include/code/code_change_password.php';
 		$success_msg='<h3>Your password changed successfully.</h3>';
 		$no_specialchars=true;

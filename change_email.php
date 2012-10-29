@@ -12,7 +12,7 @@ require $index_dir.'include/code/code_identify.php';
 
 if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
 
-require $index_dir.'include/info/info_register_fields.php';
+require $index_dir.'include/config/config_register_fields.php';
 
 $email_format=$fields['email'];
 
@@ -54,8 +54,10 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 			require $index_dir.'include/code/code_update_user_last_ch_try.php';
 		}
 		else if(isset($_COOKIE['reg8log_ch_pswd_try'])) {
-			$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$reg8log_db->quote_smart($_COOKIE['reg8log_ch_pswd_try']).' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
-			$reg8log_db->query($query);
+			if(is_numeric($_COOKIE['reg8log_ch_pswd_try'])) {
+				$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$_COOKIE['reg8log_ch_pswd_try'].' where `username`='.$reg8log_db->quote_smart($identified_user)." and `ch_pswd_tries`>={$_COOKIE['reg8log_ch_pswd_try']} limit 1";
+				$reg8log_db->query($query);
+			}
 			setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 		}
 	}

@@ -8,7 +8,7 @@ require $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 if(!isset($_GET['rid'], $_GET['key'])) exit('<h3 align="center">Error: rid and/or key parameter is not set!</h3>');
 

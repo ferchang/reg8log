@@ -164,7 +164,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	$i++;
-	echo ' id="', $i, '">';
+	echo ' id="row', $i, '">';
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';

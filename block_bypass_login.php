@@ -10,7 +10,7 @@ require $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/info/info_brute_force_protection.php';
+require $index_dir.'include/config/config_brute_force_protection.php';
 
 if(!$block_bypass_system_enabled) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
 
@@ -58,13 +58,13 @@ require_once $index_dir.'include/code/code_db_object.php';
 $_username=$reg8log_db->quote_smart($_POST['username']);
 $query="select * from `block_bypass` where `username`=$_username limit 1";
 
-if(!$reg8log_db->result_num($query)) exit('<h3 align="center">Error: No record for '.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').' was found in the block_bypass table!</h3>');
+if(!$reg8log_db->result_num($query)) exit('<h3 align="center">Error: Block-bypass link not verified!</h3>');
 
 $rec=$reg8log_db->fetch_row();
 $key=$rec['key'];
 $incorrect_logins=$rec['incorrect_logins'];
 
-if($_GET['key']!==$key) exit('<h3 align="center">Error: Block-bypass key is incorrect!</h3>');
+if($_GET['key']!==$key) exit('<h3 align="center">Error: Block-bypass link not verified!</h3>');
 
 if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) exit('<center><h3>Maximum number of incorrect logins is reached.<br>You cannot use block-bypass system until next block.</h3><br><a href="index.php">Login page</a></center>');
 

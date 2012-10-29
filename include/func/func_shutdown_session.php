@@ -49,7 +49,7 @@ if(empty($_SESSION)) {
 	return;
 }
 
-if(!isset($encrypt_session_files_contents)) require $index_dir.'include/info/info_crypto.php';
+if(!isset($encrypt_session_files_contents)) require $index_dir.'include/config/config_crypto.php';
 
 if($encrypt_session_files_contents) {
 	if(isset($session0) and serialize($session1)===serialize($_SESSION)) $_SESSION=$session0;

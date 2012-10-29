@@ -20,7 +20,7 @@ if(isset($captcha_needed)) {
 	$captcha_verified=isset($_SESSION['captcha_verified']);
 }
 
-require $index_dir.'include/info/info_register.php';
+require $index_dir.'include/config/config_register.php';
 
 do {//goto statement not supported in PHP < 5.3; so i use do ... while(false) + break in this specific scenario instead.
 

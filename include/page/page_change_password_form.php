@@ -137,7 +137,7 @@ echo '</td></tr>';
 <td align="right">Your current Password:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td align="right">New password:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="width: 100%" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
+<td align="right">New password:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
 if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and !isset($password_error)) {
 	$refill=$_POST['newpass'];
@@ -146,7 +146,7 @@ if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and 
 ?>/></td>
 </tr>
 <tr>
-<td align="right">Retype new Password:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="width: 100%" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
+<td align="right">Retype new Password:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
 <?php
 if(isset($refill_output)) echo $refill_output;
 ?>/></td>

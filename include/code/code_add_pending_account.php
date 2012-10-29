@@ -64,7 +64,7 @@ else if($admin_confirmation_needed) {
 
 $no_specialchars=true;
 
-require $index_dir.'include/info/info_cleanup.php';
+require $index_dir.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	require_once $index_dir.'include/code/code_fetch_site_vars.php';

@@ -6,7 +6,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 if(session_id()!=='' and session_name()==='reg8log_session') return;
 
-require $index_dir.'include/info/info_identify.php';
+require $index_dir.'include/config/config_identify.php';
 
 @session_write_close();
 
@@ -31,7 +31,7 @@ if(!session_start()) {
 
 session_regenerate_id(true);
 
-if(!isset($encrypt_session_files_contents)) require $index_dir.'include/info/info_crypto.php';
+if(!isset($encrypt_session_files_contents)) require $index_dir.'include/config/config_crypto.php';
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;
