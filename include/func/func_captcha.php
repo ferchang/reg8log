@@ -3,8 +3,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 require_once $index_dir.'include/func/func_secure_hash.php';
 
 /*
@@ -94,7 +92,7 @@ function captcha_show_image() {
 	// Let's place the word. Each letter will have random position, size, angle and font
 	if (function_exists('imagettftext')) {
 		for($i = 0; $i < $code_length; $i++) {
-			imagettftext($captcha_image, mt_rand(24, 28), mt_rand(-20, 20), $i*mt_rand(30, 36)+mt_rand(2,4), mt_rand(32, 36), $captcha_image_lcolor[mt_rand(0, 1)], mt_rand(1, 3).'.ttf', $captcha_word{$i});
+			imagettftext($captcha_image, mt_rand(24, 28), mt_rand(-20, 20), $i*mt_rand(30, 36)+mt_rand(2,4), mt_rand(32, 36), $captcha_image_lcolor[mt_rand(0, 1)], './'.mt_rand(1, 3).'.ttf', $captcha_word{$i});
 		}
 	} else exit('<br />error: no ttf support for generating the captcha image!<br />');
 	

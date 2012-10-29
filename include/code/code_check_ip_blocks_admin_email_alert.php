@@ -26,7 +26,7 @@ $admin_alert_email_msg='';
 
 if(isset($ip_blocks_alert_threshold_reached)) {
 
-	$admin_alert_email_msg='- There were '.$new_ip_blocks." new account block(s).\n";
+	$admin_alert_email_msg='- There were '.$new_ip_blocks." new IP block(s).\n";
 
 	$query='update `admin_alerts` set `new_ip_blocks`=0, `last_alert`='.time()." where `for`='email' limit 1";
 	$reg8log_db->query($query);
@@ -35,6 +35,6 @@ if(isset($ip_blocks_alert_threshold_reached)) {
 
 $reg8log_db->query("select release_lock('$lock_name3')");
 
-if($admin_alert_email_msg) require_once $index_dir.'include/code/code_email_admin_alert_msg.php';
+if($admin_alert_email_msg) require $index_dir.'include/code/code_email_admin_alert_msg.php';
 
 ?>

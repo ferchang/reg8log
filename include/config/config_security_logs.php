@@ -15,7 +15,7 @@ a positive integer: keep up to this number of seconds after block expiration
 $log_non_existent_accounts_blocks=true;
 //if enabled, the system logs the blocking event of non-existent accounts that it pretends to be existent.
 
-$alert_admin_about_account_blocks=1;
+$alert_admin_about_account_blocks=3;
 //0: no
 //1: when he visits
 //2: with email

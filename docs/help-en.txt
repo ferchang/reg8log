@@ -40,6 +40,8 @@ OS: MS Windows XP SP3
 Browser: FF 14 and IE 8
 EasyPHP 5.3.1.0 (MySQL 5.1.43, PHP 5.3.2, Apache 2.2.14)
 
+Now some testing is done on a real web host (GNU/Linux).
+
 =================================
 
 configuration variables (all reside in include/config/info_....php files - except common.php that is directly in the include dir)

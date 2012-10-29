@@ -50,12 +50,14 @@ if($ip_block_proportional) {
 	$incorrect=$rec['n'];
 	if($correct==0) $correct=1;
 	$count=$incorrect/$correct;
+	$ip_incorrect_count=$count;
 }
 else {
 	$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.(time()-$ip_block_period);
 	$reg8log_db->query($query);
 	$rec=$reg8log_db->fetch_row();
 	$count=$rec['n'];
+	$ip_incorrect_count=$count;
 }
 
 if($ip_block_threshold!=-1 and $count>=$ip_block_threshold) {
