@@ -8,9 +8,9 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 //for normal users accounts >
 
-$account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
+$account_captcha_threshold=3; //1-10 / -1: disabled (no captcha) / 0: always
 
-$account_block_threshold=-1; //1-10 / -1: disabled (no block)
+$account_block_threshold=6; //1-10 / -1: disabled (no block)
 
 $account_block_period=12*60*60; //in seconds
 
@@ -18,9 +18,9 @@ $account_block_period=12*60*60; //in seconds
 
 //for Admin account >
 
-$admin_account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
+$admin_account_captcha_threshold=3; //1-10 / -1: disabled (no captcha) / 0: always
 
-$admin_account_block_threshold=-1; //1-10 / -1: disabled (no block)
+$admin_account_block_threshold=6; //1-10 / -1: disabled (no block)
 
 $admin_account_block_period=12*60*60; //in seconds
 
@@ -41,11 +41,11 @@ $block_bypass_system_also4ip_block=true;
 
 $max_block_bypass_emails=10; //1-255 / -1: infinite
 
-$allow_users2disable_blocks=3;
+$allow_users2disable_blocks=0;
 //this setting can be useful e.g. if bad guys try to prevent some users' access to the system by frequently causing their accounts/IPs to be blocked. but be aware that enabling this setting opens the account to login brute force attacks, so their account password must be strong enough to resist attacks.
 //see below for possible values for this setting.
 //note that some degree of protection with captcha can still be in place with all these settings; only complete blocks are prevented.
-//0: users' accounts are fully protected with the block system (of course, if the block system itself is enabled) and no user can disable the block system for his account
+//0: users' accounts are fully protected with the block system (of course, if the block system itself is enabled) and users cannot disable the block system for their accounts
 //1: users can disable the IP based blocks for their own accounts.
 //2: users can disable the account blocks for their own accounts.
 //3: users can disable both the account and IP based blocks for their own accounts.
@@ -56,21 +56,21 @@ $allow_users2disable_blocks=3;
 
 //for normal users accounts >
 
-$ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
+$ip_captcha_threshold=6; // -1: disabled (no captcha) / 0: always
 
-$ip_block_threshold=-1; // -1: disabled (no ip block)
+$ip_block_threshold=12; // -1: disabled (no ip block)
 
-$ip_block_period=30*60; //in seconds
+$ip_block_period=12*60*60; //in seconds
 
 //< for normal users accounts
 
 //for Admin account >
 
-$admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
+$admin_ip_captcha_threshold=6; // -1: disabled (no captcha) / 0: always
 
-$admin_ip_block_threshold=-1; // -1: disabled (no ip block)
+$admin_ip_block_threshold=12; // -1: disabled (no ip block)
 
-$admin_ip_block_period=30*60; //in seconds
+$admin_ip_block_period=12*60*60; //in seconds
 
 //< for Admin account
 

@@ -6,13 +6,13 @@ $registeration_enabled=true;
 
 $password_refill=2; //0: disabled / 1: enabled if client javascript on / 2: enabled
 
-$email_verification_needed=true;
+$email_verification_needed=false;
 
-$admin_confirmation_needed=true;
+$admin_confirmation_needed=false;
 
 $email_verification_time=24*60*60; //in seconds
 
-$admin_confirmation_time=7*24*60*60; //in seconds
+$admin_confirmation_time=30*24*60*60; //in seconds
 
 $login_upon_register=true;
 
@@ -26,11 +26,11 @@ $ajax_check_username=true;//whether username availability can be checked via aja
 //u may want to disable it in some strict security environments
 //although usernames can still be checked via the register system, it will need passing a captcha test every time the username is changed
 
-$max_ajax_check_usernames=10;
-//maximum number of ajax check username availability in $max_ajax_check_usernames_period per each unique IP.
+$max_ajax_check_usernames=20;
+//maximum number of ajax check username availability in $max_ajax_check_usernames_period per each IP.
 //0: no limit
 
-$max_ajax_check_usernames_period=30*60;//the duration (in seconds) in which each IP can check $max_ajax_check_usernames usernames' availability via ajax (in the register form).
+$max_ajax_check_usernames_period=60*60;//the duration (in seconds) in which each IP can check $max_ajax_check_usernames usernames' availability via ajax (in the register form).
 
 $reset_clients_ajax_check_usernames_upon_register=true;
 //with this set to true, a client's ajax username availability check records will be deleted from the ip_ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
