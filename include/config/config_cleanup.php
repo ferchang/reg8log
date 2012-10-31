@@ -13,7 +13,7 @@ $max_login_attempt_records=1000*1000;
 // but it seems that ip_correct_logins table can reach this max number of records much harder,
 // because it needs one account be existent per record and several successful logins to one account yield only one record
 
-$max_security_logs_records=1000;
+$max_security_logs_records=10*1000;
 //note that this is used in two tables, so actual max number of log records can be twice this
 
 $max_ip_ajax_check_usernames_records=100*1000;

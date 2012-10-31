@@ -21,7 +21,7 @@ the admin account is used for various management operations like banning/unbanni
 
 =================================
 
-self critisism:
+self criticism:
 
 - using tables for HTML layout.
 - not using design patterns like MVC.
