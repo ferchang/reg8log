@@ -9,8 +9,8 @@ require $index_dir.'include/common.php';
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 if(!empty($_POST)) {
-	require $index_dir.'include/code/code_prevent_xsrf.php';
 	require $index_dir.'include/code/code_prevent_repost.php';
+	require $index_dir.'include/code/code_prevent_xsrf.php';
 }
 
 require $index_dir.'include/config/config_password_change_or_reset.php';

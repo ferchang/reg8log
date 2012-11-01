@@ -71,11 +71,11 @@ require_once $index_dir.'include/func/func_secure_hash.php';
 if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
 require $index_dir.'include/code/code_change_password.php';
 
+require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
+
 $success_msg='<h3>Your password changed successfully.</h3>';
 $no_specialchars=true;
 require $index_dir.'include/page/page_success.php';
-
-require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
 $query='delete from `password_reset` where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
 $reg8log_db->query($query);

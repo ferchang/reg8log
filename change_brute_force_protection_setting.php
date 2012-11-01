@@ -73,10 +73,10 @@ else if(!isset($captcha_err)) {
 if(!isset($err_msgs)) {
 	$block_disable=$_POST['disables'];
 	require $index_dir.'include/code/code_change_block_disable.php';
+	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 	$success_msg='<h3>Brute-force protection setting changed successfully.</h3>';
 	$no_specialchars=true;
 	require $index_dir.'include/page/page_success.php';
-	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 	exit;
 }
 

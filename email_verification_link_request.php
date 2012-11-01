@@ -54,15 +54,17 @@ if($reg8log_db->result_num($query)) {
 else $email=false;
 
 if($email) {
-	if($max_activation_emails===-1 or $emails_sent<$max_activation_emails) {
+	if($max_activation_emails==-1 or $emails_sent<$max_activation_emails) {
 		$rid=$rec['record_id'];
 		$email_verification_key=$rec['email_verification_key'];
 		require $index_dir.'include/code/code_email_verification_link.php';
-		if($emails_sent<255) $emails_sent++;
+		if($emails_sent<255) {
+			$emails_sent++;
+			$tmp21=$reg8log_db->quote_smart($rec['username']);
+			$query='update `pending_accounts` set `emails_sent`='.$emails_sent.' where `username`='.$tmp21.' limit 1';
+			$reg8log_db->query($query);
+		}
 	}
-	$tmp21=$reg8log_db->quote_smart($rec['username']);
-	$query='update `pending_accounts` set `emails_sent`='.$emails_sent.' where `username`='.$tmp21.' limit 1';
-	$reg8log_db->query($query);
 }
 
 if(isset($captcha_needed)) unset($_SESSION['captcha_verified']);

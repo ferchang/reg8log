@@ -6,6 +6,8 @@ $index_dir='../';
 
 $ban_page=true;
 
+$store_request_entropy_probability2=1;
+
 require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';

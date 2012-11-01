@@ -65,8 +65,8 @@ require $index_dir.'include/page/page_sections.php';
 <br>
 <li>Security logs:
 <ul>
-<li><a class="li_item" href="admin-blocked_accounts.php">Account blocks</a>
-<li><a class="li_item" href="admin-blocked_ips.php">IP blocks</a>
+<li><a class="li_item" href="admin-account_blocks.php">Account blocks</a>
+<li><a class="li_item" href="admin-ip_blocks.php">IP blocks</a>
 </ul>
 <br>
 <li>Database:

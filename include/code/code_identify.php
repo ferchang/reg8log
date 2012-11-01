@@ -15,9 +15,9 @@ $user=new hm_user($identify_structs);
 unset($identified_user);
 unset($identify_error);
 
-if(isset($manual_identify)) {
+if(isset($manual_login)) {
 	require_once $index_dir.'include/func/func_secure_hash.php';
-	if($user->identify($manual_identify['username'], $manual_identify['password']) and !isset($banned_user)) $identified_user=$user->user_info['username'];
+	if($user->identify($manual_login['username'], $manual_login['password']) and !isset($banned_user)) $identified_user=$user->user_info['username'];
 }
 else if($user->identify() and !isset($banned_user)) $identified_user=$user->user_info['username'];
 
@@ -25,7 +25,7 @@ if($user->err_msg) $identify_error=true;
 
 $log_activity=0;
 
-if($log_last_login and isset($manual_identify) and (isset($identified_user) or isset($banned_user))) $log_activity+=1;
+if($log_last_login and isset($manual_login) and (isset($identified_user) or isset($banned_user))) $log_activity+=1;
 
 if($log_last_activity and (isset($identified_user) or isset($banned_user))) $log_activity+=2;
 

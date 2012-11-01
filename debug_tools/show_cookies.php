@@ -10,7 +10,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 echo '<h3 align="center">reg8log cookies:</h3><hr>';
 
-foreach($_COOKIE as $name=>$value) if(strpos($name, 'reg8log')===0) {
+foreach($_COOKIE as $name=>$value) if(strpos($name, 'reg8log_')===0) {
   echo "<b>cookie name:</b> $name";
   echo "<br><b>cookie value:</b> ";
   $value=htmlspecialchars($value, ENT_QUOTES, 'UTF-8');

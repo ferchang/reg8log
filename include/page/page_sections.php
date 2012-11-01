@@ -10,7 +10,7 @@ if($index_dir=='../') echo '<tr  bgcolor="#e1cfa0" ><td>
 <a href="../index.php">Login page</a><br>
 <a href="../user_options.php">User options</a><br>
 <a href="../register.php">Register</a><br>
-<a href="../resend_email_verification_link.php">Resend email verification link</a><br>
+<a href="../email_verification_link_request.php">Resend email verification link</a><br>
 <a href="../admin/index.php">Admin operations</a>
 <hr />
 <a href="../debug_tools/show_session_contents.php">Show project session contents</a><br>
@@ -21,7 +21,7 @@ else echo '<tr  bgcolor="#e1cfa0" ><td>
 <a href="index.php">Login page</a><br>
 <a href="user_options.php">User options</a><br>
 <a href="register.php">Register</a><br>
-<a href="resend_email_verification_link.php">Resend email verification link</a><br>
+<a href="email_verification_link_request.php">Resend email verification link</a><br>
 <a href="admin/index.php">Admin operations</a>
 <hr />
 <a href="debug_tools/show_session_contents.php">Show project session contents</a><br>

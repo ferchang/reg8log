@@ -80,10 +80,10 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	
 	if(!isset($err_msgs)) {
 		require $index_dir.'include/code/code_change_email.php';
+		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		$success_msg='<h3>Your email changed successfully.</h3>';
 		$no_specialchars=true;
 		require $index_dir.'include/page/page_success.php';
-		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		exit;
 	}
 }

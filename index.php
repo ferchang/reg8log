@@ -27,7 +27,7 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
 	
-	$manual_identify=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
+	$manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
 	require $index_dir.'include/config/config_brute_force_protection.php';
 
@@ -69,11 +69,11 @@ else {
 	exit;
 }
 
-if(isset($manual_identify)) require $index_dir.'include/code/code_record_login_attempt.php';
+if(isset($manual_login)) require $index_dir.'include/code/code_record_login_attempt.php';
 
 if(isset($identified_user)) {//Identified
 
-if(isset($manual_identify)) {
+if(isset($manual_login)) {
 
 $_identified_username=$identified_user;
 require $index_dir.'include/code/code_dec_incorrect_logins.php';
@@ -90,7 +90,7 @@ require $index_dir.'include/page/page_members_area.php';
 
 }//Identified
 else if(isset($pending_user)) {
-	if(isset($manual_identify)) {
+	if(isset($manual_login)) {
 		$_identified_username=$pending_user;
 		require $index_dir.'include/code/code_dec_incorrect_logins.php';	
 	}
@@ -98,7 +98,7 @@ else if(isset($pending_user)) {
 	require $index_dir.'include/page/page_pending_user.php';
 }
 else if(isset($banned_user)) {
-	if(isset($manual_identify)) {
+	if(isset($manual_login)) {
 		$_identified_username=$banned_user;
 		require $index_dir.'include/code/code_dec_incorrect_logins.php';
 		if($remember) $user->save_identity('permanent');
@@ -107,7 +107,7 @@ else if(isset($banned_user)) {
 	require $index_dir.'include/page/page_banned_user.php';
 }
 else {//Not identified
-	if(isset($manual_identify)) {
+	if(isset($manual_login)) {
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		$err_msg='You are not authenticated!<br />Check your login information.';
 		require $index_dir.'include/code/account_incorrect_login.php';

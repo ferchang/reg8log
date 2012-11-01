@@ -237,7 +237,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>', ($rec['username_exists'])? 'Yes' : 'No', '</td>';
 	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
-	echo '<td>', inet_ntop2($rec['ip']), '</td>';
+	echo '<td>', inet_ntop2($rec['last_ip']), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';

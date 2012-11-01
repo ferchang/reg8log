@@ -100,10 +100,10 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		$_username=$identified_user;
 		require $index_dir.'include/config/config_password_change_or_reset.php';
 		require $index_dir.'include/code/code_change_password.php';
+		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		$success_msg='<h3>Your password changed successfully.</h3>';
 		$no_specialchars=true;
 		require $index_dir.'include/page/page_success.php';
-		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		exit;
 	}
 }

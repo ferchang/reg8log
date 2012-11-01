@@ -35,7 +35,7 @@ echo '<h3>- Your account is pending for admin confirmation.</h3>';
 echo '</td></tr><tr><td align="center">';
 
 if(!$rec['email_verified'] and $rec['email_verification_key']!='') {
-echo '<form method="post" action="resend_email_verification_link.php" name="resend_form"><input type="hidden" name="email" value="', $rec['email'], '">', '<input type="hidden" name="form1" value="1">';
+echo '<form method="post" action="email_verification_link_request.php" name="resend_form"><input type="hidden" name="email" value="', $rec['email'], '">', '<input type="hidden" name="form1" value="1">';
 echo '<br><input type="submit" value="Re-send me the activation email"><br><span style="color: #f00; font-style: italic" id="cap">&nbsp;</span></form></td></tr></table>';
 }
 
