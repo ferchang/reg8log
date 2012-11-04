@@ -13,8 +13,6 @@ if(strtolower($_POST['username'])=='admin') {
 
 if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
 
-$req_time=time();
-
 require $index_dir.'include/config/config_register.php';
 
 if(!$username_exists and $registeration_enabled and $ajax_check_username and !$max_ajax_check_usernames) {
@@ -29,12 +27,7 @@ require_once $index_dir.'include/code/code_db_object.php';
 $cookie=new hm_cookie('reg8log_incorrect_logins');
 $cookie->secure=$https;
 
-$_username=$reg8log_db->quote_smart($manual_login['username']);
-
-if(!isset($site_key)) require $index_dir.'include/code/code_fetch_site_vars.php';
-
-$lock_name=$reg8log_db->quote_smart('reg8log--incorrect_login-'.$manual_login['username']."--$site_key");
-$reg8log_db->query("select get_lock($lock_name, -1)");
+$_username=$reg8log_db->quote_smart($_POST['username']);
 
 $query="select * from `account_incorrect_logins` where `username`=$_username limit 1";
 
@@ -50,7 +43,7 @@ if(!$reg8log_db->result_num()) {
 	$insert_id=mysql_insert_id();
 
 	$cookie_contents=$cookie->get();
-	$tmp12=strtolower($manual_login['username']);
+	$tmp12=strtolower($_POST['username']);
 	if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
 	else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
 	$cookie_contents=implode("\n", array_slice(explode("\n", $cookie_contents), -2*20));
@@ -60,8 +53,9 @@ if(!$reg8log_db->result_num()) {
 		$_username2=$_POST['username'];
 		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 		if($block_disable!=2 and $block_disable!=3) {
-			$account_block=$manual_login['username'];
-			$block_duration=$req_time+$account_block_period-time();
+			$account_block=$_POST['username'];
+			$block_duration=$account_block_period;
+			$first_attempt=$req_time;
 			require_once $index_dir.'include/code/code_log_account_block.php';
 		}
 		else if($account_captcha_threshold==1) $captcha_needed=true;
@@ -92,8 +86,9 @@ if($account_block_threshold!=-1 and $count>=$account_block_threshold) {
 	$_username2=$_POST['username'];
 	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
-		$account_block=$manual_login['username'];
+		$account_block=$_POST['username'];
 		$block_duration=$oldest+$account_block_period-$req_time;
+		$first_attempt=$oldest;
 		require_once $index_dir.'include/code/code_log_account_block.php';
 	}
 	else if($account_captcha_threshold!=-1 and $count>=$account_captcha_threshold) $captcha_needed=true;
@@ -114,7 +109,7 @@ $query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, 
 $reg8log_db->query($query);
 
 $cookie_contents=$cookie->get();
-$tmp12=strtolower($manual_login['username']);
+$tmp12=strtolower($_POST['username']);
 if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
 else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
 $cookie->set(null, $cookie_contents);

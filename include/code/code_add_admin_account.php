@@ -17,7 +17,7 @@ require_once $index_dir.'include/func/func_secure_hash.php';
 $password_hash=$reg8log_db->quote_smart(create_secure_hash($_POST['password']));
 $username=$reg8log_db->quote_smart($_POST['username']);
 $email=$reg8log_db->quote_smart($_POST['email']);
-$timestamp=time();
+$timestamp=$req_time;
 
 $query="insert into `accounts` (`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`) values ('$rid', $username, $password_hash, $email, 'n', '$autologin_key', $timestamp)";
 

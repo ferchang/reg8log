@@ -14,15 +14,19 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $account_block_threshold==-1) return;
 
-require_once $index_dir.'include/code/code_db_object.php';
-$tmp9=$reg8log_db->quote_smart($_username);
-$query="select * from `accounts` where `username`=$tmp9 limit 1";
-$reg8log_db->query($query);
-$rec=$reg8log_db->fetch_row();
-$block_disable=$rec['block_disable'];
-$last_protection=$rec['last_protection'];
+if(!isset($site_key)) require $index_dir.'include/code/code_fetch_site_vars.php';
+$account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_POST['username'])."--$site_key");
+$reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
 
-$req_time=time();
+if(!isset($last_protection)) {
+	require_once $index_dir.'include/code/code_db_object.php';
+	$tmp9=$reg8log_db->quote_smart($_username);
+	$query="select * from `accounts` where `username`=$tmp9 limit 1";
+	$reg8log_db->query($query);
+	$rec=$reg8log_db->fetch_row();
+	$block_disable=$rec['block_disable'];
+	$last_protection=$rec['last_protection'];
+}
 
 if($account_block_threshold==0) {
 	$account_block=$_username;

@@ -8,9 +8,9 @@ require_once $index_dir.'include/config/config_security_logs.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$_username=$reg8log_db->quote_smart($manual_login['username']);
+$_username=$reg8log_db->quote_smart($_POST['username']);
 
-$tmp29='insert into `ip_block_log` (`ip`, `last_attempt`, `last_username`) values ('.$ip.', '.time().", $_username)";
+$tmp29='insert into `ip_block_log` (`ip`, `last_attempt`, `last_username`) values ('.$ip.', '.$req_time.", $_username)";
 
 $reg8log_db->query($tmp29);
 

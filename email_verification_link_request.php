@@ -40,8 +40,8 @@ if(isset($err_msgs)) break;
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$expired1=time()-$email_verification_time;
-$expired2=time()-$admin_confirmation_time;
+$expired1=$req_time-$email_verification_time;
+$expired2=$req_time-$admin_confirmation_time;
 
 $tmp21=$reg8log_db->quote_smart($_POST['email']);
 $query='select * from `pending_accounts` where `email`='.$tmp21." and (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>".$expired1.') and (`admin_confirmed`=1 or `timestamp`>'.$expired2.') limit 1';

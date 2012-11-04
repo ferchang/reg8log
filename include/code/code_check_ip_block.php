@@ -14,13 +14,19 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 if($ip_block_threshold==-1  and $ip_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $ip_block_threshold==-1) return;
 
-require_once $index_dir.'include/code/code_db_object.php';
-$tmp30=$reg8log_db->quote_smart($_username);
-$query="select * from `accounts` where `username`=$tmp30 limit 1";
-$reg8log_db->query($query);
-$rec=$reg8log_db->fetch_row();
-$block_disable=$rec['block_disable'];
-$last_protection=$rec['last_protection'];
+if(!isset($site_key)) require $index_dir.'include/code/code_fetch_site_vars.php';
+$ip_login_attempt_lock="'".'reg8log--ip_login_attempt-'.$_SERVER['REMOTE_ADDR']."--$site_key"."'";
+$reg8log_db->query("select get_lock($ip_login_attempt_lock, -1)");
+
+if(!isset($last_protection)) {
+	require_once $index_dir.'include/code/code_db_object.php';
+	$tmp30=$reg8log_db->quote_smart($_username);
+	$query="select * from `accounts` where `username`=$tmp30 limit 1";
+	$reg8log_db->query($query);
+	$rec=$reg8log_db->fetch_row();
+	$block_disable=$rec['block_disable'];
+	$last_protection=$rec['last_protection'];
+}
 
 if($ip_block_threshold==0) {
 	$ip_block=true;
@@ -39,12 +45,12 @@ require_once $index_dir.'include/func/func_inet.php';
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
 if($ip_block_proportional) {
-	$query='select count(*) as `n` from `ip_correct_logins` where `ip`='.$ip.' and `timestamp`>='.(time()-$ip_block_period);
+	$query='select count(*) as `n` from `ip_correct_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period);
 	$reg8log_db->query($query);
 	$rec=$reg8log_db->fetch_row();
 	$correct=$rec['n'];
 	//-------------
-	$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.(time()-$ip_block_period);
+	$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period);
 	$reg8log_db->query($query);
 	$rec=$reg8log_db->fetch_row();
 	$incorrect=$rec['n'];
@@ -53,7 +59,7 @@ if($ip_block_proportional) {
 	$ip_incorrect_count=$count;
 }
 else {
-	$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.(time()-$ip_block_period);
+	$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period);
 	$reg8log_db->query($query);
 	$rec=$reg8log_db->fetch_row();
 	$count=$rec['n'];

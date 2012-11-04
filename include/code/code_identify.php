@@ -17,9 +17,9 @@ unset($identify_error);
 
 if(isset($manual_login)) {
 	require_once $index_dir.'include/func/func_secure_hash.php';
-	if($user->identify($manual_login['username'], $manual_login['password']) and !isset($banned_user)) $identified_user=$user->user_info['username'];
+	if($user->identify($_POST['username'], $manual_login['password']) and !isset($banned_user) and !isset($pending_user)) $identified_user=$user->user_info['username'];
 }
-else if($user->identify() and !isset($banned_user)) $identified_user=$user->user_info['username'];
+else if($user->identify() and !isset($banned_user) and !isset($pending_user)) $identified_user=$user->user_info['username'];
 
 if($user->err_msg) $identify_error=true;
 
@@ -33,7 +33,7 @@ if($log_activity) require_once $index_dir.'include/code/code_log_last_login8acti
 
 if(isset($banned_user) and !isset($pass_banned_user)) {
 	$_identified_username=$banned_user;
-	require $index_dir.'include/code/code_dec_incorrect_logins.php';
+	require $index_dir.'include/code/code_dec_account_incorrect_logins.php';
 	require $index_dir.'include/page/page_banned_user.php';
 	exit;
 }

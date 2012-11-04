@@ -17,7 +17,7 @@ $field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_
 $username=$reg8log_db->quote_smart($rec['username']);
 $email=$reg8log_db->quote_smart($rec['email']);
 $gender=$rec['gender'];
-$timestamp=time(); // should we use $rec['timestamp'] instead?
+$timestamp=$req_time; // should we use $rec['timestamp'] instead?
 $password_hash=$reg8log_db->quote_smart($rec['password_hash']);
 
 $field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp";

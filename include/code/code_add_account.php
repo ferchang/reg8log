@@ -18,7 +18,7 @@ if($_POST['password']!=='')
 $fields['password']['value']=create_secure_hash($_POST['password']);
 
 $field_names='`uid`, `autologin_key`, `timestamp`, ';
-$field_values="'$rid', '$autologin_key', ".time().', ';
+$field_values="'$rid', '$autologin_key', ".$req_time.', ';
 $i=0;
 
 unset($fields['captcha']);

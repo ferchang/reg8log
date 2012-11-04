@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 
 
-$expired=time()-$password_reset_period;
+$expired=$req_time-$password_reset_period;
 
 $query="delete from `password_reset` where `timestamp` < $expired";
 

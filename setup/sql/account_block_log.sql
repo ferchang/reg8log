@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2012 at 09:47 PM
+-- Generation Time: Nov 04, 2012 at 09:53 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -30,8 +30,9 @@ CREATE TABLE IF NOT EXISTS `account_block_log` (
   `ext_auto` int(10) unsigned NOT NULL,
   `username` varchar(30) CHARACTER SET utf8 NOT NULL,
   `username_exists` tinyint(1) NOT NULL DEFAULT '0',
+  `first_attempt` int(10) unsigned NOT NULL,
   `last_attempt` int(10) unsigned NOT NULL,
   `last_ip` varbinary(16) NOT NULL,
   `unblocked` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`auto`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

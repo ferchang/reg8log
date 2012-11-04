@@ -19,8 +19,8 @@ $query1.=' limit 1';
 
 require $index_dir.'include/config/config_register.php';
 
-$expired1=time()-$email_verification_time;
-$expired2=time()-$admin_confirmation_time;
+$expired1=$req_time-$email_verification_time;
+$expired2=$req_time-$admin_confirmation_time;
 
 $query2="select * from `pending_accounts` where `$field_name`=$tmp8  and (`email_verification_key`='' or `email_verified`=1 or `timestamp` > $expired1)  and (`admin_confirmed`=1 or `timestamp` > $expired2)";
 if(isset($except_user)) $query2.=' and `username`!='.$except_user;
@@ -28,7 +28,7 @@ $query2.=' limit 1';
 
 if($field_name=='username' and (!$ajax_check_username or $max_ajax_check_usernames)) {
 	require_once $index_dir.'include/config/config_brute_force_protection.php';
-	$expired=time()-$account_block_period;
+	$expired=$req_time-$account_block_period;
 	$query3="select * from `account_incorrect_logins` where `username`=$tmp8 and `last_attempt` > $expired limit 1";
 }
 

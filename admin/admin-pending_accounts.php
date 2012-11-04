@@ -34,8 +34,8 @@ if(isset($_POST['admin_action'])) {
 
 require $index_dir.'include/config/config_register.php';
 
-$expired1=time()-$email_verification_time;
-$expired2=time()-$admin_confirmation_time;
+$expired1=$req_time-$email_verification_time;
+$expired2=$req_time-$admin_confirmation_time;
 
 $query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.')';
 

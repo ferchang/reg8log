@@ -1,5 +1,5 @@
 A high security register and login system by hamidreza_mz -=At=- yahoo -=Dot=- com
-version: 1.0
+version: 1.1
 licence: GPL v2 or higher
 
 https://github.com/ferchang/reg8log

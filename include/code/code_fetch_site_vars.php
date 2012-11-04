@@ -21,7 +21,7 @@ if($reg8log_db->err_msg) {
 	return;
 }
 
-$num_recs=5;
+$num_recs=6;
 
 if($reg8log_db->result_num()!==$num_recs) {
 	if(!isset($setup_page)) {

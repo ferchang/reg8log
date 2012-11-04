@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 class hm_cookie
 {
 
@@ -32,6 +30,8 @@ $this->err_msg=get_class($this).": $err_msg";
 function set($name=null, $values=array(), $value_seperator=null, $age='session')
 {
 
+global $req_time;
+
 $this->err_msg='';
 
 if(is_null($name)) $name=$this->name;
@@ -54,13 +54,13 @@ else $val=$values;
 
 switch($age) {
 case 'permanent':
-$expire=time()+$this->long_age;
+$expire=$req_time+$this->long_age;
 break;
 case 'session':
 $expire=0;
 break;
 default:
-if(is_int($age) and $age > 0) $expire=time()+$age;
+if(is_int($age) and $age > 0) $expire=$req_time+$age;
 else {
 $this->error("Invalid age value '$age'");
 return false;

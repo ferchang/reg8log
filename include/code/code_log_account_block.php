@@ -12,7 +12,7 @@ require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `last_attempt`, `last_ip`) values ('."$insert_id, $_username, $username_exists, $req_time, $ip)";
+$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip)";
 
 $reg8log_db->query($query);
 

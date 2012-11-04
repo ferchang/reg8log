@@ -189,6 +189,18 @@ if($sort_by=='username_exists') {
 echo "</th>";
 
 echo '<th>';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=first_attempt&sort_dir=";
+if($sort_by=='first_attempt' and $sort_dir=='asc') echo 'desc';
+else echo 'asc';
+echo "'>First attempt</a>";
+if($sort_by=='first_attempt') {
+	echo '&nbsp;';
+	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	else echo '<img src="../image/sort_desc.gif">';
+}
+echo "</th>";
+
+echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_attempt&sort_dir=";
 if($sort_by=='last_attempt' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
@@ -236,16 +248,17 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>', ($rec['username_exists'])? 'Yes' : 'No', '</td>';
-	echo '<td>', duration2friendly_str(time()-$rec['last_attempt'], 2), ' ago', '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), ' ago', '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), ' ago', '</td>';
 	echo '<td>', inet_ntop2($rec['last_ip']), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if(time()-$rec['last_attempt']<$account_block_period) {
+	else if($req_time-$rec['first_attempt']<$account_block_period) {
 		echo '<span style="color: red" ';
-		echo 'title="Blocked lift: ', duration2friendly_str($account_block_period-(time()-$rec['last_attempt']), 2), ' later';
+		echo 'title="Block lift: ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), ' later';
 		echo '">Blocked</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		$currently_blocked=true;
@@ -263,7 +276,7 @@ echo '<tr align="center"';
 if(!$r) echo ' style="background: ', $color1;
 else echo ' style="background: ', $color2;
 echo '">';
-echo '<td colspan="6" align="left"><input type="submit" value="Execute admin commands" style="color: #000;" name="admin_action"></td><td><input type="button" onclick="check_all(\'unblock\')" value="All" disabled id="check_all2"></td><td><input type="button" onclick="check_all(\'del\')" value="All" disabled id="check_all3"></td></tr>';
+echo '<td colspan="7" align="left"><input type="submit" value="Execute admin commands" style="color: #000;" name="admin_action"></td><td><input type="button" onclick="check_all(\'unblock\')" value="All" disabled id="check_all2"></td><td><input type="button" onclick="check_all(\'del\')" value="All" disabled id="check_all3"></td></tr>';
 echo '</table>';
 
 echo '<script>';

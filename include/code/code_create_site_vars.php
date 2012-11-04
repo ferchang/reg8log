@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 //-------------------------------
 
 $site_key=random_string(43);
@@ -13,6 +11,16 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_key', '$s
 $reg8log_db->query($query);
 
 echo "Variable <span style=\"color: green\">site_key</span> created.<br>";
+
+//-------------------------------
+
+$site_key2=random_string(43);
+
+$query="insert ignore into `site_vars` (`name`, `value`) values ('site_key2', '$site_key2')";
+
+$reg8log_db->query($query);
+
+echo "Variable <span style=\"color: green\">site_key2</span> created.<br>";
 
 //-------------------------------
 

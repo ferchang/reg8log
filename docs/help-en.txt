@@ -266,7 +266,7 @@ note that the actual number of rounds is 2^secure_hash_rounds.
 
 pepper:
 
-this is a random string composed of upper and lowercase letters + digits and of length 22 that should be set by hand before installing the tables and variables of the program. changing it is recommended for maximum security, but the program doesn't rely crucially on it being changed for its security.
+this is a random string composed of upper and lowercase letters + digits and of length 22 that should be set by hand before installing the tables and variables of the program. changing it is recommended for maximum security, but the program doesn't crucially rely on it being changed for its security.
 this random string is used in several subsystems: password hashing, (secure) random number generation, and encryption.
 highly recommended to change it when more than ordinary security is needed.
 

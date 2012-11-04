@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 $reg8log_db->query("lock tables `$table_name` write");
 
-$expired=time()-$account_block_period;
+$expired=$req_time-$account_block_period;
 
 $query="delete from `$table_name` where `last_attempt` < $expired and `username`!='admin'";
 

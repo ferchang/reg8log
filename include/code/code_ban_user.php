@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-if($_POST['ban_type']==='duration') $until=time()+$_POST['years']*(365*24*60*60)+$_POST['months']*(30*24*60*60)+$_POST['days']*(24*60*60)+$_POST['hours']*(60*60);
+if($_POST['ban_type']==='duration') $until=$req_time+$_POST['years']*(365*24*60*60)+$_POST['months']*(30*24*60*60)+$_POST['days']*(24*60*60)+$_POST['hours']*(60*60);
 else $until=1;
 
 if(!is_numeric($until)) exit("<center><h3>Error: Duration not a number!</h3></center>");

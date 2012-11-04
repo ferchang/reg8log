@@ -23,7 +23,8 @@ $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
 if(isset($identified_user) or isset($pending_user) or isset($banned_user)) {
 	$username_hash=$reg8log_db->quote_smart(substr(md5(strtolower($_POST['username']), true), 12));
-	$query='replace into `ip_correct_logins` (`ip`, `username_hash`, `timestamp`) values ('.$ip.', '.$username_hash.', '.time().')';
+	$query='replace into `ip_correct_logins` (`ip`, `username_hash`, `timestamp`) values ('.$ip.', '.$username_hash.', '.$req_time.')';
+	$reg8log_db->query("select release_lock('$lock_name4')");
 }
 else {
 	if($ip_block_threshold!=-1 and $ip_incorrect_count+1>=$ip_block_threshold) {
@@ -34,7 +35,7 @@ else {
 		require_once $index_dir.'include/code/code_log_ip_block.php';
 	}
 	else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_threshold) $captcha_needed=true;
-	$query='insert into `ip_incorrect_logins` (`ip`, `timestamp`, `admin`) values ('."$ip, ".time().", $admin)";
+	$query='insert into `ip_incorrect_logins` (`ip`, `timestamp`, `admin`) values ('."$ip, ".$req_time.", $admin)";
 }
 
 $reg8log_db->query($query);

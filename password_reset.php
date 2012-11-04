@@ -28,7 +28,7 @@ $_username=$rec['username'];
 
 require $index_dir.'include/config/config_password_change_or_reset.php';
 
-$expired=time()-$password_reset_period;
+$expired=$req_time-$password_reset_period;
 
 if($rec['timestamp']<$expired) exit('<center><h3>Error: Password reset link is expired!</h3><a href="index.php">Login page</a></center>');
 

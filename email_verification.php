@@ -38,7 +38,7 @@ if(!$reg8log_db->result_num($query)) exit('<center><h3>Error:<br>No such record 
 
 $rec=$reg8log_db->fetch_row();
 
-$expired=time()-$admin_confirmation_time;
+$expired=$req_time-$admin_confirmation_time;
 
 if($rec['timestamp']<$expired) exit('<center><h3>Error:<br>Pending account is expired!<br>Reason:<br>Not confirmed by admin in the specified time.</h3>'."$home</center>");
 
@@ -49,7 +49,7 @@ if($rec['email_verified']) {
   exit;
 }
 
-$expired=time()-$email_verification_time;
+$expired=$req_time-$email_verification_time;
 
 if($rec['timestamp']<$expired) exit('<center><h3>Error:<br>Pending account is expired!<br>Reason:<br>Out of email verification time.</h3>'."$home</center>");
 

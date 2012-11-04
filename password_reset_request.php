@@ -38,7 +38,7 @@ if(isset($err_msgs)) break;
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$time=time();
+$time=$req_time;
 $expired=$time-$password_reset_period;
 
 $tmp23=$reg8log_db->quote_smart($_POST['email']);
@@ -73,7 +73,7 @@ require $index_dir.'include/code/code_generate_unique_random_id.php';
 $username=$reg8log_db->quote_smart($rec['username']);
 $emails_sent=1;
 $key=random_string(22);
-$timestamp=time();
+$timestamp=$req_time;
 $email=$reg8log_db->quote_smart($email);
 
 $field_names='`record_id`, `username`, `email`, `emails_sent`, `key`, `timestamp`';

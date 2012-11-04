@@ -8,6 +8,8 @@ $db_installed=false;
 
 //====================================================
 
+$req_time=time();
+
 if($debug_mode) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');

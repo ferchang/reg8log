@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 if(strtolower($_POST['username'])=='admin') require $index_dir.'include/config/config_brute_force_protection.php';
 
-$expired=time()-$ip_block_period;
+$expired=$req_time-$ip_block_period;
 
 $query="delete from `ip_correct_logins` where `timestamp` < $expired";
 
@@ -14,7 +14,7 @@ $query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admi
 
 $reg8log_db->query($query);
 
-$expired=time()-$admin_ip_block_period;
+$expired=$req_time-$admin_ip_block_period;
 
 $query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=1";
 

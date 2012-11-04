@@ -34,8 +34,6 @@ else $email_verification_key='';
 if($admin_confirmation_needed) $admin_confirmed=0;
 else $admin_confirmed=1;
 
-$req_time=time();
-
 $field_names.='`emails_sent`, `email_verification_key`, `email_verified`, `admin_confirmed`, `timestamp`, `notify_user`';
 
 if($email_verification_needed) $emails_sent=1;

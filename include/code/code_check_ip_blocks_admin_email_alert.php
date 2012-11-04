@@ -14,7 +14,7 @@ $rec=$reg8log_db->fetch_row();
 
 $last_alert_email=$rec['last_alert'];
 
-if(!(!$alert_emails_min_interval or time()>=($last_alert_email+$alert_emails_min_interval))) {
+if(!(!$alert_emails_min_interval or $req_time>=($last_alert_email+$alert_emails_min_interval))) {
 	$reg8log_db->query("select release_lock('$lock_name3')");
 	return;
 }
@@ -28,7 +28,7 @@ if(isset($ip_blocks_alert_threshold_reached)) {
 
 	$admin_alert_email_msg='- There were '.$new_ip_blocks." new IP block(s).\n";
 
-	$query='update `admin_alerts` set `new_ip_blocks`=0, `last_alert`='.time()." where `for`='email' limit 1";
+	$query='update `admin_alerts` set `new_ip_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);
 
 }

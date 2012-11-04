@@ -19,10 +19,10 @@ $reg8log_db->query($query);
 $trec=$reg8log_db->fetch_row();
 
 if($try_type==='email') {
-	if($trec['last_ch_email_try']+12*60*60>time()) $captcha_needed=true;
+	if($trec['last_ch_email_try']+12*60*60>$req_time) $captcha_needed=true;
 	return;
 }
 
-if($trec['ch_pswd_tries']>=$ch_pswd_captcha_threshold and time()-$trec['last_ch_pswd_try']<$ch_pswd_period) $captcha_needed=true;
+if($trec['ch_pswd_tries']>=$ch_pswd_captcha_threshold and $req_time-$trec['last_ch_pswd_try']<$ch_pswd_period) $captcha_needed=true;
 
 ?>

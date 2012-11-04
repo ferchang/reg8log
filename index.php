@@ -76,7 +76,7 @@ if(isset($identified_user)) {//Identified
 if(isset($manual_login)) {
 
 $_identified_username=$identified_user;
-require $index_dir.'include/code/code_dec_incorrect_logins.php';
+require $index_dir.'include/code/code_dec_account_incorrect_logins.php';
 
 if($remember) $user->save_identity('permanent');
 else $user->save_identity('session');
@@ -92,7 +92,7 @@ require $index_dir.'include/page/page_members_area.php';
 else if(isset($pending_user)) {
 	if(isset($manual_login)) {
 		$_identified_username=$pending_user;
-		require $index_dir.'include/code/code_dec_incorrect_logins.php';	
+		require $index_dir.'include/code/code_dec_account_incorrect_logins.php';	
 	}
 	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
 	require $index_dir.'include/page/page_pending_user.php';
@@ -100,7 +100,7 @@ else if(isset($pending_user)) {
 else if(isset($banned_user)) {
 	if(isset($manual_login)) {
 		$_identified_username=$banned_user;
-		require $index_dir.'include/code/code_dec_incorrect_logins.php';
+		require $index_dir.'include/code/code_dec_account_incorrect_logins.php';
 		if($remember) $user->save_identity('permanent');
 		else $user->save_identity('session');
 	}

@@ -172,10 +172,10 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $rec['uid'], '</td>';
 	echo '<td>', $rec['gender'], '</td>';
 	echo '<td>', $rec['email'], '</td>';
-	echo '<td>', duration2friendly_str(time()-$rec['timestamp'], 2), '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['timestamp'], 2), '</td>';
 	echo '<td>';
 	if($rec['banned']==1) echo 'Not specified';
-	else echo duration2friendly_str($rec['banned']-time(), 2), ' later';
+	else echo duration2friendly_str($rec['banned']-$req_time, 2), ' later';
 	echo '</td>';
 	if(is_null($rec['reason'])) echo '<td title="No corresponding ban_info record found"><span style="color: yellow">?</span>';
 	else echo '<td>';
