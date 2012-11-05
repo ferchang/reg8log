@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 require_once $index_dir.'include/func/func_random.php';
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
@@ -2570,7 +2568,6 @@ class Crypt_AES extends Crypt_Rijndael {
         return;
     }
 
-
     /**
      * Sets the initialization vector. (optional)
      *
@@ -2896,7 +2893,6 @@ class Crypt_AES extends Crypt_Rijndael {
             $state['word3'] ^ $dw[$this->Nr][2],
             $state['word4'] ^ $dw[$this->Nr][3]
         );
-
 
         // invShiftRows + invSubBytes + invMixColumns + addRoundKey
         for ($round = $this->Nr - 1; $round > 0; $round--) {

@@ -20,18 +20,15 @@ if(!$username_exists and $registeration_enabled and $ajax_check_username and !$m
 	return;
 }
 
-require_once $index_dir.'include/class/class_cookie.php';
-
 require_once $index_dir.'include/code/code_db_object.php';
-
-$cookie=new hm_cookie('reg8log_incorrect_logins');
-$cookie->secure=$https;
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
 $query="select * from `account_incorrect_logins` where `username`=$_username limit 1";
 
 $reg8log_db->query($query);
+
+$cookie_capacity=30;
 
 if(!$reg8log_db->result_num()) {
 	$attempts=$reg8log_db->quote_smart(pack('l10', $req_time, 0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -41,14 +38,14 @@ if(!$reg8log_db->result_num()) {
 	$reg8log_db->query($query);
 
 	$insert_id=mysql_insert_id();
-
-	$cookie_contents=$cookie->get();
-	$tmp12=strtolower($_POST['username']);
-	if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
-	else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
-	$cookie_contents=implode("\n", array_slice(explode("\n", $cookie_contents), -2*20));
-	$cookie->set(null, $cookie_contents);
-
+	
+	if(!isset($_COOKIE['reg8log_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+	else {
+		$cookie_contents=$_COOKIE['reg8log_incorrect_logins'].','.$insert_id.','.$req_time;
+		$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
+	}
+	setcookie('reg8log_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+	
 	if($account_block_threshold==1) {
 		$_username2=$_POST['username'];
 		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
@@ -108,11 +105,12 @@ $query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, 
 
 $reg8log_db->query($query);
 
-$cookie_contents=$cookie->get();
-$tmp12=strtolower($_POST['username']);
-if($cookie_contents===false) $cookie_contents=$tmp12."\n".$req_time;
-else $cookie_contents=$cookie_contents."\n".$tmp12."\n".$req_time;
-$cookie->set(null, $cookie_contents);
+if(!isset($_COOKIE['reg8log_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+else {
+	$cookie_contents=$_COOKIE['reg8log_incorrect_logins'].','.$insert_id.','.$req_time;
+	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
+}
+setcookie('reg8log_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
 
 require_once $index_dir.'include/config/config_cleanup.php';
 

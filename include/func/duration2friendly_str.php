@@ -139,7 +139,6 @@ do {
 		
 	} while(false);
 
-
 //---------------------------
 
 	return $prep.$msg;

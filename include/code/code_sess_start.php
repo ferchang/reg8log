@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if(session_id()!=='' and session_name()==='reg8log_session') return;
 
 require $index_dir.'include/config/config_identify.php';

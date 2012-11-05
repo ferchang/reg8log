@@ -37,7 +37,7 @@ require $index_dir.'include/page/page_sections.php';
 <td align="center">
 <?php
 echo $msg;
-if($log_last_activity and $user->user_info['last_activity']) require $index_dir.'include/page/page_print_last_activity.php';
+require $index_dir.'include/page/page_print_last_activity.php';
 ?>
 <br /><a href="logout.php?antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token']; ?>" onclick="return onLogout()">Log out</a></td>
 </tr>

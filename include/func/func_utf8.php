@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 function utf8_strlen($string) {
 
 if(function_exists('mb_strlen')) return mb_strlen($string, 'UTF-8');

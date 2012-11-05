@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 if($email_verification_needed) {
 $expired=$req_time-$email_verification_time;
 $query="delete from `pending_accounts` where `email_verification_key`!='' and `email_verified`=0 and `timestamp` < $expired";

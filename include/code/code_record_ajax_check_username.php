@@ -8,7 +8,7 @@ require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='insert into `ip_ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.$req_time.')';
+$query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.$req_time.')';
 
 $reg8log_db->query($query);
 
@@ -24,8 +24,8 @@ if($reset_clients_ajax_check_usernames_upon_register) {
 
 require_once $index_dir.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_ajax_check_usernames_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ajax_check_usernames_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_ajax_check_usernames_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ajax_check_usernames_size_cleanup.php';
 
 ?>

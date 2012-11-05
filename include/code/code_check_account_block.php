@@ -15,7 +15,7 @@ if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $account_block_threshold==-1) return;
 
 if(!isset($site_key)) require $index_dir.'include/code/code_fetch_site_vars.php';
-$account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_POST['username'])."--$site_key");
+$account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_username)."--$site_key");
 $reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
 
 if(!isset($last_protection)) {
@@ -45,6 +45,8 @@ $query="select * from `account_incorrect_logins` where `username`=$tmp9 limit 1"
 if(!$reg8log_db->result_num($query)) return;
 
 $rec=$reg8log_db->fetch_row();
+
+$incorrect_logins_auto=$rec['auto'];
 
 $last_attempt=$rec['last_attempt'];
 

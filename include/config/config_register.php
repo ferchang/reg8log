@@ -33,6 +33,6 @@ $max_ajax_check_usernames=20;
 $max_ajax_check_usernames_period=60*60;//the duration (in seconds) in which each IP can check $max_ajax_check_usernames usernames' availability via ajax (in the register form).
 
 $reset_clients_ajax_check_usernames_upon_register=true;
-//with this set to true, a client's ajax username availability check records will be deleted from the ip_ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
+//with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
 
 ?>

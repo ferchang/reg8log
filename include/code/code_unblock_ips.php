@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-
-
 foreach($unblock as $item) {
 	$query='delete from `ip_incorrect_logins` where `ip`=';
 	$query.=$reg8log_db->quote_smart($item['ip']);

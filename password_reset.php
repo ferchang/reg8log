@@ -52,7 +52,6 @@ require $index_dir.'include/code/code_prevent_xsrf.php';
 
 require_once $index_dir.'include/func/func_utf8.php';
 
-
 if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
 	if(utf8_strlen($_POST['newpass'])<$password_format['minlength'])
 	$err_msgs[]="new password is shorter than {$password_format['minlength']} characters!";
@@ -85,6 +84,5 @@ exit;
 } while(false);
 
 require $index_dir.'include/page/page_password_reset_form.php';
-
 
 ?>

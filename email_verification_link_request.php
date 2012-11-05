@@ -82,5 +82,4 @@ exit;
 
 require $index_dir.'include/page/page_activation_email_request_form.php';
 
-
 ?>

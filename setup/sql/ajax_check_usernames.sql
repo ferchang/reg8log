@@ -22,10 +22,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ip_ajax_check_usernames`
+-- Table structure for table `ajax_check_usernames`
 --
 
-CREATE TABLE IF NOT EXISTS `ip_ajax_check_usernames` (
+CREATE TABLE IF NOT EXISTS `ajax_check_usernames` (
   `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varbinary(16) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL,

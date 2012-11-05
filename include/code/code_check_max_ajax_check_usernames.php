@@ -8,7 +8,7 @@ require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='select count(*) as `n` from `ip_ajax_check_usernames` where `ip`='.$ip.' and `timestamp`>='.($req_time-$max_ajax_check_usernames_period);
+$query='select count(*) as `n` from `ajax_check_usernames` where `ip`='.$ip.' and `timestamp`>='.($req_time-$max_ajax_check_usernames_period);
 
 $reg8log_db->query($query);
 

@@ -27,7 +27,7 @@ $log_activity=0;
 
 if($log_last_login and isset($manual_login) and (isset($identified_user) or isset($banned_user))) $log_activity+=1;
 
-if($log_last_activity and (isset($identified_user) or isset($banned_user))) $log_activity+=2;
+if($log_last_activity and (isset($identified_user) or isset($banned_user)) and !isset($block_bypass_mode)) $log_activity+=2;
 
 if($log_activity) require_once $index_dir.'include/code/code_log_last_login8activity.php';
 

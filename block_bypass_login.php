@@ -10,6 +10,8 @@ require $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
+$block_bypass_mode=true;
+
 require $index_dir.'include/config/config_brute_force_protection.php';
 
 if(!$block_bypass_system_enabled) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
@@ -63,6 +65,7 @@ if(!$reg8log_db->result_num($query)) exit('<h3 align="center">Error: Block-bypas
 $rec=$reg8log_db->fetch_row();
 $key=$rec['key'];
 $incorrect_logins=$rec['incorrect_logins'];
+$block_bypass_record_auto=$rec['auto'];
 
 if($_GET['key']!==$key) exit('<h3 align="center">Error: Block-bypass link not verified!</h3>');
 
@@ -108,8 +111,6 @@ else {
 }
 
 }//1
-
-$block_bypass_mode=true;
 
 require $index_dir.'include/page/page_login_form.php';
 

@@ -113,7 +113,7 @@ the time period (in secondes) in which $max_ajax_check_usernames ajax check user
 
 reset_clients_ajax_check_usernames_upon_register:
 
-with this set to true, a client's ajax username availability check records will be deleted from the ip_ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
+with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
 
 ------------------------------------------------
 config vars in config_brute_force_protection.php:
@@ -307,7 +307,7 @@ max_security_logs_records:
 maximum number of security log records (note that this is used in two tables).
 security log records r regarding account and ip block events.
 
-max_ip_ajax_check_usernames_records:
+max_ajax_check_usernames_records:
 maximum number of records that r stored for tracking and limiting the number of ajax check username availability requests per ip.
 
 ------------------------------------------------

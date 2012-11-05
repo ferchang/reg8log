@@ -14,7 +14,7 @@ require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='delete from `ip_ajax_check_usernames` where `auto` in ('.$_COOKIE['reg8log_ajax_check_usernames'].') and `ip`='.$ip.' limit '.$max_ajax_check_usernames;
+$query='delete from `ajax_check_usernames` where `auto` in ('.$_COOKIE['reg8log_ajax_check_usernames'].') and `ip`='.$ip.' limit '.$max_ajax_check_usernames;
 
 $reg8log_db->query($query);
 

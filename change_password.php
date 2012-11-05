@@ -110,5 +110,4 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 require $index_dir.'include/page/page_change_password_form.php';
 
-
 ?>

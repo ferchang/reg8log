@@ -16,6 +16,6 @@ $max_login_attempt_records=1000*1000;
 $max_security_logs_records=10*1000;
 //note that this is used in two tables, so actual max number of log records can be twice this
 
-$max_ip_ajax_check_usernames_records=100*1000;
+$max_ajax_check_usernames_records=100*1000;
 
 ?>

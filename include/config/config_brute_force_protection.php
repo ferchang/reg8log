@@ -8,9 +8,9 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 //for normal users accounts >
 
-$account_captcha_threshold=3; //1-10 / -1: disabled (no captcha) / 0: always
+$account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$account_block_threshold=2; //1-10 / -1: disabled (no block)
+$account_block_threshold=1; //1-10 / -1: disabled (no block)
 
 $account_block_period=12*60*60; //in seconds
 
@@ -56,9 +56,9 @@ $allow_users2disable_blocks=0;
 
 //for normal users accounts >
 
-$ip_captcha_threshold=6; // -1: disabled (no captcha) / 0: always
+$ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$ip_block_threshold=6; // -1: disabled (no ip block)
+$ip_block_threshold=-1; // -1: disabled (no ip block)
 
 $ip_block_period=12*60*60; //in seconds
 
