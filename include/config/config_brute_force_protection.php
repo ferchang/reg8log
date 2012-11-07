@@ -10,7 +10,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 $account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$account_block_threshold=1; //1-10 / -1: disabled (no block)
+$account_block_threshold=-1; //1-10 / -1: disabled (no block)
 
 $account_block_period=12*60*60; //in seconds
 
@@ -18,9 +18,9 @@ $account_block_period=12*60*60; //in seconds
 
 //for Admin account >
 
-$admin_account_captcha_threshold=3; //1-10 / -1: disabled (no captcha) / 0: always
+$admin_account_captcha_threshold=-1; //1-10 / -1: disabled (no captcha) / 0: always
 
-$admin_account_block_threshold=6; //1-10 / -1: disabled (no block)
+$admin_account_block_threshold=-1; //1-10 / -1: disabled (no block)
 
 $admin_account_block_period=12*60*60; //in seconds
 
@@ -58,7 +58,7 @@ $allow_users2disable_blocks=0;
 
 $ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$ip_block_threshold=-1; // -1: disabled (no ip block)
+$ip_block_threshold=3; // -1: disabled (no ip block)
 
 $ip_block_period=12*60*60; //in seconds
 
@@ -66,19 +66,13 @@ $ip_block_period=12*60*60; //in seconds
 
 //for Admin account >
 
-$admin_ip_captcha_threshold=6; // -1: disabled (no captcha) / 0: always
+$admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$admin_ip_block_threshold=12; // -1: disabled (no ip block)
+$admin_ip_block_threshold=100; // -1: disabled (no ip block)
 
 $admin_ip_block_period=12*60*60; //in seconds
 
 //< for Admin account
-
-$ip_block_proportional=true;
-// true: incorrect logins count='incorrect logins' divided by 'correct logins'
-// true is proper when an IP might be shared between possibly many users.
-// Note: several correct logins to one account are counted only once (for security reasons).
-// false: incorrect logins count=incorrect_logins
 
 //----------------------------------------
 

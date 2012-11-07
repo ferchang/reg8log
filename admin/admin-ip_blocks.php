@@ -12,7 +12,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_require_admin.php';
 
-$sort_fields=array('last_username', 'ip', 'last_attempt');
+$sort_fields=array('last_username', 'ip', 'first_attempt', 'last_attempt');
 require $index_dir.'include/code/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';

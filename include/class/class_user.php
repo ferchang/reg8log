@@ -85,7 +85,7 @@ function identify($username=null, $password=null)
 				//if(!isset($banned_user)) return true;
 				//else $this->user_info=null;
 			}
-			else $this->user_info=null;
+
 		}
 		else {
 			$reg8log_db->query("select release_lock($lock_name)");

@@ -39,12 +39,12 @@ if(!$reg8log_db->result_num()) {
 
 	$insert_id=mysql_insert_id();
 	
-	if(!isset($_COOKIE['reg8log_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+	if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
 	else {
-		$cookie_contents=$_COOKIE['reg8log_incorrect_logins'].','.$insert_id.','.$req_time;
+		$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
 		$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 	}
-	setcookie('reg8log_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
 	
 	if($account_block_threshold==1) {
 		$_username2=$_POST['username'];
@@ -105,12 +105,12 @@ $query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, 
 
 $reg8log_db->query($query);
 
-if(!isset($_COOKIE['reg8log_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
 else {
-	$cookie_contents=$_COOKIE['reg8log_incorrect_logins'].','.$insert_id.','.$req_time;
+	$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
 	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 }
-setcookie('reg8log_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
 
 require_once $index_dir.'include/config/config_cleanup.php';
 

@@ -6,9 +6,17 @@ require_once $index_dir.'include/config/config_security_logs.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
+$tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period).' order by `timestamp` asc limit 1';
+
+$reg8log_db->query($tmp38);
+
+$tmp38=$reg8log_db->fetch_row();
+
+$ip_first_attempt=$tmp38['timestamp'];
+
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
-$tmp29='insert into `ip_block_log` (`ip`, `last_attempt`, `last_username`) values ('.$ip.', '.$req_time.", $_username)";
+$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`) values '."($ip, $ip_first_attempt, $req_time, $_username)";
 
 $reg8log_db->query($tmp29);
 

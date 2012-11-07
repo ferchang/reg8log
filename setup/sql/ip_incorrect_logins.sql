@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2012 at 08:27 PM
+-- Generation Time: Nov 06, 2012 at 09:27 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -26,8 +26,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `ip_incorrect_logins` (
+  `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varbinary(16) NOT NULL,
+  `account_auto` int(10) unsigned NOT NULL,
   `timestamp` int(10) unsigned NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`auto`),
+  KEY `ip` (`ip`),
+  KEY `timestamp` (`timestamp`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

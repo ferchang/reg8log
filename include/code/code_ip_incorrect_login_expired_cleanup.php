@@ -6,10 +6,6 @@ if(strtolower($_POST['username'])=='admin') require $index_dir.'include/config/c
 
 $expired=$req_time-$ip_block_period;
 
-$query="delete from `ip_correct_logins` where `timestamp` < $expired";
-
-$reg8log_db->query($query);
-
 $query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=0";
 
 $reg8log_db->query($query);

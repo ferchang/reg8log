@@ -167,11 +167,6 @@ ip_block_threshold:
 
 an ip will be prevented from login tries after this number of incorrect login tries in each ip_block_period period.
 
-ip_block_proportional:
-
-as an ip may be shared among possibly many users at the same time (or short times), this variable is set to true by default that causes the proportion of incorrect logins to the correct logins be the criteria for ip block.
-note: correct login tries to any specific account are counted only once in each ip_block_period period, but every incorrect login try is counted. this is because if we count every correct login try, an attacker can easily create an account in our system and after each certain number of incorrect login tries, logins into his account to keep the proportion of incorrect and correct login tries under the captcha/block threshould.
-
 admin_account_captcha_threshold:
 admin_account_block_threshold:
 admin_account_block_period:
