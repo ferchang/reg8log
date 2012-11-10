@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-//----------------------------------------
+//--------------------------------
 
 // per account anti-'login brute-force' settings
 
@@ -50,7 +50,7 @@ $allow_users2disable_blocks=0;
 //2: users can disable the account blocks for their own accounts.
 //3: users can disable both the account and IP based blocks for their own accounts.
 
-//----------------------------------------
+//--------------------------------
 
 // per IP anti-'login brute-force' settings
 
@@ -58,7 +58,7 @@ $allow_users2disable_blocks=0;
 
 $ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$ip_block_threshold=3; // -1: disabled (no ip block)
+$ip_block_threshold=1; // -1: disabled (no ip block)
 
 $ip_block_period=12*60*60; //in seconds
 
@@ -68,7 +68,7 @@ $ip_block_period=12*60*60; //in seconds
 
 $admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$admin_ip_block_threshold=3; // -1: disabled (no ip block)
+$admin_ip_block_threshold=-1; // -1: disabled (no ip block)
 
 $admin_ip_block_period=12*60*60; //in seconds
 

@@ -11,19 +11,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <title>Banned account</title>
-<script>
-function onLogout() {
-	exp = new Date();
-	exp.setTime(exp.getTime()+(30*1000));
-	cookie='reg8log_autologin2=logout;path=/';
-	cookie+=';expires='+exp.toGMTString();
-	<?php
-	if($https) echo "cookie+=';secure';\n";
-	?>
-	document.cookie=cookie;
-	return true;
-}
-</script>
+<script src="js/logout.js"></script>
 <meta http-equiv="generator" content="Kate" />
 <style>
 h3 {

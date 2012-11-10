@@ -22,7 +22,7 @@ margin-left: 1; margin-right: 1
 }
 
 </style>
-<script src="js/common.js"></script>
+<script src="js/forms_common.js"></script>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 

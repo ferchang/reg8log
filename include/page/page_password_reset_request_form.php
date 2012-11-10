@@ -11,7 +11,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <title>Send password reset email</title>
-<script src="js/common.js"></script>
+<script src="js/forms_common.js"></script>
 <script>
 
 var email_re=/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i;

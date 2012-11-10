@@ -17,7 +17,7 @@ else $form_color='#55a750';
 if(isset($ban_page)) echo '<title>Ban user</title>';
 else echo '<title>Unban user</title>';
 ?>
-<script src="../js/common.js"></script>
+<script src="../js/forms_common.js"></script>
 <script language="javascript">
 
 function clear_form() {

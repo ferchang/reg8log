@@ -13,7 +13,7 @@ $color2='#ccc';
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<script src="../js/common.js"></script>
+<script src="../js/forms_common.js"></script>
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
 <title>Tables status</title>
 <style>

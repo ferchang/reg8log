@@ -17,7 +17,7 @@ $captcha_verified=isset($_SESSION['captcha_verified']);
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <title>Register form</title>
 <meta http-equiv="generator" content="Kate" />
-<script src="js/common.js"></script>
+<script src="js/forms_common.js"></script>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 

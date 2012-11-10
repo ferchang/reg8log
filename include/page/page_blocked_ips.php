@@ -235,9 +235,9 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if($req_time-$rec['first_attempt']<$account_block_period) {
+	else if($req_time-$rec['first_attempt']<$ip_block_period) {
 		echo '<span style="color: red" ';
-		echo 'title="Block lift: ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), ' later';
+		echo 'title="Block lift: ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), ' later';
 		echo '">Blocked</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';

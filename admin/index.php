@@ -12,6 +12,14 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_require_admin.php';
 
+require $index_dir.'include/config/config_admin.php';
+
+if($show_statistics_in_admin_operations_page) {
+	require $index_dir.'include/code/code_get_statistics4admin.php';
+	$flag=true;
+}
+else $flag=false;
+
 ?>
 
 <html>
@@ -51,22 +59,22 @@ require $index_dir.'include/page/page_sections.php';
 <ul>
 <li>Accounts:
 <ul>
-<li><a class="li_item" href="admin-accounts.php">Accounts</a>
+<li><a class="li_item" href="admin-accounts.php">Accounts</a><?php if($flag) echo "($accounts)"; ?>
 <br><br>
 <li><a class="li_item" href="admin-ban_user.php">Ban a user</a>
 <li><a class="li_item" href="admin-unban_user.php">Unban a user</a>
-<li><a class="li_item" href="admin-banned_users.php">Banned users</a>
+<li><a class="li_item" href="admin-banned_users.php">Banned users</a><?php if($flag) echo "($banned_users)"; ?>
 </ul>
 <br>
 <li>Pending accounts:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a>
+<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a><?php if($flag) echo "($pending_accounts)"; ?>
 </ul>
 <br>
 <li>Security logs:
 <ul>
-<li><a class="li_item" href="admin-account_blocks.php">Account blocks</a>
-<li><a class="li_item" href="admin-ip_blocks.php">IP blocks</a>
+<li><a class="li_item" href="admin-account_blocks.php">Account blocks</a><?php if($flag) echo '<span title="Active/All">(', $active_account_blocks, '/', $all_account_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-ip_blocks.php">IP blocks</a><?php if($flag) echo '<span title="Active/All">(', $active_ip_blocks, '/', $all_ip_blocks, ')</span>'; ?>
 </ul>
 <br>
 <li>Database:

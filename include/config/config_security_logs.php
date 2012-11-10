@@ -15,6 +15,8 @@ a positive integer: keep up to this number of seconds after block expiration
 $log_non_existent_accounts_blocks=true;
 //if enabled, the system logs the blocking event of non-existent accounts that it pretends to be existent.
 
+//--------------------------------
+
 $alert_admin_about_account_blocks=3;
 //0: no
 //1: when he visits
@@ -27,6 +29,8 @@ $account_blocks_alert_threshold=1;
 //alert only when this minimum number of account blocks has occured in the past 24 hours
 //u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $account_blocks_alert_threshold='%10';
 
+//--------------------------------
+
 $alert_admin_about_ip_blocks=3;
 //0: no
 //1: when admin visits
@@ -37,10 +41,16 @@ $ip_blocks_alert_threshold=1;
 //alert only when this minimum number of IP blocks has accured in the past 24 hours
 //u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $ip_blocks_alert_threshold='%10';
 
+//--------------------------------
+
 $alert_emails_min_interval=0;
 //don't send alert emails with less than this interval (in seconds)
 
+//--------------------------------
+
 $exempt_admin_account_from_alert_limits=true;
 //whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations.
+
+//--------------------------------
 
 ?>

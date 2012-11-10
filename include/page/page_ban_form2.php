@@ -18,7 +18,7 @@ $parent_page=true;
 	color: #8fd;
 }
 </style>
-<script src="../js/common.js"></script>
+<script src="../js/forms_common.js"></script>
 <script language="javascript">
 
 function show_duration_selects(show) {

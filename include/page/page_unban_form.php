@@ -12,7 +12,7 @@ $parent_page=true;
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<script src="../js/common.js"></script>
+<script src="../js/forms_common.js"></script>
 <title>Unban user</title>
 <style>
 .unit {

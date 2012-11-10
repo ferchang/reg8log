@@ -13,7 +13,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <title>Change email</title>
 <style>
 </style>
-<script src="js/common.js"></script>
+<script src="js/forms_common.js"></script>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {

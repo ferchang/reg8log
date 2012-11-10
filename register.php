@@ -60,7 +60,13 @@ if(strpos($_POST['password'], "encrypted-$site_salt")===0) {
 }
 else if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
-if($email_verification_needed or $admin_confirmation_needed) require $index_dir.'include/code/code_add_pending_account.php';
+if($email_verification_needed or $admin_confirmation_needed) {
+	require $index_dir.'include/code/code_add_pending_account.php';
+	if($admin_confirmation_needed) {
+		$pending_reg=true;
+		require $index_dir.'include/code/code_log_registeration.php';
+	}
+}
 else {
 	require $index_dir.'include/code/code_add_account.php';
 	if($login_upon_register) {
@@ -68,6 +74,7 @@ else {
 	  require $index_dir.'include/code/code_login_upon_register.php';
 	  $success_msg.='(<span style="color: blue">You are logged in automatically</span>)<br>';
 	}
+	require $index_dir.'include/code/code_log_registeration.php';
 }
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';

@@ -8,11 +8,11 @@ require_once $index_dir.'include/code/code_db_object.php';
 
 $tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period).' order by `timestamp` asc limit 1';
 
-$reg8log_db->query($tmp38);
-
-$tmp38=$reg8log_db->fetch_row();
-
-$ip_first_attempt=$tmp38['timestamp'];
+if($reg8log_db->result_num($tmp38)) {
+	$tmp38=$reg8log_db->fetch_row();
+	$ip_first_attempt=$tmp38['timestamp'];
+}
+else $ip_first_attempt=$req_time;
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
