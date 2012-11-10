@@ -68,7 +68,7 @@ $ip_block_period=12*60*60; //in seconds
 
 $admin_ip_captcha_threshold=-1; // -1: disabled (no captcha) / 0: always
 
-$admin_ip_block_threshold=100; // -1: disabled (no ip block)
+$admin_ip_block_threshold=3; // -1: disabled (no ip block)
 
 $admin_ip_block_period=12*60*60; //in seconds
 

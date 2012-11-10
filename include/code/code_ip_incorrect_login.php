@@ -49,8 +49,8 @@ setcookie('reg8log_ip_incorrect_logins', $cookie_contents, 0, '/', null, $https,
 
 require_once $index_dir.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_incorrect_login_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_incorrect_logins_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_incorrect_login_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ip_incorrect_logins_size_cleanup.php';
 
 ?>
