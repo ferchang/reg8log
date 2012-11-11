@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require $index_dir.'include/code/code_sess_start.php';
+require $index_dir.'include/code/sess/code_sess_start.php';
 
 $captcha_verified=isset($_SESSION['captcha_verified']);
 

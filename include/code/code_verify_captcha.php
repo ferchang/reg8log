@@ -8,7 +8,7 @@ require_once $index_dir.'include/config/config_register_fields.php';
 
 $captcha_format=$fields['captcha'];
 
-require $index_dir.'include/code/code_sess_start.php';
+require $index_dir.'include/code/sess/code_sess_start.php';
 
 $captcha_verified=false;
 

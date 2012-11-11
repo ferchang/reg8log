@@ -31,7 +31,7 @@ if(!isset($captcha_needed)) {
 }
 
 if(isset($captcha_needed)) {
-	require $index_dir.'include/code/code_sess_start.php';
+	require $index_dir.'include/code/sess/code_sess_start.php';
 	$captcha_verified=isset($_SESSION['captcha_verified']);
 }
 

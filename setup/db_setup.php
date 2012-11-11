@@ -16,7 +16,7 @@ require $index_dir.'include/code/code_prevent_repost.php';
 
 $encrypt_session_files_contents=false;
 
-require $index_dir.'include/code/code_sess_start.php';
+require $index_dir.'include/code/sess/code_sess_start.php';
 
 require_once $index_dir.'include/func/func_random.php';
 
@@ -25,7 +25,7 @@ $file_contents=file_get_contents('setup.txt');
 if(empty($_SESSION['setup_key']) or strpos($file_contents, $_SESSION['setup_key'])===false) {
 	$setup_key=random_string(22);
 	$_SESSION['setup_key']=$setup_key;
-	require $index_dir.'include/page/page_setup_form1.php';
+	require $index_dir.'setup/include/page_setup_form1.php';
 	exit;
 }
 
@@ -44,7 +44,7 @@ if(!isset($_POST['username'])) break;
 
 require $index_dir.'include/code/code_prevent_xsrf.php';
 
-require $index_dir.'include/code/code_validate_admin_register_submit.php';
+require $index_dir.'setup/include/code_validate_admin_register_submit.php';
 
 if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
@@ -52,13 +52,13 @@ if(isset($err_msgs)) break;
 
 echo '<html><head><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><META HTTP-EQUIV="EXPIRES" CONTENT="0"><title>Setup db - final</title></head><body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"><table align="center" valign="center" height="100%"><tr><td><h4>';
 
-require $index_dir.'include/code/code_create_tables.php';
+require $index_dir.'setup/include/code_create_tables.php';
 
 echo '<hr style="width: 250px">';
-require $index_dir.'include/code/code_create_site_vars.php';
+require $index_dir.'setup/include/code_create_site_vars.php';
 
 echo '<hr style="width: 250px">';
-require $index_dir.'include/code/code_add_admin_account.php';
+require $index_dir.'setup/include/code_add_admin_account.php';
 
 echo 'Account <span style="color: green">Admin</span> created.<br>';
 
@@ -86,10 +86,10 @@ require $index_dir.'include/page/page_foot_codes.php';
 echo '</body></html>';
 
 unset($_SESSION['setup_key']);
-require $index_dir.'include/code/code_sess_destroy.php';
+require $index_dir.'include/code/sess/code_sess_destroy.php';
 exit;
 } while(false);
 
-require $index_dir.'include/page/page_setup_form2.php';
+require $index_dir.'setup/include/page_setup_form2.php';
 
 ?>

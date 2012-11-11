@@ -36,6 +36,8 @@ function identify($username=null, $password=null)
 	$last_protection=-1;
 	global $req_time;
 	global $pepper;
+	global $tie_login2ip;
+	global $tie_login2ip_option_at_login;
 	
 	$this->err_msg='';
 	$this->user_info=null;
@@ -69,6 +71,16 @@ function identify($username=null, $password=null)
 			$block_disable=$this->user_info['block_disable'];
 			$last_protection=$this->user_info['last_protection'];
 			if(verify_secure_hash($password, $this->user_info['password_hash'])) {
+			
+				if($tie_login2ip_option_at_login) {
+					$login2ip=isset($_POST['login2ip']);
+					if($login2ip!=$this->user_info['tie_login2ip']) {
+						$tmp55='update `accounts` set `tie_login2ip`='.(($login2ip)? '1':'0').' where `username`='.$tmp7.' limit 1';
+						$reg8log_db->query($tmp55);
+						$this->user_info['tie_login2ip']=($login2ip)? '1':'0';
+					}
+				}
+			
 				if($change_autologin_key_upon_login) {
 					$new_autologin_key=random_string(43);
 					$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$tmp7.' limit 1';
@@ -114,7 +126,10 @@ function identify($username=null, $password=null)
 
 	//Following is the cookie auto-login mechanism
 
-	if(!isset($_COOKIE['reg8log_autologin'])) return false;
+	if(!isset($_COOKIE['reg8log_autologin'])) {
+		if(isset($_COOKIE['reg8log_autologin2'])) setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+		return false;
+	}
 	
 	if(!isset($_COOKIE['reg8log_autologin2'])) {
 		setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
@@ -128,12 +143,24 @@ function identify($username=null, $password=null)
 
 		require_once $index_dir.'include/code/code_db_object.php';
 
-		$query='select * from `accounts` where `';
+		$query='select * from `accounts` where ';
 		foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
-				if($key) $query.=' and `';
-				$query.=$this->identify_structs['autologin_cookie'][$key].'`='.$reg8log_db->quote_smart($cookie->values[$key]);
+				if($value=='autologin_key') {
+					$autologin_key=$cookie->values[$key];
+					continue;
+				}
+				if($key) $query.=' and ';
+				$query.="`$value`".'='.$reg8log_db->quote_smart($cookie->values[$key]);
 			}
 		$query.=' limit 1';
+		$flag=false;
+		if($reg8log_db->result_num($query)) {
+			$tmp54=$reg8log_db->fetch_row();
+			if(($tie_login2ip_option_at_login and $tmp54['tie_login2ip']) or  (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $tmp54['username']=='Admin') or ($tie_login2ip==2 and $tmp54['username']!='Admin')))) {
+				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key) $flag=true;
+			}
+			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
+		}
 
 	}//cookie read successfully
 	else {
@@ -146,9 +173,11 @@ function identify($username=null, $password=null)
 	$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.$this->user_info['username']."--$site_key");
 	$reg8log_db->query("select get_lock($lock_name, -1)");
 	
-	if($reg8log_db->result_num($query)) {
-		$this->user_info=$reg8log_db->fetch_row();
-		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', $pepper.$site_key2.$this->user_info['autologin_key'])) {
+	if($flag) {
+		if(($tie_login2ip_option_at_login and $tmp54['tie_login2ip']) or (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $tmp54['username']=='Admin') or ($tie_login2ip==2 and $tmp54['username']!='Admin')))) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
+		else $autologin_key=$tmp54['autologin_key'];
+		$this->user_info=$tmp54;
+		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', $pepper.$site_key2.$autologin_key)) {
 			global $logged_out_user;
 			$logged_out_user=$this->user_info['username'];
 			$cookie->erase();
@@ -177,6 +206,7 @@ function identify($username=null, $password=null)
 	$reg8log_db->query("select release_lock($lock_name)");
 	
 	$cookie->erase();//erase auto-login cookie in case of the user is not authenticated with it.
+	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 
 	return false;
 
@@ -196,8 +226,8 @@ function logout()
 	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https);
 
 	if(isset($_COOKIE['reg8log_session'])) {//session cookie exists
-		require $index_dir.'include/code/code_sess_start.php';
-		require $index_dir.'include/code/code_sess_destroy.php';
+		require $index_dir.'include/code/sess/code_sess_start.php';
+		require $index_dir.'include/code/sess/code_sess_destroy.php';
 	}//session cookie exists
 
 	if($this->err_msg) return false;
@@ -214,6 +244,8 @@ function save_identity($age='session')
 	global $req_time;
 	global $site_key2;
 	global $pepper;
+	global $tie_login2ip;
+	global $tie_login2ip_option_at_login;
 
 	$this->err_msg='';
 
@@ -230,12 +262,19 @@ function save_identity($age='session')
 
 	$cookie=new hm_cookie('reg8log_autologin', $this->identify_structs['autologin_cookie']['value_seperator']);
 	$cookie->secure=$https;
-	foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) $cookie->values[]=$this->user_info[$value];
+	$autologin_key=$this->user_info['autologin_key'];
+	foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
+		if($value=='autologin_key' and (($tie_login2ip_option_at_login and $this->user_info['tie_login2ip']) or (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $this->user_info['username']=='Admin') or ($tie_login2ip==2 and $this->user_info['username']!='Admin'))))) {
+			$autologin_key=hash('sha256', $this->user_info['autologin_key'].$_SERVER['REMOTE_ADDR']);
+			$cookie->values[]=$autologin_key;
+		}
+		else $cookie->values[]=$this->user_info[$value];
+	}
 
 	$cookie->values[]=($age=='session')? 0 : $age+$req_time;
 
 	if($cookie->set(null, $cookie->values, null, $age)) {
-		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$this->user_info['autologin_key']), ($age=='session')? 0:$age+$req_time, '/', null, $https);
+		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), ($age=='session')? 0:$age+$req_time, '/', null, $https);
 		return true;
 	}
 

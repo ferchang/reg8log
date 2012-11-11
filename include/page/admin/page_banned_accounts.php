@@ -186,7 +186,7 @@ while($rec=$reg8log_db->fetch_row()) {
 }
 echo '</table>';
 
-require $index_dir.'include/page/page_gen_paginated_page_links.php';
+require $index_dir.'include/page/admin/page_gen_paginated_page_links.php';
 
 if($total>$per_pages[0]) {
 	if($total<=$per_page) echo '<br>';

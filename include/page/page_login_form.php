@@ -4,6 +4,8 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 require_once $index_dir.'include/config/config_brute_force_protection.php';
 
+require_once $index_dir.'include/config/config_identify.php';
+
 ?>
 
 <html>
@@ -24,7 +26,21 @@ margin-left: 1; margin-right: 1
 </style>
 <script src="js/forms_common.js"></script>
 <script src="js/sha256.js"></script>
+
+<?php
+if($tie_login2ip_option_at_login and ($tie_login2ip==1 or $tie_login2ip==2)) {
+	echo "<script>\n";
+	if($tie_login2ip==1) echo 'var tie_login2ip=1;';
+	else echo 'var tie_login2ip=2;';
+	echo "\n</script>\n";
+	echo '<script src="js/admin_tie_login2ip.js"></script>';
+}
+else echo "<script>\nfunction check_admin(val) { }\n</script>\n";
+?>
+
 <script language="javascript">
+
+var login2ip_change=false;
 
 function clear_form() {
 document.login_form.username.value='';
@@ -104,7 +120,7 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td align="right">Username:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?>></td>
+<td align="right">Username:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value)"></td>
 </tr>
 <tr>
 <td align="right">Password:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
@@ -112,8 +128,10 @@ echo '</td></tr>';
 <tr>
 <td colspan="3" align="right">Remember me for future sessions: <input type="checkbox" value="true" name="remember" <?php if($remember) echo 'checked'; ?>></td>
 </tr>
-<!-- -->
 <?php
+
+if($tie_login2ip_option_at_login) echo '<tr><td colspan="3" align="right" title="Leads to higher security, but u would be logged out if your IP changes">Tie my login to my IP address: <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and $tie_login2ip>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
+
 if(isset($captcha_needed) or $account_captcha_threshold==0) require $index_dir.'include/page/page_captcha_form.php';
 ?>
 <!-- -->

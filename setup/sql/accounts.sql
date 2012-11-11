@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2012 at 11:50 PM
+-- Generation Time: Nov 11, 2012 at 11:18 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `last_logout` int(10) unsigned NOT NULL DEFAULT '0',
   `block_disable` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `last_protection` tinyint(4) NOT NULL DEFAULT '-1',
+  `tie_login2ip` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`auto`),
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `username` (`username`)

@@ -16,7 +16,7 @@ if(!empty($_POST)) {
 $captcha_needed=true;
 
 if(isset($captcha_needed)) {
-	require $index_dir.'include/code/code_sess_start.php';
+	require $index_dir.'include/code/sess/code_sess_start.php';
 	$captcha_verified=isset($_SESSION['captcha_verified']);
 }
 
@@ -57,7 +57,7 @@ if($email) {
 	if($max_activation_emails==-1 or $emails_sent<$max_activation_emails) {
 		$rid=$rec['record_id'];
 		$email_verification_key=$rec['email_verification_key'];
-		require $index_dir.'include/code/code_email_verification_link.php';
+		require $index_dir.'include/code/email/code_email_verification_link.php';
 		if($emails_sent<255) {
 			$emails_sent++;
 			$tmp21=$reg8log_db->quote_smart($rec['username']);

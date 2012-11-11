@@ -10,10 +10,10 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/code_require_admin.php';
+require $index_dir.'include/code/admin/code_require_admin.php';
 
 $sort_fields=array('username', 'email', 'gender', 'emails_sent', 'email_verified', 'notify_user', 'timestamp');
-require $index_dir.'include/code/code_pagination_params.php';
+require $index_dir.'include/code/admin/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
@@ -28,8 +28,8 @@ if(isset($_POST['admin_action'])) {
 		if($action=='del') $del[]=$auto;
 		else if($action=='appr') $appr[]=$auto;
 	}
-	if(isset($appr)) require $index_dir.'include/code/code_approve_pending_accounts.php';
-	if(isset($del)) require $index_dir.'include/code/code_delete_pending_accounts.php';
+	if(isset($appr)) require $index_dir.'include/code/admin/code_approve_pending_accounts.php';
+	if(isset($del)) require $index_dir.'include/code/admin/code_delete_pending_accounts.php';
 }
 
 require $index_dir.'include/config/config_register.php';
@@ -45,12 +45,12 @@ if(!$total=$reg8log_db->result_num($query)) {
 	exit('<center><h3>No pending accounts eligible for admin confirmation found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
 }
 
-require $index_dir.'include/code/code_pagination_params2.php';
+require $index_dir.'include/code/admin/code_pagination_params2.php';
 
 $query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.')'." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
 
 $reg8log_db->query($query);
 
-require $index_dir.'include/page/page_pending_accounts.php';
+require $index_dir.'include/page/admin/page_pending_accounts.php';
 
 ?>

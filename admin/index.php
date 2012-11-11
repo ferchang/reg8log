@@ -10,12 +10,12 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/code_require_admin.php';
+require $index_dir.'include/code/admin/code_require_admin.php';
 
 require $index_dir.'include/config/config_admin.php';
 
 if($show_statistics_in_admin_operations_page) {
-	require $index_dir.'include/code/code_get_statistics4admin.php';
+	require $index_dir.'include/code/admin/code_get_statistics4admin.php';
 	$flag=true;
 }
 else $flag=false;

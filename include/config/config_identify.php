@@ -50,6 +50,24 @@ Note: with this option, a database update operation is needed every time the use
 
 */
 
+$tie_login2ip=3;
+/*
+0: no
+1: only for Admin
+2: only for users other than admin
+3: for all users
+
+whith this option enabled, user's autologin cookie is tied with his IP address,
+so if the IP address changes, the user is logged out of the system.
+this way, cookie theft would be useless for attackers, unless they can use the same IP address as the user.
+this option can be useful when extreme security is needed.
+
+*/
+
+$tie_login2ip_option_at_login=true;
+//with this enabled, all users have the option of tying or not tying their logins to their IPs.
+//note that this is regardless of the setting of $tie_login2ip, but $tie_login2ip value affects the default stat of the corresponding checkbox on the login form
+
 $change_autologin_key_upon_logout=true;
 //recommended for higher security
 

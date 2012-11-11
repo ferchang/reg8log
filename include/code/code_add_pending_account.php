@@ -51,7 +51,7 @@ $reg8log_db->query($query);
 unset($_SESSION['captcha_verified'], $_SESSION['passed']);
 
 if($email_verification_needed) {
-  require $index_dir.'include/code/code_email_verification_link.php';
+  require $index_dir.'include/code/email/code_email_verification_link.php';
   require_once $index_dir.'include/func/duration2friendly_str.php';
   $success_msg='<h3>An email containing the account activation link is sent to your email.<br>Complete your registration by opening that link in '.duration2friendly_str($email_verification_time, 0).'.<br>If you received no email, you can log into your pending account and request a new email.</h3>';
 }
@@ -67,7 +67,7 @@ require $index_dir.'include/config/config_cleanup.php';
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	require_once $index_dir.'include/code/code_fetch_site_vars.php';
 	$reg8log_db->query("select release_lock('$lock_name')");
-	require $index_dir.'include/code/code_pending_accounts_expired_cleanup.php';
+	require $index_dir.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';
 }
 
 ?>

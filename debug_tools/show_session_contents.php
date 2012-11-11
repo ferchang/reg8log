@@ -11,10 +11,10 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 if(!$debug_mode) exit('<center><h3>Error: Debug mode is off!</h3><a href="../index.php">Login page</a></center>');
 
 if(isset($_COOKIE['reg8log_session'])) {
-	require $index_dir.'include/code/code_sess_start.php';
+	require $index_dir.'include/code/sess/code_sess_start.php';
 	
 	if(isset($_POST['destroy'])) {
-		require $index_dir.'include/code/code_sess_destroy.php';
+		require $index_dir.'include/code/sess/code_sess_destroy.php';
 		header("Location: {$_SERVER['PHP_SELF']}");
 		exit;
 	}

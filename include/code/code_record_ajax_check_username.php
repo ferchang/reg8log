@@ -24,8 +24,8 @@ if($reset_clients_ajax_check_usernames_upon_register) {
 
 require_once $index_dir.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ajax_check_usernames_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ajax_check_usernames_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ajax_check_usernames_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ajax_check_usernames_size_cleanup.php';
 
 ?>

@@ -10,7 +10,7 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/code_require_admin.php';
+require $index_dir.'include/code/admin/code_require_admin.php';
 
 if(!empty($_POST)) require $index_dir.'include/code/code_prevent_xsrf.php';
 
@@ -59,7 +59,7 @@ if($rec['banned']) {
 	}
 }
 
-require $index_dir.'include/page/page_unban_form.php';
+require $index_dir.'include/page/admin/page_unban_form.php';
 
 exit;
 
@@ -76,10 +76,10 @@ if(strtolower($_POST['username'])==='admin') {
 	break;
 }
 
-require $index_dir.'include/code/code_unban_user.php';
+require $index_dir.'include/code/admin/code_unban_user.php';
 
 } while(false);
 
-require $index_dir.'include/page/page_ban_form1.php';
+require $index_dir.'include/page/admin/page_ban_form1.php';
 
 ?>

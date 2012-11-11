@@ -11,7 +11,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 require $index_dir.'include/code/code_prevent_xsrf.php';
 
 $ajax=true;
-require $index_dir.'include/code/code_require_admin.php';
+require $index_dir.'include/code/admin/code_require_admin.php';
 
 if(!isset($_GET['new_account_blocks'])) exit('new_account_blocks parameter is not set');
 if(!isset($_GET['new_ip_blocks'])) exit('new_ip_blocks parameter is not set');

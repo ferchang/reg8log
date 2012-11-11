@@ -18,7 +18,7 @@ require $index_dir.'include/config/config_password_change_or_reset.php';
 $captcha_needed=true;
 
 if(isset($captcha_needed)) {
-	require $index_dir.'include/code/code_sess_start.php';
+	require $index_dir.'include/code/sess/code_sess_start.php';
 	$captcha_verified=isset($_SESSION['captcha_verified']);
 }
 
@@ -84,7 +84,7 @@ $query='replace into `password_reset` '."($field_names) values ($field_values)";
 
 $reg8log_db->query($query);
 
-require $index_dir.'include/code/code_email_password_reset_link.php';
+require $index_dir.'include/code/email/code_email_password_reset_link.php';
 
 $cleanup=true;
 
@@ -93,7 +93,7 @@ else if($emails_sent<$max_password_reset_emails or $max_password_reset_emails==-
 
 	$rid=$rec['record_id'];
 	$key=$rec['key'];
-	require $index_dir.'include/code/code_email_password_reset_link.php';
+	require $index_dir.'include/code/email/code_email_password_reset_link.php';
 
 	if($emails_sent<255) {
 		$emails_sent++;
@@ -113,7 +113,7 @@ require $index_dir.'include/page/page_success.php';
 
 if(isset($cleanup)) {
 	require $index_dir.'include/config/config_cleanup.php';
-	if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_password_reset_expired_cleanup.php';
+	if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_password_reset_expired_cleanup.php';
 }
 
 exit;

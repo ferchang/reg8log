@@ -20,7 +20,7 @@ if(!(!$alert_emails_min_interval or $req_time>=($last_alert_email+$alert_emails_
 }
 
 $new_account_blocks=$rec2['new_account_blocks'];
-require $index_dir.'include/code/code_check_account_blocks_alert_threshold.php';
+require $index_dir.'include/code/admin/code_check_account_blocks_alert_threshold.php';
 
 $admin_alert_email_msg='';
 
@@ -37,6 +37,6 @@ if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
 $reg8log_db->query("select release_lock('$lock_name2')");
 
-if($admin_alert_email_msg) require $index_dir.'include/code/code_email_admin_alert_msg.php';
+if($admin_alert_email_msg) require $index_dir.'include/code/email/code_email_admin_alert_msg.php';
 
 ?>

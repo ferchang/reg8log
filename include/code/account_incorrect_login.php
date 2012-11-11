@@ -53,7 +53,7 @@ if(!$reg8log_db->result_num()) {
 			$account_block=$_POST['username'];
 			$block_duration=$account_block_period;
 			$first_attempt=$req_time;
-			require_once $index_dir.'include/code/code_log_account_block.php';
+			require_once $index_dir.'include/code/log/code_log_account_block.php';
 		}
 		else if($account_captcha_threshold==1) $captcha_needed=true;
 	}
@@ -86,7 +86,7 @@ if($account_block_threshold!=-1 and $count>=$account_block_threshold) {
 		$account_block=$_POST['username'];
 		$block_duration=$oldest+$account_block_period-$req_time;
 		$first_attempt=$oldest;
-		require_once $index_dir.'include/code/code_log_account_block.php';
+		require_once $index_dir.'include/code/log/code_log_account_block.php';
 	}
 	else if($account_captcha_threshold!=-1 and $count>=$account_captcha_threshold) $captcha_needed=true;
 }
@@ -116,12 +116,12 @@ require_once $index_dir.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	$table_name='account_incorrect_logins';
-	require $index_dir.'include/code/code_account_incorrect_logins_expired_cleanup.php';
+	require $index_dir.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 }
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	$table_name='account_incorrect_logins';
-	require $index_dir.'include/code/code_account_incorrect_logins_size_cleanup.php';
+	require $index_dir.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 }
 
 ?>

@@ -30,7 +30,7 @@ if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 a
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
 		$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='email' limit 1";
 		$reg8log_db->query($query);
-		require $index_dir.'include/code/code_check_account_blocks_admin_email_alert.php';
+		require $index_dir.'include/code/admin/code_check_account_blocks_admin_email_alert.php';
 	}
 	else {
 		require_once $index_dir.'include/code/code_fetch_site_vars.php';
@@ -38,14 +38,14 @@ if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 a
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
 		$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`+1 limit 2";
 		$reg8log_db->query($query);
-		require $index_dir.'include/code/code_check_account_blocks_admin_email_alert.php';
+		require $index_dir.'include/code/admin/code_check_account_blocks_admin_email_alert.php';
 	}
 }
 
 require_once $index_dir.'include/config/config_cleanup.php';
 
-if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_account_block_log_expired_cleanup.php';
+if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/cleanup/code_account_block_log_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_account_block_log_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_account_block_log_size_cleanup.php';
 
 ?>

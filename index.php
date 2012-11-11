@@ -55,6 +55,9 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 if(isset($_POST['remember'])) $remember=true;
 else $remember=false;
 
+if(isset($_POST['login2ip'])) $login2ip=true;
+else $login2ip=false;
+
 if(!isset($captcha_err)) {
 	$pass_banned_user=true;
 	require $index_dir.'include/code/code_identify.php';
@@ -75,7 +78,7 @@ if(isset($manual_login)) {
 
 $_identified_username=$identified_user;
 
-require $index_dir.'include/code/code_dec_incorrect_logins.php';
+require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
 if($remember) $user->save_identity('permanent');
 else $user->save_identity('session');
@@ -92,7 +95,7 @@ else if(isset($pending_user)) {
 	if(isset($manual_login)) {
 		$_identified_username=$pending_user;
 
-		require $index_dir.'include/code/code_dec_incorrect_logins.php';
+		require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 		
 	}
 	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
@@ -102,7 +105,7 @@ else if(isset($banned_user)) {
 	if(isset($manual_login)) {
 		$_identified_username=$banned_user;
 
-		require $index_dir.'include/code/code_dec_incorrect_logins.php';
+		require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 		
 		if($remember) $user->save_identity('permanent');
 		else $user->save_identity('session');

@@ -86,7 +86,7 @@ if(isset($identified_user)) {//2
 
 	$_identified_username=$identified_user;
 
-	require $index_dir.'include/code/code_dec_incorrect_logins.php';
+	require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
 	if($remember) $user->save_identity('permanent');
 	else $user->save_identity('session');
@@ -99,7 +99,7 @@ if(isset($identified_user)) {//2
 else if(isset($pending_user)) {
 	$_identified_username=$pending_user;
 
-	require $index_dir.'include/code/code_dec_incorrect_logins.php';
+	require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
 	require $index_dir.'include/code/code_detect8fix_failed_activation.php';
 	require $index_dir.'include/page/page_pending_user.php';

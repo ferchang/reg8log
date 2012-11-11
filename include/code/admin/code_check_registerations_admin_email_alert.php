@@ -30,6 +30,6 @@ if($new_regs>=$registerations_alert_threshold) {
 
 $reg8log_db->query("select release_lock($reg_email_alert_lock)");
 
-if($admin_reg_alert_email_msg) require $index_dir.'include/code/code_email_admin_reg_alert_msg.php';
+if($admin_reg_alert_email_msg) require $index_dir.'include/code/email/code_email_admin_reg_alert_msg.php';
 
 ?>

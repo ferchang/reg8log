@@ -17,7 +17,7 @@ $reg8log_db->query($query);
 
 if(isset($emails)) foreach($emails as $_email) {
 	$_action='reject';
-	require $index_dir.'include/code/code_email_admin_action_notification.php';
+	require $index_dir.'include/code/email/code_email_admin_action_notification.php';
 }
 
 unset($emails);

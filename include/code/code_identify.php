@@ -29,17 +29,17 @@ if($log_last_login and isset($manual_login) and (isset($identified_user) or isse
 
 if($log_last_activity and (isset($identified_user) or isset($banned_user)) and !isset($block_bypass_mode)) $log_activity+=2;
 
-if($log_activity) require_once $index_dir.'include/code/code_log_last_login8activity.php';
+if($log_activity) require_once $index_dir.'include/code/log/code_log_last_login8activity.php';
 
 if(isset($banned_user) and !isset($pass_banned_user)) {
 	$_identified_username=$banned_user;
 
-	require $index_dir.'include/code/code_dec_incorrect_logins.php';
+	require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 	
 	require $index_dir.'include/page/page_banned_user.php';
 	exit;
 }
 
-if(isset($identified_user) and $identified_user=='Admin' and !isset($ajax)) require $index_dir.'include/code/code_check_admin_visit_alerts.php';
+if(isset($identified_user) and $identified_user=='Admin' and !isset($ajax)) require $index_dir.'include/code/admin/code_check_admin_visit_alerts.php';
 
 ?>

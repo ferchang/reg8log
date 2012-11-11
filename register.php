@@ -18,7 +18,7 @@ require $index_dir.'include/config/config_register.php';
 
 if(!$registeration_enabled) exit('<center><h3>Registration is disabled!</h3></center>');
 
-require $index_dir.'include/code/code_sess_start.php';
+require $index_dir.'include/code/sess/code_sess_start.php';
 
 $captcha_verified=isset($_SESSION['captcha_verified']);
 
@@ -64,7 +64,7 @@ if($email_verification_needed or $admin_confirmation_needed) {
 	require $index_dir.'include/code/code_add_pending_account.php';
 	if($admin_confirmation_needed) {
 		$pending_reg=true;
-		require $index_dir.'include/code/code_log_registeration.php';
+		require $index_dir.'include/code/log/code_log_registeration.php';
 	}
 }
 else {
@@ -74,7 +74,7 @@ else {
 	  require $index_dir.'include/code/code_login_upon_register.php';
 	  $success_msg.='(<span style="color: blue">You are logged in automatically</span>)<br>';
 	}
-	require $index_dir.'include/code/code_log_registeration.php';
+	require $index_dir.'include/code/log/code_log_registeration.php';
 }
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';

@@ -34,7 +34,7 @@ require $index_dir.'include/page/page_success.php';
 
 require $index_dir.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/code_ban_info_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ban_info_expired_cleanup.php';
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 

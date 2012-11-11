@@ -116,7 +116,7 @@ function captcha_show_image() {
 
 //======================================
 
-require $index_dir.'include/code/code_sess_start.php';
+require $index_dir.'include/code/sess/code_sess_start.php';
 require_once $index_dir.'include/func/func_secure_hash.php';
 
 global $site_priv_salt;
@@ -148,7 +148,7 @@ function captcha_verify_word() {
 	global $session0;
 	global $https;
 
-	require $index_dir.'include/code/code_sess_start.php';
+	require $index_dir.'include/code/sess/code_sess_start.php';
 
 	if(empty($_POST['captcha']) or empty($_SESSION['captcha_hash'])) return false;
 

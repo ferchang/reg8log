@@ -20,13 +20,13 @@ $admin_alert_visit_msg='';
 
 if($rec['new_account_blocks'] and in_array($alert_admin_about_account_blocks, array(1, 3, 4, 6))) {
 	$new_account_blocks=$rec['new_account_blocks'];
-	require $index_dir.'include/code/code_check_account_blocks_alert_threshold.php';
+	require $index_dir.'include/code/admin/code_check_account_blocks_alert_threshold.php';
 	if(isset($account_blocks_alert_threshold_reached)) $admin_alert_visit_msg='- There were '.$new_account_blocks." new account block(s).\n";
 }
 
 if($rec['new_ip_blocks'] and in_array($alert_admin_about_ip_blocks, array(1, 3))) {
 	$new_ip_blocks=$rec['new_ip_blocks'];
-	require $index_dir.'include/code/code_check_ip_blocks_alert_threshold.php';
+	require $index_dir.'include/code/admin/code_check_ip_blocks_alert_threshold.php';
 	if(isset($ip_blocks_alert_threshold_reached)) $admin_alert_visit_msg.='- There were '.$new_ip_blocks.' new IP block(s).';
 }
 

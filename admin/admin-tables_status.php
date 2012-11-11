@@ -10,7 +10,7 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/code_require_admin.php';
+require $index_dir.'include/code/admin/code_require_admin.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
@@ -24,6 +24,6 @@ else $sort_by='auto';
 if(isset($_GET['sort_dir']) and ($_GET['sort_dir']=='asc' or $_GET['sort_dir']=='desc')) $sort_dir=$_GET['sort_dir'];
 else $sort_dir='desc';
 
-require_once $index_dir.'include/page/page_tables_status.php';
+require_once $index_dir.'include/page/admin/page_tables_status.php';
 
 ?>
