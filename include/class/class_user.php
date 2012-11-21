@@ -20,6 +20,14 @@ function error($err_msg='')
 	$this->err_msg=get_class($this).": $err_msg";
 }
 //=======================================
+function tie_login2ip($user_info) {
+	global $tie_login2ip_option_at_login;
+	global $tie_login2ip;
+
+	if(($tie_login2ip_option_at_login and $user_info['tie_login2ip']) or  (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $user_info['username']=='Admin') or ($tie_login2ip==2 and $user_info['username']!='Admin')))) return true;
+	else return false;
+}
+//=======================================
 function identify($username=null, $password=null)
 {
 
@@ -36,7 +44,6 @@ function identify($username=null, $password=null)
 	$last_protection=-1;
 	global $req_time;
 	global $pepper;
-	global $tie_login2ip;
 	global $tie_login2ip_option_at_login;
 	
 	$this->err_msg='';
@@ -156,7 +163,7 @@ function identify($username=null, $password=null)
 		$flag=false;
 		if($reg8log_db->result_num($query)) {
 			$tmp54=$reg8log_db->fetch_row();
-			if(($tie_login2ip_option_at_login and $tmp54['tie_login2ip']) or  (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $tmp54['username']=='Admin') or ($tie_login2ip==2 and $tmp54['username']!='Admin')))) {
+			if($this->tie_login2ip($tmp54)) {
 				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key) $flag=true;
 			}
 			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
@@ -174,7 +181,7 @@ function identify($username=null, $password=null)
 	$reg8log_db->query("select get_lock($lock_name, -1)");
 	
 	if($flag) {
-		if(($tie_login2ip_option_at_login and $tmp54['tie_login2ip']) or (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $tmp54['username']=='Admin') or ($tie_login2ip==2 and $tmp54['username']!='Admin')))) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
+		if($this->tie_login2ip($tmp54)) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
 		else $autologin_key=$tmp54['autologin_key'];
 		$this->user_info=$tmp54;
 		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', $pepper.$site_key2.$autologin_key)) {
@@ -244,8 +251,6 @@ function save_identity($age='session')
 	global $req_time;
 	global $site_key2;
 	global $pepper;
-	global $tie_login2ip;
-	global $tie_login2ip_option_at_login;
 
 	$this->err_msg='';
 
@@ -264,7 +269,7 @@ function save_identity($age='session')
 	$cookie->secure=$https;
 	$autologin_key=$this->user_info['autologin_key'];
 	foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
-		if($value=='autologin_key' and (($tie_login2ip_option_at_login and $this->user_info['tie_login2ip']) or (!$tie_login2ip_option_at_login and ($tie_login2ip==3 or ($tie_login2ip==1 and $this->user_info['username']=='Admin') or ($tie_login2ip==2 and $this->user_info['username']!='Admin'))))) {
+		if($value=='autologin_key' and $this->tie_login2ip($this->user_info)) {
 			$autologin_key=hash('sha256', $this->user_info['autologin_key'].$_SERVER['REMOTE_ADDR']);
 			$cookie->values[]=$autologin_key;
 		}

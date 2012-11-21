@@ -9,7 +9,6 @@ if(!$alert_admin_about_registerations or ($alert_admin_about_registerations==1 a
 if($registerations_alert_type==1) {
 		$query="update `admin_reg_alerts` set `new_regs`=`new_regs`+1 where `for`='visit' limit 1";
 		$reg8log_db->query($query);
-		require $index_dir.'include/code/admin/code_check_registerations_admin_email_alert.php';
 	}
 	else if($registerations_alert_type==2) {
 		if(!isset($site_key)) require_once $index_dir.'include/code/code_fetch_site_vars.php';

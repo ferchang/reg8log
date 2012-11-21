@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 $parent_page=true;
 
-$index_dir='';
+$index_dir='./';
 
 $store_request_entropy_probability2=1;
 // I set store_request_entropy_probability2 to 1 on this page, because this page contains the register form and thus its requests have precious entropy (passwords, usernames, ...). Also the traffic on this page is only a tiny fraction of all of the site traffic and thus its entropy update queries contribute to the database overload proportionally less.

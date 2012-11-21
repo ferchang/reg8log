@@ -15,17 +15,8 @@ if(session_id()==='' or isset($session_decryption_error) or session_name()!=='re
 global $encrypt_session_files_contents;
 global $session1;
 global $session0;
-global $old_use_cookies;
-global $old_cookie_lifetime;
-global $old_use_only_cookies;
-global $old_gc_maxlifetime;
-global $old_session_save_path;
-global $old_session_name;
-global $old_httponly;
-global $old_trans_sid;
-global $old_cookie_secure;
 global $parent_page;
-global $old_session_id;
+global $old_session_settings;
 global $client_sess_key;
 global $https;
 
@@ -34,16 +25,16 @@ if(empty($_SESSION)) {
 	@ touch(session_save_path().'/sess_'.session_id(), 0, 0);
 	@ session_destroy();
 	@ unlink(session_save_path().'/sess_'.session_id());
-	ini_set('session.use_cookies', $old_use_cookies);
-	ini_set('session.use_only_cookies', $old_use_only_cookies);
-	ini_set('session.gc_maxlifetime', $old_gc_maxlifetime);
-	ini_set('session.cookie_httponly', $old_httponly);
-	ini_set('session.use_trans_sid', $old_trans_sid);
-	if($https) ini_set('session.cookie_secure', $old_cookie_secure);
-	session_set_cookie_params($old_cookie_lifetime);
-	session_save_path($old_session_save_path);
-	session_name($old_session_name);
-	session_id($old_session_id);
+	ini_set('session.use_cookies', $old_session_settings['use_cookies']);
+	ini_set('session.use_only_cookies', $old_session_settings['use_only_cookies']);
+	ini_set('session.gc_maxlifetime', $old_session_settings['gc_maxlifetime']);
+	ini_set('session.cookie_httponly', $old_session_settings['httponly']);
+	ini_set('session.use_trans_sid', $old_session_settings['trans_sid']);
+	if($https) ini_set('session.cookie_secure', $old_session_settings['cookie_secure']);
+	session_set_cookie_params($old_session_settings['cookie_lifetime']);
+	session_save_path($old_session_settings['session_save_path']);
+	session_name($old_session_settings['session_name']);
+	session_id($old_session_settings['session_id']);
 	return;
 }
 
@@ -59,16 +50,16 @@ if($encrypt_session_files_contents) {
 }
 
 session_write_close();
-ini_set('session.use_cookies', $old_use_cookies);
-ini_set('session.use_only_cookies', $old_use_only_cookies);
-ini_set('session.gc_maxlifetime', $old_gc_maxlifetime);
-ini_set('session.use_trans_sid', $old_trans_sid);
-if($https) ini_set('session.cookie_secure', $old_cookie_secure);
-ini_set('session.cookie_httponly', $old_httponly);
-session_set_cookie_params($old_cookie_lifetime);
-session_save_path($old_session_save_path);
-session_name($old_session_name);
-session_id($old_session_id);
+ini_set('session.use_cookies', $old_session_settings['use_cookies']);
+ini_set('session.use_only_cookies', $old_session_settings['use_only_cookies']);
+ini_set('session.gc_maxlifetime', $old_session_settings['gc_maxlifetime']);
+ini_set('session.use_trans_sid', $old_session_settings['trans_sid']);
+if($https) ini_set('session.cookie_secure', $old_session_settings['cookie_secure']);
+ini_set('session.cookie_httponly', $old_session_settings['httponly']);
+session_set_cookie_params($old_session_settings['cookie_lifetime']);
+session_save_path($old_session_settings['session_save_path']);
+session_name($old_session_settings['session_name']);
+session_id($old_session_settings['session_id']);
 
 }
 

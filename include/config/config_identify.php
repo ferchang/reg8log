@@ -50,7 +50,7 @@ Note: with this option, a database update operation is needed every time the use
 
 */
 
-$tie_login2ip=3;
+$tie_login2ip=0;
 /*
 0: no
 1: only for Admin

@@ -13,7 +13,7 @@ if(strpos($account_blocks_alert_threshold, '%')===0) {
 
 	require_once $index_dir.'include/code/code_db_object.php';
 
-	$query="select * from `accounts`";	
+	$query="select 1 from `accounts`";	
 	$num_accounts=$reg8log_db->result_num($query);
 	
 	$calculated_threshold=ceil($num_accounts*($percent/100));

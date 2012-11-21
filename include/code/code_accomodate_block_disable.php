@@ -4,8 +4,6 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 require $index_dir.'include/code/code_calc_protection.php';
 
-//echo '<hr>', $last_protection, ' ', $protection, ' ',$block_disable, '<hr>';
-
 $tmp35=$block_disable;
 
 if(($protection>$last_protection and !($protection>=($last_protection+2))) or $protection<$last_protection)
@@ -23,11 +21,8 @@ if(($protection>$last_protection and !($protection>=($last_protection+2))) or $p
 	}
 
 if($block_disable!=$tmp35) {
-	//echo 'block disable update';
 	$query='update `accounts` set `block_disable`='.$block_disable.' where `username`='.$reg8log_db->quote_smart($_username2).' limit 1';
 	$reg8log_db->query($query);
 }
-
-//echo '<hr>', $block_disable, '<hr>';
 
 ?>
