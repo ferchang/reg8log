@@ -43,6 +43,7 @@ $registerations_alert_threshold=1;
 //suggest set to 1 when registerations need admin confirmation, so u can be notified of even only one of such registerations and can confirm it in time
 
 $registerations_alert_emails_min_interval=0;
+//in secondes / 0: no interval limitation
 
 //--------------------------------
 

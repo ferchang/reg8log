@@ -69,7 +69,7 @@ $tie_login2ip_option_at_login=true;
 //note that this is regardless of the setting of $tie_login2ip, but $tie_login2ip value affects the default stat of the corresponding checkbox on the login form
 
 $change_autologin_key_upon_logout=true;
-//recommended for higher security
+//highly recommended for higher security
 
 //--------------------------------
 

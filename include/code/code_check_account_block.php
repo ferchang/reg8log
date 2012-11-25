@@ -40,6 +40,7 @@ else if($account_captcha_threshold==0) {
 
 require_once $index_dir.'include/code/code_db_object.php';
 
+if(!isset($tmp9)) $tmp9=$reg8log_db->quote_smart($_username);
 $query="select * from `account_incorrect_logins` where `username`=$tmp9 limit 1";
 
 if(!$reg8log_db->result_num($query)) return;

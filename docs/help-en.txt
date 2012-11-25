@@ -94,6 +94,13 @@ login_upon_register:
 whether to login users automatically upon completing their registrations.
 this login will last only until the user's browser is closed.
 
+alert_admin_about_registerations:
+registerations_alert_type:
+registerations_alert_threshold:
+registerations_alert_emails_min_interval:
+
+for information please see the comments in config_register.php
+
 max_activation_emails:
 
 maximum number of email verification emails that can be sent to the registrant's email.
@@ -238,6 +245,11 @@ this causes the other machines that the user is currently logged in on them to b
 it is recommended to enable this option for security.
 also see the comments of the other mode in which the login key is changed even on every page view too.
 
+tie_login2ip:
+tie_login2ip_option_at_login:
+
+for information please see the comments in the config file.
+
 change_autologin_key_upon_logout:
 
 seems no explanations r needed if u have read this help from several lines upper.
@@ -357,5 +369,14 @@ see the comments in the config file.
 exempt_admin_account_from_alert_limits:
 
 specifies whether to exempt admin account block alerts from $account_blocks_alert_threshold and $alert_emails_min_interval limitations.
+
+------------------------------------------------
+config vars in config_admin.php:
+------------------------------------------------
+
+show_statistics_in_admin_operations_page:
+
+whether to show some statistics in admin operations page.
+u can disable this if performance problems occur.
 
 ################ High security register and login system ###################

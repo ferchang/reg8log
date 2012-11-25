@@ -46,6 +46,7 @@ if(!isset($_COOKIE['reg8log_antixsrf_token'])) {
 	setcookie('reg8log_antixsrf_token', $antixsrf_token, 0, '/', null, $https, true);
 	$_COOKIE['reg8log_antixsrf_token']=$antixsrf_token;
 }
+else $_COOKIE['reg8log_antixsrf_token']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token'], ENT_QUOTES, 'UTF-8');
 
 if(!$db_installed) {
 	if(isset($setup_page)) return;

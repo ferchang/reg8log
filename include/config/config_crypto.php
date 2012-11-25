@@ -7,7 +7,7 @@ $secure_hash_rounds=16; //note that actual number of rounds is 2^$secure_hash_ro
 $pepper="89JPa36HW7Uiq348dX10ks"; //composed of at least 22 chars of upper and lowercase letters + digits
 
 $encrypt_session_files_contents=true; //whether to encrypt session file contents on the server
-//encryption with AES 128 CBC + HMAC with md5($pepper+$site_encr_key+client_key) will be used
+//encryption with AES 128 CBC + HMAC with key md5($pepper+$site_encr_key+client_key) will be used
 
 $store_request_entropy_probability=0.1; // possible values: a number equal to or less than 1.
 // 1: always store

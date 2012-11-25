@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2012 at 08:15 PM
+-- Generation Time: Nov 25, 2012 at 12:03 AM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -30,5 +30,6 @@ CREATE TABLE IF NOT EXISTS `ip_incorrect_logins_decs` (
   `account_auto` int(10) unsigned NOT NULL,
   `num_dec` int(10) unsigned NOT NULL,
   `timestamp` int(10) unsigned NOT NULL,
+  `pending_account` tinyint(1) NOT NULL DEFAULT '0',
   KEY `ip` (`ip`,`account_auto`,`timestamp`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

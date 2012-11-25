@@ -33,7 +33,9 @@ else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_thresho
 if($username_exists) $account_auto=$user->user_info['auto'];
 else $account_auto=0;
 
-$query='insert into `ip_incorrect_logins` (`ip`, `account_auto`, `timestamp`, `admin`) values '."($ip, $account_auto, $req_time, $admin)";
+if(!isset($is_pending_account)) $is_pending_account=0;
+
+$query='insert into `ip_incorrect_logins` (`ip`, `account_auto`, `timestamp`, `admin`, `pending_account`) values '."($ip, $account_auto, $req_time, $admin, $is_pending_account)";
 
 $reg8log_db->query($query);
 

@@ -30,7 +30,6 @@ $reg8log_db->query($query);
 
 $success_msg='<h3>Congratulations!<br>Your registration is completed.</h3>';
 $no_specialchars=true;
-require $index_dir.'include/page/page_success.php';
 
 require $index_dir.'include/code/log/code_log_registeration.php';
 

@@ -110,8 +110,11 @@ function identify($username=null, $password=null)
 			$reg8log_db->query("select release_lock($lock_name)");
 			if($reg8log_db->result_num($query2)) {
 				$username_exists=1;
+				global $is_pending_account;
+				$is_pending_account=1;
 				global $rec;
 				$rec=$reg8log_db->fetch_row();
+				$this->user_info=$rec;
 				if(verify_secure_hash($password, $rec['password_hash'])) {
 					global $pending_user;
 					$pending_user=$rec['username'];

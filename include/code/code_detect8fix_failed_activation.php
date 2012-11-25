@@ -6,6 +6,8 @@ if(!(($rec['email_verified'] or $rec['email_verification_key']==='') and $rec['a
 
 require $index_dir.'include/code/code_activate_pending_account.php';
 
+require $index_dir.'include/page/page_success.php';
+
 exit;
 
 ?>

@@ -69,8 +69,10 @@ else {
   if($login_upon_register) {
     $_username=$rec['username'];
     require $index_dir.'include/code/code_login_upon_register.php';
+	$success_msg.='(<span style="color: blue">You are logged in automatically</span>)<br>';
   }
   require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
+  require $index_dir.'include/page/page_success.php';
 }
 
 exit;
