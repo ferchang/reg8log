@@ -20,7 +20,7 @@ if(strpos($ip_blocks_alert_threshold, '%')===0) {
 	
 	if($new_ip_blocks<$calculated_threshold) return;
 	
-	$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-24*60*60);
+	$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-$ip_blocks_alert_threshold_period);
 	if($reg8log_db->result_num($query)>=$calculated_threshold)  $ip_blocks_alert_threshold_reached=true;
 	
 	return;
@@ -30,7 +30,7 @@ if($new_ip_blocks<$ip_blocks_alert_threshold) return;
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-24*60*60);
+$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-$ip_blocks_alert_threshold_period);
 
 if($reg8log_db->result_num($query)>=$ip_blocks_alert_threshold) $ip_blocks_alert_threshold_reached=true;
 

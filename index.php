@@ -116,7 +116,7 @@ else {//Not identified
 	if(isset($manual_login)) {
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 		$err_msg='You are not authenticated!<br />Check your login information.';
-		require $index_dir.'include/code/account_incorrect_login.php';
+		require $index_dir.'include/code/code_account_incorrect_login.php';
 		require $index_dir.'include/code/code_ip_incorrect_login.php';
 		if(isset($ip_block)) {
 			require $index_dir.'include/page/page_ip_block.php';

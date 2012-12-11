@@ -45,6 +45,12 @@ $registerations_alert_threshold=1;
 $registerations_alert_emails_min_interval=0;
 //in secondes / 0: no interval limitation
 
+$max_registeration_alert_emails=24;
+//maximum number of registeration alert emails that can be sent in $max_registeration_alert_emails_period
+//0: unlimited
+
+$max_registeration_alert_emails_period=24*60*60; //in seconds
+
 //--------------------------------
 
 $ajax_check_username=true;//whether username availability can be checked via ajax in the register form

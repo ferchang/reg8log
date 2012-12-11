@@ -26,8 +26,10 @@ $alert_admin_about_account_blocks=3;
 //example: 4 means inform admin when he visits and only when his own account was blocked
 
 $account_blocks_alert_threshold=1;
-//alert only when this minimum number of account blocks has occured in the past 24 hours
-//u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $account_blocks_alert_threshold='%10';
+//alert only when this minimum number of account blocks has occured in the past $account_blocks_alert_threshold_period seconds
+//u can also use a percentage of the total number of user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $account_blocks_alert_threshold='%10';
+
+$account_blocks_alert_threshold_period=24*60*60; //in seconds
 
 //--------------------------------
 
@@ -38,13 +40,21 @@ $alert_admin_about_ip_blocks=3;
 //3: with both methods
 
 $ip_blocks_alert_threshold=1;
-//alert only when this minimum number of IP blocks has accured in the past 24 hours
-//u can also use a percentage of the total user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $ip_blocks_alert_threshold='%10';
+//alert only when this minimum number of IP blocks has accured in the past $ip_blocks_alert_threshold_period seconds
+//u can also use a percentage of the total number of user accounts of the system by specifying a percentage string (precede the number with a percent sign in a string). example: $ip_blocks_alert_threshold='%10';
+
+$ip_blocks_alert_threshold_period=24*60*60; //in seconds
 
 //--------------------------------
 
 $alert_emails_min_interval=0;
 //don't send alert emails with less than this interval (in seconds)
+
+$max_alert_emails=24;
+//maximum number of alert emails that can be sent in $max_alert_emails_period
+//0: unlimited
+
+$max_alert_emails_period=24*60*60; //in seconds
 
 //--------------------------------
 

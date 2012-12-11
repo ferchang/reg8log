@@ -24,8 +24,8 @@ function get_window_dims() {
 }
 
 function my_alert(title, msg) {
-	msg=msg.replace('\n','<br>');
-	title=title.replace('\n','<br>');
+	while(msg.indexOf('\n')!=-1) msg=msg.replace('\n','<br>');
+	while(title.indexOf('\n')!=-1) title=title.replace('\n','<br>');
 	alert_title.innerHTML=title;
 	alert_contents.innerHTML=msg;
 	get_window_dims();

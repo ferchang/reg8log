@@ -19,6 +19,14 @@ if(!(!$alert_emails_min_interval or $req_time>=($last_alert_email+$alert_emails_
 	return;
 }
 
+if($max_alert_emails) {
+	$query='select 1 from `block_alert_emails_history` where `timestamp`>='.($req_time-$max_alert_emails_period);
+	if($reg8log_db->result_num($query)>=$max_alert_emails) {
+		$reg8log_db->query("select release_lock('$lock_name2')");
+		return;
+	}
+}
+
 $new_account_blocks=$rec2['new_account_blocks'];
 require $index_dir.'include/code/admin/code_check_account_blocks_alert_threshold.php';
 
@@ -37,6 +45,15 @@ if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
 $reg8log_db->query("select release_lock('$lock_name2')");
 
-if($admin_alert_email_msg) require $index_dir.'include/code/email/code_email_admin_alert_msg.php';
+if($admin_alert_email_msg) {
+	require $index_dir.'include/code/email/code_email_admin_alert_msg.php';
+	if($max_alert_emails) {
+		$query="insert into `block_alert_emails_history` (`timestamp`) values($req_time)";
+		$reg8log_db->query($query);
+		require_once $index_dir.'include/config/config_cleanup.php';
+		if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_block_alert_emails_history_expired_cleanup.php';
+		if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_block_alert_emails_history_size_cleanup.php';
+	}
+}
 
 ?>
