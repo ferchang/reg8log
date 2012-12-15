@@ -34,19 +34,19 @@ if($rec['new_ip_blocks'] and in_array($alert_admin_about_ip_blocks, array(1, 3))
 
 require $index_dir.'include/config/config_register.php';
 
-if($registerations_alert_type!=1 and $registerations_alert_type!=3) return;
+if($registeration_alert_type!=1 and $registeration_alert_type!=3) return;
 
-$query="select * from `admin_reg_alerts` where `for`='visit' limit 1";
+$query="select * from `admin_registeration_alerts` where `for`='visit' limit 1";
 
 $reg8log_db->query($query);
 
 $rec8=$reg8log_db->fetch_row();
 
-$new_regs=$rec8['new_regs'];
+$new_registerations=$rec8['new_registerations'];
 
-if($new_regs<$registerations_alert_threshold) return;
+if($new_registerations<$registerations_alert_threshold) return;
 
 if($admin_alert_visit_msg) $admin_alert_visit_msg.="\n";
-$admin_alert_visit_msg.='- There were '.$new_regs.' new registeration(s).';
+$admin_alert_visit_msg.='- There were '.$new_registerations.' new registeration(s).';
 
 ?>

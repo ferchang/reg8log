@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2012 at 12:28 PM
+-- Generation Time: Dec 15, 2012 at 03:34 PM
 -- Server version: 5.1.43
 -- PHP Version: 5.3.2
 
@@ -22,11 +22,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_reg_alerts`
+-- Table structure for table `registerations_history`
 --
 
-CREATE TABLE IF NOT EXISTS `admin_reg_alerts` (
-  `for` char(5) NOT NULL,
-  `new_regs` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_alert` int(10) unsigned NOT NULL DEFAULT '0'
+CREATE TABLE IF NOT EXISTS `registerations_history` (
+  `timestamp` int(10) unsigned NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

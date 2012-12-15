@@ -68,7 +68,7 @@ require $index_dir.'include/code/code_generate_form_id.php';
 echo 'Records ', $first, ' - ', $last, ' of ', $total;
 echo '<table border cellpadding="3">';
 
-require_once $index_dir.'include/func/duration2friendly_str.php';
+require_once $index_dir.'include/func/func_duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 

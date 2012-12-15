@@ -33,4 +33,8 @@ $max_block_alert_emails_history_records=10*1000;
 
 $max_registeration_alert_emails_history_records=10*1000;
 
+//--------------------------------
+
+$max_registerations_history_records=10*1000;
+
 ?>

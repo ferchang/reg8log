@@ -68,10 +68,10 @@ $reg8log_db->query($query);
 $query="insert into `admin_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('email', 0, 0)";
 $reg8log_db->query($query);
 
-$query="insert into `admin_reg_alerts` (`for`, `new_regs`) values ('visit', 0)";
+$query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('visit', 0)";
 $reg8log_db->query($query);
 
-$query="insert into `admin_reg_alerts` (`for`, `new_regs`) values ('email', 0)";
+$query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('email', 0)";
 $reg8log_db->query($query);
 
 $query="insert ignore into `dummy` (`i`) values (1)";

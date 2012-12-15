@@ -92,7 +92,7 @@ echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['user
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>', $rec['gender'], '</td>';
-require_once $index_dir.'include/func/duration2friendly_str.php';
+require_once $index_dir.'include/func/func_duration2friendly_str.php';
 echo '<td>', duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 ?>
 </tr></table><br>

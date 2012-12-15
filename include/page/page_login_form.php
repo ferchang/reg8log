@@ -145,7 +145,7 @@ if(isset($captcha_needed) or $account_captcha_threshold==0) require $index_dir.'
 </tr>
 <?php
 if(isset($err_msg) and $account_block_threshold!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
-	require_once $index_dir.'include/func/duration2friendly_str.php';
+	require_once $index_dir.'include/func/func_duration2friendly_str.php';
 	$account_block_period_msg=duration2friendly_str($account_block_period, 0);
 	$tmp20=$account_block_threshold-$incorrect_attempts;
 	echo '<tr align="left"><td colspan="3"  style="border: solid thin yellow; font-style: italic">';

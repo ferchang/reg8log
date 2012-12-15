@@ -36,13 +36,16 @@ $alert_admin_about_registerations=3;
 3: for all registerations
 */
 
-$registerations_alert_type=3;
+$registeration_alert_type=3;
 //1: when admin visits / 2: with email / 3: with both methods
 
 $registerations_alert_threshold=1;
 //suggest set to 1 when registerations need admin confirmation, so u can be notified of even only one of such registerations and can confirm it in time
 
-$registerations_alert_emails_min_interval=0;
+$registerations_alert_threshold_period=0; //in seconds
+//0: unlimited
+
+$registeration_alert_emails_min_interval=0;
 //in secondes / 0: no interval limitation
 
 $max_registeration_alert_emails=24;

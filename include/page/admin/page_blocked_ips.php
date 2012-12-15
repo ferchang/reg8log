@@ -152,7 +152,7 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token'];
 echo '">';
 
-require_once $index_dir.'include/func/duration2friendly_str.php';
+require_once $index_dir.'include/func/func_duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
