@@ -98,6 +98,8 @@ alert_admin_about_registerations:
 registeration_alert_type:
 registerations_alert_threshold:
 registeration_alert_emails_min_interval:
+max_registeration_alert_emails:
+max_registeration_alert_emails_period:
 
 for information please see the comments in config_register.php
 
@@ -354,6 +356,10 @@ account_blocks_alert_threshold:
 
 see the comments in the config file.
 
+account_blocks_alert_threshold_period:
+
+see the comments of account_blocks_alert_threshold in the config file.
+
 alert_admin_about_ip_blocks:
 
 see the comments in the config file.
@@ -362,7 +368,19 @@ ip_blocks_alert_threshold:
 
 see the comments in the config file.
 
+ip_blocks_alert_threshold_period:
+
+see the comments of ip_blocks_alert_threshold in the config file.
+
 alert_emails_min_interval:
+
+see the comments in the config file.
+
+max_alert_emails:
+
+see the comments in the config file.
+
+max_alert_emails_period:
 
 see the comments in the config file.
 
