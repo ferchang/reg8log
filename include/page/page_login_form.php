@@ -126,7 +126,11 @@ echo '</td></tr>';
 <td <?php echo $cell_align; ?>><?php echo tr('Password'); ?>:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td colspan="3" <?php echo $cell_align; ?> align="right"><?php echo tr('Remember me'); ?>: <input type="checkbox" value="true" name="remember" <?php if($remember) echo 'checked'; ?>></td>
+<td colspan="3" <?php echo $cell_align; ?> align="right"><?php echo tr('Remember me'); ?>: <input type="checkbox" value="true" name="remember" <?php if($remember) echo 'checked ';
+require_once $index_dir.'include/func/func_duration2friendly_str.php';
+//duration2friendly_str($email_verification_time, 0);
+echo 'title="', tr('Remember for a maximum of'), ' ', duration2friendly_str($identify_structs['autologin_cookie']['long_age'], 0), '"';
+?>></td>
 </tr>
 <?php
 

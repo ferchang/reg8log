@@ -10,12 +10,11 @@ return array(
 'Account activated msg' => '<h3>Congratulations!<br>Your registration is completed.</h3>',
 'account created msg' => '<h3>Congratulations!<br>You registered successfully.</h3>',
 'account activation email sent msg' => '<h3>An email containing the account activation link is sent to your email.<br>Complete your registration by opening that link in %s.<br>If you received no email, you can log into your pending account and request a new email.</h3>',
-'pending for admin confirmation msg' => '<h3>Your request is processed successfully and your account is pending for admin\'s confirmation.<br>If it is not confirmed by admin in the next %s it automatically is considered to be removed.</h3>',
+'pending for admin confirmation msg' => '<h3>Your request is processed successfully and your account is pending for admin\'s confirmation.<br>If it is not confirmed by admin in the next %s it is automatically considered to be removed.</h3>',
 'block-bypass max incorrect logins reached msg' => '<center><h3>Maximum number of incorrect logins is reached.<br>You cannot use block-bypass system until next block.</h3>',
 'notify user description' => 'Whether user will be notified (via email) about admin approval/rejection of his registration.',
 'account block msg' => '<span style="white-space: pre; color: #155;">%s</span>\'s account is <span style="color: #f00">locked</span> for the future %s',
-'Check your email carefully msg' => 'Check your email carefully because, for security reasons, the system will not inform you whether the email you entered really exists in the database;<br>
-You can of course make other tries in case you made a typo or you don\'t remember certainly which of your emails you had chosen for your account.',
+'Check your email carefully msg' => 'Check your email carefully because, for security reasons, the system will not inform you whether the email you entered really exists in the database; But you can of course make other tries in case you made a typo or you don\'t remember certainly which of your emails you had chosen for your account.',
 'protection change warning msg' => '- First, don\'t touch this setting if you don\'t know what you are doing and for what reason.
 <br>- Second, if you choose a weaker protection level then you will also need a stronger password to resist brute-force attacks.',
 'ip block weak' => 'IP block <span style="background: yellow; padding: 5px;" >(Weak protection)</span>',
@@ -31,7 +30,7 @@ You can of course make other tries in case you made a typo or you don\'t remembe
 'account or ip is not blocked msg' => 'Neither of the account <span style="white-space: pre; color: #0a8;">%s</span> and IP <span style="white-space: pre; color: #0a8;">%s</span> are locked!',
 'max incorrect logins reached msg' => 'Maximum number of incorrect logins is reached.<br>You cannot use block-bypass system until next block.',
 'Check login information msg' => 'You are not authenticated!<br />Check your login information.',
-'block-bypass email sent msg' => 'An email is sent to <span style="white-space: pre; color: #080;">%s</span><br>if that is the correct email address of the account <span style="white-space: pre; color: #080;">%s</span>',
+'block-bypass email sent msg' => 'An email is sent to <span style="white-space: pre; color: #080;">%s</span>,<br>if that is the correct email address of the account <span style="white-space: pre; color: #080;">%s</span>',
 'max block-bypass emails msg' => ' and<br>the maximum number of block-bypass emails (%s) is not reached',
 'You are not authenticated msg' => 'You are not authenticated! <br>First log in',
 'new email is shorter than2' => 'new email is shorter than %s characters!',
@@ -56,6 +55,7 @@ You can of course make other tries in case you made a typo or you don\'t remembe
 'Security code short - js msg' => 'Security code is shorter than \'+captcha_min_len+\' characters!',
 'Security code long - js msg' => 'Security code is longer than \'+captcha_max_len+\' characters!',
 'user needs email verification msg' => 'This account needs email verification too for it to be activated',
+'Check your email carefully msg2' => 'Check your email carefully because, for security reasons, the system will not inform you whether the email that you entered is the same as your account\'s email; But you can of course make other tries in case you made a typo or you don\'t remember certainly which of your emails you had chosen for your account.',
 
 );
 
