@@ -16,7 +16,7 @@ require $index_dir.'include/code/code_prevent_repost.php';
 
 require $index_dir.'include/config/config_register.php';
 
-if(!$registeration_enabled) exit('<center><h3>Registration is disabled!</h3></center>');
+if(!$registeration_enabled) my_exit('<center><h3>'.tr('Registration is disabled!').'</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/code/sess/code_sess_start.php';
 
@@ -24,7 +24,7 @@ $captcha_verified=isset($_SESSION['captcha_verified']);
 
 require $index_dir.'include/code/code_identify.php';
 
-if(isset($identified_user)) exit('<center><h3>Error: You are logged in!</h3><a href="index.php">Login page</a></center>');
+if(isset($identified_user)) my_exit('<center><h3>'.tr('Error: You are logged in!').'</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/config/config_register_fields.php';
 
@@ -72,7 +72,7 @@ else {
 	if($login_upon_register) {
 	  $_username=$_POST['username'];
 	  require $index_dir.'include/code/code_login_upon_register.php';
-	  $success_msg.='(<span style="color: blue">You are logged in automatically</span>)<br>';
+	  $success_msg.='(<span style="color: blue">'.tr('You are logged in automatically').'</span>)<br>';
 	}
 	require $index_dir.'include/code/log/code_log_registeration.php';
 }

@@ -40,9 +40,9 @@ $expired2=$req_time-$admin_confirmation_time;
 $query="select * from `pending_accounts` where (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=0 and `timestamp`>='.$expired2.')';
 
 if(!$total=$reg8log_db->result_num($query)) {
-	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
-	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">Info: ', $nonexistent_records, ' record(s) did not exist.</center>';
-	exit('<center><h3>No pending accounts eligible for admin confirmation found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
+	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">', tr('Your command(s) were executed.', true), '</center>';
+	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">', sprintf(tr('Info: %d record(s) did not exist.'), $nonexistent_records), '</center>';
+	my_exit('<center><h3>'.tr('No pending accounts eligible for admin confirmation found.').'</h3><a href="index.php">'.tr('Admin operations').'</a><br><br><a href="../index.php">'.tr('Login page').'</a></center>');
 }
 
 require $index_dir.'include/code/admin/code_pagination_params2.php';

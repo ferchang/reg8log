@@ -10,7 +10,7 @@ $rec3=$reg8log_db->fetch_row();
 
 $email=$rec3['email'];
 
-mail($email, 'Account/IP blocks alert', $admin_alert_email_msg);
+mail($email, tr('Account/IP blocks alert'), $admin_alert_email_msg);
 
 if($debug_mode) echo "Emailed: $admin_alert_email_msg";
 

@@ -17,7 +17,7 @@ if($incorrect_logins<$block_bypass_max_incorrect_logins and $incorrect_logins<25
 
 if($incorrect_logins>=$block_bypass_max_incorrect_logins) {
 	setcookie('reg8log_block_bypass_incorrect_logins', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
-	exit('<center><h3>Maximum number of incorrect logins is reached.<br>You cannot use block-bypass system until next block.</h3><br><a href="index.php">Login page</a></center>');
+	my_exit(tr('block-bypass max incorrect logins reached msg').'<br><a href="index.php">'.tr('Login page').'</a></center>');
 }
 
 ?>

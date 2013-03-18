@@ -28,8 +28,9 @@ $reg8log_db->query($query);
 
 $reg8log_db->query("select release_lock($lock_name)");
 
-$success_msg='<h3>User <span style="color: orange">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> banned successfully.</h3>';
+$success_msg='<h3>'.tr('User').' <span style="color: orange">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> '.tr('banned successfully.').'</h3>';
 $no_specialchars=true;
+$additional_link=array(tr('Admin operations'), 'index.php');
 require $index_dir.'include/page/page_success.php';
 
 require $index_dir.'include/config/config_cleanup.php';

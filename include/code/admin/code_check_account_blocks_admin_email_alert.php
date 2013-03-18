@@ -34,9 +34,9 @@ $admin_alert_email_msg='';
 
 if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
-	if($no_alert_limits) $admin_alert_email_msg="- Admin account was blocked.\n";
+	if($no_alert_limits) $admin_alert_email_msg='- '.tr('Admin account was blocked.')."\n";
 
-	$admin_alert_email_msg.='- There were '.$new_account_blocks." new account block(s).\n";
+	$admin_alert_email_msg.='- '.sprintf(tr('There were %d new account block(s).'), $new_account_blocks)."\n";
 	
 	$query='update `admin_alerts` set `new_account_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);

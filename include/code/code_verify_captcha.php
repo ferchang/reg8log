@@ -13,27 +13,27 @@ require $index_dir.'include/code/sess/code_sess_start.php';
 $captcha_verified=false;
 
 if(!isset($_SESSION['captcha_hash'], $_POST['captcha'])) {
-	$err_msgs[]=$captcha_msg='Sorry, you need to enter a security code.';
+	$err_msgs[]=$captcha_msg=tr('Sorry, you need to enter a security code.');
 	$captcha_err=true;
 }
 else if($_POST['captcha']==='') {
-	$err_msgs[]='Security code field is empty!';
+	$err_msgs[]=tr('Security code field is empty!');
 	$captcha_err=true;
 }
 else if(strlen($_POST['captcha'])<$captcha_format['minlength']) {
-	$err_msgs[]="Security code is shorter than {$captcha_format['minlength']} characters!";
+	$err_msgs[]=sprintf(tr('Security code is shorter than %d characters!'), $captcha_format['minlength']);
 	$captcha_err=true;
 }
 else if(strlen($_POST['captcha'])>$captcha_format['maxlength']) {
-	$err_msgs[]="Security code is longer than {$captcha_format['maxlength']} characters!";
+	$err_msgs[]=sprintf(tr('Security code is longer than %d characters!'), $captcha_format['maxlength']);
 	$captcha_err=true;
 }
 else if($captcha_format['php_re'] and !preg_match($captcha_format['php_re'], $_POST['captcha'])) {
-	$err_msgs[]="Security code contains invalid characters!";
+	$err_msgs[]=tr('Security code contains invalid characters!');
 	$captcha_err=true;
 }
 else if(!captcha_verify_word()) {
-	$err_msgs[]='The security code was incorrect!';
+	$err_msgs[]=tr('The security code was incorrect!');
 	$captcha_err=true;
 }
 else $captcha_verified=true;

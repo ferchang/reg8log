@@ -20,7 +20,7 @@ do {
 
 if(!isset($_POST['ban_form1']) or isset($_POST['cancel'])) break;
 
-if($_POST['user']==='') $err_msgs[]='user field is empty!';
+if($_POST['user']==='') $err_msgs[]=tr('user field is empty!');
 if($_POST['which']!=='username' and $_POST['which']!=='uid') $err_msgs[]='which field value is incorrect!';
 
 if(isset($err_msgs)) break;
@@ -34,14 +34,14 @@ $user=$reg8log_db->quote_smart($_POST['user']);
 $query="select * from `accounts` where `{$_POST['which']}`=$user limit 1";
 
 if(!$reg8log_db->result_num($query)) {
-	$err_msgs[]='no such user found in the accounts table!';
+	$err_msgs[]=tr('no such user found in the accounts table!');
 	break;
 }
 
 $rec=$reg8log_db->fetch_row();
 
 if(strtolower($rec['username'])==='admin') {
-	$err_msgs[]="Admin account cannot be banned!";
+	$err_msgs[]=tr('Admin account cannot be banned!');
 	break;
 }
 
@@ -52,7 +52,7 @@ $ban_reason ='';
 if($rec['banned']) {
 	$username=$reg8log_db->quote_smart($rec['username']);
 	$query="select * from `ban_info` where `username`=$username limit 1";
-	if(!$reg8log_db->result_num($query)) echo 'Warning: No corresponding ban_info record found for banned user!';
+	if(!$reg8log_db->result_num($query)) echo tr('Info: No corresponding ban_info record found for the banned user!');
 	else {
 		$rec2=$reg8log_db->fetch_row();
 		$ban_reason =$rec2['reason'];
@@ -72,7 +72,7 @@ do {
 if(!isset($_POST['unban_form']) or isset($_POST['cancel'])) break;
 
 if(strtolower($_POST['username'])==='admin') {
-	$err_msgs[]="Admin account cannot be banned!";
+	$err_msgs[]=tr('Admin account cannot be banned!');
 	break;
 }
 

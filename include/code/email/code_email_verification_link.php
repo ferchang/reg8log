@@ -15,12 +15,12 @@ if(strlen($dir)==1) $dir='';
 
 $link="http://{$_SERVER['HTTP_HOST']}$dir/email_verification.php?rid=$rid&key=$email_verification_key";
 
-$body="Your account activation link: $link";
-$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\nYour account activation link: $link";
+$body=tr('Account activation link').": $link";
+$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\n".tr('Account activation link').": $link";
 $body.="\n--==boundary\nContent-Type: text/html; charset=\"utf-8\"";
-$body.="\n\n<html><body><a href=\"$link\">Your account activation link</a></body></html>\n--==boundary--";
+$body.="\n\n<html $page_dir><body $page_dir><a href=\"$link\">".tr('Account activation link')."</a></body></html>\n--==boundary--";
 
-mail($_POST['email'], 'Email verification link', $body, $headers);
+mail($_POST['email'], tr('Account activation'), $body, $headers);
 
 if($debug_mode) echo $link;
 

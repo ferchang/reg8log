@@ -35,14 +35,3 @@ function mycaptcha(arg) {
 var captcha_min_len;
 var captcha_max_len;
 var captcha_re;
-
-function validate_captcha(val) {
-
-	if(val=='') msgs[i++]='Security code field is empty!';
-	else {
-		if(captcha_re && !captcha_re.test(val)) msgs[i++]='Security code contains invalid characters!';
-		if(val.length<captcha_min_len) msgs[i++]='Security code is shorter than '+captcha_min_len+' characters!';
-		else if(val.length>captcha_max_len) msgs[i++]='Security code is longer than '+captcha_max_len+' characters!';
-	}
-
-}

@@ -30,7 +30,7 @@ $admin_reg_alert_email_msg='';
 
 if(isset($registerations_alert_threshold_reached)) {
 
-	$admin_reg_alert_email_msg.='- There were '.$new_registerations." new registeration(s).\n";
+	$admin_reg_alert_email_msg.='- '.sprintf(tr('There were %d new registeration(s).'), $new_registerations)."\n";
 	
 	$query='update `admin_registeration_alerts` set `new_registerations`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);

@@ -10,7 +10,7 @@ $rec7=$reg8log_db->fetch_row();
 
 $email=$rec7['email'];
 
-mail($email, 'Registeration(s) alert', $admin_reg_alert_email_msg);
+mail($email, tr('Registeration(s) alert'), $admin_reg_alert_email_msg);
 
 if($debug_mode) echo "Emailed: $admin_reg_alert_email_msg";
 

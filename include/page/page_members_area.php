@@ -4,19 +4,19 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Members area</title>
+<title><?php echo tr('Members area'); ?></title>
 <script src="js/logout.js"></script>
 </head>
-<body bgcolor="#7587b0">
+<body bgcolor="#7587b0" <?php echo $page_dir; ?>>
 <table width="100%" height="80%">
 <tr>
-<td align="left" valign="top">
+<td valign="top">
 <?php
 require $index_dir.'include/page/page_sections.php';
 ?>
@@ -27,7 +27,7 @@ require $index_dir.'include/page/page_sections.php';
 echo $msg;
 require $index_dir.'include/page/page_print_last_activity.php';
 ?>
-<br /><a href="logout.php?antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token']; ?>" onclick="return onLogout()">Log out</a></td>
+<br /><a href="logout.php?antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token']; ?>" onclick="return onLogout()"><?php echo tr('Log out'); ?></a></td>
 </tr>
 </table>
 <?php

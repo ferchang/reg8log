@@ -7,15 +7,16 @@ $color2='#ccc';
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <script src="../js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
-<title>Tables status</title>
+<title><?php echo tr('Tables status'); ?></title>
 <style>
 </style>
 <script>
@@ -50,7 +51,7 @@ function normal(id) {
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 <table bgcolor="#7587b0" border>
 <?php
@@ -61,7 +62,7 @@ echo '<th>';
 echo "<a class='header' href='?sort_by=table_name&sort_dir=";
 if($sort_by=='table_name' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Table name</a>";
+echo "'>", tr('Table name'), "</a>";
 if($sort_by=='table_name') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -73,7 +74,7 @@ echo '<th>';
 echo "<a class='header' href='?sort_by=num_records&sort_dir=";
 if($sort_by=='num_records' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Num records</a>";
+echo "'>", tr('Num records'), "</a>";
 if($sort_by=='num_records') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -110,8 +111,8 @@ foreach($tables as $key=>$value) {
 
 ?>
 </table>
-<br><a href="index.php">Admin operations</a><br><br>
-<a href="../index.php">Login page</a>
+<br><a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo tr('Login page'); ?></a>
 </td></tr></table>
 <?php
 require $index_dir.'include/page/page_foot_codes.php';

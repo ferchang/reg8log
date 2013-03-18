@@ -30,8 +30,8 @@ if(isset($_POST['delete'])) {
 $query="select * from `accounts` where `username`!='Admin'";
 
 if(!$total=$reg8log_db->result_num($query)) {
-	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">Your command(s) executed.</center>';
-	exit('<center><h3>No accounts found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
+	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">', tr('Your command(s) were executed.', true), '</center>';
+	my_exit('<center><h3>'.tr('No accounts found.').'</h3><a href="index.php">'.tr('Admin operations').'</a><br><br><a href="../index.php">'.tr('Login page').'</a></center>');
 }
 
 require $index_dir.'include/code/admin/code_pagination_params2.php';

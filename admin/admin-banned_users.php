@@ -19,7 +19,7 @@ require_once $index_dir.'include/code/code_db_object.php';
 
 $query='select * from `accounts` where `banned`=1 or `banned`>='.$req_time;
 
-if(!$total=$reg8log_db->result_num($query)) exit('<center><h3>No banned users found.</h3><a href="index.php">Admin operations</a><br><br><a href="../index.php">Login page</a></center>');
+if(!$total=$reg8log_db->result_num($query)) my_exit('<center><h3>'.tr('No banned users found.').'</h3><a href="index.php">'.tr('Admin operations').'</a><br><br><a href="../index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/code/admin/code_pagination_params2.php';
 

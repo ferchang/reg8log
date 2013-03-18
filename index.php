@@ -62,7 +62,7 @@ if(!isset($captcha_err)) {
 	$pass_banned_user=true;
 	require $index_dir.'include/code/code_identify.php';
 	if(isset($identify_error)) {
-		$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
+		$failure_msg=($debug_mode)? $user->err_msg : tr('Identification error');
 		require $index_dir.'include/page/page_failure.php';
 		exit;
 	}
@@ -83,10 +83,10 @@ require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 if($remember) $user->save_identity('permanent');
 else $user->save_identity('session');
 
-$msg='<h1>You logged in successfully <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
+$msg='<h1>'.tr('You logged in successfully').' <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
 
 }
-else $msg='<h1>Hello <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.<br />You are logged in.</h1>';
+else $msg='<h1>'.tr('Hello').' <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.<br />'.tr('You are logged in').'.</h1>';
 
 require $index_dir.'include/page/page_members_area.php';
 
@@ -115,7 +115,7 @@ else if(isset($banned_user)) {
 else {//Not identified
 	if(isset($manual_login)) {
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
-		$err_msg='You are not authenticated!<br />Check your login information.';
+		$err_msg=tr('Check login information msg');
 		require $index_dir.'include/code/code_account_incorrect_login.php';
 		require $index_dir.'include/code/code_ip_incorrect_login.php';
 		if(isset($ip_block)) {

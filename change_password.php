@@ -10,7 +10,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_identify.php';
 
-if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
+if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticated msg').'.</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/config/config_register.php'; //for password_refill
 
@@ -42,7 +42,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 	if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/code/code_verify_captcha.php';
 	
-	if($_POST['curpass']==='') $err_msgs[]='current password field is empty!';
+	if($_POST['curpass']==='') $err_msgs[]=tr('current password field is empty!');
 	else if(!isset($captcha_err)) {
 		if(strpos($_POST['curpass'], "hashed-$site_salt")!==0) $_POST['curpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['curpass']);
 		require $index_dir.'include/code/code_verify_password.php';
@@ -61,31 +61,31 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 	if(strpos($_POST['newpass'], "hashed-$site_salt")!==0 and strpos($_POST['newpass'], "encrypted-$site_salt")!==0) {
 		if(utf8_strlen($_POST['newpass'])<$password_format['minlength']) {
-			$err_msgs[]="new password is shorter than {$password_format['minlength']} characters!";
+			$err_msgs[]=sprintf(tr('new password is shorter than'), $password_format['minlength']);
 			$password_error=true;
 		}
 		else if(utf8_strlen($_POST['newpass'])>$password_format['maxlength']) {
-			$err_msgs[]="new password is longer than {$password_format['maxlength']} characters!";
+			$err_msgs[]=sprintf(tr('new password is longer than'), $password_format['maxlength']);
 			$password_error=true;
 		}
 		else if($password_format['php_re'] and $_POST['newpass']!=='' and !preg_match($password_format['php_re'], $_POST['newpass'])) {
-			$err_msgs[]="New password is invalid!";
+			$err_msgs[]=tr('New password is invalid!');
 			$password_error=true;
 		}
 		else if($_POST['newpass']!==$_POST['repass']) {
-			$err_msgs[]="password fields aren't match!";
+			$err_msgs[]=tr('password fields aren\'t match!');
 			$password_error=true;
 		}
 	}
 	else {
 		if($_POST['newpass']!==$_POST['repass']) {
-			$err_msgs[]="password fields aren't match!";
+			$err_msgs[]=tr('password fields aren\'t match!');
 			$password_error=true;
 		}
 		else if(strpos($_POST['newpass'], "encrypted-$site_salt")===0) {
 			require_once $index_dir.'include/func/func_site8client_keys_hmac_verifier.php';
 			if(!verify_hmac(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)))) {
-				$err_msgs[]="error in password decryption!";
+				$err_msgs[]=tr('error in password decryption!');
 				$password_error=true;
 			}
 		}
@@ -101,7 +101,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		require $index_dir.'include/config/config_password_change_or_reset.php';
 		require $index_dir.'include/code/code_change_password.php';
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
-		$success_msg='<h3>Your password changed successfully.</h3>';
+		$success_msg='<h3>'.tr('Your password changed successfully').'.</h3>';
 		$no_specialchars=true;
 		require $index_dir.'include/page/page_success.php';
 		exit;

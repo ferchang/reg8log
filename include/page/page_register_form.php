@@ -8,16 +8,16 @@ $captcha_verified=isset($_SESSION['captcha_verified']);
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Register form</title>
-<meta http-equiv="generator" content="Kate" />
+<title><?php echo tr('Register'); ?></title>
 <script src="js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 
@@ -47,6 +47,8 @@ echo "new Array(\n'$field_name',\n{$specs['minlength']},\n{$specs['maxlength']},
 if($specs['js_re']===true) echo $specs['php_re'];
 else if($specs['js_re']===false) echo 'false';
 else echo $specs['js_re'];
+if($lang=='fa') echo ",\n'", tr($field_name), "'";
+else echo ",\n'$field_name'";
 echo "\n)";
 }
 echo "\n);\n";
@@ -107,20 +109,21 @@ field_value=eval('register_form.'+field_name+'.value');
 min_length=fields[j][1];
 max_length=fields[j][2];
 re=fields[j][3];
+locale_field_name=fields[j][4];
 
 if(field_name=='password' && (field_value.indexOf('encrypted-'+site_salt)==0 || field_value.indexOf('hashed-'+site_salt)==0)) {
 	if(register_form.password.value!=document.getElementById('repass').value)
-	msgs[i++]="Password fields aren't match!";
+	msgs[i++]="<?php echo tr('Password fields aren\'t match!'); ?>";
 	continue;
 }
 
-if(field_value.length<min_length) msgs[i++]=field_name+" is shorter than "+min_length+' characters!';
-else if(field_value.length>max_length) msgs[i++]=field_name+" is longer than "+max_length+' characters!';
-else if(re && field_value && !re.test(field_value)) msgs[i++]=field_name+" is invalid!";
+if(field_value.length<min_length) msgs[i++]=locale_field_name+"<?php echo tr(' is shorter than "+min_length+" characters!'); ?>";
+else if(field_value.length>max_length) msgs[i++]=locale_field_name+"<?php echo tr(' is longer than "+max_length+" characters!'); ?>";
+else if(re && field_value && !re.test(field_value)) msgs[i++]=locale_field_name+"<?php echo tr(' is invalid!'); ?>";
 else if(field_name=='email' && register_form.email.value!=register_form.reemail.value)
-msgs[i++]="Email fields aren't match!";
+msgs[i++]="<?php echo tr('Email fields aren\'t match!'); ?>";
 else if(field_name=='password' && register_form.password.value!=document.getElementById('repass').value)
-msgs[i++]="Password fields aren't match!";
+msgs[i++]="<?php echo tr('Password fields aren\'t match!'); ?>";
 }
 
 if(msgs.length) {
@@ -196,11 +199,11 @@ xhr.open('GET', 'ajax/check_username_availability.php?value='+encodeURIComponent
 xhr.onreadystatechange=function() {
 	if(xhr.readyState == 4) if(xhr.status == 200) {
 	if(xhr.responseText=='y') {
-		report('Not available!', 'orange');
+		report('<?php echo tr('Not available!'); ?>', 'orange');
 		username_change=false;
 	}
 	else if(xhr.responseText=='n') {
-		report('Is available.', 'green');
+		report('<?php echo tr('Is available.'); ?>', 'green');
 		username_change=false;
 	}
 	else if(xhr.responseText=='i') report('&nbsp;&nbsp;Invalid.&nbsp;&nbsp;', 'red');
@@ -226,15 +229,15 @@ function report(val, bg) {
 </script>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 
 <form name="register_form" action="" method="post">
-<table bgcolor="#7587b0">
+<table bgcolor="#7587b0" >
 
 <?php
 if($err_msgs) {
-echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">Registration errors:</span><br />';
+echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', tr('Errors'), ':</span><br />';
 foreach($err_msgs as $err_msg) {
 $err_msg[0]=strtoupper($err_msg[0]);
 echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -249,9 +252,9 @@ echo '">';
 require $index_dir.'include/code/code_generate_form_id.php';
 
 ?>
-<tr><td align="right" valign="top">Username format:</td><td  colspan="2">1- English &amp; Persian letters &amp; numbers<br>2- No leading, trailing or consecutive spaces.</td></tr>
+<tr><td <?php echo $cell_align; ?> valign="top"><?php echo tr('Username format'); ?>:</td><td  colspan="2"><?php echo tr('username format msg'); ?></td></tr>
 <tr>
-<td align="right" style="">Username:</td>
+<td <?php echo $cell_align; ?> style=""><?php echo tr('Username'); ?>:</td>
 <td style=""><input
 onkeypress="report('onkeypress', '');"
 onblur="if(this.value!='') check_username(this.value);" type="text" name="username" style="" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30" onchange="username_change=true;"></td>
@@ -260,7 +263,7 @@ onblur="if(this.value!='') check_username(this.value);" type="text" name="userna
 </td>
 </tr>
 <tr>
-<td align="right">Password:</td>
+<td <?php echo $cell_align; ?>><?php echo tr('Password'); ?>:</td>
 <td colspan="2">
 <input type="password" name="password" autocomplete="off" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
@@ -272,7 +275,7 @@ if(isset($_POST['password']) and $_POST['password']!=='' and $password_refill an
 size="30"></td>
 </tr>
 <tr>
-<td align="right">Retype password:</td>
+<td <?php echo $cell_align; ?>><?php echo tr('Retype password'); ?>:</td>
 <td colspan="2">
 <input type="password" id="repass" name="repass" autocomplete="off" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
 <?php
@@ -281,19 +284,19 @@ if(isset($refill_output)) echo $refill_output;
 size="30"></td>
 </tr>
 <tr>
-<td align="right">Email:</td>
+<td <?php echo $cell_align; ?>><?php echo tr('Email'); ?>:</td>
 <td colspan="2"><input type="text" name="email" style="" <?php if(isset($_POST['email'])) echo 'value="', htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td align="right">Retype email:</td>
+<td <?php echo $cell_align; ?>><?php echo tr('Retype email'); ?>:</td>
 <td colspan="2"><input type="text" name="reemail" style="" <?php if(isset($_POST['reemail'])) echo 'value="', htmlspecialchars($_POST['reemail'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td align="right" valign="top">Gender:</td><td colspan="2">
-<input type="radio" name="gender" value="n" <?php if(isset($_POST['gender'])) {
-if($_POST['gender']=='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>>Not specified
-<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']=='m') echo ' checked="true" '; ?>>Male
-<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']=='f') echo ' checked="true" '; ?>>Female
+<td <?php echo $cell_align; ?> valign="top"><?php echo tr('Gender'); ?>:</td><td colspan="2">
+&nbsp;&nbsp;<input type="radio" name="gender" value="n" <?php if(isset($_POST['gender'])) {
+if($_POST['gender']=='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo tr('Not specified'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']=='m') echo ' checked="true" '; ?>><?php echo tr('Male'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']=='f') echo ' checked="true" '; ?>><?php echo tr('Female'); ?>
 </td>
 </tr>
 <?php
@@ -315,8 +318,9 @@ if(captcha_exists) {
 </script>
 <?php
 if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
-	echo '<tr><td colspan="2" align="right">Notify me (via email) when admin approves/rejects my registration: ';
-	echo '</td><td align="left"><input type="checkbox" name="notify" ';
+	echo "<tr><td colspan=\"2\" $cell_align>";
+	echo tr('notify me admin action msg'), ': ';
+	echo '</td><td><input type="checkbox" name="notify" ';
 	if(empty($_POST) or isset($_POST['notify'])) echo ' checked="true" ';
 	echo '></td></tr>';
 }
@@ -325,10 +329,10 @@ if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
 <td>&nbsp;</td><td colspan="2"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
-<td><a href="index.php">Login page</a></td>
+<td><a href="index.php"><?php echo tr('Login page'); ?></a></td>
 <td colspan="2">
-<input type="reset" value="Clear" onClick="return clear_form();" />
-<input type="submit" value="Submit" onClick="return validate()" /></td>
+<input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form();" />
+<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr></table>
 </form>
 </td></tr></table>

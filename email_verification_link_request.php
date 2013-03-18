@@ -28,10 +28,10 @@ if(!isset($_POST['email']))  break;
 
 if(isset($_POST['form1'])) break;
 
-if($_POST['email']==='') $err_msgs[]='Email field is empty!';
+if($_POST['email']==='') $err_msgs[]=tr('Email field is empty!');
 else {
 	$email_re='/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i';
-	if(!preg_match($email_re, $_POST['email'])) $err_msgs[]='Email format is invalid!';
+	if(!preg_match($email_re, $_POST['email'])) $err_msgs[]=tr('Email format is invalid!');
 }
 
 if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/code/code_verify_captcha.php';
@@ -71,8 +71,8 @@ if(isset($captcha_needed)) unset($_SESSION['captcha_verified']);
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
-$success_msg='<h3>An email is sent to <span style="white-space: pre; color: #080;">'.htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8').'</span>';
-if(!isset($_POST['identified'])) $success_msg.=',<br>if that is the correct email address of your account.<br>(and of course if your account needs email verification)</h3>';
+$success_msg='<h3>'.sprintf(tr('verification email sent msg'), htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'));
+if(!isset($_POST['identified'])) $success_msg.=tr('verification email sent msg p2').'</h3>';
 else  $success_msg.='.</h3>';
 $no_specialchars=true;
 require $index_dir.'include/page/page_success.php';

@@ -34,7 +34,7 @@ $admin_alert_email_msg='';
 
 if(isset($ip_blocks_alert_threshold_reached)) {
 
-	$admin_alert_email_msg='- There were '.$new_ip_blocks." new IP block(s).\n";
+	$admin_alert_email_msg='- '.sprintf(tr('There were %d new IP block(s).'), $new_ip_blocks)."\n";
 
 	$query='update `admin_alerts` set `new_ip_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);

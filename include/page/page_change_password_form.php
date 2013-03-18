@@ -4,16 +4,17 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Change password</title>
+<title><?php echo tr('Change password'); ?></title>
 <style>
 </style>
 <script src="js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
@@ -79,18 +80,18 @@ function validate()
 msgs=new Array();
 i=0;
 
-if(!document.change_pass_form.curpass.value) msgs[i++]='Current password field is empty!';
+if(!document.change_pass_form.curpass.value) msgs[i++]='<?php echo tr('Current password field is empty!'); ?>';
 
 newpass_value=document.change_pass_form.newpass.value;
 repass_value=document.change_pass_form.repass.value;
 
 if(newpass_value.indexOf('encrypted-'+site_salt)!=0 && newpass_value.indexOf('hashed-'+site_salt)!=0) {
-	if(newpass_value.length<min_length) msgs[i++]="New password is shorter than "+min_length+' characters!';
-	else if(newpass_value.length>max_length) msgs[i++]="New password is longer than "+max_length+' characters!';
-	else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="New password is invalid!";
+	if(newpass_value.length<min_length) msgs[i++]="<?php echo tr('New password is shorter than "+min_length+" characters!'); ?>";
+	else if(newpass_value.length>max_length) msgs[i++]="<?php echo tr('New password is longer than "+max_length+" characters!'); ?>";
+	else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="<?php echo tr('New password is invalid!'); ?>";
 }
 
-if(newpass_value!=repass_value) msgs[i++]='New password fields are not match!';
+if(newpass_value!=repass_value) msgs[i++]='<?php echo tr('New password fields are not match!'); ?>';
 
 if(captcha_exists) validate_captcha(document.change_pass_form.captcha.value);
 
@@ -110,7 +111,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" >
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo $page_dir; ?>>
 <table width="100%"  height="100%" cellpadding="5" cellspacing="0">
 <tr>
 <td>
@@ -125,7 +126,7 @@ echo '">';
 require $index_dir.'include/code/code_generate_form_id.php';
 
 if(isset($err_msgs)) {
-echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">Errors:</span><br />';
+echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', tr('Errors'), ':</span><br />';
 foreach($err_msgs as $err_msg) {
 $err_msg[0]=strtoupper($err_msg[0]);
 echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -134,10 +135,10 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td align="right">Your current Password:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td <?php echo $cell_align; ?>><?php echo tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td align="right">New password:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
+<td <?php echo $cell_align; ?>><?php echo tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
 if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and !isset($password_error)) {
 	$refill=$_POST['newpass'];
@@ -146,7 +147,7 @@ if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and 
 ?>/></td>
 </tr>
 <tr>
-<td align="right">Retype new Password:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
+<td <?php echo $cell_align; ?>><?php echo tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
 <?php
 if(isset($refill_output)) echo $refill_output;
 ?>/></td>
@@ -159,12 +160,12 @@ if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/pa
 </tr>
 <tr>
 <td></td>
-<td align="center"><input type="reset" value="Clear" onClick="return clear_form()" />
-<input type="submit" value="Submit" onClick="return validate()" /></td>
+<td align="center"><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()" />
+<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr>
 </table>
 </form>
-<br><center><a href="user_options.php">User options</a><br><br><a href="index.php">Login page</a></center>
+<br><center><a href="user_options.php"><?php echo tr('User options'); ?></a><br><br><a href="index.php"><?php echo tr('Login page'); ?></a></center>
 </td></tr></table>
 <script>
 if(captcha_exists) {

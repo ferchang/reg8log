@@ -4,14 +4,15 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Send password reset email</title>
+<title><?php echo tr('Send password reset email'); ?></title>
 <script src="js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
 <script>
 
 var email_re=/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i;
@@ -26,8 +27,8 @@ function validate()
 {
 msgs=new Array();
 i=0;
-if(!document.reset_email_form.email.value) msgs[i++]='Email field is empty!';
-else if(!email_re.test(document.reset_email_form.email.value)) msgs[i++]='Email is invalid!';
+if(!document.reset_email_form.email.value) msgs[i++]='<?php echo tr('Email field is empty!'); ?>';
+else if(!email_re.test(document.reset_email_form.email.value)) msgs[i++]='<?php echo tr('Email is invalid!'); ?>';
 if(captcha_exists) validate_captcha(document.reset_email_form.captcha.value);
 if(msgs.length) {
 clear_cap(false);
@@ -42,10 +43,10 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#7587b0">
+<body bgcolor="#D1D1E9" <?php echo $page_dir; ?>>
 <table width="100%" >
 <tr>
-<td align="left" valign="top">
+<td valign="top">
 <?php
 require $index_dir.'include/page/page_sections.php';
 ?>
@@ -53,7 +54,7 @@ require $index_dir.'include/page/page_sections.php';
 <tr>
 <td align="center"><br>
 <form name="reset_email_form" action="" method="post">
-<table>
+<table bgcolor="#7587b0">
 <?php
 if(isset($err_msgs)) {
 echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic">';
@@ -61,7 +62,7 @@ foreach($err_msgs as $err_msg) echo '<span style="color: yellow" >', $err_msg, '
 echo '</td></tr>';
 }
 ?>
-<tr><td>Enter your account's email:</td>
+<tr><td><?php echo tr('Enter your account\'s email'); ?>:</td>
 <td colspan="2"><input type="text" name="email" <?php if(isset($_POST['email'])) echo 'value="', htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30"></td></tr>
 <?php
 
@@ -75,17 +76,15 @@ if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/pa
 ?>
 <tr><td align="center" colspan="3">
 <span style="color: yellow; font-style: italic" id="cap">&nbsp;</span>
-<div style="margin: 0px; padding: 0px; font-size: 1px">&nbsp;</div><input type="reset" value="Clear" onClick="return clear_form()">
-<input type="submit" value="Submit" onclick="return validate()"></td></tr>
-</table>
-Check your email carefully because, for security reasons, the system will not inform you whether the email you entered really exists in the database;<br>
-You can of course make other tries in case you made a typo or you don't remember certainly which of your emails you had chosen for your account.
+<div style="margin: 0px; padding: 0px; font-size: 1px">&nbsp;</div><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()">
+<input type="submit" value="<?php echo tr('Submit'); ?>" onclick="return validate()"></td></tr>
+</table><br>
+<?php echo tr('Check your email carefully msg'); ?>
 <?php
 if($max_password_reset_emails!=-1) {
 require_once $index_dir.'include/func/func_duration2friendly_str.php';
 $period_msg=duration2friendly_str($password_reset_period, 0);
-echo '<hr width="90%">Maximum number of password reset emails that can be sent in every ', $period_msg, ' : ', $max_password_reset_emails, '<br>';
-echo 'Note that the system will not, for security reasons, tell you if the maximum number of emails is reached.';
+echo '<hr width="90%">', sprintf(tr('Max password reset emails msg'), $period_msg, $max_password_reset_emails);
 }
 ?>
 </td>

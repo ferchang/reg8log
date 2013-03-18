@@ -5,7 +5,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 ?>
 
 <tr>
-<td align="left">This is the security code:<br /><span id="re_captcha_msg" style="visibility: hidden">If the code is not readable,<br />click on the image to change it.</span></td>
+<td ><?php echo tr('This is the security code'); ?>:<br /><span id="re_captcha_msg" style="visibility: hidden"><?php echo tr('If the code is not readable,<br />click on the image to change it'); ?>.</span></td>
 <td align="left" valign="center">
 <img src="captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" />
 </td>
@@ -14,8 +14,8 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 </td>
 </tr>
 <tr>
-<td align="right" valign="top">Enter the security code here:</td>
-<td align="center" colspan="2"><input type="text" size="6" name="captcha" id="captcha" style="" autocomplete="off" onfocus="captcha_focus=true" onblur="t=setTimeout('captcha_focus=false' , 200)" />&nbsp; (Not case-sensitive)</td>
+<td <?php echo $cell_align; ?> valign="top"><?php echo tr('Enter the security code here'); ?>:</td>
+<td align="center" colspan="2"><input type="text" size="6" name="captcha" id="captcha" style="" autocomplete="off" onfocus="captcha_focus=true" onblur="t=setTimeout('captcha_focus=false' , 200)" />&nbsp; <?php echo tr('(Not case-sensitive)'); ?></td>
 </tr>
 <script>
 captcha_exists=true;

@@ -10,6 +10,10 @@ require $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
+////////////////////////
+
+////////////////////////
+
 if(!isset($_GET['rid'], $_GET['key'])) exit('<h3 align="center">Error: rid and/or key parameter is not set!</h3>');
 
 if($_GET['rid']==='' or $_GET['key']==='') exit('<h3 align="center">Error: rid and/or key parameter is empty!</h3>');
@@ -21,7 +25,7 @@ $key=$reg8log_db->quote_smart($_GET['key']);
 
 $query='select * from `password_reset` where `record_id`='.$rid." and `key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) exit('<center><h3>Error: No such record found!</h3><a href="index.php">Login page</a></center>');
+if(!$reg8log_db->result_num($query)) my_exit('<center><h3>'.tr('Error: No such record found').'!</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 $rec=$reg8log_db->fetch_row();
 $_username=$rec['username'];
@@ -30,7 +34,7 @@ require $index_dir.'include/config/config_password_change_or_reset.php';
 
 $expired=$req_time-$password_reset_period;
 
-if($rec['timestamp']<$expired) exit('<center><h3>Error: Password reset link is expired!</h3><a href="index.php">Login page</a></center>');
+if($rec['timestamp']<$expired) my_exit('<center><h3>'.tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/config/config_register_fields.php';
 
@@ -54,13 +58,13 @@ require_once $index_dir.'include/func/func_utf8.php';
 
 if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
 	if(utf8_strlen($_POST['newpass'])<$password_format['minlength'])
-	$err_msgs[]="new password is shorter than {$password_format['minlength']} characters!";
+	$err_msgs[]=sprintf(tr('new password is shorter than'), $password_format['minlength']);
 	else if(utf8_strlen($_POST['newpass'])>$password_format['maxlength'])
-	$err_msgs[]="new password is longer than {$password_format['maxlength']} characters!";
+	$err_msgs[]=sprintf(tr('new password is longer than'), $password_format['maxlength']);
 	else if($password_format['php_re'] and $_POST['newpass']!=='' and !preg_match($password_format['php_re'], $_POST['newpass']))
-	$err_msgs[]="New password is invalid!";
+	$err_msgs[]=tr('New password is invalid!');
 	if($_POST['newpass']!==$_POST['repass'])
-	$err_msgs[]="password fields aren't match!";
+	$err_msgs[]=tr('password fields aren\'t match!');
 }
 
 if(isset($err_msgs)) break;
@@ -72,7 +76,7 @@ require $index_dir.'include/code/code_change_password.php';
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
-$success_msg='<h3>Your password changed successfully.</h3>';
+$success_msg='<h3>'.tr('Your password changed successfully').'.</h3>';
 $no_specialchars=true;
 require $index_dir.'include/page/page_success.php';
 

@@ -46,7 +46,7 @@ Server PHP version: 5.3.10
 
 =================================
 
-configuration variables (all reside in include/config/info_....php files - except common.php that is directly in the include dir)
+configuration variables (all reside in include/config/config_....php files - except common.php that is directly in the include dir)
 
 note: in addition to reading this help, see the comments of each config variable in the relevant config file too. there r more info/details there.
 

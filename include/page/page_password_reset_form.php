@@ -4,16 +4,17 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Reset password</title>
+<title><?php echo tr('Reset password'); ?></title>
 <style>
 </style>
 <script src="js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
@@ -47,10 +48,10 @@ i=0;
 newpass_value=document.reset_pass_form.newpass.value;
 repass_value=document.reset_pass_form.repass.value;
 
-if(newpass_value.length<min_length) msgs[i++]="New password is shorter than "+min_length+' characters!';
-else if(newpass_value.length>max_length) msgs[i++]="New password is longer than "+max_length+' characters!';
-else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="New password is invalid!";
-else if(newpass_value!=repass_value) msgs[i++]='New password fields are not match!';
+if(newpass_value.length<min_length) msgs[i++]="<?php echo tr('New password is shorter than "+min_length+" characters!'); ?>";
+else if(newpass_value.length>max_length) msgs[i++]="<?php echo tr('New password is longer than "+max_length+" characters!'); ?>";
+else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="<?php echo tr('New password is invalid!'); ?>";
+else if(newpass_value!=repass_value) msgs[i++]='<?php echo tr('New password fields are not match!'); ?>';
 
 if(msgs.length) {
 clear_cap(false);
@@ -68,7 +69,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" >
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo $page_dir; ?>>
 <table width="100%"  height="100%" cellpadding="5" cellspacing="0">
 <tr>
 <td>
@@ -83,7 +84,7 @@ echo '">';
 require $index_dir.'include/code/code_generate_form_id.php';
 
 if(isset($err_msgs)) {
-echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">Errors:</span><br />';
+echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', tr('Errors'), ':</span><br />';
 foreach($err_msgs as $err_msg) {
 $err_msg[0]=strtoupper($err_msg[0]);
 echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -92,22 +93,22 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td align="right">New password:</td><td><input type="password" name="newpass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td  <?php echo $cell_align; ?> ><?php echo tr('New password'); ?>:</td><td><input type="password" name="newpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td align="right">Retype new Password:</td><td><input type="password" name="repass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td  <?php echo $cell_align; ?> ><?php echo tr('Retype new Password'); ?>:</td><td><input type="password" name="repass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
 <td></td><td><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
 <td></td>
-<td align="center"><input type="reset" value="Clear" onClick="return clear_form()" />
-<input type="submit" value="Submit" onClick="return validate()" /></td>
+<td align="center"><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()" />
+<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr>
 </table>
 </form>
-<br><center><a href="index.php">Login page</a></center>
+<br><center><a href="index.php"><?php echo tr('Login page'); ?></a></center>
 </td></tr></table>
 <?php
 require $index_dir.'include/page/page_foot_codes.php';

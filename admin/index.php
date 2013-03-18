@@ -22,13 +22,13 @@ else $flag=false;
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title>Admin operations</title>
+<title><?php echo tr('Admin operations'); ?></title>
 <style>
 li {
 font-size: large;
@@ -41,12 +41,12 @@ color: white;
 }
 </style>
 </head>
-<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;">
+<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" <?php echo $page_dir; ?>>
 <table width="100%"  cellpadding="5" cellspacing="0" style="">
 <tr>
 <td valign="top">
 </td>
-<td  width="100%" align="left" valign="top">
+<td  width="100%" valign="top">
 <?php
 require $index_dir.'include/page/page_sections.php';
 ?>
@@ -54,32 +54,32 @@ require $index_dir.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; top: -200px;">
+<table bgcolor="#7587b0" style="position: relative; top: -150px;">
 <tr><td>
 <ul>
-<li>Accounts:
+<li><?php echo tr('Accounts'); ?>:
 <ul>
-<li><a class="li_item" href="admin-accounts.php">Accounts</a><?php if($flag) echo "($accounts)"; ?>
+<li><a class="li_item" href="admin-accounts.php"><?php echo tr('Accounts'); ?></a><?php if($flag) echo "($accounts)"; ?>
 <br><br>
-<li><a class="li_item" href="admin-ban_user.php">Ban a user</a>
-<li><a class="li_item" href="admin-unban_user.php">Unban a user</a>
-<li><a class="li_item" href="admin-banned_users.php">Banned users</a><?php if($flag) echo "($banned_users)"; ?>
+<li><a class="li_item" href="admin-ban_user.php"><?php echo tr('Ban a user'); ?></a>
+<li><a class="li_item" href="admin-unban_user.php"><?php echo tr('Unban a user'); ?></a>
+<li><a class="li_item" href="admin-banned_users.php"><?php echo tr('Banned users'); ?></a><?php if($flag) echo "($banned_users)"; ?>
 </ul>
 <br>
-<li>Pending accounts:
+<li><?php echo tr('Pending accounts'); ?>:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts.php">Pending accounts</a><?php if($flag) echo "($pending_accounts)"; ?>
+<li><a class="li_item" href="admin-pending_accounts.php"><?php echo tr('Pending accounts'); ?></a><?php if($flag) echo "($pending_accounts)"; ?>
 </ul>
 <br>
-<li>Security logs:
+<li><?php echo tr('Security logs'); ?>:
 <ul>
-<li><a class="li_item" href="admin-account_blocks.php">Account blocks</a><?php if($flag) echo '<span title="Active/All">(', $active_account_blocks, '/', $all_account_blocks, ')</span>'; ?>
-<li><a class="li_item" href="admin-ip_blocks.php">IP blocks</a><?php if($flag) echo '<span title="Active/All">(', $active_ip_blocks, '/', $all_ip_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-account_blocks.php"><?php echo tr('Account blocks'); ?></a><?php if($flag) echo '<span title="Active/All">(', $active_account_blocks, '/', $all_account_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-ip_blocks.php"><?php echo tr('IP blocks'); ?></a><?php if($flag) echo '<span title="Active/All">(', $active_ip_blocks, '/', $all_ip_blocks, ')</span>'; ?>
 </ul>
 <br>
-<li>Database:
+<li><?php echo tr('Database'); ?>:
 <ul>
-<li><a class="li_item" href="admin-tables_status.php">Tables status</a>
+<li><a class="li_item" href="admin-tables_status.php"><?php echo tr('Tables status'); ?></a>
 </ul>
 </ul>
 </td></tr>

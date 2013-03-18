@@ -38,7 +38,7 @@ $reg8log_db->result_num($query1) or
 $reg8log_db->result_num($query2) or
 (isset($query3) and $reg8log_db->result_num($query3))
 ) {
-	$err_msgs[]="$field_name is already registered; please choose another $field_name!";
+	$err_msgs[]=sprintf(tr('already registered msg'), tr($field_name), tr($field_name));
 	$uniqueness_err=true;
 }
 

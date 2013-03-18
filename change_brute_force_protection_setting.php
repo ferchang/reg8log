@@ -10,7 +10,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_identify.php';
 
-if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
+if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticated msg').'.</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require_once $index_dir.'include/config/config_brute_force_protection.php';
 
@@ -53,7 +53,7 @@ if(!in_array($disables, array(0, 1, 2, 3))) exit('Invalid block_disable value!')
 if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/code/code_verify_captcha.php';
 
 $password=$_POST['password'];
-if($password=='') $err_msgs[]='Password field is empty!';
+if($password=='') $err_msgs[]=tr('Password field is empty!');
 else if(!isset($captcha_err)) {
 		if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 		require $index_dir.'include/code/code_verify_password.php';
@@ -74,7 +74,7 @@ if(!isset($err_msgs)) {
 	$block_disable=$_POST['disables'];
 	require $index_dir.'include/code/code_change_block_disable.php';
 	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
-	$success_msg='<h3>Brute-force protection setting changed successfully.</h3>';
+	$success_msg='<h3>'.tr('Brute-force protection setting changed successfully').'.</h3>';
 	$no_specialchars=true;
 	require $index_dir.'include/page/page_success.php';
 	exit;

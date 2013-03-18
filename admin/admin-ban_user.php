@@ -20,7 +20,7 @@ do {
 
 if(!isset($_POST['ban_form1']) or isset($_POST['cancel'])) break;
 
-if($_POST['user']==='') $err_msgs[]='user field is empty!';
+if($_POST['user']==='') $err_msgs[]=tr('user field is empty!');
 if($_POST['which']!=='username' and $_POST['which']!=='uid') $err_msgs[]='which field value is incorrect!';
 
 if(isset($err_msgs)) break;
@@ -34,14 +34,14 @@ $user=$reg8log_db->quote_smart($_POST['user']);
 $query="select * from `accounts` where `{$_POST['which']}`=$user limit 1";
 
 if(!$reg8log_db->result_num($query)) {
-	$err_msgs[]='no such user found in the accounts table!';
+	$err_msgs[]=tr('no such user found in the accounts table!');
 	break;
 }
 
 $rec=$reg8log_db->fetch_row();
 
 if(strtolower($rec['username'])==='admin') {
-	$err_msgs[]="Admin account cannot be banned!";
+	$err_msgs[]=tr('Admin account cannot be banned!');
 	break;
 }
 
@@ -56,13 +56,13 @@ do {
 if(!isset($_POST['ban_form2']) or isset($_POST['cancel'])) break;
 
 if(strtolower($_POST['username'])==='admin') {
-	$err_msgs[]="Admin account cannot be banned!";
+	$err_msgs[]=tr('Admin account cannot be banned!');
 	break;
 }
 
 if(!$_POST['years'] and !$_POST['months'] and !$_POST['days'] and !$_POST['hours'] and $_POST['ban_type']!=='infinite') {//no ban duration
 
-	$err_msgs[]='no ban duration specified!';
+	$err_msgs[]=tr('no ban duration specified!');
 
 	require_once $index_dir.'include/code/code_db_object.php';
 

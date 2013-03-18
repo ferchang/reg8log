@@ -10,7 +10,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_key', '$s
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">site_key</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'site_key'), ".<br>";
 
 //-------------------------------
 
@@ -20,7 +20,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_key2', '$
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">site_key2</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'site_key2'), ".<br>";
 
 //-------------------------------
 
@@ -30,7 +30,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_encr_key'
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">site_encr_key</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'site_encr_key'), ".<br>";
 
 //-------------------------------
 
@@ -38,7 +38,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_salt', '$
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">site_salt</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'site_salt'), ".<br>";
 
 //-------------------------------
 
@@ -48,7 +48,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_priv_salt
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">site_priv_salt</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'site_priv_salt'), ".<br>";
 
 //-------------------------------
 
@@ -56,7 +56,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('entropy', '$en
 
 $reg8log_db->query($query);
 
-echo "Variable <span style=\"color: green\">entropy</span> created.<br>";
+echo sprintf(tr('variable created msg'), 'entropy'), ".<br>";
 
 //-------------------------------
 

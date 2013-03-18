@@ -10,7 +10,7 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_identify.php';
 
-if(!isset($identified_user)) exit('<center><h3>You are not authenticated! <br>First log in.</h3><a href="index.php">Login page</a></center>');
+if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticated msg').'.</h3><a href="index.php">'.tr('Login page').'</a></center>');
 
 require $index_dir.'include/config/config_register_fields.php';
 
@@ -45,7 +45,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	
 	if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/code/code_verify_captcha.php';
 	
-	if($_POST['password']==='') $err_msgs[]='Password field is empty!';
+	if($_POST['password']==='') $err_msgs[]=tr('Password field is empty!');
 	else if(!isset($captcha_err)) {
 		if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 		require $index_dir.'include/code/code_verify_password.php';
@@ -62,10 +62,10 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 		}
 	}
 	
-	if(utf8_strlen($_POST['newemail'])<$email_format['minlength']) $err_msgs[]="new email is shorter than {$email_format['minlength']} characters!";
-	else if(utf8_strlen($_POST['newemail'])>$email_format['maxlength'])	$err_msgs[]="new email is longer than {$email_format['maxlength']} characters!";
-	else if($email_format['php_re'] and $_POST['newemail']!=='' and !preg_match($email_format['php_re'], $_POST['newemail'])) $err_msgs[]="New email is invalid!";
-	else if($_POST['newemail']!==$_POST['reemail']) $err_msgs[]="email fields aren't match!";
+	if(utf8_strlen($_POST['newemail'])<$email_format['minlength']) $err_msgs[]=sprintf(tr('new email is shorter than2'), $email_format['minlength']);
+	else if(utf8_strlen($_POST['newemail'])>$email_format['maxlength'])	$err_msgs[]=sprintf(tr('new email is longer than2'), $email_format['maxlength']);
+	else if($email_format['php_re'] and $_POST['newemail']!=='' and !preg_match($email_format['php_re'], $_POST['newemail'])) $err_msgs[]=tr('New email is invalid!');
+	else if($_POST['newemail']!==$_POST['reemail']) $err_msgs[]=tr('email fields aren\'t match!');
 	else if(!isset($err_msgs)) {
 		if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
 		$captcha_verified=false;
@@ -81,7 +81,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	if(!isset($err_msgs)) {
 		require $index_dir.'include/code/code_change_email.php';
 		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
-		$success_msg='<h3>Your email changed successfully.</h3>';
+		$success_msg='<h3>'.tr('Your email changed successfully').'.</h3>';
 		$no_specialchars=true;
 		require $index_dir.'include/page/page_success.php';
 		exit;

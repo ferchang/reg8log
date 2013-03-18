@@ -6,6 +6,8 @@ $debug_mode=true;
 
 $db_installed=false;
 
+$lang='en';
+
 //====================================================
 
 $req_time=time();
@@ -15,6 +17,24 @@ if($debug_mode) {
 	ini_set('display_errors', '1');
 }
 else ini_set('display_errors', '0');
+
+//----------- language ------------
+
+if(isset($_COOKIE['reg8log_lang']) and preg_match('/^[a-z]{2}$/', $_COOKIE['reg8log_lang'])) $lang=$_COOKIE['reg8log_lang'];
+
+if($lang=='fa') {
+	$page_dir='dir="rtl"';
+	$cell_align='align="left"';
+}
+else {
+	$page_dir='';
+	$cell_align='align="right"';
+}
+
+require $index_dir.'include/func/func_tr.php';
+require $index_dir.'include/func/func_my_exit.php';
+
+//----------- language ------------
 
 if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS']!=='off' || $_SERVER['SERVER_PORT']==443) $https=true;
 else $https=false;
@@ -49,7 +69,7 @@ if(!isset($_COOKIE['reg8log_antixsrf_token'])) {
 else $_COOKIE['reg8log_antixsrf_token']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token'], ENT_QUOTES, 'UTF-8');
 
 if(!$db_installed) {
-	if(isset($setup_page)) return;
+	if(isset($setup_page) or isset($change_lang_page)) return;
 	require $index_dir.'include/page/page_not_setup.php';
 	exit;
 }

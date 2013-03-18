@@ -13,14 +13,14 @@ $num=$last-$first+1;
 
 ?>
 
-<html>
+<html <?php echo $page_dir; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
-<title>Blocked accounts</title>
+<title><?php echo tr('Blocked accounts'); ?></title>
 <style>
 </style>
 <script>
@@ -141,7 +141,9 @@ echo '	last_page=', ceil($total/$per_page), ";\n";
 ?>
 	page=document.getElementById('page').value;
 	if(page<1 || page>last_page ) {
-		alert('Page number must be between (including) 1 and '+last_page+'.');
+		alert(<?php
+		echo "'", sprintf(tr('Page number must be between (including) 1 and %d.'), ceil($total/$per_page)), "'";
+		?>);
 		document.getElementById('page').value='';
 		return false;
 	}
@@ -150,11 +152,11 @@ echo '	last_page=', ceil($total/$per_page), ";\n";
 
 </script>
 </head>
-<body bgcolor="#7587b0">
+<body bgcolor="#7587b0" <?php echo $page_dir; ?>>
 <center>
 <form action="" method="post" name="blocked_accounts_form">
 <?php
-echo 'Records ', $first, ' - ', $last, ' of ', $total;
+echo tr('Records '), $first, tr(' - '), $last, tr(' of '), $total;
 echo '<table border cellpadding="3">';
 echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token'];
@@ -168,7 +170,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
 if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Username</a>";
+echo "'>", tr('Username'), "</a>";
 if($sort_by=='username') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -180,7 +182,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username_exists&sort_dir=";
 if($sort_by=='username_exists' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Username exists</a>";
+echo "'>", tr('Username exists'), "</a>";
 if($sort_by=='username_exists') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -192,7 +194,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=first_attempt&sort_dir=";
 if($sort_by=='first_attempt' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>First attempt</a>";
+echo "'>", tr('First attempt'), "</a>";
 if($sort_by=='first_attempt') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -204,7 +206,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_attempt&sort_dir=";
 if($sort_by=='last_attempt' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Last attempt</a>";
+echo "'>", tr('Last attempt'), "</a>";
 if($sort_by=='last_attempt') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -213,22 +215,22 @@ if($sort_by=='last_attempt') {
 echo "</th>";
 
 echo '<th>';
-echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=ip&sort_dir=";
-if($sort_by=='ip' and $sort_dir=='asc') echo 'desc';
+echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_ip&sort_dir=";
+if($sort_by=='last_ip' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>Last IP</a>";
-if($sort_by=='ip') {
+echo "'>", tr('Last IP'), "</a>";
+if($sort_by=='last_ip') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
-echo '<th>Current status</th>';
+echo '<th>', tr('Current status'), '</th>';
 
-echo '<th  class="admin_action">Unblock</th>';
+echo '<th  class="admin_action">', tr('Unblock'), '</th>';
 
-echo '<th  class="admin_action">Delete log record</th>';
+echo '<th  class="admin_action">', tr('Delete log record'), '</th>';
 
 echo '</tr>';
 
@@ -247,24 +249,24 @@ while($rec=$reg8log_db->fetch_row()) {
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
-	echo '<td>', ($rec['username_exists'])? 'Yes' : 'No', '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), ' ago', '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), ' ago', '</td>';
+	echo '<td>', ($rec['username_exists'])? tr('Yes') : tr('No'), '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), tr(' ago'), '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), tr(' ago'), '</td>';
 	echo '<td>', inet_ntop2($rec['last_ip']), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
-		echo '<span style="color: blue" title="Unblocked by admin">Unblocked</span>';
+		echo '<span style="color: blue" title="', tr('Unblocked by admin'), '">', tr('Unblocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
 	else if($req_time-$rec['first_attempt']<$account_block_period) {
 		echo '<span style="color: red" ';
-		echo 'title="Block lift: ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), ' later';
-		echo '">Blocked</span>';
+		echo 'title="', tr('Block lift'), ': ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), tr(' later');
+		echo '">', tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		$currently_blocked=true;
 	}
 	else {
-		echo '<span style="color: #000" title="Block period elapsed">Not blocked</span>';
+		echo '<span style="color: #000" title="', tr('Block period elapsed'), '">', tr('Not blocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
 	echo '</td>';
@@ -272,11 +274,11 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '</tr>';
 }
 
-echo '<tr align="center"';
+echo '<tr ';
 if(!$r) echo ' style="background: ', $color1;
 else echo ' style="background: ', $color2;
 echo '">';
-echo '<td colspan="7" align="left"><input type="submit" value="Execute admin commands" style="color: #000;" name="admin_action"></td><td><input type="button" onclick="check_all(\'unblock\')" value="All" disabled id="check_all2"></td><td><input type="button" onclick="check_all(\'del\')" value="All" disabled id="check_all3"></td></tr>';
+echo '<td colspan="7" ><input type="submit" value="', tr('Execute admin commands'), '" style="color: #000;" name="admin_action"></td><td align="center"><input type="button" onclick="check_all(\'unblock\')" value="', tr('All'), '" disabled id="check_all2"></td><td align="center"><input type="button" onclick="check_all(\'del\')" value="', tr('All'), '" disabled id="check_all3"></td></tr>';
 echo '</table>';
 
 echo '<script>';
@@ -288,12 +290,12 @@ require $index_dir.'include/page/admin/page_gen_paginated_page_links.php';
 
 if($total>$per_pages[0]) {
 	if($total<=$per_page) echo '<br>';
-	echo '<br>Records per page: <select name="per_page" onchange="document.blocked_accounts_form.change_per_page.click()">';
+	echo '<br>', tr('Records per page'), ': <select name="per_page" onchange="document.blocked_accounts_form.change_per_page.click()">';
 	foreach($per_pages as $value) {
 		if($value!=$per_page) echo "<option>$value</option>";
 		else echo "<option selected>$value</option>";
 	}
-	echo '</select>&nbsp;<input type="submit" value="Show" name="change_per_page" style="display: visible">';
+	echo '</select>&nbsp;<input type="submit" value="', tr('Show'), '" name="change_per_page" style="display: visible">';
 	echo  '<script>
 	document.blocked_accounts_form.change_per_page.style.display="none";
 	</script>';
@@ -301,8 +303,8 @@ if($total>$per_pages[0]) {
 
 ?>
 </form>
-<a href="index.php">Admin operations</a><br><br>
-<a href="../index.php">Login page</a>
+<a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo tr('Login page'); ?></a>
 </center>
 <?php
 require $index_dir.'include/page/page_foot_codes.php';

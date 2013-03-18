@@ -13,11 +13,11 @@ $rec=$reg8log_db->fetch_row();
 
 if(isset($_POST['curpass'])) {
 	$password=$_POST['curpass'];
-	$tmp15="the current password that you entered was incorrect!";
+	$tmp15=tr('the current password that you entered was incorrect!');
 }
 else {
 	$password=$_POST['password'];
-	$tmp15="the account password that you entered was incorrect!";
+	$tmp15=tr('the account password that you entered was incorrect!');
 }
 
 if(!verify_secure_hash($password, $rec['password_hash'])) $err_msgs[]=$tmp15;

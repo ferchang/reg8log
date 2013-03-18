@@ -15,13 +15,13 @@ if(strlen($dir)==1) $dir='';
 
 $link="http://{$_SERVER['HTTP_HOST']}$dir/password_reset.php?rid=$rid&key=$key";
 
-$body="Your username: {$rec['username']} - Your password reset link: $link";
-$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\nYour username: {$rec['username']}\nYour password reset link: $link";
+$body=tr('Username').": {$rec['username']} - ".tr('Password reset link').": $link";
+$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\""; $body.="\n\n".tr('Username').": {$rec['username']}\n".tr('Password reset link').": $link";
 $body.="\n--==boundary\nContent-Type: text/html; charset=\"utf-8\"";
 $tmp26=htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8');
-$body.="\n\n<html><body>Your username: $tmp26<br><a href=\"$link\">Your password reset link</a></body></html>\n--==boundary--";
+$body.="\n\n<html $page_dir><body $page_dir>".tr('Username').": $tmp26<br><a href=\"$link\">".tr('Password reset link')."</a></body></html>\n--==boundary--";
 
-mail($_POST['email'], 'Password reset link', $body, $headers);
+mail($_POST['email'], tr('Password reset'), $body, $headers);
 
 if($debug_mode) echo $link;
 

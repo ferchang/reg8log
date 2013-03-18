@@ -7,7 +7,7 @@ foreach (glob('sql/*.sql') as $file) {
   $query=substr($contents, strpos($contents, 'CREATE TABLE IF NOT EXISTS'));
   $reg8log_db->query($query);
   $tablename=basename($file, '.sql');
-  echo 'Table <span style="color: green">'.$tablename.'</span> created.<br>';
+  echo sprintf(tr('table created msg'), $tablename), '.<br>';
 }
 
 ?>

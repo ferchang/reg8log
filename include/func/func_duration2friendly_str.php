@@ -87,59 +87,66 @@ do {
 
 	$n=0;
 	$msg='';
-	if($c<6) $prep='about ';
+	if($c<6) $prep=tr('about').' ';
 	else $prep='';
 
 	do {
 
 		if($y) {
-			$msg.="$y year";
-			if($y>1) $msg.='s';
+			$msg.="$y ".tr('year');
+			if($y>1) $msg.=tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($mth) {
-			if($y) $msg.=" & $mth month";
-			else $msg="$mth month";
-			if($mth>1) $msg.='s';
+			if($y) $msg.=" ".tr('&')." $mth ".tr('month');
+			else $msg="$mth ".tr('month');
+			if($mth>1) $msg.=tr('s');
 		}
 		
 		if($msg and ++$n==$c) break;
 		
 		if($d) {
-			if($y or $mth) $msg.=" & $d day";
-			else $msg="$d day";
-			if($d>1) $msg.='s';
+			if($y or $mth) $msg.=" ".tr('&')." $d ".tr('day');
+			else $msg="$d ".tr('day');
+			if($d>1) $msg.=tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($h) {
-			if($y or $mth or $d) $msg.=" & $h hour";
-			else $msg="$h hour";
-			if($h>1) $msg.='s';
+			if($y or $mth or $d) $msg.=" ".tr('&')." $h ".tr('hour');
+			else $msg="$h ".tr('hour');
+			if($h>1) $msg.=tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($m) {
-			if($y or $mth or $d or $h) $msg.=($abb)? " & $m min":" & $m minute";
-			else $msg=($abb)? "$m min":"$m minute";
-			if($m>1) $msg.='s';
+			if($y or $mth or $d or $h) $msg.=($abb)? " ".tr('&')." $m ".tr('min'):" ".tr('&')." $m ".tr('minute');
+			else $msg=($abb)? "$m ".tr('min'):"$m ".tr('minute');
+			if($m>1) $msg.=tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($s) {
-			if($y or $mth or $d or $h or $m) $msg.=($abb)? " & $s sec":" & $s second";
-			else $msg=($abb)? "$s sec":"$s second";
-			if($t>1) $msg.='s';
+			if($y or $mth or $d or $h or $m) $msg.=($abb)? " ".tr('&')." $s ".tr('sec'):" ".tr('&')." $s ".tr('second');
+			else $msg=($abb)? "$s ".tr('sec'):"$s ".tr('second');
+			if($t>1) $msg.=tr('s');
 		}
 		
 	} while(false);
 
 //---------------------------
+
+	if($msg=='1 day') $msg='24 hours';
+	else if($msg=='2 days') $msg='48 hours';
+	//else if($msg=='3 days') $msg='72 hours';
+	else if($msg=='1 روز') $msg='24 ساعت';
+	else if($msg=='2 روز') $msg='48 ساعت';
+	//else if($msg=='3 روز') $msg='72 ساعت';
 
 	return $prep.$msg;
 

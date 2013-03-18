@@ -37,7 +37,7 @@ $query="insert into `accounts` ($field_names) values ($field_values)";
 $reg8log_db->query($query);
 unset($_SESSION['captcha_verified'], $_SESSION['passed']);
 
-$success_msg='<h3>Congratulations!<br>You registered successfully.</h3>';
+$success_msg=tr('account created msg');
 $no_specialchars=true;
 
 ?>

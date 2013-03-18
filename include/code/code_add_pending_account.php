@@ -53,11 +53,11 @@ unset($_SESSION['captcha_verified'], $_SESSION['passed']);
 if($email_verification_needed) {
   require $index_dir.'include/code/email/code_email_verification_link.php';
   require_once $index_dir.'include/func/func_duration2friendly_str.php';
-  $success_msg='<h3>An email containing the account activation link is sent to your email.<br>Complete your registration by opening that link in '.duration2friendly_str($email_verification_time, 0).'.<br>If you received no email, you can log into your pending account and request a new email.</h3>';
+  $success_msg=sprintf(tr('account activation email sent msg'), duration2friendly_str($email_verification_time, 0));
 }
 else if($admin_confirmation_needed) {
   require_once $index_dir.'include/func/func_duration2friendly_str.php';
-  $success_msg="<h3>Thank you!<br>Your request is processed successfully and your account is pending for admin's confirmation in the next ".duration2friendly_str($admin_confirmation_time, 0).'.</h3>';
+  $success_msg=sprintf(tr('pending for admin confirmation msg'), duration2friendly_str($admin_confirmation_time, 0));
 }
 
 $no_specialchars=true;

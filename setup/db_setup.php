@@ -50,7 +50,7 @@ if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hash
 
 if(isset($err_msgs)) break;
 
-echo '<html><head><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><META HTTP-EQUIV="EXPIRES" CONTENT="0"><title>Setup db - final</title></head><body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"><table align="center" valign="center" height="100%"><tr><td><h4>';
+echo '<html ', $page_dir, '><head><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><META HTTP-EQUIV="EXPIRES" CONTENT="0"><title>', tr('DB setup - Final'), '</title></head><body ', $page_dir, ' bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"><table align="center" valign="center" height="100%"><tr><td><h4>';
 
 require $index_dir.'setup/include/code_create_tables.php';
 
@@ -60,7 +60,7 @@ require $index_dir.'setup/include/code_create_site_vars.php';
 echo '<hr style="width: 250px">';
 require $index_dir.'setup/include/code_add_admin_account.php';
 
-echo 'Account <span style="color: green">Admin</span> created.<br>';
+echo tr('Account <span style="color: green">Admin</span> created'), '.<br>';
 
 $query="insert into `admin_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('visit', 0, 0)";
 $reg8log_db->query($query);
@@ -77,8 +77,8 @@ $reg8log_db->query($query);
 $query="insert ignore into `dummy` (`i`) values (1)";
 $reg8log_db->query($query);
 
-echo '</h4><center><h3>Setup completed.</h3>';
-echo '<a href="../index.php">Login page</a></center>';
+echo '</h4><center><h3>', tr('Setup completed'), '.</h3>';
+echo '<a href="../index.php">', tr('Login page'), '</a></center>';
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
 echo '</td></tr></table>';

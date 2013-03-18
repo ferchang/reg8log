@@ -4,6 +4,6 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 require $index_dir.'include/code/code_identify.php';
 
-if(!isset($identified_user) or $identified_user!=='Admin') exit('<center><h3>You are not authenticated as Admin!<br>First log in as Admin.</h3><a href="../index.php">Login page</a></center>');
+if(!isset($identified_user) or $identified_user!=='Admin') my_exit('<center><h3>'.tr('You are not Admin!').'</h3><a href="../index.php">'.tr('Login page').'</a></center>');
 
 ?>

@@ -49,12 +49,12 @@ require $index_dir.'include/code/code_check_account_block.php';
 
 if(!isset($account_block)) {
 
-	if(!$block_bypass_system_also4ip_block) exit('<h3 align=center><span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span>\'s account is not locked!</h3><center><a href="index.php">Login page</a></center>');
+	if(!$block_bypass_system_also4ip_block) my_exit('<h3 align=center>'.sprintf(tr('account is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.tr('Login page').'</a></center>');
 	
 	$_username=$_POST['username'];
 	require $index_dir.'include/code/code_check_ip_block.php';
 	
-	if(!isset($ip_block)) exit('<h3 align=center>Neither of the account <span style="white-space: pre; color: #0a8;">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> and IP <span style="white-space: pre; color: #0a8;">'.$_SERVER['REMOTE_ADDR'].'</span> are locked!</h3><center><a href="index.php">Login page</a></center>');
+	if(!isset($ip_block)) my_exit('<h3 align=center>'.sprintf(tr('account or ip is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), $_SERVER['REMOTE_ADDR']).'</h3><center><a href="index.php">'.tr('Login page').'</a></center>');
 
 }
 
@@ -63,16 +63,16 @@ require_once $index_dir.'include/code/code_db_object.php';
 $_username=$reg8log_db->quote_smart($_POST['username']);
 $query="select * from `block_bypass` where `username`=$_username limit 1";
 
-if(!$reg8log_db->result_num($query)) exit('<h3 align="center">Error: Block-bypass link not verified!</h3>');
+if(!$reg8log_db->result_num($query)) my_exit('<h3 align="center">'.tr('Error: Block-bypass link not verified!').'</h3>');
 
 $rec=$reg8log_db->fetch_row();
 $key=$rec['key'];
 $incorrect_logins=$rec['incorrect_logins'];
 $block_bypass_record_auto=$rec['auto'];
 
-if($_GET['key']!==$key) exit('<h3 align="center">Error: Block-bypass link not verified!</h3>');
+if($_GET['key']!==$key) my_exit('<h3 align="center">'.tr('Error: Block-bypass link not verified!').'</h3>');
 
-if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) exit('<center><h3>Maximum number of incorrect logins is reached.<br>You cannot use block-bypass system until next block.</h3><br><a href="index.php">Login page</a></center>');
+if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) my_exit('<center><h3>'.tr('max incorrect logins reached msg').'</h3><br><a href="index.php">'.tr('Login page').'</a></center>');
 
 unset($identified_user);
 unset($identify_error);
@@ -80,7 +80,7 @@ unset($identify_error);
 require $index_dir.'include/code/code_identify.php';
 
 if(isset($identify_error)) {
-	$failure_msg=($debug_mode)? $user->err_msg : 'Identification error';
+	$failure_msg=($debug_mode)? $user->err_msg : tr('Identification error');
 	require $index_dir.'include/page/page_failure.php';
 	exit;
 }
@@ -111,7 +111,7 @@ else if(isset($pending_user)) {
 else {
 	require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 	require $index_dir.'include/code/code_block_bypass_incorrect_login.php';
-	$err_msg='You are not authenticated!<br />Check your login information.';
+	$err_msg=tr('Check login information msg');
 }
 
 }//1
