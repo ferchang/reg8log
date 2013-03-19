@@ -7,6 +7,12 @@ $debug_mode=true;
 $db_installed=false;
 
 $lang='en';
+// Default language
+// Currently, only English (en) and Persian/Farsi (fa) are supported.
+
+$admin_emails_lang='';
+// Default language for admin email alerts
+// if empty, $lang will be used.
 
 //====================================================
 
@@ -19,6 +25,8 @@ if($debug_mode) {
 else ini_set('display_errors', '0');
 
 //----------- language ------------
+
+if(!$admin_emails_lang) $admin_emails_lang=$lang;
 
 if(isset($_COOKIE['reg8log_lang']) and preg_match('/^[a-z]{2}$/', $_COOKIE['reg8log_lang'])) $lang=$_COOKIE['reg8log_lang'];
 

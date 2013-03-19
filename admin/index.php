@@ -54,7 +54,7 @@ require $index_dir.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; top: -150px;">
+<table bgcolor="#7587b0" style="position: relative; top: -170px;">
 <tr><td>
 <ul>
 <li><?php echo tr('Accounts'); ?>:
@@ -68,13 +68,14 @@ require $index_dir.'include/page/page_sections.php';
 <br>
 <li><?php echo tr('Pending accounts'); ?>:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts.php"><?php echo tr('Pending accounts'); ?></a><?php if($flag) echo "($pending_accounts)"; ?>
+<li><a class="li_item" href="admin-pending_accounts4admin.php"><?php echo tr('Accounts awaiting admin\'s confirmation'); ?></a><?php if($flag) echo "($pending_accounts4admin)"; ?>
+<li><a class="li_item" href="admin-pending_accounts4email.php"><?php echo tr('Accounts awaiting email verification'); ?></a><?php if($flag) echo "($pending_accounts4email)"; ?>
 </ul>
 <br>
 <li><?php echo tr('Security logs'); ?>:
 <ul>
-<li><a class="li_item" href="admin-account_blocks.php"><?php echo tr('Account blocks'); ?></a><?php if($flag) echo '<span title="Active/All">(', $active_account_blocks, '/', $all_account_blocks, ')</span>'; ?>
-<li><a class="li_item" href="admin-ip_blocks.php"><?php echo tr('IP blocks'); ?></a><?php if($flag) echo '<span title="Active/All">(', $active_ip_blocks, '/', $all_ip_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-account_blocks.php"><?php echo tr('Account blocks'); ?></a><?php if($flag) echo '<span title="', tr('Active/All'), '">(<span style="color: red">', $active_account_blocks, '</span>/', $all_account_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-ip_blocks.php"><?php echo tr('IP blocks'); ?></a><?php if($flag) echo '<span title="', tr('Active/All'), '">(<span style="color: red">', $active_ip_blocks, '</span>/', $all_ip_blocks, ')</span>'; ?>
 </ul>
 <br>
 <li><?php echo tr('Database'); ?>:

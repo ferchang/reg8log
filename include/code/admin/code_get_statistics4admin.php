@@ -33,7 +33,18 @@ $reg8log_db->query($query);
 
 $rec=$reg8log_db->fetch_row();
 
-$pending_accounts=$rec['n'];
+$pending_accounts4admin=$rec['n'];
+
+//---------------
+
+$query="select count(*) as `n` from `pending_accounts` where (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.')';
+
+$reg8log_db->query($query);
+
+$rec=$reg8log_db->fetch_row();
+
+$pending_accounts4email=$rec['n'];
+
 
 //---------------
 

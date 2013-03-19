@@ -2,19 +2,25 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$headers="MIME-Version: 1.0\nContent-Type: multipart/alternative; boundary=\"==boundary\"";
+require_once $index_dir.'include/code/email/code_emails_header.php';
 
-$link=$_SERVER['HTTP_HOST'];
-
-if($_action=='approve') $tmp24=tr('Congratulations! Site admin approved your registration.');
-else $tmp24=tr('Sorry! Site admin rejected your registration.');
+if($_action=='approve') $tmp24=tr('Congratulations! Site admin approved your registration.', false, $_lang);
+else $tmp24=tr('Sorry! Site admin rejected your registration.', false, $_lang);
 
 $body=$tmp24;
-$body.="\n--==Multipart_Boundary\nContent-Type: text/plain; charset=\"utf-8\"";
-$body.="\n\n$tmp24\n$link";
-$body.="\n--==boundary\nContent-Type: text/html; charset=\"utf-8\"";
-$body.="\n\n<html $page_dir><body $page_dir><center>$tmp24<br><a href=\"http://$link\">$link</a></center></body></html>\n--==boundary--";
+$body.="\r\n--==Multipart_Boundary\r\nContent-Type: text/plain; charset=\"utf-8\"";
+$body.="\r\n\r\n$tmp24";
+$body.="\r\n--==boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
 
-mail($_email, ($_action=='approve')? tr('Your registration was approved') : tr('Your registration was rejected'), $body, $headers);
+if($_lang=='fa') $body.="<html dir='rtl'><body dir='rtl'>";
+else $body.="<html><body>";
+
+$body.="<h3 align='center'>$tmp24<br><a href=\"http://$host\">$host</a></h3></body></html>\r\n--==boundary--";
+
+mail($_email, ($_action=='approve')? tr('Your registration was approved', false, $_lang) : tr('Your registration was rejected', false, $_lang), $body, $headers);
+
+/* echo '<textarea>';
+echo "email: $_email\nlang: $_lang\n\n$body";
+echo '</textarea>'; */
 
 ?>

@@ -51,6 +51,6 @@ $query="select * from `pending_accounts` where (`email_verification_key`='' or `
 
 $reg8log_db->query($query);
 
-require $index_dir.'include/page/admin/page_pending_accounts.php';
+require $index_dir.'include/page/admin/page_pending_accounts4admin.php';
 
 ?>

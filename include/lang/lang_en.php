@@ -55,6 +55,7 @@ You can of course make other tries in case you made a typo or you don\'t remembe
 //-- database setup system --
 'Security code short - js msg' => 'Security code is shorter than \'+captcha_min_len+\' characters!',
 'Security code long - js msg' => 'Security code is longer than \'+captcha_max_len+\' characters!',
+'user needs email verification msg' => 'This account needs email verification too for it to be activated',
 
 );
 

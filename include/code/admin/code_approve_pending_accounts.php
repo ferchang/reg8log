@@ -29,7 +29,10 @@ foreach($appr as $auto) {
 
 	$rec=$reg8log_db->fetch_row();
 
-	if(isset($_POST['email-'.$auto])) $emails[]=$_POST['email-'.$auto];
+	if(isset($_POST['email-'.$auto])) {
+		$emails[]=$_POST['email-'.$auto];
+		$langs[]=$_POST['lang-'.$auto];
+	}
 
 	if($rec['email_verification_key']!=='' and !$rec['email_verified']) continue;
 
@@ -68,12 +71,14 @@ if(isset($tmp2)) {
 	$reg8log_db->query($query);
 }
 
-if(isset($emails)) foreach($emails as $_email) {
+if(isset($emails)) for($j=0; $j<count($emails); $j++) {
+	$_email=$emails[$j];
+	$_lang=$langs[$j];
 	$_action='approve';
 	require $index_dir.'include/code/email/code_email_admin_action_notification.php';
 }
 
-unset($emails);
+unset($emails, $langs);
 
 $queries_executed=true;
 

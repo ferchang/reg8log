@@ -30,7 +30,7 @@ $admin_reg_alert_email_msg='';
 
 if(isset($registerations_alert_threshold_reached)) {
 
-	$admin_reg_alert_email_msg.='- '.sprintf(tr('There were %d new registeration(s).'), $new_registerations)."\n";
+	$admin_reg_alert_email_msg.='- '.sprintf(tr('There were %d new registeration(s).', false, $admin_emails_lang), $new_registerations)."\n";
 	
 	$query='update `admin_registeration_alerts` set `new_registerations`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);
@@ -40,7 +40,7 @@ if(isset($registerations_alert_threshold_reached)) {
 $reg8log_db->query("select release_lock($reg_email_alert_lock)");
 
 if($admin_reg_alert_email_msg) {
-	require $index_dir.'include/code/email/code_email_admin_reg_alert_msg.php';
+	require $index_dir.'include/code/email/admin/code_email_admin_reg_alert_msg.php';
 	if($max_registeration_alert_emails) {
 		$query="insert into `registeration_alert_emails_history` (`timestamp`) values($req_time)";
 		$reg8log_db->query($query);

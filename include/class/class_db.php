@@ -86,6 +86,7 @@ function error($err_msg='')
 
 	if($this->auto_abort) {
 		$failure_msg=($debug_mode)? $this->err_msg : "Database error";
+		global $page_dir;
 		require $index_dir.'include/page/page_failure.php';
 		exit;
 	}

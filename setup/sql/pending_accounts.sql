@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.5
+-- version 3.4.9
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2012 at 04:20 PM
--- Server version: 5.1.43
--- PHP Version: 5.3.2
+-- Generation Time: Mar 19, 2013 at 05:25 AM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,8 +38,9 @@ CREATE TABLE IF NOT EXISTS `pending_accounts` (
   `admin_confirmed` tinyint(1) NOT NULL,
   `timestamp` int(11) unsigned NOT NULL,
   `notify_user` tinyint(1) NOT NULL DEFAULT '0',
+  `lang` char(2) CHARACTER SET ascii NOT NULL,
   PRIMARY KEY (`auto`),
   UNIQUE KEY `username` (`username`),
   KEY `record_id` (`record_id`),
   KEY `timestamp` (`timestamp`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

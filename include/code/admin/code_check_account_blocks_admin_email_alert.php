@@ -34,9 +34,9 @@ $admin_alert_email_msg='';
 
 if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
-	if($no_alert_limits) $admin_alert_email_msg='- '.tr('Admin account was blocked.')."\n";
+	if($no_alert_limits) $admin_alert_email_msg='- '.tr('Admin account was blocked.', false, $admin_emails_lang)."\n";
 
-	$admin_alert_email_msg.='- '.sprintf(tr('There were %d new account block(s).'), $new_account_blocks)."\n";
+	$admin_alert_email_msg.='- '.sprintf(tr('There were %d new account block(s).', false, $admin_emails_lang), $new_account_blocks)."\n";
 	
 	$query='update `admin_alerts` set `new_account_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);
@@ -46,7 +46,7 @@ if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 $reg8log_db->query("select release_lock('$lock_name2')");
 
 if($admin_alert_email_msg) {
-	require $index_dir.'include/code/email/code_email_admin_alert_msg.php';
+	require $index_dir.'include/code/email/admin/code_email_admin_alert_msg.php';
 	if($max_alert_emails) {
 		$query="insert into `block_alert_emails_history` (`timestamp`) values($req_time)";
 		$reg8log_db->query($query);

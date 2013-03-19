@@ -335,6 +335,17 @@ when the tables and variables (and also the Admin account) of the program are in
 i don't know if this can have a significant effect, but it is there in case it can.
 when this var is set to false (default), the program itself decides if database is setup fully/successfully by executing a probing query on a dummy table; anyway this should be very fast and have little overhead.
 
+lang:
+
+default language
+example: $lang='en';
+Currently, only English (en) and Persian/Farsi (fa) are supported.
+
+admin_emails_lang:
+
+Default language for admin email alerts
+if empty, $lang will be used.
+
 ------------------------------------------------
 config vars in config_security_logs.php:
 ------------------------------------------------

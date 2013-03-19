@@ -164,7 +164,7 @@ return array(
 'Last username' => 'آخرین نام کاربری',
 'Go' => 'برو',
 'Emails sent' => 'ایمیل های ارسال شده',
-'Email verified' => 'صحیت ایمیل تایید شده',
+'Email verified' => 'صحت ایمیل تایید شده',
 'Time' => 'زمان',
 'Notify' => 'آگاه کردن',
 'notify user description' => 'آیا به کاربر بوسیلهء ایمیل درمورد تصمیم ادمین درمورد قبول یا رد ثبت نام او اطلاع داده خواهد شد یا نه.',
@@ -321,6 +321,13 @@ return array(
 //-- database setup system --
 'Security code short - js msg' => 'کد امنیتی کوتاهتر از \'+captcha_min_len+\' کاراکتر است!',
 'Security code long - js msg' => 'کد امنیتی بیشتر از \'+captcha_max_len+\' کاراکتر است!',
+'user needs email verification msg' => 'این اکانت برای فعال شدن به تایید صحت ایمیل نیز نیاز دارد',
+'Does not need email verification' => 'به تایید صحت ایمیل نیازی ندارد',
+'Accounts awaiting admin\'s confirmation' => 'اکانتهای منتظر تایید ادمین',
+'Accounts awaiting email verification' => 'اکانتهای منتظر تایید صحت ایمیل',
+'No pending accounts awaiting for email verification found.' => 'هیچ اکانت منتظر تایید صحت ایمیل پیدا نشد.',
+'Needs admin confirmation' => 'به تایید ادمین نیز نیاز دارد',
+'Active/All' => 'فعال (قرمز) / همه (سیاه)',
 
 );
 
