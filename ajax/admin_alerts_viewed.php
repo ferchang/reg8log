@@ -22,12 +22,12 @@ if(!is_numeric($_GET['new_ip_blocks'])) exit('new_ip_blocks parameter is not num
 if(!is_numeric($_GET['new_registerations'])) exit('new_registerations parameter is not numeric');
 
 if($_GET['new_account_blocks']) {
-	$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`-{$_GET['new_account_blocks']} where `for`='visit' and `new_account_blocks`>={$_GET['new_account_blocks']} limit 1";
+	$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`-{$_GET['new_account_blocks']} where `for`='visit' and `new_account_blocks`>={$_GET['new_account_blocks']} limit 1";
 	$reg8log_db->query($query);
 }
 
 if($_GET['new_ip_blocks']) {
-	$query="update `admin_alerts` set `new_ip_blocks`=`new_ip_blocks`-{$_GET['new_ip_blocks']} where `for`='visit' and `new_ip_blocks`>={$_GET['new_ip_blocks']} limit 1";
+	$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`-{$_GET['new_ip_blocks']} where `for`='visit' and `new_ip_blocks`>={$_GET['new_ip_blocks']} limit 1";
 	$reg8log_db->query($query);
 }
 

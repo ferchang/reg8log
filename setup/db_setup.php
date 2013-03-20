@@ -62,10 +62,10 @@ require $index_dir.'setup/include/code_add_admin_account.php';
 
 echo tr('Account <span style="color: green">Admin</span> created'), '.<br>';
 
-$query="insert into `admin_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('visit', 0, 0)";
+$query="insert into `admin_block_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('visit', 0, 0)";
 $reg8log_db->query($query);
 
-$query="insert into `admin_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('email', 0, 0)";
+$query="insert into `admin_block_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('email', 0, 0)";
 $reg8log_db->query($query);
 
 $query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('visit', 0)";

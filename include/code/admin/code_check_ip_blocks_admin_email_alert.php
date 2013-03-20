@@ -6,7 +6,7 @@ require_once $index_dir.'include/config/config_security_logs.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$query="select * from `admin_alerts` where `for`='email' limit 1";
+$query="select * from `admin_block_alerts` where `for`='email' limit 1";
 
 $reg8log_db->query($query);
 
@@ -20,8 +20,8 @@ if(!(!$alert_emails_min_interval or $req_time>=($last_alert_email+$alert_emails_
 }
 
 if($max_alert_emails) {
-	$query='select 1 from `block_alert_emails_history` where `timestamp`>='.($req_time-$max_alert_emails_period);
-	if($reg8log_db->result_num($query)>=$max_alert_emails) {
+	$query='select count(*) from `block_alert_emails_history` where `timestamp`>='.($req_time-$max_alert_emails_period);
+	if($reg8log_db->count_star($query)>=$max_alert_emails) {
 		$reg8log_db->query("select release_lock('$lock_name3')");
 		return;
 	}
@@ -36,7 +36,7 @@ if(isset($ip_blocks_alert_threshold_reached)) {
 
 	$admin_alert_email_msg='- '.sprintf(tr('There were %d new IP block(s).', false, $admin_emails_lang), $new_ip_blocks)."\n";
 
-	$query='update `admin_alerts` set `new_ip_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
+	$query='update `admin_block_alerts` set `new_ip_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);
 
 }

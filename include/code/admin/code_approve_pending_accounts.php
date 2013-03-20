@@ -7,6 +7,7 @@ require_once $index_dir.'include/func/func_random.php';
 $autos='';
 $i=0;
 foreach($appr as $auto) {
+  if(!is_numeric($auto)) exit('error: auto value not numeric!');
   $autos.="$auto";
   if(++$i==count($appr)) break;
   $autos.=", ";

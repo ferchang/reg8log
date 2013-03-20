@@ -14,8 +14,6 @@ require $index_dir.'include/code/admin/code_require_admin.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-require_once $index_dir.'include/code/code_db_object.php';
-
 $sort_fields=array('table_name', 'num_records');
 
 if(isset($_GET['sort_by']) and in_array($_GET['sort_by'], $sort_fields))  $sort_by=$_GET['sort_by'];

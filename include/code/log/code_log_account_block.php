@@ -21,14 +21,14 @@ else $no_alert_limits=false;
 
 if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 and !$no_alert_limits)) {
 	if(in_array($alert_admin_about_account_blocks, array(1, 4))) {
-		$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='visit' limit 1";
+		$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='visit' limit 1";
 		$reg8log_db->query($query);
 	}
 	else if(in_array($alert_admin_about_account_blocks, array(2, 5))) {
 		require_once $index_dir.'include/code/code_fetch_site_vars.php';
 		$lock_name2='reg8log--admin_account_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
-		$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='email' limit 1";
+		$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='email' limit 1";
 		$reg8log_db->query($query);
 		require $index_dir.'include/code/admin/code_check_account_blocks_admin_email_alert.php';
 	}
@@ -36,7 +36,7 @@ if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 a
 		require_once $index_dir.'include/code/code_fetch_site_vars.php';
 		$lock_name2='reg8log--admin_account_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
-		$query="update `admin_alerts` set `new_account_blocks`=`new_account_blocks`+1 limit 2";
+		$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`+1 limit 2";
 		$reg8log_db->query($query);
 		require $index_dir.'include/code/admin/code_check_account_blocks_admin_email_alert.php';
 	}

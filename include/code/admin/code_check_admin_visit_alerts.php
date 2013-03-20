@@ -10,7 +10,7 @@ if(isset($_COOKIE['reg8log_dont_disturb']) and $_COOKIE['reg8log_dont_disturb']=
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-$query="select * from `admin_alerts` where `for`='visit' limit 1";
+$query="select * from `admin_block_alerts` where `for`='visit' limit 1";
 
 $reg8log_db->query($query);
 

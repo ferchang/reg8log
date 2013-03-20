@@ -4,16 +4,16 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 foreach($unblock as $item) {
 	$query='delete from `ip_incorrect_logins` where ';
-	$query.=" `admin`={$item['admin']}";
-	$query.=' and `ip`=';
-	$query.=$reg8log_db->quote_smart($item['ip']);
-	$query.=" and `timestamp`<={$item['last_attempt']}";
+	$query.=' `admin`='.$reg8log_db->quote_smart($item['admin']);
+	$query.=' and `ip`='.$reg8log_db->quote_smart($item['ip']);
+	$query.=' and `timestamp`<='.$reg8log_db->quote_smart($item['last_attempt']);
 	$reg8log_db->query($query);
 }
 
 $autos='';
 $i=0;
 foreach($unblock as $item) {
+	if(!is_numeric($item['auto'])) exit('error: auto value not numeric!');
 	$autos.="{$item['auto']}";
 	if(++$i==count($unblock)) break;
 	$autos.=", ";

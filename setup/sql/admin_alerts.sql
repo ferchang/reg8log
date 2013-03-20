@@ -21,10 +21,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_alerts`
+-- Table structure for table `admin_block_alerts`
 --
 
-CREATE TABLE IF NOT EXISTS `admin_alerts` (
+CREATE TABLE IF NOT EXISTS `admin_block_alerts` (
   `for` char(5) CHARACTER SET big5 COLLATE big5_bin NOT NULL,
   `new_account_blocks` int(10) unsigned NOT NULL DEFAULT '0',
   `new_ip_blocks` int(10) unsigned NOT NULL DEFAULT '0',

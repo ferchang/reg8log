@@ -16,8 +16,8 @@ if(!(!$registeration_alert_emails_min_interval or $req_time>=($last_reg_alert_em
 }
 
 if($max_registeration_alert_emails) {
-	$query='select 1 from `registeration_alert_emails_history` where `timestamp`>='.($req_time-$max_registeration_alert_emails_period);
-	if($reg8log_db->result_num($query)>=$max_registeration_alert_emails) {
+	$query='select count(*) from `registeration_alert_emails_history` where `timestamp`>='.($req_time-$max_registeration_alert_emails_period);
+	if($reg8log_db->count_star($query)>=$max_registeration_alert_emails) {
 		$reg8log_db->query("select release_lock($reg_email_alert_lock)");
 		return;
 	}

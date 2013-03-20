@@ -5,6 +5,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 $autos='';
 $i=0;
 foreach($del as $auto) {
+	if(!is_numeric($auto)) exit('error: auto value not numeric!');
 	$autos.="$auto";
 	if(++$i==count($del)) break;
 	$autos.=", ";

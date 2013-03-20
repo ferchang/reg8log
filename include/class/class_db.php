@@ -103,6 +103,19 @@ $this->error('No query result exists');
 return false;
 }
 //=======================================
+function count_star($query=null) //for count(*) queries only
+{
+	$this->err_msg='';
+	if(!is_null($query) and !$this->query($query)) return false;
+	if(!is_resource($this->result)) {
+		$this->error('No valid query result');
+		return false;
+	}
+	$rec=$this->fetch_row(MYSQL_NUM);
+	return $rec[0];
+}
+
+//=======================================
 function quote_smart($value, $identifier=false)
 {
 
