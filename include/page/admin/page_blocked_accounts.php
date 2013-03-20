@@ -258,7 +258,17 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: blue" title="', tr('Unblocked by admin'), '">', tr('Unblocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if($req_time-$rec['first_attempt']<$account_block_period) {
+	else if(
+
+	(
+	strtolower($rec['username'])!='admin' and $req_time-$rec['first_attempt']<$account_block_period and $rec['block_threshold']>=$account_block_threshold
+	)
+	or
+	(
+	strtolower($rec['username'])=='admin' and $req_time-$rec['first_attempt']<$admin_account_block_period and $rec['block_threshold']>=$admin_account_block_threshold
+	)
+
+	) {
 		echo '<span style="color: red" ';
 		echo 'title="', tr('Block lift'), ': ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), tr(' later');
 		echo '">', tr('Blocked'), '</span>';

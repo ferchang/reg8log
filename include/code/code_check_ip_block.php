@@ -9,7 +9,9 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 	$ip_block_threshold=$admin_ip_block_threshold;
 	$ip_captcha_threshold=$admin_ip_captcha_threshold;
 	$ip_block_period=$admin_ip_block_period;
+	$_admin=1;
 }
+else $_admin=0;
 
 if($ip_block_threshold==-1  and $ip_captcha_threshold==-1) return;
 if(isset($captcha_needed) and $ip_block_threshold==-1) return;
@@ -44,7 +46,7 @@ require_once $index_dir.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='select count(*) as `n` from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period);
+$query="select count(*) as `n` from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip and `timestamp`>=".($req_time-$ip_block_period);
 $reg8log_db->query($query);
 $rec=$reg8log_db->fetch_row();
 $count=$rec['n'];
@@ -56,7 +58,7 @@ if($ip_block_threshold!=-1 and $count>=$ip_block_threshold) {
 	if($block_disable!=1 and $block_disable!=3) {
 		$ip_block=$_SERVER['REMOTE_ADDR'];
 		if(isset($set_last_attempt)) {
-			$query='select * from `ip_incorrect_logins` where `ip`='.$ip.' order by `timestamp` desc limit 1';
+			$query="select * from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip order by `timestamp` desc limit 1";
 			$reg8log_db->query($query);
 			$rec=$reg8log_db->fetch_row();
 			$last_attempt=$rec['timestamp'];

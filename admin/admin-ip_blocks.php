@@ -29,6 +29,7 @@ if(isset($_POST['admin_action'])) {
 			$unblock[$i]['ip']=pack('H*', $_POST['ip'.$auto]);
 			$unblock[$i]['auto']=$auto;
 			$unblock[$i]['last_attempt']=$_POST['t'.$auto];
+			$unblock[$i]['admin']=$_POST['a'.$auto];
 			$i++;
 		}
 	}

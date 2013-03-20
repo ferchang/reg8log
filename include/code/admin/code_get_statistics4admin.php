@@ -58,7 +58,7 @@ $all_account_blocks=$rec['n'];
 
 require $index_dir.'include/config/config_brute_force_protection.php';
 
-$query="select count(*) as `n` from `account_block_log` where `first_attempt`>".($req_time-$account_block_period);
+$query="select count(*) as `n` from `account_block_log` where `unblocked`=0 and  ((`username`!='admin' and `first_attempt`>".($req_time-$account_block_period)." and `block_threshold`>=$account_block_threshold) or (`username`='admin' and `first_attempt`>".($req_time-$admin_account_block_period)." and `block_threshold`>=$admin_account_block_threshold))";
 
 $reg8log_db->query($query);
 
@@ -76,7 +76,7 @@ $rec=$reg8log_db->fetch_row();
 
 $all_ip_blocks=$rec['n'];
 
-$query="select count(*) as `n` from `ip_block_log` where `first_attempt`>".($req_time-$ip_block_period);
+$query="select count(*) as `n` from `ip_block_log` where `unblocked`=0 and  ((`last_username`!='admin' and `first_attempt`>".($req_time-$ip_block_period)." and `block_threshold`>=$ip_block_threshold) or (`last_username`='admin' and `first_attempt`>".($req_time-$admin_ip_block_period)." and `block_threshold`>=$admin_ip_block_threshold))";
 
 $reg8log_db->query($query);
 

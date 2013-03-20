@@ -237,13 +237,24 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: blue" title="', tr('Unblocked by admin'), '">', tr('Unblocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
-	else if($req_time-$rec['first_attempt']<$ip_block_period) {
+	else if(
+	
+		(
+		strtolower($rec['last_username'])!='admin' and $req_time-$rec['first_attempt']<$ip_block_period and $rec['block_threshold']>=$ip_block_threshold
+		)
+		or
+		(
+		strtolower($rec['last_username'])=='admin' and $req_time-$rec['first_attempt']<$admin_ip_block_period and $rec['block_threshold']>=$admin_ip_block_threshold
+		)
+
+		) {
 		echo '<span style="color: red" ';
 		echo 'title="', tr('Block lift'), ': ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), tr(' later');
 		echo '">', tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
 		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
+		echo '<input type="hidden" name="a', $rec['auto'], '" value="', ((strtolower($rec['last_username'])=='admin')? '1':'0'), '">';
 		$currently_blocked=true;
 	}
 	else {

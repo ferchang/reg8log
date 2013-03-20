@@ -10,7 +10,7 @@ $lang='en';
 // Default language
 // Currently, only English (en) and Persian/Farsi (fa) are supported.
 
-$admin_emails_lang='';
+$admin_emails_lang='fa';
 // Default language for admin email alerts
 // if empty, $lang will be used.
 

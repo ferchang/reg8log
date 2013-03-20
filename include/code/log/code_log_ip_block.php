@@ -16,7 +16,7 @@ else $ip_first_attempt=$req_time;
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
-$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`) values '."($ip, $ip_first_attempt, $req_time, $_username)";
+$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, $req_time, $_username, $ip_block_threshold)";
 
 $reg8log_db->query($tmp29);
 
