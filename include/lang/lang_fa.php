@@ -323,7 +323,7 @@ return array(
 'Security code long - js msg' => 'کد امنیتی بیشتر از \'+captcha_max_len+\' کاراکتر است!',
 'user needs email verification msg' => 'این اکانت برای فعال شدن به تایید صحت ایمیل نیز نیاز دارد',
 'Does not need email verification' => 'به تایید صحت ایمیل نیازی ندارد',
-'Accounts awaiting admin\'s confirmation' => 'اکانتهای منتظر تایید ادمین',
+'Accounts awaiting admin\'s confirmation' => 'اکانتهای منتظر تایید توسط ادمین',
 'Accounts awaiting email verification' => 'اکانتهای منتظر تایید صحت ایمیل',
 'No pending accounts awaiting for email verification found.' => 'هیچ اکانت منتظر تایید صحت ایمیل پیدا نشد.',
 'Needs admin confirmation' => 'به تایید ادمین نیز نیاز دارد',
