@@ -194,7 +194,8 @@ if(!xhr) {
 	if(!xhr) return false;
 }
 
-xhr.open('GET', 'ajax/check_username_availability.php?value='+encodeURIComponent(uname), true);
+xhr.open('POST', 'ajax/check_username_availability.php', true);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 xhr.onreadystatechange=function() {
 	if(xhr.readyState == 4) if(xhr.status == 200) {
@@ -211,7 +212,7 @@ xhr.onreadystatechange=function() {
 	} else report(ws, '');
 }
 
-xhr.send(null);
+xhr.send('value='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token4post']; ?>');
 
 return true;
 }
@@ -246,7 +247,7 @@ echo '</td></tr>';
 }
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_COOKIE['reg8log_antixsrf_token'];
+echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
 require $index_dir.'include/code/code_generate_form_id.php';

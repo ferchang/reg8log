@@ -10,7 +10,7 @@ $lang='en';
 // Default language
 // Currently, only English (en) and Persian/Farsi (fa) are supported.
 
-$admin_emails_lang='fa';
+$admin_emails_lang='';
 // Default language for admin email alerts
 // if empty, $lang will be used.
 
@@ -68,13 +68,25 @@ else {
 	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, $https, true);
 }
 
-if(!isset($_COOKIE['reg8log_antixsrf_token'])) {
+//---------- antixsrf_token ------------
+
+if(!isset($_COOKIE['reg8log_antixsrf_token4post'])) {
 	require_once $index_dir.'include/func/func_random.php';
 	$antixsrf_token=random_string(22);
-	setcookie('reg8log_antixsrf_token', $antixsrf_token, 0, '/', null, $https, true);
-	$_COOKIE['reg8log_antixsrf_token']=$antixsrf_token;
+	setcookie('reg8log_antixsrf_token4post', $antixsrf_token, 0, '/', null, $https, true);
+	$_COOKIE['reg8log_antixsrf_token4post']=$antixsrf_token;
 }
-else $_COOKIE['reg8log_antixsrf_token']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token'], ENT_QUOTES, 'UTF-8');
+else $_COOKIE['reg8log_antixsrf_token4post']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token4post'], ENT_QUOTES, 'UTF-8');
+
+if(!isset($_COOKIE['reg8log_antixsrf_token4get'])) {
+	require_once $index_dir.'include/func/func_random.php';
+	$antixsrf_token=random_string(22);
+	setcookie('reg8log_antixsrf_token4get', $antixsrf_token, 0, '/', null, $https, true);
+	$_COOKIE['reg8log_antixsrf_token4get']=$antixsrf_token;
+}
+else $_COOKIE['reg8log_antixsrf_token4get']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token4get'], ENT_QUOTES, 'UTF-8');
+
+//---------- antixsrf_token ------------
 
 if(!$db_installed) {
 	if(isset($setup_page) or isset($change_lang_page)) return;

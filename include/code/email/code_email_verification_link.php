@@ -21,7 +21,7 @@ $body.=tr('Account activation link').": $link";
 $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
 $body.="<html $page_dir><body $page_dir><h3 align='center'><a href=\"$link\">".tr('Account activation link')."</a></h3></body></html>\r\n--==$boundary--";
 
-mail($_POST['email'], tr('Account activation'), $body, $headers);
+mail($_POST['email'], '=?UTF-8?B?'.base64_encode(tr('Account activation')).'?=', $body, $headers);
 
 if($debug_mode) echo $link;
 

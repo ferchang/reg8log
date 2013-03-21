@@ -22,7 +22,7 @@ else $body.="<html><body>";
 
 $body.="<h3 align='center'>".str_replace("\n", '<br>', $admin_alert_email_msg)."<br><a href=\"http://$host\">$host</a></h3></body></html>\r\n--==$boundary--";
 
-mail($email, tr('Account/IP blocks alert', false, $admin_emails_lang), $body, $headers);
+mail($email, '=?UTF-8?B?'.base64_encode(tr('Account/IP blocks alert', false, $admin_emails_lang)).'?=', $body, $headers);
 
 if($debug_mode) echo "Emailed: $admin_alert_email_msg";
 

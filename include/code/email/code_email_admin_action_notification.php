@@ -17,10 +17,8 @@ else $body.="<html><body>";
 
 $body.="<h3 align='center'>$tmp24<br><br><a href=\"http://$host\">$host</a></h3></body></html>\r\n--==$boundary--";
 
-mail($_email, ($_action=='approve')? tr('Your registration was approved', false, $_lang) : tr('Your registration was rejected', false, $_lang), $body, $headers);
+$subject=($_action=='approve')? tr('Your registration was approved', false, $_lang) : tr('Your registration was rejected', false, $_lang);
 
-/* echo '<textarea>';
-echo "email: $_email\nlang: $_lang\n\n$body";
-echo '</textarea>'; */
+mail($_email, '=?UTF-8?B?'.base64_encode($subject).'?=', $body, $headers);
 
 ?>

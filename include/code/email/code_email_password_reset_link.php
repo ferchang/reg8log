@@ -22,7 +22,7 @@ $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n"
 $tmp26=htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8');
 $body.="<html $page_dir><body $page_dir><h3 align='center'>".tr('Username').": $tmp26<br><br><a href=\"$link\">".tr('Password reset link')."</a></h3></body></html>\r\n--==$boundary--";
 
-mail($_POST['email'], tr('Password reset'), $body, $headers);
+mail($_POST['email'], '=?UTF-8?B?'.base64_encode(tr('Password reset')).'?=', $body, $headers);
 
 if($debug_mode) echo $link;
 

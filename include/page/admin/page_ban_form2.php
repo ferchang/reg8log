@@ -77,7 +77,7 @@ if(!empty($err_msgs)) {
 }
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_COOKIE['reg8log_antixsrf_token'];
+echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
 require $index_dir.'include/code/code_generate_form_id.php';

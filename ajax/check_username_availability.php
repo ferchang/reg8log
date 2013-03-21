@@ -8,17 +8,19 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
+require $index_dir.'include/code/code_prevent_xsrf.php';
+
 require $index_dir.'include/config/config_register.php';
 
 if(!$ajax_check_username or !$registeration_enabled) exit('ajax username check or registeration is disabled!');
 
-if(!isset($_GET['value'])) {
+if(!isset($_POST['value'])) {
 	$failure_msg="No value specified";
 	require $index_dir.'include/page/page_failure.php';
 	exit;
 }
 
-$value=$_GET['value'];
+$value=$_POST['value'];
 
 require_once $index_dir.'include/code/code_db_object.php';
 

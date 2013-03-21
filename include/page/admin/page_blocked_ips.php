@@ -151,7 +151,7 @@ echo '	last_page=', ceil($total/$per_page), ";\n";
 echo tr('Records '), $first, tr(' - '), $last, tr(' of '), $total;
 echo '<table border cellpadding="3">';
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_COOKIE['reg8log_antixsrf_token'];
+echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
 require_once $index_dir.'include/func/func_duration2friendly_str.php';

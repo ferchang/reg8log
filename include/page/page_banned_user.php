@@ -32,7 +32,7 @@ if($ban_until!=1) {
 else echo '<h4>', tr('Ban will be lifted at'), ':  <span style="color: #84f;">', tr('Unlimited'), '.</span></h4>';
 echo '<br>';
 
-echo '<a onclick="return onLogout()" href="logout.php?antixsrf_token=', $_COOKIE['reg8log_antixsrf_token'], '">', tr('Log out'), '</a>';
+echo '<a onclick="return onLogout()" href="logout.php?antixsrf_token=', $_COOKIE['reg8log_antixsrf_token4get'], '">', tr('Log out'), '</a>';
 
 ?>
 
