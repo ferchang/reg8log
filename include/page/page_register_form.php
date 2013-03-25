@@ -184,7 +184,7 @@ for(j in fields) {
 	else if(field_value.length>max_length) invalid=true;
 	else if(re && field_value && !re.test(field_value)) invalid=true;
 	if(invalid) {
-		report('&nbsp;&nbsp;Invalid.&nbsp;&nbsp;', 'red');
+		report('&nbsp;&nbsp;<?php echo tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
 		return;
 	}
 }
@@ -207,7 +207,7 @@ xhr.onreadystatechange=function() {
 		report('<?php echo tr('Is available.'); ?>', 'green');
 		username_change=false;
 	}
-	else if(xhr.responseText=='i') report('&nbsp;&nbsp;Invalid.&nbsp;&nbsp;', 'red');
+	else if(xhr.responseText=='i') report('&nbsp;&nbsp;<?php echo tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
 	else report(ws, '');
 	} else report(ws, '');
 }

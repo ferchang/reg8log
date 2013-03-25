@@ -56,6 +56,7 @@ return array(
 'Security code long - js msg' => 'Security code is longer than \'+captcha_max_len+\' characters!',
 'user needs email verification msg' => 'This account needs email verification too for it to be activated',
 'Check your email carefully msg2' => 'Check your email carefully because, for security reasons, the system will not inform you whether the email that you entered is the same as your account\'s email; But you can of course make other tries in case you made a typo or you don\'t remember certainly which of your emails you had chosen for your account.',
+'captcha - never used letters' => 'Note: The letters B, D, I, O, Q are never used in captcha codes <br>due to similar appearance with some other characters.',
 
 );
 

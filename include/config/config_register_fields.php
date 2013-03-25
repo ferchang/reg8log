@@ -29,7 +29,7 @@ $fields=array(
 	),
 	'password'=>array(
 		'minlength'=>6,
-		'maxlength'=>100,
+		'maxlength'=>128,
 		'php_re'=>'',
 		'js_re'=>false,
 		'unique'=>false,

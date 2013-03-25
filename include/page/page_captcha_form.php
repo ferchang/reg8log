@@ -7,10 +7,15 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <tr>
 <td ><?php echo tr('This is the security code'); ?>:<br /><span id="re_captcha_msg" style="visibility: hidden"><?php echo tr('If the code is not readable,<br />click on the image to change it'); ?>.</span></td>
 <td align="left" valign="center">
-<img src="captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" />
+<img src="captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" title="" />
 </td>
 <td>
 <img src="image/throbber.gif" style="visibility: hidden; border: 2px solid #000" id="captcha_throbber" /></td>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<?php echo tr('captcha - never used letters'); ?>
 </td>
 </tr>
 <tr>

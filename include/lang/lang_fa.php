@@ -329,6 +329,8 @@ return array(
 'Needs admin confirmation' => 'به تایید ادمین نیز نیاز دارد',
 'Active/All' => 'فعال (قرمز) / همه (سیاه)',
 'Remember for a maximum of' => 'بخاطرسپاری برای حداکثر',
+'captcha - never used letters' => 'نکته: حروف B, D, I, O, Q بخاطر شباهت ظاهری با کاراکترهای دیگر،<br> هیچوقت در کدهای کپچا استفاده نمیشوند.',
+'Invalid' => 'نامعتبر',
 
 );
 

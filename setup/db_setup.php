@@ -12,6 +12,8 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
+ob_start();
+
 require $index_dir.'include/code/code_prevent_repost.php';
 
 $encrypt_session_files_contents=false;
@@ -79,6 +81,7 @@ $reg8log_db->query($query);
 
 echo '</h4><center><h3>', tr('Setup completed'), '.</h3>';
 echo '<a href="../index.php">', tr('Login page'), '</a></center>';
+
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
 echo '</td></tr></table>';
