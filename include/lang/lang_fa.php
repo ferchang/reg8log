@@ -196,7 +196,7 @@ return array(
 'If the code is not readable,<br />click on the image to change it' => 'اگر کد خوانا نیست،<br>برای تغییر آن رویش کلیک کنید',
 'Enter the security code here' => 'کد امنیتی را اینجا وارد کنید',
 '(Not case-sensitive)' => '(غیر حساس به کوچکی و بزرگی حروف)',
-'Change brute-force protection setting' => '&#x202b;تغییر تنظیمات محافظت در برابر Brute-force&#x200f;',
+'Change brute-force protection setting' => '&#x202b;تغییر تنظیمات محافظت در برابر Brute-force<!--&#x200f;-->',
 'password field is empty!' => 'فیلد رمز عبور خالی است!',
 'Warning' => 'هشدار',
 'protection change warning msg' => 'اولاً: اگر شما نمیدانید برای چه درحال انجام چه کاری هستید، پس به این تنظیمات دست نزنید.<br>دوماً: اگر شما یک سطح محافظت کمتر را انتخاب کنید، سپس برای مقاومت در برابر حمله های Brute-force به رمز عبور قوی تری نیاز خواهید داشت.',
@@ -304,7 +304,6 @@ return array(
 'password email sent msg' => 'یک ایمیل به <span style="white-space: pre; color: #080;">%s</span> ارسال شد،<br>اگر آن ایمیل صحیح اکانت شما بوده است',
 'Registration is disabled!' => 'امکان ثبت نام غیرفعال است!',
 'Error: You are logged in!' => 'خطا: شما درحال حاضر لاگین هستید!',
-'User options' => 'گزینه های کاربر',
 'Admin only' => 'فقط ادمین',
 //-- database setup system --
 'DB Setup - Final' => 'نصب پایگاه داده ها - قدم آخر',
@@ -331,6 +330,10 @@ return array(
 'Remember for a maximum of' => 'بخاطرسپاری برای حداکثر',
 'captcha - never used letters' => 'نکته: حروف B, D, I, O, Q بخاطر شباهت ظاهری با کاراکترهای دیگر،<br> هیچوقت در کدهای کپچا استفاده نمیشوند.',
 'Invalid' => 'نامعتبر',
+'Logging other systems out' => 'قطع دسترسی از سیستمهای دیگر',
+'change_autologin_key_msg' => '',
+'The operation was performed successfully' => 'عملیات با موفقیت انجام شد',
+'change autologin key comments' => '- با انجام این عملیات، کلید احراز هویت خودکار شما تغییر یافته و بنابراین سیستمهای دیگری که ممکن است شما در آنها لاگین کرده بوده باشید و همچنان لاگین مانده باشند از لاگین خارج میشوند (دسترسی آنها به اکانت شما قطع میگردد).<br>- این عملیات همچنین در مواردی که ممکن است کوکی/کلید احراز هویت خودکار شما بصورت مقطعی توسط یک هکر سرقت شده باشد، جلوی ادامهء دسترسی غیرمجاز با استفاده از کوکی سرقت شده را میگیرد.',
 
 );
 

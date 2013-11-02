@@ -81,4 +81,20 @@ $log_last_login=true;
 
 //--------------------------------
 
+$allow_manual_autologin_key_change=true;
+/*
+note: admin is always able to perform this operation regardless of this config.
+
+with this option set to true, a logged in user can change his autologin key at any time which will cause other possibly logged in systems to lose access to the account; this can be useful e.g. when a logged in system is left somewhere inadvertently or in the case of an authentication cookie theft.
+
+note that this config is ignored when change_autologin_key_upon_login=2,
+because when change_autologin_key_upon_login=2 autologin key is changed automatically at each request anyway.
+
+*/
+
+//--------------------------------
+
+$cookie_theft_detection_enabled=true;
+//not implemented yet
+
 ?>

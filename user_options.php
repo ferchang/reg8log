@@ -50,14 +50,19 @@ require $index_dir.'include/page/page_sections.php';
 <tr><td>
 <ul>
 <li><a class="li_item" href="change_password.php"><?php echo tr('Change password'); ?></a><br>
-<li><a class="li_item" href="change_email.php"><?php echo tr('Change email'); ?></a>
+<li><a class="li_item" href="change_email.php"><?php echo tr('Change email'); ?></a><br>
 <?php
+
+if($change_autologin_key_upon_login!=2 and ($allow_manual_autologin_key_change or $identified_user=='Admin')) {
+	echo '<li><a class="li_item" href="change_autologin_key.php">', tr("Logging other systems out"), '</a>';
+	if(!$allow_manual_autologin_key_change) echo '<small> (', tr('Admin only'), ')</small>';
+}
 
 require_once $index_dir.'include/config/config_brute_force_protection.php';
 require $index_dir.'include/code/code_check_block_options.php';
 if(count($block_options)>1)  {
 	echo '<li><a class="li_item" href="change_brute_force_protection_setting.php">', tr('Change brute-force protection setting'), '</a>';
-	if(!$allow_users2disable_blocks) echo '<small> (', tr('Admin only'), ')<small>';
+	if(!$allow_users2disable_blocks) echo '<small> (', tr('Admin only'), ')</small>';
 }
 
 ?>
