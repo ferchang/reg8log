@@ -1,4 +1,4 @@
-A high security register and login system by hamidreza_mz -=At=- yahoo -=Dot=- com
+A high security register and login system by hamidreza.mz712 -=At=- gmail -=Dot=- com
 version: 1.9
 licence: GPL v2 or higher
 
