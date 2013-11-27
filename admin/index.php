@@ -54,7 +54,7 @@ require $index_dir.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; top: -170px;">
+<table bgcolor="#7587b0" style="position: relative; <?php if($debug_mode) echo ' top: -170px;'; else echo 'top: -125px;'; ?> ">
 <tr><td>
 <ul>
 <li><?php echo tr('Accounts'); ?>:
