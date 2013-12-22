@@ -23,4 +23,41 @@ function validate_captcha(val) {
 	else captcha_client_error=false;
 	
 }
+
+//-----------------------------------
+
+var captcha_code_correct=false;
+
+function check_captcha() {
+	if(!captcha_exists) return;
+	
+	document.getElementById('captcha_check_throbber').style.display='';
+	document.getElementById('captcha_check_status').innerHTML='<span style="color: #000;"><?php echo tr('Checking the security code...'); ?></span>';
+	
+	if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+	else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+	xhr.open('POST', 'ajax/check_captcha_code.php', true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+	xhr.onreadystatechange=function() {
+		if(xhr.readyState == 4) if(xhr.status == 200) {
+			document.getElementById('captcha_check_throbber').style.display='none';
+			if(xhr.responseText=='y') form_obj.submit();
+			else if(xhr.responseText=='n') {
+				document.getElementById('captcha_check_status').innerHTML='<span style="color: yellow"><?php echo tr('Security code was incorrect!'); ?></span>';
+				mycaptcha('change');
+				return;
+			}
+			else form_obj.submit();
+		}
+		else {
+			form_obj.submit();
+			document.getElementById('captcha_check_throbber').style.display='none';
+		}
+	}
+
+	xhr.send('captcha='+document.getElementById('captcha').value+'&antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token4post']; ?>');
+}
+
 </script>

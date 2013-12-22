@@ -38,6 +38,13 @@ cap.appendChild(document.createElement("br"));
 }
 return false;
 }
+
+if(captcha_exists) {
+	form_obj=document.reset_email_form;
+	check_captcha();
+	return false;
+}
+
 return true;
 }
 

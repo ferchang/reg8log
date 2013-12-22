@@ -67,6 +67,12 @@ cap.appendChild(document.createElement("br"));
 return false;
 }
 
+if(captcha_exists) {
+	form_obj=document.change_email_form;
+	check_captcha();
+	return false;
+}
+
 hash_password();
 
 return true;

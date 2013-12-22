@@ -104,6 +104,12 @@ if(msgs.length) {
 	return false;
 }
 
+if(captcha_exists) {
+	form_obj=document.change_pass_form;
+	check_captcha();
+	return false;
+}
+
 hash_password();
 
 return true;

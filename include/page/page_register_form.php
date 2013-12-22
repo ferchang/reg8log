@@ -136,6 +136,12 @@ cap.appendChild(document.createElement("br"));
 return false;
 }
 
+if(captcha_exists) {
+	form_obj=document.register_form;
+	check_captcha();
+	return false;
+}
+
 hash_password();
 
 return true;

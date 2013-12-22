@@ -10,6 +10,12 @@ $captcha_format=$fields['captcha'];
 
 require $index_dir.'include/code/sess/code_sess_start.php';
 
+if(isset($_SESSION['captcha_verified'])) {
+	$captcha_verified=true;
+	unset($_SESSION['captcha_verified']);
+	return true;
+}
+
 $captcha_verified=false;
 
 if(!isset($_SESSION['captcha_hash'], $_POST['captcha'])) {

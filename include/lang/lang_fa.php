@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'Checking the security code...' => 'در حال چک کردن کد امنیتی...',
+'Security code was incorrect!' => 'کد امنیتی وارد شده اشتباه بود!',
 'login' => 'ورود',
 'username' => 'نام کاربری',
 'password' => 'رمز عبور',

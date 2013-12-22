@@ -23,7 +23,7 @@ if(isset($captcha_form4login)) echo '<table>';
 </tr>
 <tr>
 <td <?php echo $cell_align; ?> valign="top"><?php echo tr('Enter the security code here'); ?>:</td>
-<td align="center" colspan="2"><input type="text" size="6" name="captcha" id="captcha" style="" autocomplete="off" onfocus="captcha_focus=true" onblur="t=setTimeout('captcha_focus=false' , 200)" />&nbsp; <?php echo tr('(Not case-sensitive)'); ?></td>
+<td align="center" colspan="2"><input type="text" size="6" name="captcha" id="captcha" style="" autocomplete="off" onfocus="captcha_focus=true" onblur="t=setTimeout('captcha_focus=false' , 200)" style="vertical-align: middle" />&nbsp;<img src="image/throbber.gif" id="captcha_check_throbber" style="display: none; border: 1px solid #000; width: 17px; height: 17px; vertical-align: middle; margin-left: 5px; margin-right: 5px" /><span id="captcha_check_status"><?php echo tr('(Not case-sensitive)'); ?></span></td>
 </tr>
 <script>
 //copy the same code into add_captcha function in page_login_form.php

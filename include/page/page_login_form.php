@@ -60,23 +60,29 @@ document.login_form.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+
 
 function validate()
 {
-msgs=new Array();
-i=0;
-if(!document.login_form.username.value) msgs[i++]='<?php echo tr('Username field is empty!'); ?>';
-if(!document.login_form.password.value) msgs[i++]='<?php echo tr('Password field is empty!'); ?>';
-if(captcha_exists) validate_captcha(document.login_form.captcha.value);
-if(msgs.length) {
-clear_cap(false);
-for(i in msgs){
-cap.appendChild(document.createTextNode(msgs[i]));
-cap.appendChild(document.createElement("br"));
-}
-return false;
-}
+	msgs=new Array();
+	i=0;
+	if(!document.login_form.username.value) msgs[i++]='<?php echo tr('Username field is empty!'); ?>';
+	if(!document.login_form.password.value) msgs[i++]='<?php echo tr('Password field is empty!'); ?>';
+	if(captcha_exists) validate_captcha(document.login_form.captcha.value);
+	if(msgs.length) {
+	clear_cap(false);
+	for(i in msgs){
+	cap.appendChild(document.createTextNode(msgs[i]));
+	cap.appendChild(document.createElement("br"));
+	}
+	return false;
+	}
 
-hash_password();
-
-return true;
+	if(captcha_exists) {
+		form_obj=document.login_form;
+		check_captcha();
+		return false;
+	}
+	
+	hash_password();
+	
+	return true;
 }
 
 //----------------------------------------------
