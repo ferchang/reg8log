@@ -19,7 +19,7 @@ require_once $index_dir.'include/config/config_identify.php';
       <style>
 
 button {
-margin-left: 1; margin-right: 1
+	margin-left: 1; margin-right: 1
 }
 
 </style>
@@ -79,6 +79,92 @@ hash_password();
 return true;
 }
 
+//----------------------------------------------
+
+var xhr=null;
+var username_change=false;
+
+function create_xhr() {
+	var xhr;
+	if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+	else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+	return xhr;
+}
+
+function add_captcha(captcha_html) {
+	if(captcha_exists) return;
+	document.getElementById('captcha_form_placeholder').innerHTML='<table>'+captcha_html+'</table>';
+	captcha_exists=true;
+	<?php
+	require_once $index_dir.'include/config/config_register_fields.php';
+	echo "captcha_min_len={$fields['captcha']['minlength']};\n";
+	echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
+	echo "captcha_re=";
+	if($fields['captcha']['js_re']===true) echo $fields['captcha']['php_re'];
+	else if($fields['captcha']['js_re']===false) echo 'false';
+	else echo $fields['captcha']['js_re'];
+	echo ";\n";
+	?>
+	document.getElementById('re_captcha_msg').style.visibility='visible';
+	captcha_img_style=document.getElementById('captcha_image').style;
+	captcha_img_style.cursor='hand';
+	if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
+}
+
+function remove_captcha() {
+	if(!captcha_exists) return;
+	document.getElementById('captcha_form_placeholder').innerHTML='';
+	captcha_exists=false;
+	if(captcha_client_error) clear_cap(true);
+}
+
+function check_captcha_needed(uname) {
+
+<?php
+if(
+($account_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+or
+($ip_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+or
+($account_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+or 
+($ip_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+) echo "\nreturn;\n";
+?>
+
+if(!username_change) {
+	//remove_captcha();
+	return;
+}
+
+if(!xhr) {
+	xhr=create_xhr();
+	if(!xhr) return false;
+}
+
+xhr.open('POST', 'ajax/check_captcha_needed.php', true);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+xhr.onreadystatechange=function() {
+	if(xhr.readyState == 4) if(xhr.status == 200) {
+		if(xhr.responseText=='n') {
+			remove_captcha();
+			username_change=false;
+		}
+		else if(xhr.responseText.indexOf('*add captcha from*')!=-1) {
+			add_captcha(xhr.responseText);
+			username_change=false;
+		}
+	}
+}
+
+xhr.send('username='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token4post']; ?>');
+
+return true;
+}
+//----------------------------------------------
+
 </script>
 </head>
 
@@ -120,7 +206,7 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td <?php echo $cell_align; ?> ><?php echo tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value)"></td>
+<td <?php echo $cell_align; ?> ><?php echo tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value); username_change=true;" onblur="if(this.value!='') check_captcha_needed(this.value);" ></td>
 </tr>
 <tr>
 <td <?php echo $cell_align; ?>><?php echo tr('Password'); ?>:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
@@ -130,14 +216,31 @@ echo '</td></tr>';
 require_once $index_dir.'include/func/func_duration2friendly_str.php';
 //duration2friendly_str($email_verification_time, 0);
 echo 'title="', tr('Remember for a maximum of'), ' ', duration2friendly_str($identify_structs['autologin_cookie']['long_age'], 0), '"';
-?>></td>
+?>>
+</td>
 </tr>
 <?php
 
 if($tie_login2ip_option_at_login) echo "<tr><td colspan=\"3\" $cell_align ";
 echo ' title="', tr('tie login to ip option description'), '">', tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and $tie_login2ip>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
 
-if(isset($captcha_needed) or $account_captcha_threshold==0) require $index_dir.'include/page/page_captcha_form.php';
+echo '<tr><td colspan="3" id="captcha_form_placeholder">';
+if(
+isset($captcha_needed)
+or
+($account_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+or
+($ip_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+or
+($account_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+or 
+($ip_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+) {
+	$captcha_form4login=true;
+	require $index_dir.'include/page/page_captcha_form.php';
+}
+echo '</td></tr>';
+
 ?>
 <!-- -->
 <tr>
@@ -164,6 +267,7 @@ if(isset($block_bypass_mode) and $block_bypass_max_incorrect_logins) echo '<br>'
 </center>
 </form>
 <script>
+//copy the same code into add_captcha function
 if(captcha_exists) {
 	document.getElementById('re_captcha_msg').style.visibility='visible';
 	captcha_img_style=document.getElementById('captcha_image').style;

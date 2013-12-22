@@ -6,7 +6,7 @@ return array(
 'login' => 'ورود',
 'username' => 'نام کاربری',
 'password' => 'رمز عبور',
-'remember me' => 'بخاطرسپاری لاگین برای جلسات آینده',
+'remember me' => 'بخاطرسپاری لاگین',
 'block-bypass mode' => 'حالت دور زدن مسدود شدگی',
 'tie login to ip option description' => 'منجر به افزایش امنیت میشود، اما اگر IP شما عوض شود از لاگین خارج میشوید',
 'tie my login to my ip address' => 'لاگین مرا به IP من وابسته کن',

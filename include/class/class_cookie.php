@@ -27,7 +27,7 @@ function error($err_msg='No error message specified')
 $this->err_msg=get_class($this).": $err_msg";
 }
 //=======================================
-function set($name=null, $values=array(), $value_seperator=null, $age='session')
+function set($name=null, $values=array(), $value_seperator=null, $age='session', $is_abs_time=false)
 {
 
 global $req_time;
@@ -44,28 +44,28 @@ return false;
 
 $val='';
 if(is_array($values)) {
-if(is_null($value_seperator)) {
-$this->error('No value seperator specified');
-return false;
-}
-$val=implode($value_seperator, $values);
+	if(is_null($value_seperator)) {
+		$this->error('No value seperator specified');
+		return false;
+	}
+	$val=implode($value_seperator, $values);
 }
 else $val=$values;
 
 switch($age) {
-case 'permanent':
-$expire=$req_time+$this->long_age;
-break;
-case 'session':
-$expire=0;
-break;
-default:
-if(is_int($age) and $age > 0) $expire=$req_time+$age;
-else {
-$this->error("Invalid age value '$age'");
-return false;
-}
-break;
+	case 'permanent':
+		$expire=$req_time+$this->long_age;
+	break;
+	case 'session':
+		$expire=0;
+	break;
+	default:
+		if(is_numeric($age) and $age > 0) $expire=($is_abs_time)? $age : $req_time+$age;
+		else {
+			$this->error("Invalid age value '$age'");
+			return false;
+		}
+	break;
 }
 
 if(setcookie($name, $val, $expire, $this->path, $this->domain, $this->secure, $this->httponly)) return true;

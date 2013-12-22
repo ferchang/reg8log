@@ -202,7 +202,8 @@ function identify($username=null, $password=null)
 			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($this->user_info['username']).' limit 1';
 			$reg8log_db->query($query);
 			$this->user_info['autologin_key']=$new_autologin_key;
-			$this->save_identity($this->autologin_durability);
+			if($cookie->values[$key+1]) $this->save_identity($cookie->values[$key+1], true);
+			else $this->save_identity($this->autologin_durability);
 		}
 		if($this->user_info['banned']) {
 			$_username=$this->user_info['username'];
@@ -246,7 +247,7 @@ function logout()
 	
 }//end of logout
 //=======================================
-function save_identity($age='session')
+function save_identity($age='session', $is_abs_time=false)
 {
 
 	global $parent_page;
@@ -263,7 +264,7 @@ function save_identity($age='session')
 	}
 
 	if($age==='permanent') $age=$this->identify_structs['autologin_cookie']['long_age'];
-	else if($age!=='session' and !(is_int($age) and $age > 0)) {
+	else if($age!=='session' and !(is_numeric($age) and $age > 0)) {
 			$this->error("Invalid age value '$age'");
 			return false;
 		}
@@ -279,10 +280,10 @@ function save_identity($age='session')
 		else $cookie->values[]=$this->user_info[$value];
 	}
 
-	$cookie->values[]=($age=='session')? 0 : $age+$req_time;
+	$cookie->values[]=(($age=='session')? 0 : (($is_abs_time)? $age : $age+$req_time));
 
-	if($cookie->set(null, $cookie->values, null, $age)) {
-		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), ($age=='session')? 0:$age+$req_time, '/', null, $https);
+	if($cookie->set(null, $cookie->values, null, $age, $is_abs_time)) {
+		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), (($age=='session')? 0 : (($is_abs_time)? $age : $age+$req_time)), '/', null, $https);
 		return true;
 	}
 

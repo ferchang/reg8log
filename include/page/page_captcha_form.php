@@ -2,6 +2,9 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
+if(isset($captcha_form4login)) echo '<table>';
+// we need captcha from in its own table so we can remove it dynamically (with Javascript) from the login from.
+
 ?>
 
 <tr>
@@ -23,6 +26,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <td align="center" colspan="2"><input type="text" size="6" name="captcha" id="captcha" style="" autocomplete="off" onfocus="captcha_focus=true" onblur="t=setTimeout('captcha_focus=false' , 200)" />&nbsp; <?php echo tr('(Not case-sensitive)'); ?></td>
 </tr>
 <script>
+//copy the same code into add_captcha function in page_login_form.php
 captcha_exists=true;
 <?php
 require_once $index_dir.'include/config/config_register_fields.php';
@@ -35,3 +39,6 @@ else echo $fields['captcha']['js_re'];
 echo ";\n";
 ?>
 </script>
+<?php
+if(isset($captcha_form4login)) echo '</table>';
+?>

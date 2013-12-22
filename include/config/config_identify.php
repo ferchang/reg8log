@@ -94,7 +94,4 @@ because when change_autologin_key_upon_login=2 autologin key is changed automati
 
 //--------------------------------
 
-$cookie_theft_detection_enabled=true;
-//not implemented yet
-
 ?>
