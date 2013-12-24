@@ -7,7 +7,7 @@ class hm_user {
 var $err_msg='';
 var $user_info=null;
 var $identify_structs=null;
-var $autologin_durability='';
+var $autologin_cookie_expiration='';
 
 //=======================================
 function hm_user($identify_structs)
@@ -196,14 +196,13 @@ function identify($username=null, $password=null)
 		}
 		$block_disable=$this->user_info['block_disable'];
 		$last_protection=$this->user_info['last_protection'];
-		$this->autologin_durability=($cookie->values[$key+1])? 'permanent' : 'session';
+		$this->autologin_cookie_expiration=$cookie->values[$key+1];
 		if($change_autologin_key_upon_login==2) {
 			$new_autologin_key=random_string(43);
 			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($this->user_info['username']).' limit 1';
 			$reg8log_db->query($query);
 			$this->user_info['autologin_key']=$new_autologin_key;
-			if($cookie->values[$key+1]) $this->save_identity($cookie->values[$key+1], true);
-			else $this->save_identity($this->autologin_durability);
+			$this->save_identity($this->autologin_cookie_expiration, true);
 		}
 		if($this->user_info['banned']) {
 			$_username=$this->user_info['username'];
@@ -247,7 +246,7 @@ function logout()
 	
 }//end of logout
 //=======================================
-function save_identity($age='session', $is_abs_time=false)
+function save_identity($age, $is_abs_time=false)
 {
 
 	global $parent_page;
@@ -263,12 +262,6 @@ function save_identity($age='session', $is_abs_time=false)
 		return false;
 	}
 
-	if($age==='permanent') $age=$this->identify_structs['autologin_cookie']['long_age'];
-	else if($age!=='session' and !(is_numeric($age) and $age > 0)) {
-			$this->error("Invalid age value '$age'");
-			return false;
-		}
-
 	$cookie=new hm_cookie('reg8log_autologin', $this->identify_structs['autologin_cookie']['value_seperator']);
 	$cookie->secure=$https;
 	$autologin_key=$this->user_info['autologin_key'];
@@ -280,10 +273,12 @@ function save_identity($age='session', $is_abs_time=false)
 		else $cookie->values[]=$this->user_info[$value];
 	}
 
-	$cookie->values[]=(($age=='session')? 0 : (($is_abs_time)? $age : $age+$req_time));
-
-	if($cookie->set(null, $cookie->values, null, $age, $is_abs_time)) {
-		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), (($age=='session')? 0 : (($is_abs_time)? $age : $age+$req_time)), '/', null, $https);
+	$age=(($is_abs_time)? $age : (($age)? $age+$req_time : 0));
+	
+	$cookie->values[]=$age;
+	
+	if($cookie->set(null, $cookie->values, null, $age, true)) {
+		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), $age, '/', null, $https);
 		return true;
 	}
 

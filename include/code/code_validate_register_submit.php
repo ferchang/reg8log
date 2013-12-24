@@ -2,7 +2,8 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
+require_once $index_dir.'include/func/func_yeh8kaaf.php';
+fix_yeh8kaaf($_POST['username']);
 
 foreach($fields as $field_name=>$specs) {//validate post data
 

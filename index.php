@@ -25,7 +25,8 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
-	$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
+	require_once $index_dir.'include/func/func_yeh8kaaf.php';
+	fix_yeh8kaaf($_POST['username']);
 	
 	$manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
@@ -52,9 +53,6 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 	
 } //login attempt
 
-if(isset($_POST['remember'])) $remember=true;
-else $remember=false;
-
 if(isset($_POST['login2ip'])) $login2ip=true;
 else $login2ip=false;
 
@@ -80,8 +78,21 @@ $_identified_username=$identified_user;
 
 require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
-if($remember) $user->save_identity('permanent');
-else $user->save_identity('session');
+//------------------------------
+
+require_once $index_dir.'include/func/func_autologin_ages.php';
+$autologin_ages=get_autologin_ages();
+
+if(count($autologin_ages)==1) $autologin_age=$autologin_ages[0];
+else {
+	if(!isset($_POST['autologin_age'])) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] not set!</h3></center>');
+	if(!in_array($_POST['autologin_age'], $autologin_ages)) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] value not in $autologin_ages array!</h3></center>');
+	$autologin_age=$_POST['autologin_age'];
+}
+
+$user->save_identity($autologin_age);
+
+//---------------------------
 
 $msg='<h1>'.tr('You logged in successfully').' <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
 
@@ -106,9 +117,21 @@ else if(isset($banned_user)) {
 		$_identified_username=$banned_user;
 
 		require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
-		
-		if($remember) $user->save_identity('permanent');
-		else $user->save_identity('session');
+
+		//-----------------------------
+		require_once $index_dir.'include/func/func_autologin_ages.php';
+		$autologin_ages=get_autologin_ages();
+
+		if(count($autologin_ages)==1) $autologin_age=$autologin_ages[0];
+		else {
+			if(!isset($_POST['autologin_age'])) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] not set!</h3></center>');
+			if(!in_array($_POST['autologin_age'], $autologin_ages)) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] value not in $autologin_ages array!</h3></center>');
+			$autologin_age=$_POST['autologin_age'];
+		}
+
+		$user->save_identity($autologin_age);
+		//-----------------------------
+
 	}
 	require $index_dir.'include/page/page_banned_user.php';
 }

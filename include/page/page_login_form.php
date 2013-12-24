@@ -36,11 +36,58 @@ if($tie_login2ip_option_at_login and ($tie_login2ip==1 or $tie_login2ip==2)) {
 	echo '<script src="js/admin_tie_login2ip.js"></script>';
 }
 else echo "<script>\nfunction check_admin(val) { }\n</script>\n";
+
+//--------------------------------------------------------------
+
+require_once $index_dir.'include/func/func_duration2friendly_str.php';
+
+echo '<script>';
+
+$str='<select name=autologin_age ';
+if(count($autologin_ages)==1) $str.=' disabled ';
+$str.='>';
+foreach($autologin_ages as $value) {
+	$str.="<option value=$value style='text-align: center'>";
+	if($value==0) $str.=tr('Browser session');
+	else $str.=duration2friendly_str($value, 0);
+}
+echo "\nautologin_ages_select_html=\"$str</select>\";";
+
+$str='<select name=autologin_age ';
+if(count($admin_autologin_ages)==1) $str.=' disabled ';
+$str.='>';
+foreach($admin_autologin_ages as $value) {
+	$str.="<option value=$value style='text-align: center'>";
+	if($value==0) $str.=tr('Browser session');
+	else $str.=duration2friendly_str($value, 0);
+}
+echo "\nadmin_autologin_ages_select_html=\"$str</select>\";\n";
+
+echo '</script>';
+
+//-------------------------------------------
+
 ?>
+
+<script>
+function check_autologin_age_options(val) {
+
+	if(val.toLowerCase()=='admin') {
+			document.getElementById('autologin_age_select_placeholder').innerHTML=admin_autologin_ages_select_html;
+			return;
+	}
+	else {
+		document.getElementById('autologin_age_select_placeholder').innerHTML=autologin_ages_select_html;
+		return;
+	}
+
+}
+</script>
 
 <script language="javascript">
 
 var login2ip_change=false;
+var autologin_age_change=false;
 
 function clear_form() {
 document.login_form.username.value='';
@@ -212,23 +259,51 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td <?php echo $cell_align; ?> ><?php echo tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value); username_change=true;" onblur="if(this.value!='') check_captcha_needed(this.value);" ></td>
+<td <?php echo $cell_align; ?> ><?php echo tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value); username_change=true; check_autologin_age_options(this.value)" onblur="if(this.value!='') check_captcha_needed(this.value);" ></td>
 </tr>
 <tr>
 <td <?php echo $cell_align; ?>><?php echo tr('Password'); ?>:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td colspan="3" <?php echo $cell_align; ?> align="right"><?php echo tr('Remember me'); ?>: <input type="checkbox" value="true" name="remember" <?php if($remember) echo 'checked ';
-require_once $index_dir.'include/func/func_duration2friendly_str.php';
-//duration2friendly_str($email_verification_time, 0);
-echo 'title="', tr('Remember for a maximum of'), ' ', duration2friendly_str($identify_structs['autologin_cookie']['long_age'], 0), '"';
-?>>
+<td colspan="3" <?php echo $cell_align; ?> align="right"><?php echo tr('Remember login for'); ?>: 
+
+<span id=autologin_age_select_placeholder>
+<select name=autologin_age 
+<?php
+
+require_once $index_dir.'include/func/func_autologin_ages.php';
+$autologin_ages=get_autologin_ages();
+
+if(count($autologin_ages)==1) echo ' disabled >';
+else echo ' >';
+
+if(count($autologin_ages)==1) {
+	echo "<option value={$autologin_ages[0]}>";
+	if($autologin_ages[0]==0) echo tr('Browser session');
+	else echo duration2friendly_str($autologin_ages[0], 0);
+}
+else {
+	foreach($autologin_ages as $value) {
+		echo "<option value=$value style='text-align: center' ";
+		if(isset($_POST['autologin_age']) and $value==$_POST['autologin_age']) echo ' selected ';
+		echo '>';
+		if($value==0) echo tr('Browser session');
+		else echo duration2friendly_str($value, 0);
+	}
+}
+
+?>
+</select>
+</span>
+
 </td>
 </tr>
 <?php
 
-if($tie_login2ip_option_at_login) echo "<tr><td colspan=\"3\" $cell_align ";
-echo ' title="', tr('tie login to ip option description'), '">', tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and $tie_login2ip>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
+if($tie_login2ip_option_at_login) {
+	echo "<tr><td colspan=\"3\" $cell_align ";
+	echo ' title="', tr('tie login to ip option description'), '">', tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and $tie_login2ip>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
+}
 
 echo '<tr><td colspan="3" id="captcha_form_placeholder">';
 if(
@@ -273,7 +348,7 @@ if(isset($block_bypass_mode) and $block_bypass_max_incorrect_logins) echo '<br>'
 </center>
 </form>
 <script>
-//copy the same code into add_captcha function
+//copy the same code into add_captcha JS function
 if(captcha_exists) {
 	document.getElementById('re_captcha_msg').style.visibility='visible';
 	captcha_img_style=document.getElementById('captcha_image').style;

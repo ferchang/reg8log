@@ -20,6 +20,9 @@ if(!isset($_POST['value'])) {
 	exit;
 }
 
+require_once $index_dir.'include/func/func_yeh8kaaf.php';
+fix_yeh8kaaf($_POST['value']);
+
 $value=$_POST['value'];
 
 require_once $index_dir.'include/code/code_db_object.php';

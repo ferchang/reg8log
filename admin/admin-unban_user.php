@@ -25,7 +25,8 @@ if($_POST['which']!=='username' and $_POST['which']!=='uid') $err_msgs[]='which 
 
 if(isset($err_msgs)) break;
 
-$_POST['user']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['user']);
+require_once $index_dir.'include/func/func_yeh8kaaf.php';
+fix_yeh8kaaf($_POST['user']);
 
 require_once $index_dir.'include/code/code_db_object.php';
 	

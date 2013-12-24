@@ -15,7 +15,7 @@ if($change_autologin_key_upon_new_password) {
 	
 	$user->user_info['autologin_key']=$new_autologin_key;
 
-	$user->save_identity($user->autologin_durability);
+	$user->save_identity($user->autologin_cookie_expiration, true);
 
 }
 else {

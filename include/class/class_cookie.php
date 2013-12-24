@@ -52,7 +52,7 @@ if(is_array($values)) {
 }
 else $val=$values;
 
-switch($age) {
+switch("$age") {
 	case 'permanent':
 		$expire=$req_time+$this->long_age;
 	break;
@@ -60,11 +60,7 @@ switch($age) {
 		$expire=0;
 	break;
 	default:
-		if(is_numeric($age) and $age > 0) $expire=($is_abs_time)? $age : $req_time+$age;
-		else {
-			$this->error("Invalid age value '$age'");
-			return false;
-		}
+		$expire=(($is_abs_time)? $age : (($age)? $age+$req_time : 0));
 	break;
 }
 

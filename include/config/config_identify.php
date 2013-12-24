@@ -66,7 +66,7 @@ this option can be useful when extreme security is needed.
 
 $tie_login2ip_option_at_login=true;
 //with this enabled, all users have the option of tying or not tying their logins to their IPs.
-//note that this is regardless of the setting of $tie_login2ip, but $tie_login2ip value affects the default stat of the corresponding checkbox on the login form
+//note that this is regardless of the setting of $tie_login2ip, but $tie_login2ip value affects the default state of the corresponding checkbox on the login form
 
 $change_autologin_key_upon_logout=true;
 //highly recommended for higher security
@@ -93,5 +93,40 @@ because when change_autologin_key_upon_login=2 autologin key is changed automati
 */
 
 //--------------------------------
+
+$max_session_autologin_age=0;//in seconds / 0: infinite
+//not implemented yet
+
+$autologin_ages=array(
+
+	0,
+	5*60,
+	20*60,
+	60*60,
+	8*60*60,
+	24*60*60,
+	3*24*60*60,
+	7*24*60*60,
+	30*24*60*60,
+	3*30*24*60*60,
+	12*30*24*60*60,
+
+);
+
+$admin_autologin_ages=array(
+
+	0,
+	5*60,
+	20*60,
+	60*60,
+	8*60*60,
+	24*60*60,
+	3*24*60*60,
+	7*24*60*60,
+	30*24*60*60,
+	3*30*24*60*60,
+	12*30*24*60*60,
+
+);
 
 ?>

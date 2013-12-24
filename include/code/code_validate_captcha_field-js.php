@@ -47,6 +47,7 @@ function check_captcha() {
 			else if(xhr.responseText=='n') {
 				document.getElementById('captcha_check_status').innerHTML='<span style="color: yellow"><?php echo tr('Security code was incorrect!'); ?></span>';
 				mycaptcha('change');
+				document.getElementById('captcha').focus();
 				return;
 			}
 			else form_obj.submit();

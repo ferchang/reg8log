@@ -3,12 +3,13 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'Browser session' => 'باز بودن مرورگر',
 'Checking the security code...' => 'در حال چک کردن کد امنیتی...',
 'Security code was incorrect!' => 'کد امنیتی وارد شده اشتباه بود!',
 'login' => 'ورود',
 'username' => 'نام کاربری',
 'password' => 'رمز عبور',
-'remember me' => 'بخاطرسپاری لاگین',
+'Remember login for' => 'بخاطرسپاری لاگین تا مدت',
 'block-bypass mode' => 'حالت دور زدن مسدود شدگی',
 'tie login to ip option description' => 'منجر به افزایش امنیت میشود، اما اگر IP شما عوض شود از لاگین خارج میشوید',
 'tie my login to my ip address' => 'لاگین مرا به IP من وابسته کن',

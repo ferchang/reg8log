@@ -16,7 +16,8 @@ if(!isset($_POST['username'])) {
 	exit;
 }
 
-$_POST['username']=str_replace(array('ي', 'ك'), array('ی', 'ک'), $_POST['username']);
+require_once $index_dir.'include/func/func_yeh8kaaf.php';
+fix_yeh8kaaf($_POST['username']);
 
 require $index_dir.'include/config/config_brute_force_protection.php';
 
