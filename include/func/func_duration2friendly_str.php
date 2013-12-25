@@ -148,6 +148,13 @@ do {
 	else if($msg=='2 روز') $msg='48 ساعت';
 	//else if($msg=='3 روز') $msg='72 ساعت';
 
+	global $lang;
+	if($lang=='fa') {
+		$en_num = array('0','1','2','3','4','5','6','7','8','9');
+		$fa_num = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
+		$msg=str_replace($en_num, $fa_num, $msg);
+	}
+	
 	return $prep.$msg;
 
 }

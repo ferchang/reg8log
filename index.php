@@ -78,21 +78,29 @@ $_identified_username=$identified_user;
 
 require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
-//------------------------------
-
+//=================
 require_once $index_dir.'include/func/func_autologin_ages.php';
 $autologin_ages=get_autologin_ages();
 
-if(count($autologin_ages)==1) $autologin_age=$autologin_ages[0];
-else {
-	if(!isset($_POST['autologin_age'])) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] not set!</h3></center>');
-	if(!in_array($_POST['autologin_age'], $autologin_ages)) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] value not in $autologin_ages array!</h3></center>');
+if(isset($_POST['autologin_age'])) {
+	if(!in_array($_POST['autologin_age'], $autologin_ages)) {
+		$autologin_age_msg=tr('illegal autologin_age msg');
+		require $index_dir.'include/page/page_login_form.php';
+		exit;
+	}
 	$autologin_age=$_POST['autologin_age'];
+}
+else {
+	if(count($autologin_ages)!=1) {
+		$autologin_age_msg=tr('illegal autologin_age msg');
+		require $index_dir.'include/page/page_login_form.php';
+		exit;
+	}
+	$autologin_age=$autologin_ages[0];
 }
 
 $user->save_identity($autologin_age);
-
-//---------------------------
+//=================
 
 $msg='<h1>'.tr('You logged in successfully').' <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
 
@@ -118,19 +126,29 @@ else if(isset($banned_user)) {
 
 		require $index_dir.'include/code/dec/code_dec_incorrect_logins.php';
 
-		//-----------------------------
+		//=================
 		require_once $index_dir.'include/func/func_autologin_ages.php';
 		$autologin_ages=get_autologin_ages();
 
-		if(count($autologin_ages)==1) $autologin_age=$autologin_ages[0];
-		else {
-			if(!isset($_POST['autologin_age'])) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] not set!</h3></center>');
-			if(!in_array($_POST['autologin_age'], $autologin_ages)) my_exit('<center><h3>Error: $_POST[\'autologin_age\'] value not in $autologin_ages array!</h3></center>');
+		if(isset($_POST['autologin_age'])) {
+			if(!in_array($_POST['autologin_age'], $autologin_ages)) {
+				$autologin_age_msg=tr('illegal autologin_age msg');
+				require $index_dir.'include/page/page_login_form.php';
+				exit;
+			}
 			$autologin_age=$_POST['autologin_age'];
+		}
+		else {
+			if(count($autologin_ages)!=1) {
+				$autologin_age_msg=tr('illegal autologin_age msg');
+				require $index_dir.'include/page/page_login_form.php';
+				exit;
+			}
+			$autologin_age=$autologin_ages[0];
 		}
 
 		$user->save_identity($autologin_age);
-		//-----------------------------
+		//=================
 
 	}
 	require $index_dir.'include/page/page_banned_user.php';

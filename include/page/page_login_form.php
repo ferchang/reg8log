@@ -70,14 +70,24 @@ echo '</script>';
 ?>
 
 <script>
-function check_autologin_age_options(val) {
 
+<?php
+echo 'var autologin_age_group=';
+if(isset($_POST['username']) and strtolower($_POST['username'])=='admin') echo "'admin';\n";
+else echo "'users';\n";
+?>
+
+function check_autologin_age_options(val) {
 	if(val.toLowerCase()=='admin') {
+			if(autologin_age_group=='admin') return;
 			document.getElementById('autologin_age_select_placeholder').innerHTML=admin_autologin_ages_select_html;
+			autologin_age_group='admin';
 			return;
 	}
 	else {
+		if(autologin_age_group=='users') return;
 		document.getElementById('autologin_age_select_placeholder').innerHTML=autologin_ages_select_html;
+		autologin_age_group='users';
 		return;
 	}
 
@@ -87,7 +97,6 @@ function check_autologin_age_options(val) {
 <script language="javascript">
 
 var login2ip_change=false;
-var autologin_age_change=false;
 
 function clear_form() {
 document.login_form.username.value='';
@@ -255,6 +264,11 @@ echo '</td></tr>';
 if(isset($captcha_msg)) {
 echo '<tr align="center"><td colspan="3" style="border: solid thin yellow; font-style: italic">';
 echo "<span style=\"color: yellow\" >$captcha_msg</span><br />";
+echo '</td></tr>';
+}
+else if(isset($autologin_age_msg)) {
+echo '<tr align="center"><td colspan="3" style="border: solid thin yellow; font-style: italic">';
+echo "<span style=\"color: yellow\" >$autologin_age_msg</span><br />";
 echo '</td></tr>';
 }
 ?>

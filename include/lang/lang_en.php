@@ -3,6 +3,7 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'illegal autologin_age msg' => 'Illegal value for remember login!<br>Please try again.',
 'tie login to ip option description' => 'Leads to higher security, but u would be logged out if your IP changes',
 'login limit warning' => 'Only %d incorrect login attempts are permitted in every %s.<br>Number of incorrect login attempts in the past %s: %d<br>Number of tries left: %d',
 'block_bypass_mode_max_logins' => 'Note: Maximum number of incorrect logins is limited to <span style="color: red">%d</span>.',
