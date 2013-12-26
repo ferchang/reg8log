@@ -167,9 +167,9 @@ function identify($username=null, $password=null)
 		if($reg8log_db->result_num($query)) {
 			$tmp54=$reg8log_db->fetch_row();
 			if($this->tie_login2ip($tmp54)) {
-				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key) $flag=true;
+				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key and (!$tmp54['autologin_expiration'] or $tmp54['autologin_expiration']>$req_time)) $flag=true;
 			}
-			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
+			else if($tmp54['autologin_key']==$autologin_key and (!$tmp54['autologin_expiration'] or $tmp54['autologin_expiration']>$req_time)) $flag=true;
 		}
 
 	}//cookie read successfully
@@ -199,7 +199,7 @@ function identify($username=null, $password=null)
 		$this->autologin_cookie_expiration=$cookie->values[$key+1];
 		if($change_autologin_key_upon_login==2) {
 			$new_autologin_key=random_string(43);
-			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($this->user_info['username']).' limit 1';
+			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `auto`=".$this->user_info['auto'].' limit 1';
 			$reg8log_db->query($query);
 			$this->user_info['autologin_key']=$new_autologin_key;
 			$this->save_identity($this->autologin_cookie_expiration, true);
@@ -246,7 +246,7 @@ function logout()
 	
 }//end of logout
 //=======================================
-function save_identity($age, $is_abs_time=false)
+function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false)
 {
 
 	global $parent_page;
@@ -254,6 +254,8 @@ function save_identity($age, $is_abs_time=false)
 	global $req_time;
 	global $site_key2;
 	global $pepper;
+	global $reg8log_db;
+	global $max_session_autologin_age;
 
 	$this->err_msg='';
 
@@ -279,6 +281,19 @@ function save_identity($age, $is_abs_time=false)
 	
 	if($cookie->set(null, $cookie->values, null, $age, true)) {
 		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), $age, '/', null, $https);
+
+	//----------------
+	if($set_autologin_expiration) {
+		if(!$age) {
+			if($max_session_autologin_age) $autologin_expiration=$req_time+$max_session_autologin_age;
+			else $autologin_expiration=0;
+		}
+		else $autologin_expiration=$req_time+$age;
+		$query="update `accounts` set `autologin_expiration`=".$autologin_expiration." where `auto`=".$this->user_info['auto'].' limit 1';
+		$reg8log_db->query($query);
+	}
+	//----------------
+		
 		return true;
 	}
 

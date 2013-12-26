@@ -14,6 +14,6 @@ $tmp13=new hm_user($identify_structs);
 
 $tmp13->user_info=$reg8log_db->fetch_row();
 
-$tmp13->save_identity($login_upon_register_age);
+$tmp13->save_identity($login_upon_register_age, false, true);
 
 ?>

@@ -99,7 +99,7 @@ else {
 	$autologin_age=$autologin_ages[0];
 }
 
-$user->save_identity($autologin_age);
+$user->save_identity($autologin_age, false, true);
 //=================
 
 $msg='<h1>'.tr('You logged in successfully').' <span style="white-space: pre; color: #155;">'.htmlspecialchars($identified_user, ENT_QUOTES, 'UTF-8').'</span>.</h1>';
@@ -147,7 +147,7 @@ else if(isset($banned_user)) {
 			$autologin_age=$autologin_ages[0];
 		}
 
-		$user->save_identity($autologin_age);
+		$user->save_identity($autologin_age, false, true);
 		//=================
 
 	}

@@ -111,7 +111,7 @@ if(isset($identified_user)) {//2
 		$autologin_age=$autologin_ages[0];
 	}
 
-	$user->save_identity($autologin_age);
+	$user->save_identity($autologin_age, false, true);
 	//=================
 
 	header('Location: index.php');
@@ -153,7 +153,7 @@ else if(isset($banned_user)) {
 			$autologin_age=$autologin_ages[0];
 		}
 
-		$user->save_identity($autologin_age);
+		$user->save_identity($autologin_age, false, true);
 		//=================
 
 	}

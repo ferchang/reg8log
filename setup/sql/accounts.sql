@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.5
+-- version 3.4.9
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2012 at 11:18 PM
--- Server version: 5.1.43
--- PHP Version: 5.3.2
+-- Generation Time: Dec 26, 2013 at 07:43 AM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -44,7 +45,12 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `block_disable` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `last_protection` tinyint(4) NOT NULL DEFAULT '-1',
   `tie_login2ip` tinyint(1) NOT NULL DEFAULT '0',
+  `autologin_expiration` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'unix timestamp',
   PRIMARY KEY (`auto`),
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -9,11 +9,6 @@ $identify_structs=array(
 
 	'autologin_cookie'=>array(
 
-		'long_age'=>365*24*60*60, //in seconds
-		/*
-		$long_age value is used as the default age for permanent autologin cookies.
-		*/
-
 		'value_seperator'=>'-',//string used to seperate values in auto-login cookie
 
 		'uid',
@@ -94,8 +89,7 @@ because when change_autologin_key_upon_login=2 autologin key is changed automati
 
 //--------------------------------
 
-$max_session_autologin_age=0;//in seconds / 0: infinite
-//not implemented yet
+$max_session_autologin_age=12*60*60;//in seconds / 0: infinite
 
 $autologin_ages=array(
 
