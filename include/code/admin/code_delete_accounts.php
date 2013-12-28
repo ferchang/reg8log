@@ -11,7 +11,7 @@ foreach($del as $auto) {
 	$autos.=", ";
 }
 
-$query='delete from `accounts` where `auto` in ('.$autos.") and username!='Admin'";
+$query='delete from `accounts` where `auto` in ('.$autos.") and `username`!='Admin'";
 
 $reg8log_db->query($query);
 

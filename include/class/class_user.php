@@ -45,6 +45,7 @@ function identify($username=null, $password=null)
 	global $req_time;
 	global $pepper;
 	global $tie_login2ip_option_at_login;
+	global $dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero;
 	
 	$this->err_msg='';
 	$this->user_info=null;
@@ -167,9 +168,19 @@ function identify($username=null, $password=null)
 		if($reg8log_db->result_num($query)) {
 			$tmp54=$reg8log_db->fetch_row();
 			if($this->tie_login2ip($tmp54)) {
-				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key and (!$tmp54['autologin_expiration'] or $tmp54['autologin_expiration']>$req_time)) $flag=true;
+				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key) $flag=true;
 			}
-			else if($tmp54['autologin_key']==$autologin_key and (!$tmp54['autologin_expiration'] or $tmp54['autologin_expiration']>$req_time)) $flag=true;
+			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
+			
+			if($flag) do {
+				if(!$change_autologin_key_upon_login) {
+					if($dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero==3) break;
+					if($dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero==2 and $tmp54['username']!='Admin') break;
+					if($dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero==1 and $tmp54['username']=='Admin') break;
+				}
+				if($tmp54['autologin_expiration'] and $tmp54['autologin_expiration']<$req_time) $flag=false;
+			} while(false);
+			
 		}
 
 	}//cookie read successfully
@@ -288,7 +299,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 			if($max_session_autologin_age) $autologin_expiration=$req_time+$max_session_autologin_age;
 			else $autologin_expiration=0;
 		}
-		else $autologin_expiration=$req_time+$age;
+		else $autologin_expiration=$age;
 		$query="update `accounts` set `autologin_expiration`=".$autologin_expiration." where `auto`=".$this->user_info['auto'].' limit 1';
 		$reg8log_db->query($query);
 	}

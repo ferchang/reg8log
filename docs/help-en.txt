@@ -236,10 +236,6 @@ config vars in config_identify.php:
 this file contains some program internal config vars (related to identification/authentication of users)
 but there exists some config vars in it interesting for other guys too:
 
-long_age:
-
-specifies, in seconds, how long users can be autologined when they login with the 'remember me' option checked. the default value is 1 year.
-
 change_autologin_key_upon_login:
 
 whether to change user's autologin key upon each manual login.
@@ -263,6 +259,14 @@ log_last_login:
 
 with these options various actions of the users r logged.
 the admin can view this information in admin/admin-accounts.php page.
+
+allow_manual_autologin_key_change:
+max_session_autologin_age:
+autologin_ages:
+admin_autologin_ages:
+dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero:
+
+see the correponding comments in the config file for explanations.
 
 ------------------------------------------------
 config vars in config_crypto.php:

@@ -99,11 +99,10 @@ function check_autologin_age_options(val) {
 var login2ip_change=false;
 
 function clear_form() {
-document.login_form.username.value='';
-document.login_form.password.value='';
-document.login_form.remember.checked=false;
-clear_cap(true);
-return false;
+	document.login_form.username.value='';
+	document.login_form.password.value='';
+	clear_cap(true);
+	return false;
 }
 
 <?php
