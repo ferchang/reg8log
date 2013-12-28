@@ -94,6 +94,7 @@ login_upon_register:
 whether to login users automatically upon completing their registrations.
 this login will last only until the user's browser is closed.
 
+login_upon_register_age:
 alert_admin_about_registerations:
 registeration_alert_type:
 registerations_alert_threshold:
@@ -123,6 +124,8 @@ the time period (in secondes) in which $max_ajax_check_usernames ajax check user
 reset_clients_ajax_check_usernames_upon_register:
 
 with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
+
+
 
 ------------------------------------------------
 config vars in config_brute_force_protection.php:
