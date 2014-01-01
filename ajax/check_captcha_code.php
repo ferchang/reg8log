@@ -10,6 +10,8 @@ require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
 require $index_dir.'include/code/code_prevent_xsrf.php';
 
+//sleep(1);
+
 require $index_dir.'include/code/code_verify_captcha.php';
 if(isset($captcha_err)) echo 'n';
 else echo 'y';

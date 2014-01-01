@@ -43,6 +43,7 @@ if($req_time-$trec['last_ch_pswd_try']>$account_block_period) {
 		$reg8log_db->query($query);
 		$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
+		setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 		header("Location: {$index_dir}index.php");
 		exit;
 	}
@@ -70,6 +71,7 @@ if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=$ch_pswd_tries) {
 	$reg8log_db->query($query);
 	$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
+	setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
 	header("Location: {$index_dir}index.php");
 	exit;
 }

@@ -76,6 +76,9 @@ $reg8log_db->query($query);
 $query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('email', 0)";
 $reg8log_db->query($query);
 
+$query="insert into `admin` (`last_password_check`, `password_check_key`) values (0, '')";
+$reg8log_db->query($query);
+
 $query="insert ignore into `dummy` (`i`) values (1)";
 $reg8log_db->query($query);
 

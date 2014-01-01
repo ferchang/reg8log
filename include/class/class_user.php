@@ -207,6 +207,7 @@ function identify($username=null, $password=null)
 		}
 		$block_disable=$this->user_info['block_disable'];
 		$last_protection=$this->user_info['last_protection'];
+		if(!is_numeric($cookie->values[$key+1])) exit("<center><h3>Error: expiration time in cookie is not numeric!</h3></center>");
 		$this->autologin_cookie_expiration=$cookie->values[$key+1];
 		if($change_autologin_key_upon_login==2) {
 			$new_autologin_key=random_string(43);

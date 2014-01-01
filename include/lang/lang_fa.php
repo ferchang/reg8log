@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'Sorry, but entering Admin password is needed!' => 'متاسفیم، شما باید پسورد ادمین را نیز وارد کنید!',
+'Admin password' => 'رمز عبور ادمین',
 'illegal autologin_age msg' => 'مقدار غیرمجاز برای بخاطرسپاری لاگین!<br>لطفا مجددا تلاش نمایید.',
 'Browser session' => 'باز بودن مرورگر',
 'Checking the security code...' => 'در حال چک کردن کد امنیتی...',
