@@ -43,18 +43,25 @@ function check_captcha() {
 	xhr.onreadystatechange=function() {
 		if(xhr.readyState == 4) if(xhr.status == 200) {
 			document.getElementById('captcha_check_throbber').style.display='none';
-			if(xhr.responseText=='y') form_obj.submit();
+			if(xhr.responseText=='y') {
+				try { hash_password(); } catch(e) { }
+				form_obj.submit();
+			}
 			else if(xhr.responseText=='n') {
 				document.getElementById('captcha_check_status').innerHTML='<span style="color: yellow"><?php echo tr('Security code was incorrect!'); ?></span>';
 				mycaptcha('change');
 				document.getElementById('captcha').focus();
 				return;
 			}
-			else form_obj.submit();
+			else {
+				try { hash_password(); } catch(e) { }
+				form_obj.submit();
+			}
 		}
 		else {
-			form_obj.submit();
 			document.getElementById('captcha_check_throbber').style.display='none';
+			try { hash_password(); } catch(e) { }
+			form_obj.submit();
 		}
 	}
 

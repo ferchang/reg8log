@@ -101,6 +101,7 @@ var login2ip_change=false;
 function clear_form() {
 	document.login_form.username.value='';
 	document.login_form.password.value='';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 	clear_cap(true);
 	return false;
 }
@@ -115,6 +116,9 @@ document.login_form.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+
 
 function validate()
 {
+
+	clear_cap(true);
+
 	msgs=new Array();
 	i=0;
 	if(!document.login_form.username.value) msgs[i++]='<?php echo tr('Username field is empty!'); ?>';
@@ -345,7 +349,7 @@ echo '</td></tr>';
 <td align="center" colspan="2"><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()" />
 <input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr>
-<tr align="center"><td colspan="3"><br><a href="password_reset_request.php" title="Forgot password/username"><?php echo tr('Forgot password/username'); ?></a><br><br></td></tr>
+<tr align="center"><td colspan="3"><br><a href="password_reset_request.php" ><?php echo tr('Forgot password/username'); ?></a><br><br></td></tr>
 <?php
 if(isset($err_msg) and $account_block_threshold!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
 	require_once $index_dir.'include/func/func_duration2friendly_str.php';

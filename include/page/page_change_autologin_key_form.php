@@ -17,6 +17,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <script language="javascript">
 function clear_form() {
 	document.change_autologin_key_form.password.value='';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 	clear_cap(true);
 	return false;
 }
@@ -30,6 +31,8 @@ function hash_password() {
 }
 
 function validate() {//client side validator
+
+clear_cap(true);
 
 msgs=new Array();
 

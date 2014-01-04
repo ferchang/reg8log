@@ -28,6 +28,4 @@ require $index_dir.'include/page/page_success.php';
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
-exit;
-
 ?>

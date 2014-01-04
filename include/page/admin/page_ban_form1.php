@@ -29,6 +29,8 @@ function clear_form() {
 
 function validate() {//client side validator
 
+clear_cap(true);
+
 msgs=new Array();
 
 i=0;

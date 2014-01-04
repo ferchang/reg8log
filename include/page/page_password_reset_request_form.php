@@ -19,12 +19,16 @@ var email_re=/^[a-z0-9_\-+\.]+@([a-z0-9\-+]+\.)+[a-z]{2,5}$/i;
 
 function clear_form() {
 document.reset_email_form.email.value='';
+if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 clear_cap(true);
 return false;
 }
 
 function validate()
 {
+
+clear_cap(true);
+
 msgs=new Array();
 i=0;
 if(!document.reset_email_form.email.value) msgs[i++]='<?php echo tr('Email field is empty!'); ?>';

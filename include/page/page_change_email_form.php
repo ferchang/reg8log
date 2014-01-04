@@ -21,6 +21,7 @@ function clear_form() {
 document.change_email_form.password.value='';
 document.change_email_form.newemail.value='';
 document.change_email_form.reemail.value='';
+if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 clear_cap(true);
 return false;
 }
@@ -43,6 +44,9 @@ document.change_email_form.password.value='hashed-'+site_salt+'-'+hex_sha256(sit
 
 function validate()
 {
+
+clear_cap(true);
+
 msgs=new Array();
 i=0;
 

@@ -2,14 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$color1='#aaa';
-$color2='#ccc';
-
-if($page*$per_page>$total) $less=($page*$per_page)-$total;
-else $less=0;
-$first=($page-1)*$per_page+1;
-$last=($page*$per_page-$less);
-$num=$last-$first+1;
+require $index_dir.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
@@ -24,36 +17,9 @@ $num=$last-$first+1;
 <style>
 </style>
 <script>
-
-var tmp;
-function highlight(row) {
-tmp=row.style.background;
-row.style.background="#fff";
-}
-function unhighlight(row) {
-row.style.background=tmp;
-}
-
-function is_digit(e) {
-	code = e.keyCode ? e.keyCode : e.which;
-	if(code<48 || code>57) return false;
-	else return true;
-}
-
-function validate_goto() {
 <?php
-echo '	last_page=', ceil($total/$per_page), ";\n";
+require $index_dir.'include/page/admin/page_common_list_funcs-js.php';
 ?>
-	page=document.getElementById('page').value;
-	if(page<1 || page>last_page ) {
-		alert(<?php
-		echo "'", sprintf(tr('Page number must be between (including) 1 and %d.'), ceil($total/$per_page)), "'";
-		?>);
-		document.getElementById('page').value='';
-		return false;
-	}
-	else return true;
-}
 </script>
 </head>
 <body bgcolor="#7587b0" <?php echo $page_dir; ?>>
@@ -181,7 +147,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', duration2friendly_str($req_time-$rec['timestamp'], 2), '</td>';
 	echo '<td>';
 	if($rec['banned']==1) echo tr('Unlimited');
-	else echo duration2friendly_str($rec['banned']-$req_time, 2), ' later';
+	else echo duration2friendly_str($rec['banned']-$req_time, 2), tr(' later');
 	echo '</td>';
 	if(is_null($rec['reason'])) echo '<td title="', tr('No corresponding ban_info record found'), '"><span style="color: yellow">?</span>';
 	else if($rec['reason']!=='') echo '<td>', $rec['reason'];
@@ -193,18 +159,8 @@ echo '</table>';
 
 require $index_dir.'include/page/admin/page_gen_paginated_page_links.php';
 
-if($total>$per_pages[0]) {
-	if($total<=$per_page) echo '<br>';
-	echo '<br>', tr('Records per page'), ': <select name="per_page" onchange="document.banned_users_form.change_per_page.click()">';
-	foreach($per_pages as $value) {
-		if($value!=$per_page) echo "<option>$value</option>";
-		else echo "<option selected>$value</option>";
-	}
-	echo '</select>&nbsp;<input type="submit" value="', tr('Show'), '" name="change_per_page" style="display: visible">';
-	echo  '<script>
-	document.banned_users_form.change_per_page.style.display="none";
-	</script>';
-}
+$form_name='banned_users_form';
+require $index_dir.'include/page/admin/page_per_pages_select.php';
 
 ?>
 </form>
@@ -216,3 +172,11 @@ require $index_dir.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>
+
+
+
+
+
+
+
+

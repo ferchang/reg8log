@@ -14,11 +14,17 @@ $query='select * from `admin` limit 1';
 
 $reg8log_db->query($query);
 
-$rec=$reg8log_db->fetch_row();
+$tmp42=$reg8log_db->fetch_row();
 
-if($req_time>$rec['last_password_check']+$admin_operations_require_password) return;
+if($req_time>$tmp42['last_password_check']+$admin_operations_require_password) {
+	setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+	return;
+}
 
-if($rec['password_check_key']!=$_COOKIE['reg8log_password_check_key']) return;
+if($tmp42['password_check_key']!=$_COOKIE['reg8log_password_check_key']) {
+	setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+	return;
+}
 
 unset($password_check_needed);
 

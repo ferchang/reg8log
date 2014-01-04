@@ -42,6 +42,9 @@ document.reset_pass_form.newpass.value=document.reset_pass_form.repass.value='ha
 
 function validate()
 {
+
+clear_cap(true);
+
 msgs=new Array();
 i=0;
 

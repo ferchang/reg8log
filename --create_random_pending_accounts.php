@@ -18,8 +18,9 @@ for($i=0; $i<50; $i++) {
 
 	$username=random_string(8);
 
+	//$timestamp=$req_time;
 
-	$query="insert into accounts values(null, '$uid', '$username', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+	$query="insert into pending_accounts values(null, '$uid', '$username', '', '', '', 0, 'x', 0, 0, $req_time, 0, '')";
 	
 	$reg8log_db->query($query);
 	

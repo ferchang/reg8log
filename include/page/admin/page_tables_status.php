@@ -2,8 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$color1='#aaa';
-$color2='#ccc';
+require $index_dir.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
@@ -21,33 +20,9 @@ $color2='#ccc';
 </style>
 <script>
 
-var tmp;
-function highlight(row) {
-	tmp=row.style.background;
-	row.style.background="#fff";
-}
-
-function unhighlight(row) {
-	row.style.background=tmp;
-}
-
-function delete_click(id, checked) {
-	if(!checked) normal(id);
-	else red(id);
-}
-
-function green(id) {
-	tmp=document.getElementById(id).style.background="green";
-}
-
-function red(id) {
-	tmp=document.getElementById(id).style.background="red";
-}
-
-function normal(id) {
-	if(id%2) tmp=document.getElementById(id).style.background='<?php echo $color1 ?>';
-	else tmp=document.getElementById(id).style.background='<?php echo $color2 ?>';
-}
+<?php
+require $index_dir.'include/page/admin/page_common_list_funcs-js.php';
+?>
 
 </script>
 </head>

@@ -39,6 +39,4 @@ if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/cod
 
 require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
 
-exit;
-
 ?>

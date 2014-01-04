@@ -28,6 +28,7 @@ document.register_form.repass.value='';
 document.register_form.email.value='';
 document.register_form.reemail.value='';
 document.register_form.gender[0].checked=true;
+if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 clear_cap(true);
 if(xhr) {
 	xhr.abort();
@@ -94,6 +95,8 @@ function password_keydown(e) {
 }
 
 function validate() {//client side validator
+
+clear_cap(true);
 
 msgs=new Array();
 i=0;

@@ -14,9 +14,9 @@ require $index_dir.'include/code/admin/code_require_admin.php';
 
 if(!empty($_POST)) require $index_dir.'include/code/code_prevent_xsrf.php';
 
-//----------------------------
+//##################################################################
 
-do {
+do {//1
 
 if(!isset($_POST['ban_form1']) or isset($_POST['cancel'])) break;
 
@@ -41,7 +41,7 @@ if(!$reg8log_db->result_num($query)) {
 
 $rec=$reg8log_db->fetch_row();
 
-if(strtolower($rec['username'])==='admin') {
+if($rec['username']==='Admin') {
 	$err_msgs[]=tr('Admin account cannot be banned!');
 	break;
 }
@@ -59,27 +59,116 @@ if($rec['banned']) {
 		$ban_reason =$rec2['reason'];
 	}
 }
+else {
+	require $index_dir.'include/page/admin/page_unban_form.php';
+	exit;
+}
+
+//-------------
+
+require_once $index_dir.'include/config/config_admin.php';
+
+require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+
+if(isset($password_check_needed)) {
+	$try_type='password';
+	require $index_dir.'include/code/code_check_captcha_needed4user.php';
+
+	if(isset($captcha_needed)) {
+		require $index_dir.'include/code/sess/code_sess_start.php';
+		$captcha_verified=isset($_SESSION['captcha_verified']);
+	}
+}
+
+//-------------
 
 require $index_dir.'include/page/admin/page_unban_form.php';
 
 exit;
 
-} while(false);
+} while(false);//1
 
-//----------------------------
+//##################################################################
 
-do {
+do {//2
 
-if(!isset($_POST['unban_form']) or isset($_POST['cancel'])) break;
+	if((!isset($_POST['unban_form']) and !isset($_POST['captcha'])) or isset($_POST['cancel'])) break;
 
-if(strtolower($_POST['username'])==='admin') {
-	$err_msgs[]=tr('Admin account cannot be banned!');
-	break;
-}
+	if(strtolower($_POST['username'])==='admin') {
+		$err_msgs[]=tr('Admin account cannot be banned!');
+		break;
+	}
+	
+	//-------------
 
-require $index_dir.'include/code/admin/code_unban_user.php';
+	require_once $index_dir.'include/config/config_admin.php';
 
-} while(false);
+	require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+
+	if(isset($password_check_needed)) {
+		$try_type='password';
+		require $index_dir.'include/code/code_check_captcha_needed4user.php';
+
+		if(isset($captcha_needed)) {
+			require $index_dir.'include/code/sess/code_sess_start.php';
+			$captcha_verified=isset($_SESSION['captcha_verified']);
+		}
+	}
+
+	//-------------
+
+	require $index_dir.'include/code/admin/code_captcha8password_check.php';
+
+	if(!isset($err_msgs)) {
+
+		require $index_dir.'include/code/admin/code_update_password_check.php';
+
+		require $index_dir.'include/code/admin/code_unban_user.php';
+		
+		exit;	
+
+	}
+
+
+	$user=$reg8log_db->quote_smart($_POST['username']);
+
+	$query="select * from `accounts` where `username`=$user limit 1";
+
+	if(!$reg8log_db->result_num($query)) {
+		$err_msgs[]=tr('no such user found in the accounts table!');
+		break;
+	}
+
+	$rec=$reg8log_db->fetch_row();
+
+	if(strtolower($rec['username'])==='admin') {
+		$err_msgs[]=tr('Admin account cannot be banned!');
+		break;
+	}
+
+	$ban_until=$rec['banned'];
+
+	$ban_reason ='';
+
+	if($rec['banned']) {
+		$username=$reg8log_db->quote_smart($rec['username']);
+		$query="select * from `ban_info` where `username`=$username limit 1";
+		if(!$reg8log_db->result_num($query)) echo tr('Info: No corresponding ban_info record found for the banned user!');
+		else {
+			$rec2=$reg8log_db->fetch_row();
+			$ban_reason =$rec2['reason'];
+		}
+	}
+	
+	//-------------------
+
+	require $index_dir.'include/page/admin/page_unban_form.php';
+
+	exit;
+
+} while(false);//2
+
+//##################################################################
 
 require $index_dir.'include/page/admin/page_ban_form1.php';
 

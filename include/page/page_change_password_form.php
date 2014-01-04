@@ -21,6 +21,7 @@ function clear_form() {
 document.change_pass_form.curpass.value='';
 document.change_pass_form.newpass.value='';
 document.change_pass_form.repass.value='';
+if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
 clear_cap(true);
 return false;
 }
@@ -77,6 +78,9 @@ function password_keydown(e) {
 
 function validate()
 {
+
+clear_cap(true);
+
 msgs=new Array();
 i=0;
 
