@@ -16,11 +16,7 @@ require_once $index_dir.'include/config/config_brute_force_protection.php';
 
 if($change_autologin_key_upon_login==2 or (!$allow_manual_autologin_key_change and $identified_user!='Admin')) exit('<center><h3>Changing autologin key manually is not allowed!</h3></center>');
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
-else {
-	require $index_dir.'include/code/code_fetch_site_vars.php';
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
-}
+require $index_dir.'include/code/code_set_site_salt.php';
 
 $try_type='password';
 require $index_dir.'include/code/code_check_captcha_needed4user.php';

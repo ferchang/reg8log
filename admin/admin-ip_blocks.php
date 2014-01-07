@@ -10,6 +10,8 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
+require $index_dir.'include/code/code_set_site_salt.php';
+
 require $index_dir.'include/code/admin/code_require_admin.php';
 
 $sort_fields=array('last_username', 'ip', 'first_attempt', 'last_attempt');
@@ -17,24 +19,35 @@ require $index_dir.'include/code/admin/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-if(isset($_POST['admin_action'])) {
+require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+
+if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 
 	require $index_dir.'include/code/code_prevent_xsrf.php';
+	
+	require $index_dir.'include/code/admin/code_captcha8password_check.php';
 
-	$i=0;
-	foreach($_POST as $auto=>$action) {
-		if($action=='del') $del[]=$auto;
-		else if($action=='unblock') {
-			$auto=substr($auto, 2);
-			$unblock[$i]['ip']=pack('H*', $_POST['ip'.$auto]);
-			$unblock[$i]['auto']=$auto;
-			$unblock[$i]['last_attempt']=$_POST['t'.$auto];
-			$unblock[$i]['admin']=$_POST['a'.$auto];
-			$i++;
+	if(!isset($err_msgs)) {
+	
+		require $index_dir.'include/code/admin/code_update_password_check.php';
+
+		$i=0;
+		foreach($_POST as $auto=>$action) {
+			if($action=='del') $del[]=$auto;
+			else if($action=='unblock') {
+				$auto=substr($auto, 2);
+				$unblock[$i]['ip']=pack('H*', $_POST['ip'.$auto]);
+				$unblock[$i]['auto']=$auto;
+				$unblock[$i]['last_attempt']=$_POST['t'.$auto];
+				$unblock[$i]['admin']=$_POST['a'.$auto];
+				$i++;
+			}
 		}
+		if(isset($unblock)) require $index_dir.'include/code/admin/code_unblock_ips.php';
+		if(isset($del)) require $index_dir.'include/code/admin/code_delete_ip_block_log_records.php';
+
 	}
-	if(isset($unblock)) require $index_dir.'include/code/admin/code_unblock_ips.php';
-	if(isset($del)) require $index_dir.'include/code/admin/code_delete_ip_block_log_records.php';
+	
 }
 
 $query="select * from `ip_block_log`";

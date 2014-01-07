@@ -18,11 +18,7 @@ require $index_dir.'include/config/config_register_fields.php';
 
 $password_format=$fields['password'];
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
-else {
-	require $index_dir.'include/code/code_fetch_site_vars.php';
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
-}
+require $index_dir.'include/code/code_set_site_salt.php';
 
 $try_type='password';
 require $index_dir.'include/code/code_check_captcha_needed4user.php';

@@ -21,11 +21,7 @@ if(!isset($_GET['key'])) exit('<h3 align="center">Error: key parameter is not se
 if(isset($_POST['login2ip'])) $login2ip=true;
 else $login2ip=false;
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
-else {
-	require $index_dir.'include/code/code_fetch_site_vars.php';
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
-}
+require $index_dir.'include/code/code_set_site_salt.php';
 
 if(isset($_POST['username']) and isset($_POST['password'])) {//1
 

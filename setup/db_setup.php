@@ -35,11 +35,7 @@ require $index_dir.'include/config/config_register_fields.php';
 
 require $index_dir.'include/code/code_fetch_site_vars.php';
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
-else {
-	$site_salt=random_string(22);
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
-}
+require $index_dir.'include/code/code_set_site_salt.php';
 
 do {
 if(!isset($_POST['username'])) break;

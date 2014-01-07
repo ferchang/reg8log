@@ -10,11 +10,7 @@ require_once $index_dir.'include/common.php';
 
 require $index_dir.'include/code/code_encoding8anticache_headers.php';
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
-else {
-	require $index_dir.'include/code/code_fetch_site_vars.php';
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, $https, true);
-}
+require $index_dir.'include/code/code_set_site_salt.php';
 
 require $index_dir.'include/code/admin/code_require_admin.php';
 
@@ -23,21 +19,7 @@ require $index_dir.'include/code/admin/code_pagination_params.php';
 
 require_once $index_dir.'include/code/code_db_object.php';
 
-//-------------
-require $index_dir.'include/config/config_admin.php';
-
 require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
-
-if(isset($password_check_needed)) {
-	$try_type='password';
-	require $index_dir.'include/code/code_check_captcha_needed4user.php';
-
-	if(isset($captcha_needed)) {
-		require $index_dir.'include/code/sess/code_sess_start.php';
-		$captcha_verified=isset($_SESSION['captcha_verified']);
-	}
-}
-//-------------
 
 require $index_dir.'include/config/config_register.php';
 

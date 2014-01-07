@@ -48,23 +48,7 @@ do {//1
 		break;
 	}
 
-	//-------------
-
-	require_once $index_dir.'include/config/config_admin.php';
-
 	require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
-
-	if(isset($password_check_needed)) {
-		$try_type='password';
-		require $index_dir.'include/code/code_check_captcha_needed4user.php';
-
-		if(isset($captcha_needed)) {
-			require $index_dir.'include/code/sess/code_sess_start.php';
-			$captcha_verified=isset($_SESSION['captcha_verified']);
-		}
-	}
-
-	//-------------
 
 	require $index_dir.'include/page/admin/page_ban_form2.php';
 
@@ -85,23 +69,7 @@ do {//2
 
 	if(!$_POST['years'] and !$_POST['months'] and !$_POST['days'] and !$_POST['hours'] and $_POST['ban_type']!=='infinite') $err_msgs[]=tr('no ban duration specified!');
 
-	//-------------
-
-	require_once $index_dir.'include/config/config_admin.php';
-
 	require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
-
-	if(isset($password_check_needed)) {
-		$try_type='password';
-		require $index_dir.'include/code/code_check_captcha_needed4user.php';
-
-		if(isset($captcha_needed)) {
-			require $index_dir.'include/code/sess/code_sess_start.php';
-			$captcha_verified=isset($_SESSION['captcha_verified']);
-		}
-	}
-
-	//-------------
 
 	require $index_dir.'include/code/admin/code_captcha8password_check.php';
 

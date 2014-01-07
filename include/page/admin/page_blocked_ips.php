@@ -16,7 +16,20 @@ require $index_dir.'include/page/admin/page_pagination_initials.php';
 <title><?php echo tr('Blocked IPs'); ?></title>
 <style>
 </style>
+<script src="../js/forms_common.js"></script>
+<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<script src="../js/sha256.js"></script>
 <script>
+
+<?php
+echo "\nsite_salt='$site_salt';\n";
+?>
+
+<?php
+if(isset($password_check_needed)) echo 'password_exists=true;';
+else echo 'password_exists=false;';
+?>
+
 
 var del_all_toggle_stat=false;
 var unblock_all_toggle_stat=false;
@@ -24,6 +37,51 @@ var unblock_all_toggle_stat=false;
 <?php
 require $index_dir.'include/page/admin/page_common_list_funcs-js.php';
 ?>
+
+function clear_form() {
+	document.blocked_ips_form.password.value='';
+	if(document.blocked_ips_form.remember) document.blocked_ips_form.remember.checked=false;
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	clear_cap(false);
+	return false;
+}
+
+function hash_password() {
+	document.blocked_ips_form.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.blocked_ips_form.password.value);
+}
+
+function validate() {//client side validator
+
+	clear_cap(true);
+
+	msgs=new Array();
+
+	i=0;
+
+	if(password_exists) if(!document.blocked_ips_form.password.value.length) msgs[i++]="<?php echo tr('password field is empty!'); ?>";
+
+	if(captcha_exists) validate_captcha(document.blocked_ips_form.captcha.value);
+
+	if(msgs.length) {
+	clear_cap(false);
+	for(i in msgs){
+		msgs[i]=msgs[i].charAt(0).toUpperCase()+msgs[i].substring(1, msgs[i].length);
+		cap.appendChild(document.createTextNode(msgs[i]));
+		cap.appendChild(document.createElement("br"));
+	}
+	return false;
+	}
+
+	if(captcha_exists) {
+		form_obj=document.blocked_ips_form;
+		check_captcha();
+		return false;
+	}
+
+	if(password_exists) hash_password();
+
+	return true;
+}//client side validator
 
 function unblock_click(id, checked) {
 	if(document.getElementById('del'+id) && document.getElementById('del'+id).checked) {
@@ -97,6 +155,9 @@ function check_all(action) {
 </head>
 <body bgcolor="#7587b0" <?php echo $page_dir; ?>>
 <center>
+<?php
+require $index_dir.'include/page/admin/page_err_msgs.php';
+?>
 <form action="" method="post" name="blocked_ips_form">
 <?php
 echo tr('Records '), $first, tr(' - '), $last, tr(' of '), $total;
@@ -202,7 +263,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<span style="color: red" ';
 		echo 'title="', tr('Block lift'), ': ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), tr(' later');
 		echo '">', tr('Blocked'), '</span>';
-		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)"></td>';
+		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['un'.$rec['auto']]))? ' checked ' : ''), '></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
 		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
 		echo '<input type="hidden" name="a', $rec['auto'], '" value="', ((strtolower($rec['last_username'])=='admin')? '1':'0'), '">';
@@ -213,15 +274,28 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<td>&nbsp;</td>';
 	}
 	echo '</td>';
-	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)"></td>';
+	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)" ', ((isset($_POST[$rec['auto']]))? ' checked ' : ''), '></td>';
 	echo '</tr>';
+	
+	if(isset($_POST['un'.$rec['auto']], $_POST[$rec['auto']])) $boths[]=$i;
+	else if(isset($_POST['un'.$rec['auto']])) $unblocks[]=$i;
+	else if(isset($_POST[$rec['auto']])) $dels[]=$i;
 }
 
 echo '<tr ';
 if(!$r) echo ' style="background: ', $color1;
 else echo ' style="background: ', $color2;
 echo '">';
-echo '<td colspan="6" ><input type="submit" value="', tr('Execute admin commands'), '" style="color: #000;" name="admin_action"></td><td align="center"><input type="button" onclick="check_all(\'unblock\')" value="', tr('All'), '" disabled id="check_all2"></td><td align="center"><input type="button" onclick="check_all(\'del\')" value="', tr('All'), '" disabled id="check_all3"></td></tr>';
+echo '<td colspan="6" >';
+
+require $index_dir.'include/page/admin/page_captcha8password_fields.php';
+
+echo '<input type="submit" value="', tr('Execute admin commands'), '" style="color: #000;" name="admin_action" onclick="return validate();">';
+if(isset($captcha_needed) and !$captcha_verified) echo '<br>';
+else echo '&nbsp;&nbsp;&nbsp;';
+echo '<span style="color: red; font-style: italic" id="cap"></span></td></tr></table>';
+
+echo '</td><td align="center" valign=top><input type="button" onclick="check_all(\'unblock\')" value="', tr('All'), '" disabled id="check_all2"></td><td align="center" valign=top><input type="button" onclick="check_all(\'del\')" value="', tr('All'), '" disabled id="check_all3"></td></tr>';
 echo '</table>';
 
 echo '<script>';
@@ -239,6 +313,47 @@ require $index_dir.'include/page/admin/page_per_pages_select.php';
 <a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
 <a href="../index.php"><?php echo tr('Login page'); ?></a>
 </center>
+<script>
+if(captcha_exists) {
+	document.getElementById('re_captcha_msg').style.visibility='visible';
+	captcha_img_style=document.getElementById('captcha_image').style;
+	captcha_img_style.cursor='hand';
+	if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
+}
+</script>
+<script>
+
+boths=new Array(<?php
+$flag=false;
+if(isset($boths)) foreach($boths as $v) {
+	if($flag) echo ', ';
+	else $flag=true;
+	echo "'$v'";
+}
+?>);
+for(var i in boths) orange(boths[i]);
+
+unblocks=new Array(<?php
+$flag=false;
+if(isset($unblocks)) foreach($unblocks as $v) {
+	if($flag) echo ', ';
+	else $flag=true;
+	echo "'$v'";
+}
+?>);
+for(var i in unblocks) if(document.getElementById('unblock'+unblocks[i])) yellow(unblocks[i]);
+
+dels=new Array(<?php
+$flag=false;
+if(isset($dels)) foreach($dels as $v) {
+	if($flag) echo ', ';
+	else $flag=true;
+	echo "'$v'";
+}
+?>);
+for(var i in dels) red(dels[i]);
+
+</script>
 <?php
 require $index_dir.'include/page/page_foot_codes.php';
 ?>
