@@ -41,6 +41,18 @@ Note that if the user himself uses more than one PC (e.g. at work and home), wit
 Note: with this option, a database update operation is needed every time the user logs in.
 
 - option 2 can be used when higher security is needed, but notice that it needs a database update operation on every request for each logged in user.
+
+Note: this config var is for ordinary users (other than Admin) only.
+
+*/
+
+$admin_change_autologin_key_upon_login=2; // possible values: 0, 1, 2.
+// 0: no
+// 1: upon manual login
+// 2: upon both manual and auto-login
+
+/*
+same as above (change_autologin_key_upon_login) but this config var is for admin only.
 */
 
 $change_autologin_key_upon_logout=true;

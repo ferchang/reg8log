@@ -36,6 +36,7 @@ function identify($username=null, $password=null)
 	global $site_key2;
 	global $parent_page;
 	global $change_autologin_key_upon_login;
+	global $admin_change_autologin_key_upon_login;//--
 	global $index_dir;
 	global $https;
 	global $block_disable;
@@ -88,7 +89,8 @@ function identify($username=null, $password=null)
 						$this->user_info['tie_login2ip']=($login2ip)? '1':'0';
 					}
 				}
-			
+				
+				if($this->user_info['username']=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 				if($change_autologin_key_upon_login) {
 					$new_autologin_key=random_string(43);
 					$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$tmp7.' limit 1';
@@ -172,6 +174,7 @@ function identify($username=null, $password=null)
 			}
 			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
 			
+			if($tmp54['username']=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 			if($flag) do {
 				if(!$change_autologin_key_upon_login) {
 					if($dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero==3) break;
@@ -209,6 +212,7 @@ function identify($username=null, $password=null)
 		$last_protection=$this->user_info['last_protection'];
 		if(!is_numeric($cookie->values[$key+1])) exit("<center><h3>Error: expiration time in cookie is not numeric!</h3></center>");
 		$this->autologin_cookie_expiration=$cookie->values[$key+1];
+		if($this->user_info['username']=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 		if($change_autologin_key_upon_login==2) {
 			$new_autologin_key=random_string(43);
 			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `auto`=".$this->user_info['auto'].' limit 1';

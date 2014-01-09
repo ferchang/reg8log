@@ -14,6 +14,7 @@ if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticate
 
 require_once $index_dir.'include/config/config_brute_force_protection.php';
 
+if($identified_user=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 if($change_autologin_key_upon_login==2 or (!$allow_manual_autologin_key_change and $identified_user!='Admin')) exit('<center><h3>Changing autologin key manually is not allowed!</h3></center>');
 
 require $index_dir.'include/code/code_set_site_salt.php';

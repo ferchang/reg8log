@@ -246,6 +246,12 @@ this causes the other machines that the user is currently logged in on them to b
 it is recommended to enable this option for security.
 also see the comments of the other mode in which the login key is changed even on every page view too.
 
+Note: this config var is for ordinary users (other than Admin) only.
+
+admin_change_autologin_key_upon_login:
+
+same as change_autologin_key_upon_login but this config var is effective only for the Admin account.
+
 tie_login2ip:
 tie_login2ip_option_at_login:
 

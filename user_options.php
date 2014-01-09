@@ -53,6 +53,7 @@ require $index_dir.'include/page/page_sections.php';
 <li><a class="li_item" href="change_email.php"><?php echo tr('Change email'); ?></a><br>
 <?php
 
+if($identified_user=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 if($change_autologin_key_upon_login!=2 and ($allow_manual_autologin_key_change or $identified_user=='Admin')) {
 	echo '<li><a class="li_item" href="change_autologin_key.php">', tr("Logging other systems out"), '</a>';
 	if(!$allow_manual_autologin_key_change) echo '<small> (', tr('Admin only'), ')</small>';
