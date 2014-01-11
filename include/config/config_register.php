@@ -10,7 +10,7 @@ $password_refill=2; //0: disabled / 1: enabled if client javascript on / 2: enab
 
 //--------------------------------
 
-$email_verification_needed=false;
+$email_verification_needed=true;
 
 $admin_confirmation_needed=true;
 
@@ -71,6 +71,22 @@ $max_ajax_check_usernames_period=60*60;//the duration (in seconds) in which each
 
 $reset_clients_ajax_check_usernames_upon_register=true;
 //with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
+
+//--------------------------------
+
+/* the following config vars r related to when a registered user tries to change the email of his account */
+
+$email_change_needs_email_verification=2;
+//0: no /1: yes /2: follow $email_verification_needed
+
+$max_change_email_emails=-1;
+//max change email verification emails that can be sent in $change_email_verification_time.
+//1-255
+//special values: -1: follow $max_activation_emails /0: unlimited
+
+$change_email_verification_time=0;
+//in seconds
+//special values: 0: follow $email_verification_time.
 
 //--------------------------------
 

@@ -4,8 +4,8 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 $parent_page=true;
 
-if(isset($captcha_needed) and !$captcha_verified) echo '<table align=center style="border: thin solid #000; background: #bbb"><tr><td>';
-else echo '<table cellspacing=0 cellpadding=0><tr><td>';
+if(isset($captcha_needed) and !$captcha_verified) echo '<table  align=center style="border: thin solid #000; background: #bbb"><tr><td>';
+else echo '<table  cellspacing=0 cellpadding=0><tr><td>';
 
 if(isset($password_check_needed)) {
 	echo tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';

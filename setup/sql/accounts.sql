@@ -48,5 +48,6 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `autologin_expiration` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'unix timestamp',
   PRIMARY KEY (`auto`),
   UNIQUE KEY `uid` (`uid`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;

@@ -19,8 +19,11 @@ $log_last_activity=false;
 
 $pass_banned_user=true;
 
+if($change_autologin_key_upon_logout or $admin_change_autologin_key_upon_logout) require_once $index_dir.'include/code/code_identify.php';
+
+if((isset($identified_user) and $identified_user=='Admin') or (isset($logged_out_user) and $logged_out_user=='Admin')) $change_autologin_key_upon_logout=$admin_change_autologin_key_upon_logout;
+
 if($change_autologin_key_upon_logout) {
-	require_once $index_dir.'include/code/code_identify.php';
 	if(isset($identified_user) or isset($banned_user) or isset($logged_out_user)) {
 		if(isset($identified_user)) $tmp36=$reg8log_db->quote_smart($identified_user);
 		else if(isset($banned_user)) $tmp36=$reg8log_db->quote_smart($banned_user);

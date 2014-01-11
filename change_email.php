@@ -75,12 +75,30 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	}
 	
 	if(!isset($err_msgs)) {
-		require $index_dir.'include/code/code_change_email.php';
-		require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
-		$success_msg='<h3>'.tr('Your email changed successfully').'.</h3>';
+		require $index_dir.'include/config/config_register.php';
+		if(!$email_change_needs_email_verification or ($email_change_needs_email_verification==2 and !$email_verification_needed)) {
+			require $index_dir.'include/code/code_change_email.php';
+			require $index_dir.'include/code/code_set_submitted_forms_cookie.php';
+			$success_msg='<h3>'.tr('Your email changed successfully').'.</h3>';
+			$no_specialchars=true;
+			require $index_dir.'include/page/page_success.php';
+			exit;
+		}
+		//---------------
+		require $index_dir.'include/code/code_add_change_email_request.php';
+		require_once $index_dir.'include/func/func_duration2friendly_str.php';
+		if(isset($max_emails_reached)) {
+			if($lang=='fa') $failure_msg='<h3>'.sprintf(tr('max emails reached msg'), duration2friendly_str($verification_time, 0), $max_emails).'.</h3>';
+			else $failure_msg='<h3>'.sprintf(tr('max emails reached msg'), $max_emails, duration2friendly_str($verification_time, 0)).'.</h3>';
+			$no_specialchars=true;
+			require $index_dir.'include/page/page_failure.php';
+			exit;
+		}
+		$success_msg='<h3>'.sprintf(tr('verification email sent msg3'), $_POST['newemail'], duration2friendly_str($verification_time, 0)).'.</h3>';
 		$no_specialchars=true;
 		require $index_dir.'include/page/page_success.php';
 		exit;
+		//---------------
 	}
 }
 

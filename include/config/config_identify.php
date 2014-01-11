@@ -57,6 +57,11 @@ same as above (change_autologin_key_upon_login) but this config var is for admin
 
 $change_autologin_key_upon_logout=true;
 //highly recommended for higher security
+//Note: this config var is for ordinary users (other than Admin) only.
+
+$admin_change_autologin_key_upon_logout=true;
+//highly recommended for higher security
+//same as above (change_autologin_key_upon_logout) but this config var is for admin only.
 
 $tie_login2ip=0;
 /*

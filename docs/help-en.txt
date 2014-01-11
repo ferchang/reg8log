@@ -261,6 +261,13 @@ change_autologin_key_upon_logout:
 
 seems no explanations r needed if u have read this help from several lines upper.
 i also recommend to enable this for secuity.
+Note: this config var is for ordinary users (other than Admin) only.
+
+admin_change_autologin_key_upon_logout:
+
+seems no explanations r needed if u have read this help from several lines upper.
+i also recommend to enable this for secuity.
+Note: this config var is for admin only.
 
 log_last_activity:
 log_last_logout:

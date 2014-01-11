@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'verification email sent msg3' => 'An email containing email verification link is sent to %s.<br>You must open that link in %s to change the email of your account',
+'max emails reached msg' => 'You are not allowed to send more than %s email change requests in every %s',
 'illegal autologin_age msg' => 'Illegal value for remember login!<br>Please try again.',
 'tie login to ip option description' => 'Leads to higher security, but u would be logged out if your IP changes',
 'login limit warning' => 'Only %d incorrect login attempts are permitted in every %s.<br>Number of incorrect login attempts in the past %s: %d<br>Number of tries left: %d',

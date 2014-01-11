@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'verification email sent msg3' => 'یک ایمیل محتوی لینک تایید صحت ایمیل به %s ارسال شد.<br>شما باید در ظرف %s لینک تایید صحت ایمیل را باز کنید تا آدرس ایمیل اکانت شما تغییر داده شود',
+'max emails reached msg' => 'شما در هر %s میتوانید حداکثر %s درخواست تغییر ایمیل ارسال کنید',
 'Remember for' => 'بخاطرسپاری برای مدت',
 'Remember' => 'بخاطرسپاری',
 'Sorry, but entering Admin password is needed!' => 'متاسفیم، شما باید پسورد ادمین را نیز وارد کنید!',

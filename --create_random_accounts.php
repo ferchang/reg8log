@@ -17,9 +17,10 @@ for($i=0; $i<50; $i++) {
 	$uid=random_string(8);
 
 	$username=random_string(8);
+	
+	$email=random_string(8);
 
-
-	$query="insert into accounts values(null, '$uid', '$username', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+	$query="insert into accounts values(null, '$uid', '$username', '', '$email', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
 	
 	$reg8log_db->query($query);
 	
