@@ -14,11 +14,11 @@ else $max_emails=$max_change_email_emails;
 
 if($change_email_verification_time==0) $verification_time=$email_verification_time;
 else $verification_time=$change_email_verification_time;
-
 //--------------
 
 if($reg8log_db->result_num($query)) {
 	$rec=$reg8log_db->fetch_row();
+	$rid=$rec['record_id'];
 	$emails_sent=$rec['emails_sent']+1;
 	if($emails_sent>255) $emails_sent=255;
 	if($_POST['newemail']!=$rec['email']) {

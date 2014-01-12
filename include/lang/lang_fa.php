@@ -3,6 +3,7 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'Email change verification link' => 'لینک تایید صحت ایمیل برای تغییر ایمیل',
 'verification email sent msg3' => 'یک ایمیل محتوی لینک تایید صحت ایمیل به %s ارسال شد.<br>شما باید در ظرف %s لینک تایید صحت ایمیل را باز کنید تا آدرس ایمیل اکانت شما تغییر داده شود',
 'max emails reached msg' => 'شما در هر %s میتوانید حداکثر %s درخواست تغییر ایمیل ارسال کنید',
 'Remember for' => 'بخاطرسپاری برای مدت',
@@ -295,14 +296,17 @@ return array(
 'new password is longer than' => 'رمز عبور جدید از %d کاراکتر بیشتر است!',
 'Your password changed successfully' => 'رمز عبور شما با موفقیت تغییر یافت',
 'no such email verification record' => 'خطا:<br>چنان رکوردی پیدا نشد!<br>دلایل ممکن:<br>- زمان تایید ایمیل گذشته است.<br>- ثبت نام موکول به تایید ادمین بوده و در زمان مشخص شده توسط ادمین تایید نشده است',
+'no such email verification record2' => 'خطا:<br>چنان رکوردی پیدا نشد!<br>دلایل ممکن:<br>- زمان تایید ایمیل گذشته است.<br>- این لینک تایید ایمیل قبلا اجرا شده و ایمیل با موفقیت تغییر داده شده است',
 'Pending account expired msg' => 'خطا:<br>اکانت معلق منقضی شده است!<br>دلیل:<br>بوسیلهء ادمین در حداکثر زمان مشخص شده تایید نشده است',
 'Out of email verification time msg' => 'خطا:<br>اکانت معلق منقضی شده است!<br>علت:<br>حداکثر زمان تایید ایمیل سپری شده است',
+'Out of email verification time msg2' => 'خطا:<br>حداکثر زمان تایید صحت ایمیل سپری شده است!',
 'email verification already done msg' => 'تایید ایمیل اکانت شما قبلا انجام شده است!',
 'waiting for admin confirmation msg' => '<br>اکانت شما منتظر تایید شدن توسط ادمین است',
 'email verified - waiting admin msg' => 'ایمیل شما با موفقیت تایید شد.<br>اکانت شما منتظر تایید ادمین است تا در حداکثر %s از زمان ثبت نام شما تایید شود',
 'You are logged in automatically' => 'شما بصورت خودکار لاگین شدید',
 'Email verification' => 'تایید صحت ایمیل',
 'To complete your registration, click on the button below' => 'برای تکمیل ثبت نام خود، بر روی دکمهء زیر کلیک کنید',
+'To complete your email change, click on the button below' => 'برای تکمیل تغییر ایمیل خود، بر روی دکمهء زیر کلیک کنید',
 'Proceed' => 'پیش برو',
 'verification email sent msg' => 'یک ایمیل به <span style="white-space: pre; color: #080;">%s</span> ارسال شد',
 'verification email sent msg p2' => '،<br> البته اگر آن آدرس ایمیل صحیح اکانت شما باشد.<br>(و البته اگر اکانت شما به تایید صحت ایمیل نیاز داشته باشد)',
@@ -315,7 +319,7 @@ return array(
 'Registration is disabled!' => 'امکان ثبت نام غیرفعال است!',
 'Error: You are logged in!' => 'خطا: شما درحال حاضر لاگین هستید!',
 'Admin only' => 'فقط ادمین',
-//-- database setup system --
+//-- database setup system >>
 'DB Setup - Final' => 'نصب پایگاه داده ها - قدم آخر',
 'Account <span style="color: green">Admin</span> created' => 'اکانت <span style="color: green">ادمین</span> ایجاد شد',
 'Setup completed' => 'نصب کامل شد',
@@ -327,7 +331,7 @@ return array(
 'Continue' => 'ادامه',
 'DB setup - Step 2' => 'نصب دیتابیس - قدم دوم',
 'Setup admin account' => 'نصب اکانت ادمین',
-//-- database setup system --
+//-- database setup system <<
 'Security code short - js msg' => 'کد امنیتی کوتاهتر از \'+captcha_min_len+\' کاراکتر است!',
 'Security code long - js msg' => 'کد امنیتی بیشتر از \'+captcha_max_len+\' کاراکتر است!',
 'user needs email verification msg' => 'این اکانت برای فعال شدن به تایید صحت ایمیل نیز نیاز دارد',

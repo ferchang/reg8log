@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'Out of email verification time msg2' => 'Error:<br>Email change record is expired!',
+'no such email verification record2' => 'Error:<br>No such record found!<br>Possible reasons:<br>- Out of email verification time.<br>- The email verification link was already executed and the email changed successfully',
 'verification email sent msg3' => 'An email containing email verification link is sent to %s.<br>You must open that link in %s to change the email of your account',
 'max emails reached msg' => 'You are not allowed to send more than %s email change requests in every %s',
 'illegal autologin_age msg' => 'Illegal value for remember login!<br>Please try again.',
