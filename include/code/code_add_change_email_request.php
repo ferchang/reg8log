@@ -42,6 +42,7 @@ if($reg8log_db->result_num($query)) {
 	$query="update `email_change` set `email`=".$reg8log_db->quote_smart($_POST['newemail']).", `emails_sent`=$emails_sent, `email_verification_key`='$email_verification_key', `timestamp`=$timestamp";
 	$reg8log_db->query($query);
 	require $index_dir.'include/code/email/code_email_change_email_verification_link.php';
+	
 	return;
 }
 
@@ -61,5 +62,10 @@ $query="replace into `email_change` (`record_id`, `username`, `email`, `emails_s
 
 $reg8log_db->query($query);
 require $index_dir.'include/code/email/code_email_change_email_verification_link.php';
+
+//-------------
+require_once $index_dir.'include/config/config_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_email_change_expired_cleanup.php';
+//-------------
 
 ?>
