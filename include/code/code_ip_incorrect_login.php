@@ -26,7 +26,7 @@ if($ip_block_threshold!=-1 and $ip_incorrect_count+1>=$ip_block_threshold) {
 	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=1 and $block_disable!=3) $ip_block=$_SERVER['REMOTE_ADDR'];
 	else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_threshold) $captcha_needed=true;
-	require_once $index_dir.'include/code/log/code_log_ip_block.php';
+	if($ip_incorrect_count<$ip_block_threshold) require_once $index_dir.'include/code/log/code_log_ip_block.php';
 }
 else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_threshold) $captcha_needed=true;
 

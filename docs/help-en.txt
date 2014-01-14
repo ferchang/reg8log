@@ -102,7 +102,7 @@ registeration_alert_emails_min_interval:
 max_registeration_alert_emails:
 max_registeration_alert_emails_period:
 
-for information please see the comments in config_register.php
+for information please see the comments in config_register.php.
 
 max_activation_emails:
 
@@ -125,7 +125,11 @@ reset_clients_ajax_check_usernames_upon_register:
 
 with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
 
+email_change_needs_email_verification:
+max_change_email_emails:
+change_email_verification_time:
 
+for information please see the comments in config_register.php.
 
 ------------------------------------------------
 config vars in config_brute_force_protection.php:
@@ -284,6 +288,11 @@ dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_ze
 
 see the correponding comments in the config file for explanations.
 
+admin_change_autologin_key_upon_login:
+admin_change_autologin_key_upon_logout:
+
+see the correponding comments in the config file for explanations.
+
 ------------------------------------------------
 config vars in config_crypto.php:
 ------------------------------------------------
@@ -427,5 +436,9 @@ show_statistics_in_admin_operations_page:
 
 whether to show some statistics in admin operations page.
 u can disable this if performance problems occur.
+
+admin_operations_require_password:
+
+see the comments in config_admin.php.
 
 ################ High security register and login system ###################

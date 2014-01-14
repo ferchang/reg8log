@@ -9,4 +9,6 @@ $password_reset_period=24*60*60; //in seconds
 
 $change_autologin_key_upon_new_password=true;
 
+$admin_change_autologin_key_upon_new_password=true;
+
 ?>

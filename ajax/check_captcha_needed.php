@@ -27,6 +27,7 @@ if(!isset($captcha_needed)) require $index_dir.'include/code/code_check_account_
 
 if(isset($captcha_needed)) {
 	echo '<!-- *add captcha from* -->';
+	$ajax=true;
 	require $index_dir.'include/page/page_captcha_form.php';
 }
 else echo 'n';
