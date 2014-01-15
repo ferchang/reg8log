@@ -40,6 +40,11 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 		}
 		if(isset($appr)) require $index_dir.'include/code/admin/code_approve_pending_accounts.php';
 		if(isset($del)) require $index_dir.'include/code/admin/code_delete_pending_accounts.php';
+		
+		//----------
+		unset($password_check_needed, $captcha_needed);
+		require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+		//----------
 
 	}
 	

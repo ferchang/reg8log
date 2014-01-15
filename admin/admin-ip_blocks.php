@@ -46,6 +46,11 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 		if(isset($unblock)) require $index_dir.'include/code/admin/code_unblock_ips.php';
 		if(isset($del)) require $index_dir.'include/code/admin/code_delete_ip_block_log_records.php';
 
+		//----------
+		unset($password_check_needed, $captcha_needed);
+		require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+		//----------
+		
 	}
 	
 }

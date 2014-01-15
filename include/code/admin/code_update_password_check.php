@@ -14,6 +14,7 @@ if($admin_operations_require_password>1) {
 		$query.="`password_check_key`='$password_check_key' limit 1";
 		$reg8log_db->query($query);
 		setcookie('reg8log_password_check_key', $password_check_key, 0, '/', null, $https, true);
+		$_COOKIE['reg8log_password_check_key']=$password_check_key;
 		unset($password_check_needed, $captcha_needed);
 	}
 }

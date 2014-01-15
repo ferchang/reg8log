@@ -30,9 +30,14 @@ if(isset($_POST['delete']) or isset($_POST['captcha'])) {
 	if(!isset($err_msgs)) {
 	
 		require $index_dir.'include/code/admin/code_update_password_check.php';
-
+		
 		foreach($_POST as $auto=>$action) if($action=='del') $del[]=$auto;
 		if(isset($del)) require $index_dir.'include/code/admin/code_delete_accounts.php';
+		
+		//----------
+		unset($password_check_needed, $captcha_needed);
+		require $index_dir.'include/code/admin/code_check_password_entry_needed4admin.php';
+		//----------
 
 	}
 
