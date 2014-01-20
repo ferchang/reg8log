@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'email_take_no_action_msg' => 'هشدار: دریافت کنندهء گرامی، این ایمیل توسط یک سیستم کاربری به شما ارسال شده است. ممکن است شخصی به اشتباه یا عمدا آدرس ایمیل شما را بعنوان آدرس ایمیل خودش به سیستم معرفی کرده باشد. اگر شما باعث ارسال این ایمیل نشده اید و نمیدانید چرا چنین ایمیلی به شما ارسال شده است، لطفا هیچگونه عملی انجام ندهید و میتوانید بسادگی این ایمیل را نادیده گرفته و آن را حذف نمایید.',
+'debug mode turn off instruction msg' => 'برای خاموش کردن حالت عیب یابی، مقدار متغییر debug_mode در فایل common.php را به false تغییر دهید',
 'Email change verification link' => 'لینک تایید صحت ایمیل برای تغییر ایمیل',
 'verification email sent msg3' => 'یک ایمیل محتوی لینک تایید صحت ایمیل به %s ارسال شد.<br>شما باید در ظرف %s لینک تایید صحت ایمیل را باز کنید تا آدرس ایمیل اکانت شما تغییر داده شود',
 'max emails reached msg' => 'شما در هر %s میتوانید حداکثر %s درخواست تغییر ایمیل ارسال کنید',

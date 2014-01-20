@@ -15,11 +15,13 @@ if(strlen($dir)==1) $dir='';
 
 $link='http://'.$host.$dir.'/block_bypass_login.php?key='.$key;
 
-$body=tr('Block-bypass link').": $link";
+$take_no_action_msg=tr('email_take_no_action_msg');
+
+$body=$take_no_action_msg."\r\n\r\n".tr('Block-bypass link').": $link\r\n\r\n";
 $body.="\r\n--==Multipart_Boundary\r\nContent-Type: text/plain; charset=\"utf-8\"";
-$body.="\r\n\r\n".tr('Block-bypass link').": $link";
+$body.="\r\n\r\n$take_no_action_msg\r\n\r\n".tr('Block-bypass link').": $link\r\n\r\n";
 $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
-$body.="<html $page_dir><body $page_dir><h3 align='center'><a href=\"$link\">".tr('Block-bypass link')."</a></h3></body></html>\r\n--==$boundary--";
+$body.="<html $page_dir><body $page_dir><h3 align='center'>$take_no_action_msg<br><br><a href=\"$link\">".tr('Block-bypass link')."</a><br><br></h3></body></html>\r\n--==$boundary--";
 
 mail($email, '=?UTF-8?B?'.base64_encode(tr('Block-bypass')).'?=', $body, $headers);
 

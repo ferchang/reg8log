@@ -3,6 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'email_take_no_action_msg' => 'Dear the receiver, this email has been sent to you by a user account system. It is possible that someone has inadvertently (or intentionally) introduced your email address as his own email address to the system. So if you didn\'t cause sending of this email and don\'t know for what reason it is sent to you, then please take no action and just ignore/delete it.',
+'debug mode turn off instruction msg' => 'To turn off debug mode, set the debug_mode variable in common.php file to false',
 'Out of email verification time msg2' => 'Error:<br>Email change record is expired!',
 'no such email verification record2' => 'Error:<br>No such record found!<br>Possible reasons:<br>- Out of email verification time.<br>- The email verification link was already executed and the email changed successfully',
 'verification email sent msg3' => 'An email containing email verification link is sent to %s.<br>You must open that link in %s to change the email of your account',

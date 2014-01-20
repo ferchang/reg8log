@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 $show_statistics_in_admin_operations_page=true;
 
-$admin_operations_require_password=10;//whether entering admin password is required when performing admin operations (such as confirming or deleting an account).
+$admin_operations_require_password=1;//whether entering admin password is required when performing admin operations (such as confirming or deleting an account).
 //possible values: 0 no / 1: yes / any bigger number n: yes but dont require re-entering password if it was entered in the past n seconds (note this remembering will not work after browser is closed because the related cookie will be deleted - this is intentional for security)
 
 ?>

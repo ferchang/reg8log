@@ -4,7 +4,7 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 echo '<table cellpadding="5" style="border: thin solid black">';
 
-if($debug_mode) echo '<tr bgcolor="#e1cfa0" ><td><div style="border: medium solid #f00; padding: 2px; color: #f00; font-weight: bold; background: yellow; text-align: center">', tr('Warning: Debug mode on!'), '</div></td></tr>';
+if($debug_mode) echo '<tr bgcolor="#e1cfa0" title="', tr('debug mode turn off instruction msg'),'"><td><div style="border: medium solid #f00; padding: 2px; color: #f00; font-weight: bold; background: yellow; text-align: center">', tr('Warning: Debug mode on!'), '</div></td></tr>';
 
 echo '<tr  bgcolor="#e1cfa0" ><td>
 <a href="', $index_dir, 'index.php">', tr('Login page'), '</a>&nbsp;|&nbsp;

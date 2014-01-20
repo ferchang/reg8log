@@ -12,7 +12,7 @@ require $index_dir.'include/code/code_db_object.php';
 
 require_once $index_dir.'include/func/func_random.php';
 
-for($i=0; $i<50; $i++) {
+for($i=0; $i<500; $i++) {
 
 	$uid=random_string(8);
 

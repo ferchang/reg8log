@@ -12,15 +12,15 @@ $email=$rec3['email'];
 
 require_once $index_dir.'include/code/email/code_emails_header.php';
 
-$body=$admin_alert_email_msg;
+$body="$admin_alert_email_msg\r\n\r\n";
 $body.="\r\n--==Multipart_Boundary\r\nContent-Type: text/plain; charset=\"utf-8\"";
-$body.="\r\n\r\n$admin_alert_email_msg";
+$body.="\r\n\r\n$admin_alert_email_msg\r\n\r\n";
 $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
 
 if($admin_emails_lang=='fa') $body.="<html dir='rtl'><body dir='rtl'>";
 else $body.="<html><body>";
 
-$body.="<h3 align='center'>".str_replace("\n", '<br>', $admin_alert_email_msg)."<br><a href=\"http://$host\">$host</a></h3></body></html>\r\n--==$boundary--";
+$body.="<h3 align='center'>".str_replace("\n", '<br>', $admin_alert_email_msg)."<br><a href=\"http://$host\">$host</a><br><br></h3></body></html>\r\n--==$boundary--";
 
 mail($email, '=?UTF-8?B?'.base64_encode(tr('Account/IP blocks alert', false, $admin_emails_lang)).'?=', $body, $headers);
 

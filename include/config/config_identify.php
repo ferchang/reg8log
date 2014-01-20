@@ -50,7 +50,6 @@ $admin_change_autologin_key_upon_login=2; // possible values: 0, 1, 2.
 // 0: no
 // 1: upon manual login
 // 2: upon both manual and auto-login
-
 /*
 same as above (change_autologin_key_upon_login) but this config var is for admin only.
 */
@@ -73,8 +72,7 @@ $tie_login2ip=0;
 whith this option enabled, user's autologin cookie is tied with his IP address,
 so if the IP address changes, the user is logged out of the system.
 this way, cookie theft would be useless for attackers, unless they can use the same IP address as the user.
-this option can be useful when extreme security is needed.
-
+this option can be useful when more security is demanded.
 */
 
 $tie_login2ip_option_at_login=true;
@@ -106,7 +104,7 @@ because when change_autologin_key_upon_login=2 autologin key is changed automati
 
 $dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero=0;
 //oh man this is a really long variable name ;D
-//when change_autologin_key_upon_login is set to 0, user's autologin key is not changed in each request and/or when logging in, so a user can log in into his account from several machines and remain login from all of them at the same time. but since autologin expiration time is checked on the server side too, and only the expiration time of the last login is recorded on the server, this can cause problems both from the point of view of functionality and from the pov of security, so u can, by setting this variable, specify to ignore the server side expiration times when change_autologin_key_upon_login is set to 0. but i recommend to leave it to the default (0) unless enabling it seems really unavoidable.
+//when change_autologin_key_upon_login is set to 0, user's autologin key is not changed in each request and/or when logging in, so a user can log into his account from several machines and remain login from all of them at the same time. but since autologin expiration time is checked on the server side too, and only the expiration time of the last login is recorded on the server, this can cause problems both from the point of view of functionality and from the pov of security, so u can, by setting this variable, specify to ignore the server side expiration times when change_autologin_key_upon_login is set to 0. but i recommend to leave it to the default (0) unless enabling it seems really unavoidable.
 //possible values: 0: no / 1: only for the admin account / 2: only for ordinary users / 3: for all
 
 $max_session_autologin_age=12*60*60;//in seconds / 0: infinite
@@ -128,6 +126,8 @@ $autologin_ages=array(
 	365*24*60*60,
 
 );
+//auto-login age (remember me) options on the login form
+//this config var is for ordinary users only
 
 $admin_autologin_ages=array(
 
@@ -144,5 +144,7 @@ $admin_autologin_ages=array(
 	365*24*60*60,
 	
 );
+//auto-login age (remember me) options on the login form
+//this config var is for the Admin account only
 
 ?>

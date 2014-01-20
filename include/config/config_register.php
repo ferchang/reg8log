@@ -27,7 +27,8 @@ $can_notify_user_about_admin_action=true; //with this set to true user can be no
 $login_upon_register=true;
 
 $login_upon_register_age=0; //login upon register autologin age
-//in seconds / 0: until browser closes
+//in seconds
+//special values: 0: until browser closes
 
 //--------------------------------
 
