@@ -7,6 +7,7 @@ $registeration_enabled=true;
 //--------------------------------
 
 $password_refill=2; //0: disabled / 1: enabled if client javascript on / 2: enabled
+//password refill is related to the register form only
 
 //--------------------------------
 
@@ -79,6 +80,11 @@ $reset_clients_ajax_check_usernames_upon_register=true;
 
 $email_change_needs_email_verification=2;
 //0: no /1: yes /2: follow $email_verification_needed
+//this config var is for ordinary users only
+
+$admin_email_change_needs_email_verification=0;
+//0: no /1: yes /2: follow $email_verification_needed
+//this config var is for the Admin account only
 
 $max_change_email_emails=-1;
 //max change email verification emails that can be sent in $change_email_verification_time.

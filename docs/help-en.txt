@@ -126,6 +126,7 @@ reset_clients_ajax_check_usernames_upon_register:
 with this set to true, a client's ajax username availability check records will be deleted from the ajax_check_usernames table when the client registers successfully (which means it passed a captcha). this lets human users to use the ajax username availability check again.
 
 email_change_needs_email_verification:
+admin_email_change_needs_email_verification:
 max_change_email_emails:
 change_email_verification_time:
 
