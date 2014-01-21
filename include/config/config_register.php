@@ -7,7 +7,7 @@ $registeration_enabled=true;
 //--------------------------------
 
 $password_refill=2; //0: disabled / 1: enabled if client javascript on / 2: enabled
-//password refill is related to the register form only
+//password refill is related to the register and change password forms only
 
 //--------------------------------
 

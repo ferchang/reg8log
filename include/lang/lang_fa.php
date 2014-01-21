@@ -209,7 +209,7 @@ return array(
 'If the code is not readable,<br />click on the image to change it' => 'اگر کد خوانا نیست،<br>برای تغییر آن رویش کلیک کنید',
 'Enter the security code here' => 'کد امنیتی را اینجا وارد کنید',
 '(Not case-sensitive)' => '(غیر حساس به کوچکی و بزرگی حروف)',
-'Change brute-force protection setting' => '&#x202b;تغییر تنظیمات محافظت در برابر Brute-force<!--&#x200f;-->',
+'Change brute-force protection setting' => '&#x202b;تغییر تنظیمات محافظت در برابر Brute-force&#x200f;',
 'password field is empty!' => 'فیلد رمز عبور خالی است!',
 'Warning' => 'هشدار',
 'protection change warning msg' => 'اولاً: اگر شما نمیدانید برای چه درحال انجام چه کاری هستید، پس به این تنظیمات دست نزنید.<br>دوماً: اگر شما یک سطح محافظت کمتر را انتخاب کنید، سپس برای مقاومت در برابر حمله های Brute-force به رمز عبور قوی تری نیاز خواهید داشت.',
