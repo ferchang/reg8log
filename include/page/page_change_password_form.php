@@ -18,12 +18,12 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
-document.change_pass_form.curpass.value='';
-document.change_pass_form.newpass.value='';
-document.change_pass_form.repass.value='';
-if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
-clear_cap(true);
-return false;
+	document.change_pass_form.curpass.value='';
+	document.change_pass_form.newpass.value='';
+	document.change_pass_form.repass.value='';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	clear_cap(true);
+	return false;
 }
 
 <?php
@@ -48,8 +48,16 @@ function hash_password() {
 	document.change_pass_form.newpass.value=document.change_pass_form.repass.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.change_pass_form.newpass.value);
 }
 
+password_autofill_msg_flag=false;
+
 function password_focus(p, i) {
 	if(p.value.indexOf('encrypted-'+site_salt)==0 || p.value.indexOf('hashed-'+site_salt)==0) {
+		if(!password_autofill_msg_flag) {
+			alert('<?php echo tr('password_autofill_msg'); ?>');
+			password_autofill_msg_flag=true;
+			p.blur();
+			return;
+		}
 		auto_filled=p;
 		password_edited=false;
 		password_value=p.value;
@@ -148,7 +156,7 @@ echo '</td></tr>';
 <td <?php echo $cell_align; ?>><?php echo tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
+<td <?php echo $cell_align; ?>><?php echo tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and !isset($password_error)) {
 	$refill=$_POST['newpass'];
@@ -157,10 +165,11 @@ if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and 
 ?>/></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
+<td <?php echo $cell_align; ?>><?php echo tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($refill_output)) echo $refill_output;
-?>/></td>
+?>/>
+</td>
 </tr>
 <?php
 if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/page/page_captcha_form.php';

@@ -66,8 +66,16 @@ function hash_password() {
 	document.register_form.repass.value=document.register_form.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.register_form.password.value);
 }
 
+password_autofill_msg_flag=false;
+
 function password_focus(p, i) {
 	if(p.value.indexOf('encrypted-'+site_salt)==0 || p.value.indexOf('hashed-'+site_salt)==0) {
+		if(!password_autofill_msg_flag) {
+			alert('<?php echo tr('password_autofill_msg'); ?>');
+			password_autofill_msg_flag=true;
+			p.blur();
+			return;
+		}
 		auto_filled=p;
 		password_edited=false;
 		password_value=p.value;
