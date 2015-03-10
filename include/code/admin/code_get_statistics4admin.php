@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 $query="select count(*) from `accounts` where `username`!='Admin'";
 
@@ -14,7 +14,7 @@ $banned_users=$reg8log_db->count_star($query);;
 
 //---------------
 
-require $index_dir.'include/config/config_register.php';
+require ROOT.'include/config/config_register.php';
 
 $expired1=$req_time-$email_verification_time;
 $expired2=$req_time-$admin_confirmation_time;
@@ -36,7 +36,7 @@ $query="select count(*) from `account_block_log`";
 
 $all_account_blocks=$reg8log_db->count_star($query);
 
-require $index_dir.'include/config/config_brute_force_protection.php';
+require ROOT.'include/config/config_brute_force_protection.php';
 
 $query="select count(*) from `account_block_log` where `unblocked`=0 and  ((`username`!='admin' and `first_attempt`>".($req_time-$account_block_period)." and `block_threshold`>=$account_block_threshold) or (`username`='admin' and `first_attempt`>".($req_time-$admin_account_block_period)." and `block_threshold`>=$admin_account_block_threshold))";
 

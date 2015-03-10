@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 ?>
 
@@ -10,18 +10,18 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('Change password'); ?></title>
+<title><?php echo func::tr('Change password'); ?></title>
 <style>
 </style>
 <script src="js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
 	document.change_pass_form.curpass.value='';
 	document.change_pass_form.newpass.value='';
 	document.change_pass_form.repass.value='';
-	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	clear_cap(true);
 	return false;
 }
@@ -53,7 +53,7 @@ password_autofill_msg_flag=false;
 function password_focus(p, i) {
 	if(p.value.indexOf('encrypted-'+site_salt)==0 || p.value.indexOf('hashed-'+site_salt)==0) {
 		if(!password_autofill_msg_flag) {
-			alert('<?php echo tr('password_autofill_msg'); ?>');
+			alert('<?php echo func::tr('password_autofill_msg'); ?>');
 			password_autofill_msg_flag=true;
 			p.blur();
 			return;
@@ -92,18 +92,18 @@ clear_cap(true);
 msgs=new Array();
 i=0;
 
-if(!document.change_pass_form.curpass.value) msgs[i++]='<?php echo tr('Current password field is empty!'); ?>';
+if(!document.change_pass_form.curpass.value) msgs[i++]='<?php echo func::tr('Current password field is empty!'); ?>';
 
 newpass_value=document.change_pass_form.newpass.value;
 repass_value=document.change_pass_form.repass.value;
 
 if(newpass_value.indexOf('encrypted-'+site_salt)!=0 && newpass_value.indexOf('hashed-'+site_salt)!=0) {
-	if(newpass_value.length<min_length) msgs[i++]="<?php echo tr('New password is shorter than "+min_length+" characters!'); ?>";
-	else if(newpass_value.length>max_length) msgs[i++]="<?php echo tr('New password is longer than "+max_length+" characters!'); ?>";
-	else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="<?php echo tr('New password is invalid!'); ?>";
+	if(newpass_value.length<min_length) msgs[i++]="<?php echo func::tr('New password is shorter than "+min_length+" characters!'); ?>";
+	else if(newpass_value.length>max_length) msgs[i++]="<?php echo func::tr('New password is longer than "+max_length+" characters!'); ?>";
+	else if(re && newpass_value && !re.test(newpass_value)) msgs[i++]="<?php echo func::tr('New password is invalid!'); ?>";
 }
 
-if(newpass_value!=repass_value) msgs[i++]='<?php echo tr('New password fields are not match!'); ?>';
+if(newpass_value!=repass_value) msgs[i++]='<?php echo func::tr('New password fields are not match!'); ?>';
 
 if(captcha_exists) validate_captcha(document.change_pass_form.captcha.value);
 
@@ -141,10 +141,10 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require $index_dir.'include/code/code_generate_form_id.php';
+require ROOT.'include/code/code_generate_form_id.php';
 
 if(isset($err_msgs)) {
-echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', tr('Errors'), ':</span><br />';
+echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 foreach($err_msgs as $err_msg) {
 $err_msg[0]=strtoupper($err_msg[0]);
 echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -153,38 +153,38 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td <?php echo $cell_align; ?>><?php echo func::tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
+<td <?php echo $cell_align; ?>><?php echo func::tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and !isset($password_error)) {
 	$refill=$_POST['newpass'];
-	require $index_dir.'include/code/code_refill_password.php';
+	require ROOT.'include/code/code_refill_password.php';
 }
 ?>/></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);" 
+<td <?php echo $cell_align; ?>><?php echo func::tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($refill_output)) echo $refill_output;
 ?>/>
 </td>
 </tr>
 <?php
-if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/page/page_captcha_form.php';
+if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
 ?>
 <tr>
 <td></td><td><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
 <td></td>
-<td align="center"><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()" />
-<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
+<td align="center"><input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form()" />
+<input type="submit" value="<?php echo func::tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr>
 </table>
 </form>
-<br><center><a href="user_options.php"><?php echo tr('User options'); ?></a><br><br><a href="index.php"><?php echo tr('Login page'); ?></a></center>
+<br><center><a href="user_options.php"><?php echo func::tr('User options'); ?></a><br><br><a href="index.php"><?php echo func::tr('Login page'); ?></a></center>
 </td></tr></table>
 <script>
 if(captcha_exists) {
@@ -195,7 +195,7 @@ if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
 }
 </script>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

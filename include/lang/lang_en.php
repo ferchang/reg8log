@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>error: turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
 'password_autofill_msg' => 'Note:\nYour selected password is automatically filled into the password field in an encrypted form.\nYou don\\\'t need to type it again unless you want to change it.',

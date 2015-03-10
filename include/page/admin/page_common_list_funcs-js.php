@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
 ?>
 
@@ -50,7 +50,7 @@ echo '	last_page=', ceil($total/$per_page), ";\n";
 	page=document.getElementById('page').value;
 	if(page<1 || page>last_page ) {
 		alert(<?php
-		echo "'", sprintf(tr('Page number must be between (including) 1 and %d.'), ceil($total/$per_page)), "'";
+		echo "'", sprintf(func::tr('Page number must be between (including) 1 and %d.'), ceil($total/$per_page)), "'";
 		?>);
 		document.getElementById('page').value='';
 		return false;

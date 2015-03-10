@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>error: turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>error: direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
 'password_autofill_msg' => 'نکته:\nرمز عبور انتخابی شما بطور خودکار و در یک شکل رمز شده در فیلد رمز عبور وارد شده است.\nشما نیازی به وارد کردن مجدد رمز عبور انتخابی خود ندارید، مگر آنکه مایل به تغییر آن باشید.',

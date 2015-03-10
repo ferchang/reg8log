@@ -1,10 +1,10 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if(session_id()!=='' and session_name()==='reg8log_session') return;
 
-require $index_dir.'include/config/config_identify.php';
+require ROOT.'include/config/config_identify.php';
 
 @session_write_close();
 
@@ -19,28 +19,28 @@ $old_session_settings['session_name']=session_name('reg8log_session');
 $old_session_settings['session_id']=session_id();
 $old_session_settings['httponly']=ini_set("session.cookie_httponly", 1);
 $old_session_settings['trans_sid']=ini_set("session.use_trans_sid", 0);
-if($https) $old_session_settings['cookie_secure']=ini_set('session.cookie_secure', 'on');
+if(HTTPS) $old_session_settings['cookie_secure']=ini_set('session.cookie_secure', 'on');
 
 if(!session_start()) {
 	$failure_msg="session_start failed";
-	require $index_dir.'include/page/page_failure.php';
+	require ROOT.'include/page/page_failure.php';
 	exit;
 }
 
 session_regenerate_id(true);
 
-if(!isset($encrypt_session_files_contents)) require $index_dir.'include/config/config_crypto.php';
+if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;
 	if($encrypt_session_files_contents) $session0=$_SESSION;
-	require_once $index_dir.'include/func/func_encryption_with_site8client_keys.php';
+	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
 		if(!isset($setup_page)) {
-			setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+			setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 			$failure_msg="Session decryption error!";
-			require $index_dir.'include/page/page_failure.php';
+			require ROOT.'include/page/page_failure.php';
 			$session_decryption_error=true;
 			exit;
 		}

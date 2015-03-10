@@ -1,16 +1,16 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='./';
 
-require $index_dir.'include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require 'include/common.php';
 
-require $index_dir.'include/code/code_identify.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticated msg').'.</h3><a href="index.php">'.tr('Login page').'</a></center>');
+require ROOT.'include/code/code_identify.php';
+
+if(!isset($identified_user)) my_exit('<center><h3>'.func::tr('You are not authenticated msg').'.</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 ?>
 
@@ -20,7 +20,7 @@ if(!isset($identified_user)) my_exit('<center><h3>'.tr('You are not authenticate
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('User options'); ?></title>
+<title><?php echo func::tr('User options'); ?></title>
 <style>
 li {
 font-size: large;
@@ -40,7 +40,7 @@ color: white;
 </td>
 <td  width="100%" valign="top">
 <?php
-require $index_dir.'include/page/page_sections.php';
+require ROOT.'include/page/page_sections.php';
 ?>
 </td>
 </tr>
@@ -49,21 +49,21 @@ require $index_dir.'include/page/page_sections.php';
 <table bgcolor="#7587b0">
 <tr><td>
 <ul>
-<li><a class="li_item" href="change_password.php"><?php echo tr('Change password'); ?></a><br>
-<li><a class="li_item" href="change_email.php"><?php echo tr('Change email'); ?></a><br>
+<li><a class="li_item" href="change_password.php"><?php echo func::tr('Change password'); ?></a><br>
+<li><a class="li_item" href="change_email.php"><?php echo func::tr('Change email'); ?></a><br>
 <?php
 
 if($identified_user=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 if($change_autologin_key_upon_login!=2 and ($allow_manual_autologin_key_change or $identified_user=='Admin')) {
-	echo '<li><a class="li_item" href="change_autologin_key.php">', tr("Logging other systems out"), '</a>';
-	if(!$allow_manual_autologin_key_change) echo '<small> (', tr('Admin only'), ')</small>';
+	echo '<li><a class="li_item" href="change_autologin_key.php">', func::tr('Logging other systems out'), '</a>';
+	if(!$allow_manual_autologin_key_change) echo '<small> (', func::tr('Admin only'), ')</small>';
 }
 
-require_once $index_dir.'include/config/config_brute_force_protection.php';
-require $index_dir.'include/code/code_check_block_options.php';
+require_once ROOT.'include/config/config_brute_force_protection.php';
+require ROOT.'include/code/code_check_block_options.php';
 if(count($block_options)>1)  {
-	echo '<li><a class="li_item" href="change_brute_force_protection_setting.php">', tr('Change brute-force protection setting'), '</a>';
-	if(!$allow_users2disable_blocks) echo '<small> (', tr('Admin only'), ')</small>';
+	echo '<li><a class="li_item" href="change_brute_force_protection_setting.php">', func::tr('Change brute-force protection setting'), '</a>';
+	if(!$allow_users2disable_blocks) echo '<small> (', func::tr('Admin only'), ')</small>';
 }
 
 ?>
@@ -72,7 +72,7 @@ if(count($block_options)>1)  {
 </table>
 </center>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

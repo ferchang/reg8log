@@ -1,12 +1,12 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if($ch_pswd_max_threshold==-1 and $ch_pswd_captcha_threshold==-1) return;
 
 if($try_type==='email') {
 	if($ch_pswd_captcha_threshold==-1) return;
-	require_once $index_dir.'include/code/code_db_object.php';
+	require_once ROOT.'include/code/code_db_object.php';
 	$query="update `accounts` set `last_ch_email_try`=".$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	return;
@@ -14,13 +14,13 @@ if($try_type==='email') {
 
 //--------------------------------
 
-if(isset($_COOKIE['reg8log_ch_pswd_try'])) setcookie('reg8log_ch_pswd_try', $_COOKIE['reg8log_ch_pswd_try']+1, 0, '/', null, $https, true);
-else setcookie('reg8log_ch_pswd_try', '1', 0, '/', null, $https, true);
+if(isset($_COOKIE['reg8log_ch_pswd_try'])) setcookie('reg8log_ch_pswd_try', $_COOKIE['reg8log_ch_pswd_try']+1, 0, '/', null, HTTPS, true);
+else setcookie('reg8log_ch_pswd_try', '1', 0, '/', null, HTTPS, true);
 
 //--------------------------------
 
 if(!isset($trec)) {
-	require_once $index_dir.'include/code/code_db_object.php';
+	require_once ROOT.'include/code/code_db_object.php';
 	$query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	$trec=$reg8log_db->fetch_row();
@@ -37,14 +37,14 @@ if($req_time-$trec['last_ch_pswd_try']>$account_block_period) {
 		if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
 	}
 	if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=1) {
-		require_once $index_dir.'include/func/func_random.php';
+		require_once ROOT.'include/func/func_random.php';
 		$new_autologin_key=random_string(43);
 		$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
 		$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
-		setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
-		header("Location: {$index_dir}index.php");
+		setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
+		header("Location: {ROOT}index.php");
 		exit;
 	}
 	return;
@@ -65,14 +65,14 @@ if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=$ch_pswd_tries
 }
 
 if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=$ch_pswd_tries) {
-	require_once $index_dir.'include/func/func_random.php';
+	require_once ROOT.'include/func/func_random.php';
 	$new_autologin_key=random_string(43);
 	$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
-	setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
-	header("Location: {$index_dir}index.php");
+	setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
+	header("Location: {ROOT}index.php");
 	exit;
 }
 

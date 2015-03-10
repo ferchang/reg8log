@@ -1,20 +1,18 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
+require_once '../include/common.php';
 
-require_once $index_dir.'include/common.php';
-
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 if(!$debug_mode) exit('<center><h3>Error: Debug mode is off!</h3><a href="../index.php">Login page</a></center>');
 
 if(isset($_COOKIE['reg8log_session'])) {
-	require $index_dir.'include/code/sess/code_sess_start.php';
+	require ROOT.'include/code/sess/code_sess_start.php';
 	
 	if(isset($_POST['destroy'])) {
-		require $index_dir.'include/code/sess/code_sess_destroy.php';
+		require ROOT.'include/code/sess/code_sess_destroy.php';
 		header("Location: {$_SERVER['PHP_SELF']}");
 		exit;
 	}

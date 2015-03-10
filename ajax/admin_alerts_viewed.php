@@ -1,17 +1,17 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
 
-require_once $index_dir.'include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require_once ROOT.'include/common.php';
 
-require $index_dir.'include/code/code_prevent_xsrf.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
+
+require ROOT.'include/code/code_prevent_xsrf.php';
 
 $ajax=true;
-require $index_dir.'include/code/admin/code_require_admin.php';
+require ROOT.'include/code/admin/code_require_admin.php';
 
 if(!isset($_POST['new_account_blocks'])) exit('new_account_blocks parameter is not set');
 if(!isset($_POST['new_ip_blocks'])) exit('new_ip_blocks parameter is not set');

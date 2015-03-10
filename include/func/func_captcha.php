@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/func/func_secure_hash.php';
+require_once ROOT.'include/func/func_secure_hash.php';
 
 /*
  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
@@ -28,11 +28,11 @@ $captcha_show_credits = false;
 /* captcha_show_image() - outputs the image to browser and stores a CAPTCHA word in a cookie or a session file. */
 function captcha_show_image() {
 
-	global $parent_page;
-	global $index_dir;
+	
+	
 	global $session1;
 	global $session0;
-	global $https;
+	
 	
 	// Let's create an image
 	$GLOBALS['captcha_show_credits'] ? $captcha_image = imagecreate(200, 51) : $captcha_image = imagecreate(200, 40);
@@ -115,12 +115,12 @@ function captcha_show_image() {
 
 //======================================
 
-require $index_dir.'include/code/sess/code_sess_start.php';
-require_once $index_dir.'include/func/func_secure_hash.php';
+require ROOT.'include/code/sess/code_sess_start.php';
+require_once ROOT.'include/func/func_secure_hash.php';
 
 global $site_priv_salt;
 
-require_once $index_dir.'include/code/code_fetch_site_vars.php';
+require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 $_SESSION['captcha_hash'] = create_secure_hash($site_priv_salt.$captcha_word, 0);
 
@@ -141,19 +141,19 @@ $_SESSION['captcha_hash'] = create_secure_hash($site_priv_salt.$captcha_word, 0)
 /* captcha_verify_word() - verifies a word. Returns 'true' or 'false'. */
 function captcha_verify_word() {
 
-	global $parent_page;
-	global $index_dir;
+	
+	
 	global $session1;
 	global $session0;
-	global $https;
+	
 
-	require $index_dir.'include/code/sess/code_sess_start.php';
+	require ROOT.'include/code/sess/code_sess_start.php';
 
 	if(empty($_POST['captcha']) or empty($_SESSION['captcha_hash'])) return false;
 
 	global $site_priv_salt;
 
-	require_once $index_dir.'include/code/code_fetch_site_vars.php';
+	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	
 	if (!verify_secure_hash($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['captcha_hash'])) {
 		unset($_SESSION['captcha_hash']);

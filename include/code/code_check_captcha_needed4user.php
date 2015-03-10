@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/config/config_brute_force_protection.php';
+require_once ROOT.'include/config/config_brute_force_protection.php';
 
 if($ch_pswd_captcha_threshold==-1) return;
 if($ch_pswd_captcha_threshold==0) {
@@ -10,7 +10,7 @@ if($ch_pswd_captcha_threshold==0) {
 	return;
 }
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
 $query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 

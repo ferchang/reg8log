@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 class hm_user {
 
@@ -34,11 +34,11 @@ function identify($username=null, $password=null)
 	global $reg8log_db;
 	global $site_key;
 	global $site_key2;
-	global $parent_page;
+	
 	global $change_autologin_key_upon_login;
 	global $admin_change_autologin_key_upon_login;//--
-	global $index_dir;
-	global $https;
+	
+	
 	global $block_disable;
 	$block_disable=0;
 	global $last_protection;
@@ -53,13 +53,13 @@ function identify($username=null, $password=null)
 
 	if(!is_null($username)) {//Manual login
 
-		require_once $index_dir.'include/code/code_db_object.php';
+		require_once ROOT.'include/code/code_db_object.php';
 
 		$tmp7=$reg8log_db->quote_smart($username);
 
 		$query1='select * from `accounts` where `username`='.$tmp7.' limit 1';
 
-		require $index_dir.'include/config/config_register.php';
+		require ROOT.'include/config/config_register.php';
 		
 		$expired1=$req_time-$email_verification_time;
 		$expired2=$req_time-$admin_confirmation_time;
@@ -69,7 +69,7 @@ function identify($username=null, $password=null)
 		global $username_exists;
 		$username_exists=0;
 
-		require_once $index_dir.'include/code/code_fetch_site_vars.php';
+		require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 		$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.$this->user_info['username']."--$site_key");
 		$reg8log_db->query("select get_lock($lock_name, -1)");
@@ -100,7 +100,7 @@ function identify($username=null, $password=null)
 				if($this->user_info['banned']) {
 					$_username=$this->user_info['username'];
 					$_until=$this->user_info['banned'];
-					require $index_dir.'include/code/code_check_ban_status.php';
+					require ROOT.'include/code/code_check_ban_status.php';
 				}
 				$reg8log_db->query("select release_lock($lock_name)");
 				return true;
@@ -140,21 +140,21 @@ function identify($username=null, $password=null)
 	//Following is the cookie auto-login mechanism
 
 	if(!isset($_COOKIE['reg8log_autologin'])) {
-		if(isset($_COOKIE['reg8log_autologin2'])) setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+		if(isset($_COOKIE['reg8log_autologin2'])) setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		return false;
 	}
 	
 	if(!isset($_COOKIE['reg8log_autologin2'])) {
-		setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+		setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		return false;
 	}
 
 	$cookie=new hm_cookie('reg8log_autologin', $this->identify_structs['autologin_cookie']['value_seperator']);
-	$cookie->secure=$https;
+	$cookie->secure=HTTPS;
 
 	if($cookie->get()) {//cookie read successfully
 
-		require_once $index_dir.'include/code/code_db_object.php';
+		require_once ROOT.'include/code/code_db_object.php';
 
 		$query='select * from `accounts` where ';
 		foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
@@ -192,7 +192,7 @@ function identify($username=null, $password=null)
 		return false;
 	}
 
-	require_once $index_dir.'include/code/code_fetch_site_vars.php';
+	require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 	$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.$this->user_info['username']."--$site_key");
 	$reg8log_db->query("select get_lock($lock_name, -1)");
@@ -205,7 +205,7 @@ function identify($username=null, $password=null)
 			global $logged_out_user;
 			$logged_out_user=$this->user_info['username'];
 			$cookie->erase();
-			setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https);
+			setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);
 			return false;
 		}
 		$block_disable=$this->user_info['block_disable'];
@@ -223,7 +223,7 @@ function identify($username=null, $password=null)
 		if($this->user_info['banned']) {
 			$_username=$this->user_info['username'];
 			$_until=$this->user_info['banned'];
-			require $index_dir.'include/code/code_check_ban_status.php';
+			require ROOT.'include/code/code_check_ban_status.php';
 		}
 		$reg8log_db->query("select release_lock($lock_name)");
 		return true;
@@ -232,7 +232,7 @@ function identify($username=null, $password=null)
 	$reg8log_db->query("select release_lock($lock_name)");
 	
 	$cookie->erase();//erase auto-login cookie in case of the user is not authenticated with it.
-	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
+	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 
 	return false;
 
@@ -242,18 +242,18 @@ function identify($username=null, $password=null)
 function logout()
 {
 
-	global $parent_page;
-	global $index_dir;
-	global $https;
+	
+	
+	
 
 	$this->err_msg='';
 
-	setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, $https, true);
-	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, $https);
+	setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
+	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);
 
 	if(isset($_COOKIE['reg8log_session'])) {//session cookie exists
-		require $index_dir.'include/code/sess/code_sess_start.php';
-		require $index_dir.'include/code/sess/code_sess_destroy.php';
+		require ROOT.'include/code/sess/code_sess_start.php';
+		require ROOT.'include/code/sess/code_sess_destroy.php';
 	}//session cookie exists
 
 	if($this->err_msg) return false;
@@ -265,8 +265,8 @@ function logout()
 function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false)
 {
 
-	global $parent_page;
-	global $https;
+	
+	
 	global $req_time;
 	global $site_key2;
 	global $pepper;
@@ -281,7 +281,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	}
 
 	$cookie=new hm_cookie('reg8log_autologin', $this->identify_structs['autologin_cookie']['value_seperator']);
-	$cookie->secure=$https;
+	$cookie->secure=HTTPS;
 	$autologin_key=$this->user_info['autologin_key'];
 	foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
 		if($value=='autologin_key' and $this->tie_login2ip($this->user_info)) {
@@ -296,7 +296,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	$cookie->values[]=$age;
 	
 	if($cookie->set(null, $cookie->values, null, $age, true)) {
-		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), $age, '/', null, $https);
+		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), $age, '/', null, HTTPS);
 
 	//----------------
 	if($set_autologin_expiration) {

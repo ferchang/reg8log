@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 /**
  * Random Number Generator
@@ -34,9 +34,9 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 
 //  crypt_random modified by hamidreza_mz -=At=- yahoo -=Dot=- com
 
-if(!isset($entropy) and $db_installed) require $index_dir.'include/code/code_fetch_site_vars.php';
+if(!isset($entropy) and $db_installed) require ROOT.'include/code/code_fetch_site_vars.php';
 
-require_once $index_dir.'include/config/config_crypto.php';
+require_once ROOT.'include/config/config_crypto.php';
 
 @$entropy=sha1($pepper.$request_entropy.$entropy);
 

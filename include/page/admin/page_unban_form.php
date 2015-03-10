@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
 ?>
 
@@ -13,7 +13,7 @@ $parent_page=true;
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <script src="../js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="../js/sha256.js"></script>
 
 <script>
@@ -30,7 +30,7 @@ function clear_form() {
 	//--------------
 	if(password_exists) document.ban_form2.password.value='';
 	if(document.ban_form2.remember) document.ban_form2.remember.checked=false;
-	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	//--------------
 	clear_cap(true);
 	return false;
@@ -54,7 +54,7 @@ function validate() {//client side validator
 
 	//----------------
 	
-	if(password_exists) if(!document.ban_form2.password.value.length) msgs[i++]="<?php echo tr('password field is empty!'); ?>";
+	if(password_exists) if(!document.ban_form2.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
 
 	if(captcha_exists) validate_captcha(document.ban_form2.captcha.value);
 	
@@ -83,7 +83,7 @@ function validate() {//client side validator
 
 </script>
 
-<title><?php echo tr('Unban user'); ?></title>
+<title><?php echo func::tr('Unban user'); ?></title>
 <style>
 .unit {
 	color: #8fd;
@@ -108,7 +108,7 @@ else if(isset($captcha_msg) and count($err_msgs)==1) {
 	echo '</td></tr>';
 }
 else if(!empty($err_msgs)) {
-	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', tr('Errors'), ':</span><br />';
+	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 	foreach($err_msgs as $err_msg) {
 		$err_msg[0]=strtoupper($err_msg[0]);
 		echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -121,34 +121,34 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require $index_dir.'include/code/code_generate_form_id.php';
+require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
 
 <tr align="center"><td>
 <?php
 echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '">';
-if(!$rec['banned'] or ($rec['banned']!=1 and $rec['banned']<$req_time)) echo '<h3>', sprintf(tr('User <span style="color: yellow">%s</span> is not banned!'), htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8')), '</h3>';
+if(!$rec['banned'] or ($rec['banned']!=1 and $rec['banned']<$req_time)) echo '<h3>', sprintf(func::tr('User <span style="color: yellow">%s</span> is not banned!'), htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8')), '</h3>';
 else {
 echo '<table border style="margin-top: 7px">
-<tr style="background: brown; color: #fff"><th>', tr('Username'), '</th><th>', tr('Uid'), '</th><th>', tr('Email'), '</th><th>', tr('Gender'), '</th><th>', tr('Member for'), '</th></tr><tr style="background: #ccc" align="center">';
+<tr style="background: brown; color: #fff"><th>', func::tr('Username'), '</th><th>', func::tr('Uid'), '</th><th>', func::tr('Email'), '</th><th>', func::tr('Gender'), '</th><th>', func::tr('Member for'), '</th></tr><tr style="background: #ccc" align="center">';
 echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>';
 if($rec['gender']=='n') echo '?';
-else if($rec['gender']=='m') echo tr('Male');
-else echo tr('Female');
+else if($rec['gender']=='m') echo func::tr('Male');
+else echo func::tr('Female');
 echo '</td>';
-require_once $index_dir.'include/func/func_duration2friendly_str.php';
+require_once ROOT.'include/func/func_duration2friendly_str.php';
 echo '<td>', duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 echo '</tr></table><br></td></tr><tr><td >';
-if($ban_reason!=='') echo tr('Ban reason'), ': <span style="color: #8fd;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span><br>';
+if($ban_reason!=='') echo func::tr('Ban reason'), ': <span style="color: #8fd;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span><br>';
 if($ban_until!=1) {
-	require_once $index_dir.'include/func/func_duration2friendly_str.php';
-	echo tr('Ban until'), ':  <span style="color: #8fd;">', duration2friendly_str($ban_until-$req_time, 2), '</span> ', tr(' later'), '.';
+	require_once ROOT.'include/func/func_duration2friendly_str.php';
+	echo func::tr('Ban until'), ':  <span style="color: #8fd;">', duration2friendly_str($ban_until-$req_time, 2), '</span> ', func::tr(' later'), '.';
 }
-else echo tr('Ban until'), ':  <span style="color: #8fd;">', tr('unlimited'), '.</span>';
+else echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::tr('unlimited'), '.</span>';
 echo '<br><br></td></tr>';
 }
 
@@ -158,32 +158,32 @@ echo '<tr><td><table width=100% style="background: #aaa; padding-top: 5px">';
 
 if(isset($password_check_needed)) {
 	echo '<tr><td>';
-	echo tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
-	if($admin_operations_require_password>1) echo '&nbsp;', tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
+	echo func::tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
+	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
 	echo '</td></tr>';
 }
 
 if(isset($captcha_needed) and !$captcha_verified) {
 	echo '<tr align=center><td>';
 	$captcha_form4login=true;
-	require $index_dir.'include/page/page_captcha_form.php';
+	require ROOT.'include/page/page_captcha_form.php';
 	echo '</td></tr>';
 }
 
 //---------------------
 
-echo '<tr><td align="center"><br><input type="submit" value="', tr('Cancel'), '" name="cancel">&nbsp;';
+echo '<tr><td align="center"><br><input type="submit" value="', func::tr('Cancel'), '" name="cancel">&nbsp;';
 if($rec['banned']) {
-	if(isset($password_check_needed)) echo '<input type="reset" value="', tr('Clear'), '" onClick="return clear_form();"  />&nbsp;';
-	echo '<input type="submit" value="', tr('Unban'), '" name="unban_form" onclick="return validate()">';
+	if(isset($password_check_needed)) echo '<input type="reset" value="', func::tr('Clear'), '" onClick="return clear_form();"  />&nbsp;';
+	echo '<input type="submit" value="', func::tr('Unban'), '" name="unban_form" onclick="return validate()">';
 }
 ?>
 <br><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span>
 </td></tr></table>
 </tr></table>
 </form>
-<a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
-<a href="../index.php"><?php echo tr('Login page'); ?></a>
+<a href="index.php"><?php echo func::tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo func::tr('Login page'); ?></a>
 </td></tr></table>
 <script>
 if(captcha_exists) {
@@ -194,7 +194,7 @@ if(captcha_exists) {
 }
 </script>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

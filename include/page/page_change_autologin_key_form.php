@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 ?>
 
@@ -10,14 +10,14 @@ if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></ce
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('Logging other systems out'); ?></title>
+<title><?php echo func::tr('Logging other systems out'); ?></title>
 <script src="js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
 	document.change_autologin_key_form.password.value='';
-	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	clear_cap(true);
 	return false;
 }
@@ -38,7 +38,7 @@ msgs=new Array();
 
 i=0;
 
-if(!change_autologin_key_form.password.value.length) msgs[i++]="<?php echo tr('password field is empty!'); ?>";
+if(!change_autologin_key_form.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
 
 if(captcha_exists) validate_captcha(document.change_autologin_key_form.captcha.value);
 
@@ -75,7 +75,7 @@ return true;
 <?php
 
 if(!empty($err_msgs)) {
-	echo '<tr align="center"><td colspan="3"  style="border: solid thin orange; font-style: italic; background: #ccc; padding: 7px;"><span style="color: #800">', tr('Errors'), ':</span><br />';
+	echo '<tr align="center"><td colspan="3"  style="border: solid thin orange; font-style: italic; background: #ccc; padding: 7px;"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 	foreach($err_msgs as $err_msg) {
 		$err_msg[0]=strtoupper($err_msg[0]);
 		echo "<span style=\"color: red\" >$err_msg</span><br />";
@@ -87,25 +87,25 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require $index_dir.'include/code/code_generate_form_id.php';
+require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
 <tr><td align="" style="" colspan="3" width="200">
-<b><?php echo tr('change autologin key comments'); ?></b><br><br>
+<b><?php echo func::tr('change autologin key comments'); ?></b><br><br>
 </td></tr>
-<tr><td align="" style="" colspan="3"><b><?php echo tr('Enter your account password'); ?>:</b> <input type="password" name="password"></td></tr>
+<tr><td align="" style="" colspan="3"><b><?php echo func::tr('Enter your account password'); ?>:</b> <input type="password" name="password"></td></tr>
 <?php
-if(isset($captcha_needed) and !$captcha_verified) require $index_dir.'include/page/page_captcha_form.php';
+if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
 ?>
 <tr>
 <td align="center" colspan="3"><span style="color: red; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
-<td align="center" colspan="3"><input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form()" />
-<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
+<td align="center" colspan="3"><input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form()" />
+<input type="submit" value="<?php echo func::tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr></table></td></tr></table>
 </form>
-<center><a href="user_options.php"><?php echo tr('User options'); ?></a><br><br><a href="index.php"><?php echo tr('Login page'); ?></a></center>
+<center><a href="user_options.php"><?php echo func::tr('User options'); ?></a><br><br><a href="index.php"><?php echo func::tr('Login page'); ?></a></center>
 </td></tr></table>
 <script>
 if(captcha_exists) {
@@ -116,7 +116,7 @@ if(captcha_exists) {
 }
 </script>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

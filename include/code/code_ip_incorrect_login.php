@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if(strtolower($_POST['username'])=='admin') {
 	$account_block_threshold=$admin_account_block_threshold;
@@ -17,16 +17,16 @@ if($ip_block_threshold==-1 and $ip_captcha_threshold==-1) return;
 
 if(isset($identified_user) or isset($pending_user) or isset($banned_user)) return;
 
-require_once $index_dir.'include/func/func_inet.php';
+require_once ROOT.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
 if($ip_block_threshold!=-1 and $ip_incorrect_count+1>=$ip_block_threshold) {
 	$_username2=$_POST['username'];
-	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=1 and $block_disable!=3) $ip_block=$_SERVER['REMOTE_ADDR'];
 	else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_threshold) $captcha_needed=true;
-	if($ip_incorrect_count<$ip_block_threshold) if(isset($ip_block) or strtolower($_POST['username'])!='admin') require_once $index_dir.'include/code/log/code_log_ip_block.php';
+	if($ip_incorrect_count<$ip_block_threshold) if(isset($ip_block) or strtolower($_POST['username'])!='admin') require_once ROOT.'include/code/log/code_log_ip_block.php';
 }
 else if($ip_captcha_threshold!=-1 and $ip_incorrect_count+1>=$ip_captcha_threshold) $captcha_needed=true;
 
@@ -47,12 +47,12 @@ else {
 	$cookie_contents=$_COOKIE['reg8log_ip_incorrect_logins'].','.$insert_id2;
 	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -1*$cookie_capacity));
 }
-setcookie('reg8log_ip_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+setcookie('reg8log_ip_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 
-require_once $index_dir.'include/config/config_cleanup.php';
+require_once ROOT.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ip_incorrect_logins_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ip_incorrect_logins_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_size_cleanup.php';
 
 ?>

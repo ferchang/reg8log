@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if(strtolower($_POST['username'])=='admin') {
 	$account_block_threshold=$admin_account_block_threshold;
@@ -13,14 +13,14 @@ if(strtolower($_POST['username'])=='admin') {
 
 if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
 
-require $index_dir.'include/config/config_register.php';
+require ROOT.'include/config/config_register.php';
 
 if(!$username_exists and $registeration_enabled and $ajax_check_username and !$max_ajax_check_usernames) {
 	$no_pretend_user=true;
 	return;
 }
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
@@ -44,16 +44,16 @@ if(!$reg8log_db->result_num()) {
 		$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
 		$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 	}
-	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 	
 	if($account_block_threshold==1) {
 		$_username2=$_POST['username'];
-		require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+		require_once ROOT.'include/code/code_accomodate_block_disable.php';
 		if($block_disable!=2 and $block_disable!=3) {
 			$account_block=$_POST['username'];
 			$block_duration=$account_block_period;
 			$first_attempt=$req_time;
-			require_once $index_dir.'include/code/log/code_log_account_block.php';
+			require_once ROOT.'include/code/log/code_log_account_block.php';
 		}
 		else if($account_captcha_threshold==1) $captcha_needed=true;
 	}
@@ -81,12 +81,12 @@ $incorrect_attempts=$count;
 
 if($account_block_threshold!=-1 and $count>=$account_block_threshold) {
 	$_username2=$_POST['username'];
-	require_once $index_dir.'include/code/code_accomodate_block_disable.php';
+	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
 		$account_block=$_POST['username'];
 		$block_duration=$oldest+$account_block_period-$req_time;
 		$first_attempt=$oldest;
-		require_once $index_dir.'include/code/log/code_log_account_block.php';
+		require_once ROOT.'include/code/log/code_log_account_block.php';
 	}
 	else if($account_captcha_threshold!=-1 and $count>=$account_captcha_threshold) $captcha_needed=true;
 }
@@ -110,18 +110,18 @@ else {
 	$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
 	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 }
-setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, $https, true);
+setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 
-require_once $index_dir.'include/config/config_cleanup.php';
+require_once ROOT.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	$table_name='account_incorrect_logins';
-	require $index_dir.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
+	require ROOT.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 }
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
 	$table_name='account_incorrect_logins';
-	require $index_dir.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
+	require ROOT.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 }
 
 ?>

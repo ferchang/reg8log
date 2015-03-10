@@ -1,12 +1,12 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
 
-require_once $index_dir.'include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require_once ROOT.'include/common.php';
+
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 echo '<h3 align="center">reg8log cookies:</h3><hr>';
 

@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require $index_dir.'include/page/admin/page_pagination_initials.php';
+require ROOT.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
@@ -13,15 +13,15 @@ require $index_dir.'include/page/admin/page_pagination_initials.php';
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <script src="../js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
-<title><?php echo tr('Tables status'); ?></title>
+<title><?php echo func::tr('Tables status'); ?></title>
 <style>
 </style>
 <script>
 
 <?php
-require $index_dir.'include/page/admin/page_common_list_funcs-js.php';
+require ROOT.'include/page/admin/page_common_list_funcs-js.php';
 ?>
 
 </script>
@@ -37,7 +37,7 @@ echo '<th>';
 echo "<a class='header' href='?sort_by=table_name&sort_dir=";
 if($sort_by=='table_name' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>", tr('Table name'), "</a>";
+echo "'>", func::tr('Table name'), "</a>";
 if($sort_by=='table_name') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -49,7 +49,7 @@ echo '<th>';
 echo "<a class='header' href='?sort_by=num_records&sort_dir=";
 if($sort_by=='num_records' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>", tr('Num records'), "</a>";
+echo "'>", func::tr('Num records'), "</a>";
 if($sort_by=='num_records') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -59,7 +59,7 @@ echo "</th>";
 
 echo '</tr>';
 
-foreach(glob($index_dir.'setup/sql/*.sql') as $file) {
+foreach(glob(ROOT.'setup/sql/*.sql') as $file) {
 	$tablename=basename($file, '.sql');
 	$query="select count(*) as `n` from `$tablename`";
 	$reg8log_db->query($query);
@@ -86,11 +86,11 @@ foreach($tables as $key=>$value) {
 
 ?>
 </table>
-<br><a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
-<a href="../index.php"><?php echo tr('Login page'); ?></a>
+<br><a href="index.php"><?php echo func::tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo func::tr('Login page'); ?></a>
 </td></tr></table>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

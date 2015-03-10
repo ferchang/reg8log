@@ -1,19 +1,19 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
-require_once $index_dir.'include/func/func_random.php';
+require_once ROOT.'include/func/func_random.php';
 
-require_once $index_dir.'include/func/func_secure_hash.php';
+require_once ROOT.'include/func/func_secure_hash.php';
 
 if($_POST['password']!=='') 
 $fields['password']['value']=create_secure_hash($_POST['password']);
 
 $table_name='pending_accounts';
 $field_name='record_id';
-require $index_dir.'include/code/code_generate_unique_random_id.php';
+require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $field_names='`record_id`, ';
 $field_values="'$rid', ";
@@ -51,23 +51,23 @@ $reg8log_db->query($query);
 unset($_SESSION['captcha_verified'], $_SESSION['passed']);
 
 if($email_verification_needed) {
-  require $index_dir.'include/code/email/code_email_verification_link.php';
-  require_once $index_dir.'include/func/func_duration2friendly_str.php';
-  $success_msg=sprintf(tr('account activation email sent msg'), duration2friendly_str($email_verification_time, 0));
+  require ROOT.'include/code/email/code_email_verification_link.php';
+  require_once ROOT.'include/func/func_duration2friendly_str.php';
+  $success_msg=sprintf(func::tr('account activation email sent msg'), duration2friendly_str($email_verification_time, 0));
 }
 else if($admin_confirmation_needed) {
-  require_once $index_dir.'include/func/func_duration2friendly_str.php';
-  $success_msg=sprintf(tr('pending for admin confirmation msg'), duration2friendly_str($admin_confirmation_time, 0));
+  require_once ROOT.'include/func/func_duration2friendly_str.php';
+  $success_msg=sprintf(func::tr('pending for admin confirmation msg'), duration2friendly_str($admin_confirmation_time, 0));
 }
 
 $no_specialchars=true;
 
-require $index_dir.'include/config/config_cleanup.php';
+require ROOT.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/$cleanup_probability))==1) {
-	require_once $index_dir.'include/code/code_fetch_site_vars.php';
+	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	$reg8log_db->query("select release_lock('$lock_name')");
-	require $index_dir.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';
+	require ROOT.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';
 }
 
 ?>

@@ -1,18 +1,18 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
-require_once $index_dir.'include/func/func_random.php';
+require_once ROOT.'include/func/func_random.php';
 
 $table_name='accounts';
 $field_name='uid';
-require $index_dir.'include/code/code_generate_unique_random_id.php';
+require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $autologin_key=random_string(43);
 
-require_once $index_dir.'include/func/func_secure_hash.php';
+require_once ROOT.'include/func/func_secure_hash.php';
 
 if($_POST['password']!=='') 
 $fields['password']['value']=create_secure_hash($_POST['password']);
@@ -37,7 +37,7 @@ $query="insert into `accounts` ($field_names) values ($field_values)";
 $reg8log_db->query($query);
 unset($_SESSION['captcha_verified'], $_SESSION['passed']);
 
-$success_msg=tr('account created msg');
+$success_msg=func::tr('account created msg');
 $no_specialchars=true;
 
 ?>

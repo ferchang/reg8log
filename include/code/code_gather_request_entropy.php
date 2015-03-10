@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require $index_dir.'include/config/config_crypto.php';
+require ROOT.'include/config/config_crypto.php';
 
 if(isset($store_request_entropy_probability2)) $store_request_entropy_probability=$store_request_entropy_probability2;
 
@@ -19,7 +19,7 @@ if(!$store_request_entropy_probability or !$db_installed) return;
 
 if($store_request_entropy_probability!==1 and mt_rand(1, floor(1/$store_request_entropy_probability))!==1) return;
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
 $query="update `site_vars` set `value`=sha1(concat(`value`, '$request_entropy')) where name='entropy'";
 

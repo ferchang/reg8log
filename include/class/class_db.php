@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 class reg8log_db {
 
@@ -78,16 +78,16 @@ return false;
 function error($err_msg='')
 {
 
-	global $index_dir;
+	
 	global $debug_mode;
-	global $parent_page;
+	
 
 	$this->err_msg=get_class($this).': '.(($err_msg)? $err_msg : mysql_error());
 
 	if($this->auto_abort) {
 		$failure_msg=($debug_mode)? $this->err_msg : "Database error";
 		global $page_dir;
-		require $index_dir.'include/page/page_failure.php';
+		require ROOT.'include/page/page_failure.php';
 		exit;
 	}
 

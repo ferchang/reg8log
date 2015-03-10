@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require $index_dir.'include/code/sess/code_sess_start.php';
+require ROOT.'include/code/sess/code_sess_start.php';
 
 $captcha_verified=isset($_SESSION['captcha_verified']);
 
@@ -15,9 +15,9 @@ $captcha_verified=isset($_SESSION['captcha_verified']);
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('Register'); ?></title>
+<title><?php echo func::tr('Register'); ?></title>
 <script src="js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="js/sha256.js"></script>
 <script language="javascript">
 
@@ -28,7 +28,7 @@ document.register_form.repass.value='';
 document.register_form.email.value='';
 document.register_form.reemail.value='';
 document.register_form.gender[0].checked=true;
-if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 clear_cap(true);
 if(xhr) {
 	xhr.abort();
@@ -48,7 +48,7 @@ echo "new Array(\n'$field_name',\n{$specs['minlength']},\n{$specs['maxlength']},
 if($specs['js_re']===true) echo $specs['php_re'];
 else if($specs['js_re']===false) echo 'false';
 else echo $specs['js_re'];
-if($lang=='fa') echo ",\n'", tr($field_name), "'";
+if($lang=='fa') echo ",\n'", func::tr($field_name), "'";
 else echo ",\n'$field_name'";
 echo "\n)";
 }
@@ -71,7 +71,7 @@ password_autofill_msg_flag=false;
 function password_focus(p, i) {
 	if(p.value.indexOf('encrypted-'+site_salt)==0 || p.value.indexOf('hashed-'+site_salt)==0) {
 		if(!password_autofill_msg_flag) {
-			alert('<?php echo tr('password_autofill_msg'); ?>');
+			alert('<?php echo func::tr('password_autofill_msg'); ?>');
 			password_autofill_msg_flag=true;
 			p.blur();
 			return;
@@ -124,17 +124,17 @@ locale_field_name=fields[j][4];
 
 if(field_name=='password' && (field_value.indexOf('encrypted-'+site_salt)==0 || field_value.indexOf('hashed-'+site_salt)==0)) {
 	if(register_form.password.value!=document.getElementById('repass').value)
-	msgs[i++]="<?php echo tr('Password fields aren\'t match!'); ?>";
+	msgs[i++]="<?php echo func::tr('Password fields aren\'t match!'); ?>";
 	continue;
 }
 
-if(field_value.length<min_length) msgs[i++]=locale_field_name+"<?php echo tr(' is shorter than "+min_length+" characters!'); ?>";
-else if(field_value.length>max_length) msgs[i++]=locale_field_name+"<?php echo tr(' is longer than "+max_length+" characters!'); ?>";
-else if(re && field_value && !re.test(field_value)) msgs[i++]=locale_field_name+"<?php echo tr(' is invalid!'); ?>";
+if(field_value.length<min_length) msgs[i++]=locale_field_name+"<?php echo func::tr(' is shorter than "+min_length+" characters!'); ?>";
+else if(field_value.length>max_length) msgs[i++]=locale_field_name+"<?php echo func::tr(' is longer than "+max_length+" characters!'); ?>";
+else if(re && field_value && !re.test(field_value)) msgs[i++]=locale_field_name+"<?php echo func::tr(' is invalid!'); ?>";
 else if(field_name=='email' && register_form.email.value!=register_form.reemail.value)
-msgs[i++]="<?php echo tr('Email fields aren\'t match!'); ?>";
+msgs[i++]="<?php echo func::tr('Email fields aren\'t match!'); ?>";
 else if(field_name=='password' && register_form.password.value!=document.getElementById('repass').value)
-msgs[i++]="<?php echo tr('Password fields aren\'t match!'); ?>";
+msgs[i++]="<?php echo func::tr('Password fields aren\'t match!'); ?>";
 }
 
 if(msgs.length) {
@@ -201,7 +201,7 @@ for(j in fields) {
 	else if(field_value.length>max_length) invalid=true;
 	else if(re && field_value && !re.test(field_value)) invalid=true;
 	if(invalid) {
-		report('&nbsp;&nbsp;<?php echo tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
+		report('&nbsp;&nbsp;<?php echo func::tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
 		return;
 	}
 }
@@ -217,14 +217,14 @@ xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange=function() {
 	if(xhr.readyState == 4) if(xhr.status == 200) {
 	if(xhr.responseText=='y') {
-		report('<?php echo tr('Not available!'); ?>', 'orange');
+		report('<?php echo func::tr('Not available!'); ?>', 'orange');
 		username_change=false;
 	}
 	else if(xhr.responseText=='n') {
-		report('<?php echo tr('Is available.'); ?>', 'green');
+		report('<?php echo func::tr('Is available.'); ?>', 'green');
 		username_change=false;
 	}
-	else if(xhr.responseText=='i') report('&nbsp;&nbsp;<?php echo tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
+	else if(xhr.responseText=='i') report('&nbsp;&nbsp;<?php echo func::tr('Invalid'); ?>!&nbsp;&nbsp;', 'red');
 	else report(ws, '');
 	} else report(ws, '');
 }
@@ -255,7 +255,7 @@ function report(val, bg) {
 
 <?php
 if($err_msgs) {
-echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', tr('Errors'), ':</span><br />';
+echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 foreach($err_msgs as $err_msg) {
 $err_msg[0]=strtoupper($err_msg[0]);
 echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -267,12 +267,12 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require $index_dir.'include/code/code_generate_form_id.php';
+require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
-<tr><td <?php echo $cell_align; ?> valign="top"><?php echo tr('Username format'); ?>:</td><td  colspan="2"><?php echo tr('username format msg'); ?></td></tr>
+<tr><td <?php echo $cell_align; ?> valign="top"><?php echo func::tr('Username format'); ?>:</td><td  colspan="2"><?php echo func::tr('username format msg'); ?></td></tr>
 <tr>
-<td <?php echo $cell_align; ?> style=""><?php echo tr('Username'); ?>:</td>
+<td <?php echo $cell_align; ?> style=""><?php echo func::tr('Username'); ?>:</td>
 <td style=""><input
 onkeypress="report('onkeypress', '');"
 onblur="if(this.value!='') check_username(this.value);" type="text" name="username" style="" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30" onchange="username_change=true;"></td>
@@ -281,19 +281,19 @@ onblur="if(this.value!='') check_username(this.value);" type="text" name="userna
 </td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Password'); ?>:</td>
+<td <?php echo $cell_align; ?>><?php echo func::tr('Password'); ?>:</td>
 <td colspan="2">
 <input type="password" name="password" autocomplete="off" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
 if(isset($_POST['password']) and $_POST['password']!=='' and $password_refill and !isset($password_error)) {
 	$refill=$_POST['password'];
-	require $index_dir.'include/code/code_refill_password.php';
+	require ROOT.'include/code/code_refill_password.php';
 }
 ?>
 size="30"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Retype password'); ?>:</td>
+<td <?php echo $cell_align; ?>><?php echo func::tr('Retype password'); ?>:</td>
 <td colspan="2">
 <input type="password" id="repass" name="repass" autocomplete="off" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
 <?php
@@ -302,23 +302,23 @@ if(isset($refill_output)) echo $refill_output;
 size="30"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Email'); ?>:</td>
+<td <?php echo $cell_align; ?>><?php echo func::tr('Email'); ?>:</td>
 <td colspan="2"><input type="text" name="email" style="" <?php if(isset($_POST['email'])) echo 'value="', htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo tr('Retype email'); ?>:</td>
+<td <?php echo $cell_align; ?>><?php echo func::tr('Retype email'); ?>:</td>
 <td colspan="2"><input type="text" name="reemail" style="" <?php if(isset($_POST['reemail'])) echo 'value="', htmlspecialchars($_POST['reemail'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?> valign="top"><?php echo tr('Gender'); ?>:</td><td colspan="2">
+<td <?php echo $cell_align; ?> valign="top"><?php echo func::tr('Gender'); ?>:</td><td colspan="2">
 &nbsp;&nbsp;<input type="radio" name="gender" value="n" <?php if(isset($_POST['gender'])) {
-if($_POST['gender']=='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo tr('Not specified'); ?>
-&nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']=='m') echo ' checked="true" '; ?>><?php echo tr('Male'); ?>
-&nbsp;&nbsp;<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']=='f') echo ' checked="true" '; ?>><?php echo tr('Female'); ?>
+if($_POST['gender']=='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('Not specified'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']=='m') echo ' checked="true" '; ?>><?php echo func::tr('Male'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']=='f') echo ' checked="true" '; ?>><?php echo func::tr('Female'); ?>
 </td>
 </tr>
 <?php
-if(!$captcha_verified) require $index_dir.'include/page/page_captcha_form.php';
+if(!$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
 ?>
 <tr>
 <script language="javascript">
@@ -337,7 +337,7 @@ if(captcha_exists) {
 <?php
 if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
 	echo "<tr><td colspan=\"2\" $cell_align>";
-	echo tr('notify me admin action msg'), ': ';
+	echo func::tr('notify me admin action msg'), ': ';
 	echo '</td><td><input type="checkbox" name="notify" ';
 	if(empty($_POST) or isset($_POST['notify'])) echo ' checked="true" ';
 	echo '></td></tr>';
@@ -347,15 +347,15 @@ if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
 <td>&nbsp;</td><td colspan="2"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 <tr>
-<td><a href="index.php"><?php echo tr('Login page'); ?></a></td>
+<td><a href="index.php"><?php echo func::tr('Login page'); ?></a></td>
 <td colspan="2">
-<input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form();" />
-<input type="submit" value="<?php echo tr('Submit'); ?>" onClick="return validate()" /></td>
+<input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();" />
+<input type="submit" value="<?php echo func::tr('Submit'); ?>" onClick="return validate()" /></td>
 </tr></table>
 </form>
 </td></tr></table>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once $index_dir.'include/func/func_yeh8kaaf.php';
+require_once ROOT.'include/func/func_yeh8kaaf.php';
 fix_yeh8kaaf($_POST['username']);
 
 foreach($fields as $field_name=>$specs) {//validate post data
@@ -11,13 +11,13 @@ $ct=count($err_msgs);
 
 if($field_name=='password' and (strpos($_POST[$field_name], "hashed-$site_salt")===0 or strpos($_POST[$field_name], "encrypted-$site_salt")===0)) {
 	if($_POST['password']!==$_POST['repass']) {
-		$err_msgs[]=tr('password fields aren\'t match!');
+		$err_msgs[]=func::tr('password fields aren\'t match!');
 		$password_error=true;
 	}
 	else if(strpos($_POST[$field_name], "encrypted-$site_salt")===0) {
-		require_once $index_dir.'include/func/func_site8client_keys_hmac_verifier.php';
+		require_once ROOT.'include/func/func_site8client_keys_hmac_verifier.php';
 		if(!verify_hmac(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)))) {
-			$err_msgs[]=tr('error in password decryption!');
+			$err_msgs[]=func::tr('error in password decryption!');
 			$password_error=true;
 		}
 	}
@@ -26,7 +26,7 @@ if($field_name=='password' and (strpos($_POST[$field_name], "hashed-$site_salt")
 
 if($field_name=='captcha') {
 	if($captcha_verified) continue;
-	require $index_dir.'include/code/code_verify_captcha.php';
+	require ROOT.'include/code/code_verify_captcha.php';
 	continue;
 }
 
@@ -35,7 +35,7 @@ $max_length=$specs['maxlength'];
 $re=$specs['php_re'];
 $unique=$specs['unique'];
 
-if(!isset($_POST[$field_name])) $err_msgs[]=sprintf(tr('No %s field exist!'), $field_name);
+if(!isset($_POST[$field_name])) $err_msgs[]=sprintf(func::tr('No %s field exist!'), $field_name);
 else {//field exists
 
 $field_value=$_POST[$field_name];
@@ -43,13 +43,13 @@ $field_value=$_POST[$field_name];
 $fields[$field_name]['value']=$field_value;
 
 if(utf8_strlen($field_value)<$min_length)
-$err_msgs[]=tr($field_name).sprintf(tr(' is shorter than %d characters!'), $min_length);
+$err_msgs[]=func::tr($field_name).sprintf(func::tr(' is shorter than %d characters!'), $min_length);
 else if(utf8_strlen($field_value)>$max_length)
-$err_msgs[]=tr($field_name).sprintf(tr(' is longer than %d characters!'), $max_length);
+$err_msgs[]=func::tr($field_name).sprintf(func::tr(' is longer than %d characters!'), $max_length);
 else if($re and $field_value!=='' and !preg_match($re, $field_value))
-$err_msgs[]=tr($field_name).tr(' is invalid!');
+$err_msgs[]=func::tr($field_name).func::tr(' is invalid!');
 else if($unique and !isset($captcha_err)) {
-	require $index_dir.'include/code/code_check_field_uniqueness.php';
+	require ROOT.'include/code/code_check_field_uniqueness.php';
 	if(isset($uniqueness_err) and ($field_name!='username')) {
 		unset($_SESSION['captcha_verified']);
 		$captcha_verified=false;
@@ -57,9 +57,9 @@ else if($unique and !isset($captcha_err)) {
 }
 
 if(count($err_msgs)===$ct) {
-	if($field_name=='password' and $field_value!=$_POST['repass']) $err_msgs[]=tr('password fields aren\'t match!');
-	else if($field_name=='email' and $field_value!=$_POST['reemail']) $err_msgs[]=tr('email fields aren\'t match!');
-	else if($field_name=='username' and strtolower($field_value)==='admin') $err_msgs[]=tr('username \'Admin\' is reserved!');
+	if($field_name=='password' and $field_value!=$_POST['repass']) $err_msgs[]=func::tr('password fields aren\'t match!');
+	else if($field_name=='email' and $field_value!=$_POST['reemail']) $err_msgs[]=func::tr('email fields aren\'t match!');
+	else if($field_name=='username' and strtolower($field_value)==='admin') $err_msgs[]=func::tr('username \'Admin\' is reserved!');
 }
 
 /*
@@ -73,7 +73,7 @@ unique field values in our members database.
 if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !$ajax_check_username or $max_ajax_check_usernames)) {
 		if(isset($_SESSION['passed'][$field_name]) and $_SESSION['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
 				unset($_SESSION['captcha_verified']);
-				$err_msgs[]=tr('You need to enter a security code again.');
+				$err_msgs[]=func::tr('You need to enter a security code again.');
 				$captcha_verified=false;
 			}
 		$_SESSION['passed'][$field_name]=sha1($session_salt.$field_value, true);

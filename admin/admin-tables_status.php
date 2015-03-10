@@ -1,18 +1,18 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
+
 
 $store_request_entropy_probability2=1;
 
-require_once $index_dir.'include/common.php';
+require_once '../include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/admin/code_require_admin.php';
+require ROOT.'include/code/admin/code_require_admin.php';
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
 $sort_fields=array('table_name', 'num_records');
 
@@ -22,6 +22,6 @@ else $sort_by='auto';
 if(isset($_GET['sort_dir']) and ($_GET['sort_dir']=='asc' or $_GET['sort_dir']=='desc')) $sort_dir=$_GET['sort_dir'];
 else $sort_dir='desc';
 
-require_once $index_dir.'include/page/admin/page_tables_status.php';
+require_once ROOT.'include/page/admin/page_tables_status.php';
 
 ?>

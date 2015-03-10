@@ -1,21 +1,21 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
+
 
 $store_request_entropy_probability2=1;
 
-require_once $index_dir.'include/common.php';
+require_once '../include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/code/admin/code_require_admin.php';
+require ROOT.'include/code/admin/code_require_admin.php';
 
-require $index_dir.'include/config/config_admin.php';
+require ROOT.'include/config/config_admin.php';
 
 if($show_statistics_in_admin_operations_page) {
-	require $index_dir.'include/code/admin/code_get_statistics4admin.php';
+	require ROOT.'include/code/admin/code_get_statistics4admin.php';
 	$flag=true;
 }
 else $flag=false;
@@ -28,7 +28,7 @@ else $flag=false;
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('Admin operations'); ?></title>
+<title><?php echo func::tr('Admin operations'); ?></title>
 <style>
 li {
 font-size: large;
@@ -48,7 +48,7 @@ color: white;
 </td>
 <td  width="100%" valign="top">
 <?php
-require $index_dir.'include/page/page_sections.php';
+require ROOT.'include/page/page_sections.php';
 ?>
 </td>
 </tr>
@@ -57,37 +57,37 @@ require $index_dir.'include/page/page_sections.php';
 <table bgcolor="#7587b0" style="position: relative; <?php if($debug_mode) echo ' top: -170px;'; else echo 'top: -125px;'; ?> ">
 <tr><td>
 <ul>
-<li><?php echo tr('Accounts'); ?>:
+<li><?php echo func::tr('Accounts'); ?>:
 <ul>
-<li><a class="li_item" href="admin-accounts.php"><?php echo tr('Accounts'); ?></a><?php if($flag) echo "($accounts)"; ?>
+<li><a class="li_item" href="admin-accounts.php"><?php echo func::tr('Accounts'); ?></a><?php if($flag) echo "($accounts)"; ?>
 <br><br>
-<li><a class="li_item" href="admin-ban_user.php"><?php echo tr('Ban a user'); ?></a>
-<li><a class="li_item" href="admin-unban_user.php"><?php echo tr('Unban a user'); ?></a>
-<li><a class="li_item" href="admin-banned_users.php"><?php echo tr('Banned users'); ?></a><?php if($flag) echo "($banned_users)"; ?>
+<li><a class="li_item" href="admin-ban_user.php"><?php echo func::tr('Ban a user'); ?></a>
+<li><a class="li_item" href="admin-unban_user.php"><?php echo func::tr('Unban a user'); ?></a>
+<li><a class="li_item" href="admin-banned_users.php"><?php echo func::tr('Banned users'); ?></a><?php if($flag) echo "($banned_users)"; ?>
 </ul>
 <br>
-<li><?php echo tr('Pending accounts'); ?>:
+<li><?php echo func::tr('Pending accounts'); ?>:
 <ul>
-<li><a class="li_item" href="admin-pending_accounts4admin.php"><?php echo tr('Accounts awaiting admin\'s confirmation'); ?></a><?php if($flag) echo "($pending_accounts4admin)"; ?>
-<li><a class="li_item" href="admin-pending_accounts4email.php"><?php echo tr('Accounts awaiting email verification'); ?></a><?php if($flag) echo "($pending_accounts4email)"; ?>
+<li><a class="li_item" href="admin-pending_accounts4admin.php"><?php echo func::tr('Accounts awaiting admin\'s confirmation'); ?></a><?php if($flag) echo "($pending_accounts4admin)"; ?>
+<li><a class="li_item" href="admin-pending_accounts4email.php"><?php echo func::tr('Accounts awaiting email verification'); ?></a><?php if($flag) echo "($pending_accounts4email)"; ?>
 </ul>
 <br>
-<li><?php echo tr('Security logs'); ?>:
+<li><?php echo func::tr('Security logs'); ?>:
 <ul>
-<li><a class="li_item" href="admin-account_blocks.php"><?php echo tr('Account blocks'); ?></a><?php if($flag) echo '<span title="', tr('Active/All'), '">(<span style="color: red">', $active_account_blocks, '</span>/', $all_account_blocks, ')</span>'; ?>
-<li><a class="li_item" href="admin-ip_blocks.php"><?php echo tr('IP blocks'); ?></a><?php if($flag) echo '<span title="', tr('Active/All'), '">(<span style="color: red">', $active_ip_blocks, '</span>/', $all_ip_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-account_blocks.php"><?php echo func::tr('Account blocks'); ?></a><?php if($flag) echo '<span title="', func::tr('Active/All'), '">(<span style="color: red">', $active_account_blocks, '</span>/', $all_account_blocks, ')</span>'; ?>
+<li><a class="li_item" href="admin-ip_blocks.php"><?php echo func::tr('IP blocks'); ?></a><?php if($flag) echo '<span title="', func::tr('Active/All'), '">(<span style="color: red">', $active_ip_blocks, '</span>/', $all_ip_blocks, ')</span>'; ?>
 </ul>
 <br>
-<li><?php echo tr('Database'); ?>:
+<li><?php echo func::tr('Database'); ?>:
 <ul>
-<li><a class="li_item" href="admin-tables_status.php"><?php echo tr('Tables status'); ?></a>
+<li><a class="li_item" href="admin-tables_status.php"><?php echo func::tr('Tables status'); ?></a>
 </ul>
 </ul>
 </td></tr>
 </table>
 </center>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

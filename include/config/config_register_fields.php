@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 $tmp18='[\x{067E}\x{0622}\x{0627}\x{0628}\x{062A}-\x{063A}\x{0641}-\x{064A}\x{0698}\x{06A9}\x{06AF}\x{06C1}\x{06CC}]|[a-zA-Z0-9]';
 $username_php_re="/^($tmp18)($tmp18|\\s($tmp18))*$/u";

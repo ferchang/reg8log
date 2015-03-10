@@ -1,35 +1,35 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
-$index_dir='../';
 
-require_once $index_dir.'include/common.php';
 
-require $index_dir.'include/code/code_encoding8anticache_headers.php';
+require_once ROOT.'include/common.php';
 
-require $index_dir.'include/code/code_prevent_xsrf.php';
+require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-require $index_dir.'include/config/config_register.php';
+require ROOT.'include/code/code_prevent_xsrf.php';
+
+require ROOT.'include/config/config_register.php';
 
 if(!$ajax_check_username or !$registeration_enabled) exit('ajax username check or registeration is disabled!');
 
 if(!isset($_POST['value'])) {
 	$failure_msg="No value specified";
-	require $index_dir.'include/page/page_failure.php';
+	require ROOT.'include/page/page_failure.php';
 	exit;
 }
 
-require_once $index_dir.'include/func/func_yeh8kaaf.php';
+require_once ROOT.'include/func/func_yeh8kaaf.php';
 fix_yeh8kaaf($_POST['value']);
 
 $value=$_POST['value'];
 
-require_once $index_dir.'include/code/code_db_object.php';
+require_once ROOT.'include/code/code_db_object.php';
 
-require $index_dir.'include/code/code_check_max_ajax_check_usernames.php';
+require ROOT.'include/code/code_check_max_ajax_check_usernames.php';
 
-require $index_dir.'include/code/code_record_ajax_check_username.php';
+require ROOT.'include/code/code_record_ajax_check_username.php';
 
 $value=$reg8log_db->quote_smart($value);
 

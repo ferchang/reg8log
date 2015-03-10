@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 //-------------------------------
 
@@ -10,7 +10,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_key', '$s
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'site_key'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'site_key'), ".<br>";
 
 //-------------------------------
 
@@ -20,7 +20,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_key2', '$
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'site_key2'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'site_key2'), ".<br>";
 
 //-------------------------------
 
@@ -30,7 +30,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_encr_key'
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'site_encr_key'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'site_encr_key'), ".<br>";
 
 //-------------------------------
 
@@ -38,7 +38,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_salt', '$
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'site_salt'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'site_salt'), ".<br>";
 
 //-------------------------------
 
@@ -48,7 +48,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('site_priv_salt
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'site_priv_salt'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'site_priv_salt'), ".<br>";
 
 //-------------------------------
 
@@ -56,7 +56,7 @@ $query="insert ignore into `site_vars` (`name`, `value`) values ('entropy', '$en
 
 $reg8log_db->query($query);
 
-echo sprintf(tr('variable created msg'), 'entropy'), ".<br>";
+echo sprintf(func::tr('variable created msg'), 'entropy'), ".<br>";
 
 //-------------------------------
 

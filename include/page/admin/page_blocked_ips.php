@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require $index_dir.'include/page/admin/page_pagination_initials.php';
+require ROOT.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
@@ -13,11 +13,11 @@ require $index_dir.'include/page/admin/page_pagination_initials.php';
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
-<title><?php echo tr('Blocked IPs'); ?></title>
+<title><?php echo func::tr('Blocked IPs'); ?></title>
 <style>
 </style>
 <script src="../js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="../js/sha256.js"></script>
 <script>
 
@@ -35,13 +35,13 @@ var del_all_toggle_stat=false;
 var unblock_all_toggle_stat=false;
 
 <?php
-require $index_dir.'include/page/admin/page_common_list_funcs-js.php';
+require ROOT.'include/page/admin/page_common_list_funcs-js.php';
 ?>
 
 function clear_form() {
 	document.blocked_ips_form.password.value='';
 	if(document.blocked_ips_form.remember) document.blocked_ips_form.remember.checked=false;
-	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	clear_cap(false);
 	return false;
 }
@@ -58,7 +58,7 @@ function validate() {//client side validator
 
 	i=0;
 
-	if(password_exists) if(!document.blocked_ips_form.password.value.length) msgs[i++]="<?php echo tr('password field is empty!'); ?>";
+	if(password_exists) if(!document.blocked_ips_form.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
 
 	if(captcha_exists) validate_captcha(document.blocked_ips_form.captcha.value);
 
@@ -156,17 +156,17 @@ function check_all(action) {
 <body bgcolor="#7587b0" <?php echo $page_dir; ?>>
 <center>
 <?php
-require $index_dir.'include/page/admin/page_err_msgs.php';
+require ROOT.'include/page/admin/page_err_msgs.php';
 ?>
 <form action="" method="post" name="blocked_ips_form">
 <?php
-echo tr('Records '), $first, tr(' - '), $last, tr(' of '), $total;
+echo func::tr('Records '), $first, func::tr(' - '), $last, func::tr(' of '), $total;
 echo '<table border cellpadding="3">';
 echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require_once $index_dir.'include/func/func_duration2friendly_str.php';
+require_once ROOT.'include/func/func_duration2friendly_str.php';
 
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
@@ -186,7 +186,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=first_attempt&sort_dir=";
 if($sort_by=='first_attempt' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>", tr('First attempt'), "</a>";
+echo "'>", func::tr('First attempt'), "</a>";
 if($sort_by=='first_attempt') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -198,7 +198,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_attempt&sort_dir=";
 if($sort_by=='last_attempt' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>", tr('Last attempt'), "</a>";
+echo "'>", func::tr('Last attempt'), "</a>";
 if($sort_by=='last_attempt') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -210,7 +210,7 @@ echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_username&sort_dir=";
 if($sort_by=='last_username' and $sort_dir=='asc') echo 'desc';
 else echo 'asc';
-echo "'>", tr('Last username'), "</a>";
+echo "'>", func::tr('Last username'), "</a>";
 if($sort_by=='last_username') {
 	echo '&nbsp;';
 	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
@@ -218,17 +218,17 @@ if($sort_by=='last_username') {
 }
 echo "</th>";
 
-echo '<th>', tr('Current status'), '</th>';
+echo '<th>', func::tr('Current status'), '</th>';
 
-echo '<th  class="admin_action">', tr('Unblock'), '</th>';
+echo '<th  class="admin_action">', func::tr('Unblock'), '</th>';
 
-echo '<th  class="admin_action">', tr('Delete log record'), '</th>';
+echo '<th  class="admin_action">', func::tr('Delete log record'), '</th>';
 
 echo '</tr>';
 
-require $index_dir.'include/config/config_brute_force_protection.php';
+require ROOT.'include/config/config_brute_force_protection.php';
 
-require_once $index_dir.'include/func/func_inet.php';
+require_once ROOT.'include/func/func_inet.php';
 
 $i=0;
 $r=false;
@@ -241,12 +241,12 @@ while($rec=$reg8log_db->fetch_row()) {
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
 	echo '<td>', inet_ntop2($rec['ip']), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), tr(' ago'), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), tr(' ago'), '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
 	echo '<td>', htmlspecialchars($rec['last_username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
-		echo '<span style="color: blue" title="', tr('Unblocked by admin'), '">', tr('Unblocked'), '</span>';
+		echo '<span style="color: blue" title="', func::tr('Unblocked by admin'), '">', func::tr('Unblocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
 	else if(
@@ -261,8 +261,8 @@ while($rec=$reg8log_db->fetch_row()) {
 
 		) {
 		echo '<span style="color: red" ';
-		echo 'title="', tr('Block lift'), ': ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), tr(' later');
-		echo '">', tr('Blocked'), '</span>';
+		echo 'title="', func::tr('Block lift'), ': ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
+		echo '">', func::tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['un'.$rec['auto']]))? ' checked ' : ''), '></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
 		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
@@ -270,7 +270,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		$currently_blocked=true;
 	}
 	else {
-		echo '<span style="color: #000" title="', tr('Block period elapsed'), '">', tr('Not blocked'), '</span>';
+		echo '<span style="color: #000" title="', func::tr('Block period elapsed'), '">', func::tr('Not blocked'), '</span>';
 		echo '<td>&nbsp;</td>';
 	}
 	echo '</td>';
@@ -288,14 +288,14 @@ else echo ' style="background: ', $color2;
 echo '">';
 echo '<td colspan="6" >';
 
-require $index_dir.'include/page/admin/page_captcha8password_fields.php';
+require ROOT.'include/page/admin/page_captcha8password_fields.php';
 
-echo '<input type="submit" value="', tr('Execute admin commands'), '" style="color: #000;" name="admin_action" onclick="return validate();">';
+echo '<input type="submit" value="', func::tr('Execute admin commands'), '" style="color: #000;" name="admin_action" onclick="return validate();">';
 if(isset($captcha_needed) and !$captcha_verified) echo '<br>';
 else echo '&nbsp;&nbsp;&nbsp;';
 echo '<span style="color: red; font-style: italic" id="cap"></span></td></tr></table>';
 
-echo '</td><td align="center" valign=top><input type="button" onclick="check_all(\'unblock\')" value="', tr('All'), '" disabled id="check_all2"></td><td align="center" valign=top><input type="button" onclick="check_all(\'del\')" value="', tr('All'), '" disabled id="check_all3"></td></tr>';
+echo '</td><td align="center" valign=top><input type="button" onclick="check_all(\'unblock\')" value="', func::tr('All'), '" disabled id="check_all2"></td><td align="center" valign=top><input type="button" onclick="check_all(\'del\')" value="', func::tr('All'), '" disabled id="check_all3"></td></tr>';
 echo '</table>';
 
 echo '<script>';
@@ -303,15 +303,15 @@ if(isset($currently_blocked)) echo "\ndocument.getElementById('check_all2').disa
 echo "\ndocument.getElementById('check_all3').disabled=false;\n";
 echo '</script>';
 
-require $index_dir.'include/page/admin/page_gen_paginated_page_links.php';
+require ROOT.'include/page/admin/page_gen_paginated_page_links.php';
 
 $form_name='blocked_ips_form';
-require $index_dir.'include/page/admin/page_per_pages_select.php';
+require ROOT.'include/page/admin/page_per_pages_select.php';
 
 ?>
 </form>
-<a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
-<a href="../index.php"><?php echo tr('Login page'); ?></a>
+<a href="index.php"><?php echo func::tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo func::tr('Login page'); ?></a>
 </center>
 <script>
 if(captcha_exists) {
@@ -355,7 +355,7 @@ for(var i in dels) red(dels[i]);
 
 </script>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>

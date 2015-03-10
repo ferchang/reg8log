@@ -1,6 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 function duration2friendly_str($t, $c=2, $abb=false) {
 
@@ -87,54 +87,54 @@ do {
 
 	$n=0;
 	$msg='';
-	if($c<6) $prep=tr('about').' ';
+	if($c<6) $prep=func::tr('about').' ';
 	else $prep='';
 
 	do {
 
 		if($y) {
-			$msg.="$y ".tr('year');
-			if($y>1) $msg.=tr('s');
+			$msg.="$y ".func::tr('year');
+			if($y>1) $msg.=func::tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($mth) {
-			if($y) $msg.=" ".tr('&')." $mth ".tr('month');
-			else $msg="$mth ".tr('month');
-			if($mth>1) $msg.=tr('s');
+			if($y) $msg.=" ".func::tr('&')." $mth ".func::tr('month');
+			else $msg="$mth ".func::tr('month');
+			if($mth>1) $msg.=func::tr('s');
 		}
 		
 		if($msg and ++$n==$c) break;
 		
 		if($d) {
-			if($y or $mth) $msg.=" ".tr('&')." $d ".tr('day');
-			else $msg="$d ".tr('day');
-			if($d>1) $msg.=tr('s');
+			if($y or $mth) $msg.=" ".func::tr('&')." $d ".func::tr('day');
+			else $msg="$d ".func::tr('day');
+			if($d>1) $msg.=func::tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($h) {
-			if($y or $mth or $d) $msg.=" ".tr('&')." $h ".tr('hour');
-			else $msg="$h ".tr('hour');
-			if($h>1) $msg.=tr('s');
+			if($y or $mth or $d) $msg.=" ".func::tr('&')." $h ".func::tr('hour');
+			else $msg="$h ".func::tr('hour');
+			if($h>1) $msg.=func::tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($m) {
-			if($y or $mth or $d or $h) $msg.=($abb)? " ".tr('&')." $m ".tr('min'):" ".tr('&')." $m ".tr('minute');
-			else $msg=($abb)? "$m ".tr('min'):"$m ".tr('minute');
-			if($m>1) $msg.=tr('s');
+			if($y or $mth or $d or $h) $msg.=($abb)? " ".func::tr('&')." $m ".func::tr('min'):" ".func::tr('&')." $m ".func::tr('minute');
+			else $msg=($abb)? "$m ".func::tr('min'):"$m ".func::tr('minute');
+			if($m>1) $msg.=func::tr('s');
 		}
 
 		if($msg and ++$n==$c) break;
 
 		if($s) {
-			if($y or $mth or $d or $h or $m) $msg.=($abb)? " ".tr('&')." $s ".tr('sec'):" ".tr('&')." $s ".tr('second');
-			else $msg=($abb)? "$s ".tr('sec'):"$s ".tr('second');
-			if($t>1) $msg.=tr('s');
+			if($y or $mth or $d or $h or $m) $msg.=($abb)? " ".func::tr('&')." $s ".func::tr('sec'):" ".func::tr('&')." $s ".func::tr('second');
+			else $msg=($abb)? "$s ".func::tr('sec'):"$s ".func::tr('second');
+			if($t>1) $msg.=func::tr('s');
 		}
 		
 	} while(false);

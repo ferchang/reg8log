@@ -1,10 +1,10 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if(!$max_ajax_check_usernames) return;
 
-require_once $index_dir.'include/func/func_inet.php';
+require_once ROOT.'include/func/func_inet.php';
 
 $ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
 
@@ -19,13 +19,13 @@ if($reset_clients_ajax_check_usernames_upon_register) {
 		$cookie_contents=$_COOKIE['reg8log_ajax_check_usernames'].",".$insert_id;
 		$cookie_contents=implode(",", array_slice(explode(",", $cookie_contents), -20));
 	}
-	setcookie('reg8log_ajax_check_usernames', $cookie_contents, 0, '/', null, $https, true);	
+	setcookie('reg8log_ajax_check_usernames', $cookie_contents, 0, '/', null, HTTPS, true);	
 }
 
-require_once $index_dir.'include/config/config_cleanup.php';
+require_once ROOT.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ajax_check_usernames_expired_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ajax_check_usernames_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require $index_dir.'include/code/cleanup/code_ajax_check_usernames_size_cleanup.php';
+if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ajax_check_usernames_size_cleanup.php';
 
 ?>

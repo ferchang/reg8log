@@ -1,8 +1,8 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
-if(!isset($parent_page)) exit("<center><h3>Error: Direct access denied!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$parent_page=true;
+define('CAN_INCLUDE', true);
 
 ?>
 
@@ -12,14 +12,14 @@ $parent_page=true;
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<title><?php echo tr('Ban user'); ?></title>
+<title><?php echo func::tr('Ban user'); ?></title>
 <style>
 .unit {
 	color: #8fd;
 }
 </style>
 <script src="../js/forms_common.js"></script>
-<?php require $index_dir.'include/code/code_validate_captcha_field-js.php'; ?>
+<?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
 <script src="../js/sha256.js"></script>
 <script language="javascript">
 
@@ -41,7 +41,7 @@ function clear_form() {
 	//--------------
 	if(password_exists) document.ban_form2.password.value='';
 	if(document.ban_form2.remember) document.ban_form2.remember.checked=false;
-	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo tr('(Not case-sensitive)'); ?>';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	//--------------
 	ban_form2.reason.value='';
 	ban_form2.ban_type[0].click();
@@ -69,11 +69,11 @@ function validate() {//client side validator
 
 	i=0;
 
-	if(ban_form2.years.options[0].selected && ban_form2.months.options[0].selected && ban_form2.days.options[0].selected && ban_form2.hours.options[0].selected && !ban_form2.ban_type[1].checked) msgs[i++]="<?php echo tr('no ban duration specified!'); ?>";
+	if(ban_form2.years.options[0].selected && ban_form2.months.options[0].selected && ban_form2.days.options[0].selected && ban_form2.hours.options[0].selected && !ban_form2.ban_type[1].checked) msgs[i++]="<?php echo func::tr('no ban duration specified!'); ?>";
 
 	//----------------
 	
-	if(password_exists) if(!document.ban_form2.password.value.length) msgs[i++]="<?php echo tr('password field is empty!'); ?>";
+	if(password_exists) if(!document.ban_form2.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
 
 	if(captcha_exists) validate_captcha(document.ban_form2.captcha.value);
 	
@@ -119,7 +119,7 @@ else if(isset($captcha_msg) and count($err_msgs)==1) {
 	echo '</td></tr>';
 }
 else if(!empty($err_msgs)) {
-	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', tr('Errors'), ':</span><br />';
+	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 	foreach($err_msgs as $err_msg) {
 		$err_msg[0]=strtoupper($err_msg[0]);
 		echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -131,7 +131,7 @@ else if(!empty($err_msgs)) {
 <?php
 
 /* if(!empty($err_msgs)) {
-	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', tr('Errors'), ':</span><br />';
+	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
 	foreach($err_msgs as $err_msg) {
 		$err_msg[0]=strtoupper($err_msg[0]);
 		echo "<span style=\"color: yellow\" >$err_msg</span><br />";
@@ -143,13 +143,13 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_COOKIE['reg8log_antixsrf_token4post'];
 echo '">';
 
-require $index_dir.'include/code/code_generate_form_id.php';
+require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
 
 <tr align="center"><td>
 <table border style="margin-top: 7px">
-<tr style="background: brown; color: #fff"><th><?php echo tr('Username'); ?></th><th><?php echo tr('Uid'); ?></th><th><?php echo tr('Email'); ?></th><th><?php echo tr('Gender'); ?></th><th><?php echo tr('Member for'); ?></th></tr><tr style="background: #ccc" align="center">
+<tr style="background: brown; color: #fff"><th><?php echo func::tr('Username'); ?></th><th><?php echo func::tr('Uid'); ?></th><th><?php echo func::tr('Email'); ?></th><th><?php echo func::tr('Gender'); ?></th><th><?php echo func::tr('Member for'); ?></th></tr><tr style="background: #ccc" align="center">
 <?php
 echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '">';
@@ -157,29 +157,29 @@ echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>';
 if($rec['gender']=='n') echo '?';
-else if($rec['gender']=='m') echo tr('Male');
-else echo tr('Female');
+else if($rec['gender']=='m') echo func::tr('Male');
+else echo func::tr('Female');
 echo '</td>';
-require_once $index_dir.'include/func/func_duration2friendly_str.php';
+require_once ROOT.'include/func/func_duration2friendly_str.php';
 echo '<td>', duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 ?>
 </tr></table><br>
 </td></tr>
 <tr>
-<td style=""><?php echo tr('Ban for a'); ?> <span class="unit"><?php echo tr('duration'); ?></span> <input type="radio" name="ban_type" value="duration" onclick="show_duration_selects(1)" <?php if(isset($_POST['ban_type'])) {
-if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checked="true" '; ?>> <?php echo tr('or'); ?> <span class="unit"><?php echo tr('infinitely'); ?></span> <input type="radio" name="ban_type" value="infinite" onclick="show_duration_selects(0)" <?php if(isset($_POST['ban_type']) and $_POST['ban_type']=='infinite') echo ' checked="true" '; ?>><br><br>
+<td style=""><?php echo func::tr('Ban for a'); ?> <span class="unit"><?php echo func::tr('duration'); ?></span> <input type="radio" name="ban_type" value="duration" onclick="show_duration_selects(1)" <?php if(isset($_POST['ban_type'])) {
+if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checked="true" '; ?>> <?php echo func::tr('or'); ?> <span class="unit"><?php echo func::tr('infinitely'); ?></span> <input type="radio" name="ban_type" value="infinite" onclick="show_duration_selects(0)" <?php if(isset($_POST['ban_type']) and $_POST['ban_type']=='infinite') echo ' checked="true" '; ?>><br><br>
 </td>
 </tr>
 <tr id="ban_duration" style="display: inline;<?php if(isset($_POST['ban_type']) and $_POST['ban_type']=='infinite') echo ' visibility: hidden'; ?>">
-<td align="left"><?php echo tr('Ban for '); ?> 
-<select name="years"><option>0</option><option <?php if(isset($_POST['years']) and $_POST['years']=='1') echo 'selected'; ?>>1</option></select> <span class="unit"><?php echo tr('year(s)'); ?></span> <?php echo tr('and'); ?> 
-<select name="months"><option>0</option><option <?php if(isset($_POST['months']) and $_POST['months']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['months']) and $_POST['months']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['months']) and $_POST['months']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['months']) and $_POST['months']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['months']) and $_POST['months']=='9') echo 'selected'; ?>>9</option></select> <span class="unit"><?php echo tr('month(s)'); ?></span> <?php echo tr('and'); ?> 
-<select name="days"><option>0</option><option<?php if(isset($_POST['days']) and $_POST['days']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['days']) and $_POST['days']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['days']) and $_POST['days']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['days']) and $_POST['days']=='7') echo 'selected'; ?>>7</option><option <?php if(isset($_POST['days']) and $_POST['days']=='15') echo 'selected'; ?>>15</option><option <?php if(isset($_POST['days']) and $_POST['days']=='25') echo 'selected'; ?>>25</option></select> <span class="unit"><?php echo tr('day(s)'); ?></span> <?php echo tr('and'); ?> 
-<select name="hours"><option>0</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='12') echo 'selected'; ?>>12</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='20') echo 'selected'; ?>>20</option></select> <span class="unit"><?php echo tr('hour(s)'); ?></span>
+<td align="left"><?php echo func::tr('Ban for '); ?> 
+<select name="years"><option>0</option><option <?php if(isset($_POST['years']) and $_POST['years']=='1') echo 'selected'; ?>>1</option></select> <span class="unit"><?php echo func::tr('year(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="months"><option>0</option><option <?php if(isset($_POST['months']) and $_POST['months']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['months']) and $_POST['months']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['months']) and $_POST['months']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['months']) and $_POST['months']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['months']) and $_POST['months']=='9') echo 'selected'; ?>>9</option></select> <span class="unit"><?php echo func::tr('month(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="days"><option>0</option><option<?php if(isset($_POST['days']) and $_POST['days']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['days']) and $_POST['days']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['days']) and $_POST['days']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['days']) and $_POST['days']=='7') echo 'selected'; ?>>7</option><option <?php if(isset($_POST['days']) and $_POST['days']=='15') echo 'selected'; ?>>15</option><option <?php if(isset($_POST['days']) and $_POST['days']=='25') echo 'selected'; ?>>25</option></select> <span class="unit"><?php echo func::tr('day(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="hours"><option>0</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='12') echo 'selected'; ?>>12</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='20') echo 'selected'; ?>>20</option></select> <span class="unit"><?php echo func::tr('hour(s)'); ?></span>
 </td>
 </tr>
 <tr>
-<td align=""><br><?php echo tr('Reason'); ?>: <input type="text" name="reason" size="50" <?php if(isset($_POST['reason'])) echo 'value="', htmlspecialchars($_POST['reason'], ENT_QUOTES, 'UTF-8'), '"'; ?>></td>
+<td align=""><br><?php echo func::tr('Reason'); ?>: <input type="text" name="reason" size="50" <?php if(isset($_POST['reason'])) echo 'value="', htmlspecialchars($_POST['reason'], ENT_QUOTES, 'UTF-8'), '"'; ?>></td>
 </tr>
 <tr>
 <td align=""><br>
@@ -189,15 +189,15 @@ if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checke
 
 if(isset($password_check_needed)) {
 	echo '<tr><td>';
-	echo tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
-	if($admin_operations_require_password>1) echo '&nbsp;', tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
+	echo func::tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
+	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
 	echo '</td></tr>';
 }
 
 if(isset($captcha_needed) and !$captcha_verified) {
 	echo '<tr align=center><td>';
 	$captcha_form4login=true;
-	require $index_dir.'include/page/page_captcha_form.php';
+	require ROOT.'include/page/page_captcha_form.php';
 	echo '</td></tr>';
 }
 
@@ -207,16 +207,16 @@ if(isset($captcha_needed) and !$captcha_verified) {
 <?php
 if(isset($password_check_needed)) echo '<br>';
 ?>
-<input type="submit" value="<?php echo tr('Cancel'); ?>" name="cancel" />
-<input type="reset" value="<?php echo tr('Clear'); ?>" onClick="return clear_form();"  />
-<input type="submit" value="<?php echo tr('Ban'); ?>" name="ban_form2" onClick="return validate()" /></td>
+<input type="submit" value="<?php echo func::tr('Cancel'); ?>" name="cancel" />
+<input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();"  />
+<input type="submit" value="<?php echo func::tr('Ban'); ?>" name="ban_form2" onClick="return validate()" /></td>
 </td></tr></table></tr>
 <tr><td align="center"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
 </table>
 </form>
-<a href="index.php"><?php echo tr('Admin operations'); ?></a><br><br>
-<a href="../index.php"><?php echo tr('Login page'); ?></a>
+<a href="index.php"><?php echo func::tr('Admin operations'); ?></a><br><br>
+<a href="../index.php"><?php echo func::tr('Login page'); ?></a>
 </td></tr></table>
 <script>
 if(captcha_exists) {
@@ -227,7 +227,7 @@ if(captcha_exists) {
 }
 </script>
 <?php
-require $index_dir.'include/page/page_foot_codes.php';
+require ROOT.'include/page/page_foot_codes.php';
 ?>
 </body>
 </html>
