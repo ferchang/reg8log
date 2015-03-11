@@ -2,9 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-echo '<pre>';
-print_r($_SERVER);
-exit;
 
 // All codes created with Notepad++
 //Thanks for such a lightweight, fast and powerful tool with excellent features.

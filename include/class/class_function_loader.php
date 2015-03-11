@@ -18,7 +18,8 @@ class func {
 		
 		//echo func::$index[$x__func_name];
 		
-		require_once ROOT.'include/func/'.func::$index[$x__func_name];
+		include_once ROOT.'include/func/'.func::$index[$x__func_name];
+		//don't use require_once, because if a function's file is renamed it will block our function autoloader mechanism. (no index auto-updating will occur because the code execution will stop at this point)
 		
 		if(!function_exists($x__func_name)) {//i.e. function is deleted or moved into a different file
 			func::update_index();
