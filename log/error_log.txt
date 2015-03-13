@@ -1,0 +1,1 @@
+[13-Mar-2015 09:01:01 UTC] PHP Notice:  Undefined variable: ddd in D:\Program Files\EasyPHP-5.3.9\www\reg8log\index.php on line 9

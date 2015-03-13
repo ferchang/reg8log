@@ -14,7 +14,9 @@ $admin_emails_lang='';
 // Default language for admin email alerts
 // if empty, $lang will be used.
 
-$log_errors='';
+$log_errors=E_ALL;//set to E_ERROR, E_ALL, E_ERROR|E_WARNING, etc. set to false/0 to disable error logging
+
+$error_log_file='log/error_log.txt';
 
 //====================================================
 
@@ -24,18 +26,7 @@ if($debug_mode) {
 }
 else ini_set('display_errors', '0');
 
-$req_time=time();
-
-ob_start();
-
 define('ROOT', str_replace('/include', '', str_replace('\\', '/', __DIR__)).'/');
-
-if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS']!=='off' || $_SERVER['SERVER_PORT']==443) define('HTTPS', true);
-else define('HTTPS', false);
-
-require ROOT.'include/code/sess/code_sess_start.php';
-
-//require ROOT.'include/class/class_function_loader.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
@@ -54,10 +45,30 @@ else {
 	$cell_align='align="right"';
 }
 
-//require ROOT.'include/func/func_tr.php';
-require ROOT.'include/func/func_my_exit.php';
-
 //----------- language ------------
+
+if($log_errors) {
+	if(!$debug_mode) error_reporting($log_errors);
+	//if debug_mode is on, error reporting level shouldn't be changed (it is set to E_ALL)
+	ini_set('log_errors', 1);
+	ini_set('error_log', ROOT.$error_log_file);
+	ini_set('ignore_repeated_errors', 1);
+	if(file_exists($error_log_file)) {
+		if(!is_writable($error_log_file)) echo func::tr('Warning: Error log file not writable!', true);
+	}
+	else if(!is_writable(dirname($error_log_file))) echo func::tr('Warning: Error log directory not writable!', true);
+}
+
+$req_time=time();
+
+ob_start();
+
+if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS']!=='off' || $_SERVER['SERVER_PORT']==443) define('HTTPS', true);
+else define('HTTPS', false);
+
+require ROOT.'include/code/sess/code_sess_start.php';
+
+//require ROOT.'include/class/class_function_loader.php';
 
 ignore_user_abort(true);
 

@@ -6,7 +6,7 @@ function tr($str, $add_direction=false, $force_lang='') {
 	
 	global $lang;
 	
-	
+
 
 	static $fa_translations;
 	static $en_translations;
@@ -16,10 +16,13 @@ function tr($str, $add_direction=false, $force_lang='') {
 	
 	if(!$force_lang) $tmp_lang=$lang;
 	else $tmp_lang=$force_lang;
-	
+
 	if($tmp_lang=='en') {
 		if(!$en_translations) $en_translations=require ROOT."include/lang/lang_en.php";
-		foreach($en_translations as $key=>$value) if(strtolower($key)==$str) return $en_translations[$key];
+		foreach($en_translations as $key=>$value) if(strtolower($key)==$str) {
+			if($add_direction) return '<div style="display: inline-block" dir="ltr">'.$en_translations[$key].'</div>';
+			else return $en_translations[$key];
+		}
 	}
 	else {
 		if(!$fa_translations) $fa_translations=require ROOT."include/lang/lang_fa.php";
@@ -29,7 +32,9 @@ function tr($str, $add_direction=false, $force_lang='') {
 		}
 	}
 	
-	return $orig_str;
+	
+	if($add_direction) return '<div style="display: inline-block" dir="ltr">'.$orig_str.'</div>';
+	else return $orig_str;
 
 }
 
