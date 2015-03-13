@@ -35,7 +35,9 @@ else define('HTTPS', false);
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
-require ROOT.'include/class/class_function_loader.php';
+//require ROOT.'include/class/class_function_loader.php';
+
+require ROOT.'include/class/class_class_loader.php';
 
 //----------- language ------------
 
