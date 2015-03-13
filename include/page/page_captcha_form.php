@@ -6,15 +6,17 @@ if(isset($captcha_form4login)) echo '<table>';
 // we need captcha from in its own table so we can remove it dynamically (with Javascript) from the login from.
 //update: but this is also used in page_accounts.php.
 
+$index_dir=func::get_relative_root_path();
+
 ?>
 
 <tr>
 <td ><?php echo func::tr('This is the security code'); ?>:<br /><span id="re_captcha_msg" style="visibility: hidden"><?php echo func::tr('If the code is not readable,<br />click on the image to change it'); ?>.</span></td>
 <td align="<?php echo (($lang=='fa')? 'right' : 'left' ); ?>" valign="center">
-<img src="<?php if(!isset($ajax)) echo ROOT; ?>captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" title="" />
+<img src="<?php if(!isset($ajax)) echo $index_dir; ?>captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" title="" />
 </td>
 <td align="">
-<img src="<?php if(!isset($ajax)) echo ROOT; ?>image/throbber.gif" style="visibility: hidden; border: 2px solid #000; <?php //echo (($lang=='fa')? 'position: relative; right: -30px;' : '' ); ?>" id="captcha_throbber" /></td>
+<img src="<?php if(!isset($ajax)) echo $index_dir; ?>image/throbber.gif" style="visibility: hidden; border: 2px solid #000; <?php //echo (($lang=='fa')? 'position: relative; right: -30px;' : '' ); ?>" id="captcha_throbber" /></td>
 </td>
 </tr>
 <tr>

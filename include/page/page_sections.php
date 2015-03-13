@@ -12,7 +12,7 @@ echo '<tr  bgcolor="#e1cfa0" ><td>
 <a href="', $index_dir, 'index.php">', func::tr('Login page'), '</a>&nbsp;|&nbsp;
 <a href="', $index_dir, 'user_options.php">', func::tr('User options'), '</a><br>
 <a href="', $index_dir, 'register.php">', func::tr('Register'), '</a>&nbsp;|&nbsp;
-<a href="', $index_dir, 'change_lang.php" onclick="this.href=this.href+\'?addr=\'+location.href">', func::tr('Change language'), '</a><br>
+<a href="', $index_dir, 'change_lang.php?antixsrf_token=', $_COOKIE['reg8log_antixsrf_token4get'], '" onclick="this.href=this.href+\'&addr=\'+location.href">', func::tr('Change language'), '</a><br>
 <a href="', $index_dir, 'email_verification_link_request.php">', func::tr('Resend email verification link'), '</a><br>
 <a href="', $index_dir, 'admin/index.php">', func::tr('Admin operations'), '</a>
 <hr style="background: #000; height: 3px; max-height: 3px; margin-top: 10px; margin-bottom: 5px; color: #000">

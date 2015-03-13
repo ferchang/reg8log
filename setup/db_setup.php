@@ -4,7 +4,7 @@ define('CAN_INCLUDE', true);
 
 $setup_page=true;
 
-
+require '../include/common.php';
 
 $site_encr_key='ff'; //just to prevent func_encryption_with_site8client_keys.php from complaining!
 
