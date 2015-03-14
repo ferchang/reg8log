@@ -19,7 +19,7 @@ global $old_session_settings;
 global $client_sess_key;
 
 
-if(empty($_SESSION)) {
+if(empty($_SESSION) and 0) {
 	@ setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 	@ touch(session_save_path().'/sess_'.session_id(), 0, 0);
 	@ session_destroy();

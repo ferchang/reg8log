@@ -6,6 +6,8 @@ require_once ROOT.'include/code/code_db_object.php';
 
 $query='select * from `site_vars`';
 
+$reg8log_db=$GLOBALS['reg8log_db'];
+
 $reg8log_db->auto_abort=false;
 $reg8log_db->query($query);
 $reg8log_db->auto_abort=true;
@@ -31,6 +33,6 @@ if($reg8log_db->result_num()!==$num_recs) {
 return;
 }
 
-while($rec=$reg8log_db->fetch_row()) $$rec['name']=$rec['value'];
+while($rec=$reg8log_db->fetch_row()) $$rec['name']=$GLOBALS[$rec['name']]=$rec['value'];
 
 ?>

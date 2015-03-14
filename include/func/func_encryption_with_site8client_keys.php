@@ -9,11 +9,11 @@ if(!isset($aes)) {
 
 require_once ROOT.'include/code/code_fetch_site_vars.php';
 
-if(!isset($_COOKIE['reg8log_site_salt'])) setcookie('reg8log_site_salt', $site_salt, 0, '/', null, HTTPS, true);
+if(!isset($_COOKIE['reg8log_site_salt'])) setcookie('reg8log_site_salt', $GLOBALS['site_salt'], 0, '/', null, HTTPS, true);
 
 require_once ROOT.'include/config/config_crypto.php';
 
-$aes->setKey(pack('H*', md5($pepper.$site_encr_key.$client_sess_key)));
+$aes->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 
 function encrypt($str) {
 	global $aes;

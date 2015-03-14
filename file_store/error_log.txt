@@ -1,0 +1,11 @@
+[14-Mar-2015 04:15:09 UTC] PHP Notice:  reg8log: class func: Notice: Function index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 91
+[14-Mar-2015 04:15:41 UTC] PHP Notice:  reg8log: class func: Function index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 91
+[14-Mar-2015 04:40:22 UTC] PHP Notice:  reg8log: class class_loader: Class index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 82
+[14-Mar-2015 04:44:21 UTC] PHP Notice:  reg8log: class func: Function index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 91
+[14-Mar-2015 04:45:23 UTC] PHP Notice:  reg8log: class class_loader: Class index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 82
+[14-Mar-2015 04:45:23 UTC] PHP Notice:  reg8log: class func: Function index file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 91
+[14-Mar-2015 04:59:16 UTC] PHP Notice:  reg8log: class class_loader: Class index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 82
+[14-Mar-2015 04:59:16 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 91
+[14-Mar-2015 05:03:52 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
+[14-Mar-2015 05:04:44 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
+[14-Mar-2015 05:05:15 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
