@@ -27,7 +27,7 @@ require ROOT.'include/page/page_sections.php';
 echo $msg;
 require ROOT.'include/page/page_print_last_activity.php';
 ?>
-<br /><a href="logout.php?antixsrf_token=<?php echo $_SESSION['reg8log']['reg8log_antixsrf_token4get']; ?>" onclick="return onLogout()"><?php echo func::tr('Log out'); ?></a></td>
+<br /><a href="logout.php?antixsrf_token=<?php echo $_SESSION['reg8log']['antixsrf_token4get']; ?>" onclick="return onLogout()"><?php echo func::tr('Log out'); ?></a></td>
 </tr>
 </table>
 <?php

@@ -78,14 +78,14 @@ require ROOT.'include/code/code_gather_request_entropy.php';
 
 //---------- antixsrf_token ------------
 
-if(!isset($_SESSION['reg8log']['reg8log_antixsrf_token4post'])) {
+if(!isset($_SESSION['reg8log']['antixsrf_token4post'])) {
 	$antixsrf_token=func::random_string(22);
-	$_SESSION['reg8log']['reg8log_antixsrf_token4post']=$antixsrf_token;
+	$_SESSION['reg8log']['antixsrf_token4post']=$antixsrf_token;
 }
 
-if(!isset($_SESSION['reg8log']['reg8log_antixsrf_token4get'])) {
+if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 	$antixsrf_token=func::random_string(22);
-	$_SESSION['reg8log']['reg8log_antixsrf_token4get']=$antixsrf_token;
+	$_SESSION['reg8log']['antixsrf_token4get']=$antixsrf_token;
 }
 
 //---------- antixsrf_token ------------

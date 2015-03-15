@@ -163,7 +163,7 @@ require ROOT.'include/page/admin/page_err_msgs.php';
 echo func::tr('Records '), $first, func::tr(' - '), $last, func::tr(' of '), $total;
 echo '<table border cellpadding="3">';
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['reg8log_antixsrf_token4post'];
+echo $_SESSION['reg8log']['antixsrf_token4post'];
 echo '">';
 
 require_once ROOT.'include/func/func_duration2friendly_str.php';
