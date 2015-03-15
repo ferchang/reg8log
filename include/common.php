@@ -78,19 +78,15 @@ require ROOT.'include/code/code_gather_request_entropy.php';
 
 //---------- antixsrf_token ------------
 
-if(!isset($_COOKIE['reg8log_antixsrf_token4post'])) {
+if(!isset($_SESSION['reg8log']['reg8log_antixsrf_token4post'])) {
 	$antixsrf_token=func::random_string(22);
-	setcookie('reg8log_antixsrf_token4post', $antixsrf_token, 0, '/', null, HTTPS, true);
-	$_COOKIE['reg8log_antixsrf_token4post']=$antixsrf_token;
+	$_SESSION['reg8log']['reg8log_antixsrf_token4post']=$antixsrf_token;
 }
-else $_COOKIE['reg8log_antixsrf_token4post']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token4post'], ENT_QUOTES, 'UTF-8');
 
-if(!isset($_COOKIE['reg8log_antixsrf_token4get'])) {
+if(!isset($_SESSION['reg8log']['reg8log_antixsrf_token4get'])) {
 	$antixsrf_token=func::random_string(22);
-	setcookie('reg8log_antixsrf_token4get', $antixsrf_token, 0, '/', null, HTTPS, true);
-	$_COOKIE['reg8log_antixsrf_token4get']=$antixsrf_token;
+	$_SESSION['reg8log']['reg8log_antixsrf_token4get']=$antixsrf_token;
 }
-else $_COOKIE['reg8log_antixsrf_token4get']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token4get'], ENT_QUOTES, 'UTF-8');
 
 //---------- antixsrf_token ------------
 

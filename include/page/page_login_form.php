@@ -224,7 +224,7 @@ xhr.onreadystatechange=function() {
 	}
 }
 
-xhr.send('username='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo $_COOKIE['reg8log_antixsrf_token4post']; ?>');
+xhr.send('username='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo $_SESSION['reg8log']['reg8log_antixsrf_token4post']; ?>');
 
 return true;
 }
@@ -252,7 +252,7 @@ require ROOT.'include/page/page_sections.php';
 <?php
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_COOKIE['reg8log_antixsrf_token4post'];
+echo $_SESSION['reg8log']['reg8log_antixsrf_token4post'];
 echo '">';
 
 require ROOT.'include/code/code_generate_form_id.php';

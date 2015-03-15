@@ -6,8 +6,9 @@ require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 
 function shutdown_session() {
 
-global $session_decryption_error;
+if(empty($_SESSION)) return;
 
+global $session_decryption_error;
 
 if(session_id()==='' or isset($session_decryption_error) or session_name()!=='reg8log_session') return;
 
@@ -17,14 +18,6 @@ global $session0;
 
 global $old_session_settings;
 global $client_sess_key;
-
-
-if(empty($_SESSION)) {
-	setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
-	session_destroy();
-	require ROOT.'include/code/sess/code_restore_old_sess_settings.php';
-	return;
-}
 
 if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
 

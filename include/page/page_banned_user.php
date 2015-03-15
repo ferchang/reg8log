@@ -32,7 +32,7 @@ if($ban_until!=1) {
 else echo '<h4>', func::tr('Ban will be lifted at'), ':  <span style="color: #84f;">', func::tr('Unlimited'), '.</span></h4>';
 echo '<br>';
 
-echo '<a onclick="return onLogout()" href="logout.php?antixsrf_token=', $_COOKIE['reg8log_antixsrf_token4get'], '">', func::tr('Log out'), '</a>';
+echo '<a onclick="return onLogout()" href="logout.php?antixsrf_token=', $_SESSION['reg8log']['reg8log_antixsrf_token4get'], '">', func::tr('Log out'), '</a>';
 
 ?>
 

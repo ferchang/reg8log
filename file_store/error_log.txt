@@ -56,3 +56,13 @@
 [15-Mar-2015 05:01:58 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
 [15-Mar-2015 05:01:59 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
 [15-Mar-2015 05:02:07 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:07:08 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:07:17 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:18:03 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:18:05 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:18:31 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:22:14 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:22:15 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:22:47 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:28:46 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:28:47 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
