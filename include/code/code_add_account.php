@@ -35,7 +35,7 @@ foreach($fields as $field_name=>$specs) {
 $query="insert into `accounts` ($field_names) values ($field_values)";
 
 $reg8log_db->query($query);
-unset($_SESSION['captcha_verified'], $_SESSION['passed']);
+unset($_SESSION['reg8log']['captcha_verified'], $_SESSION['reg8log']['passed']);
 
 $success_msg=func::tr('account created msg');
 $no_specialchars=true;

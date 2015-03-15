@@ -40,7 +40,7 @@ if(isset($password_check_needed)) {
 
 	if(isset($captcha_needed)) {
 		require ROOT.'include/code/sess/code_sess_start.php';
-		$captcha_verified=isset($_SESSION['captcha_verified']);
+		$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 	}
 }
 

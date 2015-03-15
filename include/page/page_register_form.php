@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
-$captcha_verified=isset($_SESSION['captcha_verified']);
+$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 ?>
 

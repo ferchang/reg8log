@@ -20,7 +20,7 @@ if(!$registeration_enabled) my_exit('<center><h3>'.func::tr('Registration is dis
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
-$captcha_verified=isset($_SESSION['captcha_verified']);
+$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 require ROOT.'include/code/code_identify.php';
 

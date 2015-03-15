@@ -17,7 +17,7 @@ $captcha_needed=true;
 
 if(isset($captcha_needed)) {
 	require ROOT.'include/code/sess/code_sess_start.php';
-	$captcha_verified=isset($_SESSION['captcha_verified']);
+	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 }
 
 require ROOT.'include/config/config_register.php';
@@ -67,7 +67,7 @@ if($email) {
 	}
 }
 
-if(isset($captcha_needed)) unset($_SESSION['captcha_verified']);
+if(isset($captcha_needed)) unset($_SESSION['reg8log']['captcha_verified']);
 
 require ROOT.'include/code/code_set_submitted_forms_cookie.php';
 

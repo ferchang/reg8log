@@ -11,7 +11,7 @@ if(isset($password_check_needed)) {//password_check_needed
 		if($password=='') $err_msgs[]=func::tr('Password field is empty!');
 		else if(!isset($captcha_err)) {
 			unset($captcha_verified);
-			if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
+			if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 			if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 			require ROOT.'include/code/code_verify_password.php';
 			if(isset($err_msgs)) {

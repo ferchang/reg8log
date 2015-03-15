@@ -9,3 +9,50 @@
 [14-Mar-2015 05:03:52 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
 [14-Mar-2015 05:04:44 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
 [14-Mar-2015 05:05:15 UTC] PHP Notice:  reg8log: class func: Function index directory not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_function_loader.php on line 92
+[14-Mar-2015 07:55:15 UTC] PHP Fatal error:  Cannot unset string offsets in D:\Program Files\EasyPHP-5.3.9\www\reg8log\debug_tools\show_session_contents.php on line 24
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: use_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: use_only_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: gc_maxlifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: httponly in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: trans_sid in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: cookie_lifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:38:26 UTC] PHP Notice:  Undefined index: session_id in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15
+[15-Mar-2015 04:39:46 UTC] PHP Notice:  Undefined index: use_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[15-Mar-2015 04:39:46 UTC] PHP Notice:  Undefined index: use_only_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[15-Mar-2015 04:39:46 UTC] PHP Notice:  Undefined index: gc_maxlifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[15-Mar-2015 04:39:46 UTC] PHP Notice:  Undefined index: cookie_lifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[15-Mar-2015 04:39:46 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:39:48 UTC] PHP Notice:  Undefined index: use_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[15-Mar-2015 04:39:48 UTC] PHP Notice:  Undefined index: use_only_cookies in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[15-Mar-2015 04:39:48 UTC] PHP Notice:  Undefined index: gc_maxlifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[15-Mar-2015 04:39:48 UTC] PHP Notice:  Undefined index: cookie_lifetime in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[15-Mar-2015 04:39:48 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:40:37 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:40:38 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:41:24 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:41:27 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:41:31 UTC] PHP Notice:  Undefined index: session_save_path in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:44:24 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:45:23 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:45:25 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:45:33 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:45:57 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:48:00 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:48:00 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:48:19 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:48:29 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:49:17 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:52:52 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:53:09 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:53:53 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:54:04 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:54:06 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:55:35 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:55:43 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:57:22 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:57:34 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 04:58:01 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:01:58 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:01:59 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13
+[15-Mar-2015 05:02:07 UTC] PHP Notice:  Undefined variable: identify_structs in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 13

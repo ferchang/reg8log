@@ -28,7 +28,7 @@ if(!isset($captcha_needed)) {
 
 if(isset($captcha_needed)) {
 	require ROOT.'include/code/sess/code_sess_start.php';
-	$captcha_verified=isset($_SESSION['captcha_verified']);
+	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 }
 
 if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
@@ -63,7 +63,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	else if($email_format['php_re'] and $_POST['newemail']!=='' and !preg_match($email_format['php_re'], $_POST['newemail'])) $err_msgs[]=func::tr('New email is invalid!');
 	else if($_POST['newemail']!==$_POST['reemail']) $err_msgs[]=func::tr('email fields aren\'t match!');
 	else if(!isset($err_msgs)) {
-		if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
+		if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 		$captcha_verified=false;
 		$captcha_needed=true;
 		$try_type='email';

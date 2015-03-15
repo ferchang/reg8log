@@ -51,7 +51,7 @@ $err_msgs[]=func::tr($field_name).func::tr(' is invalid!');
 else if($unique and !isset($captcha_err)) {
 	require ROOT.'include/code/code_check_field_uniqueness.php';
 	if(isset($uniqueness_err) and ($field_name!='username')) {
-		unset($_SESSION['captcha_verified']);
+		unset($_SESSION['reg8log']['captcha_verified']);
 		$captcha_verified=false;
 	}
 }
@@ -71,12 +71,12 @@ this is to prevent misusing the system with bots to get knowledge about register
 unique field values in our members database.
 */
 if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !$ajax_check_username or $max_ajax_check_usernames)) {
-		if(isset($_SESSION['passed'][$field_name]) and $_SESSION['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
-				unset($_SESSION['captcha_verified']);
+		if(isset($_SESSION['reg8log']['passed'][$field_name]) and $_SESSION['reg8log']['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
+				unset($_SESSION['reg8log']['captcha_verified']);
 				$err_msgs[]=func::tr('You need to enter a security code again.');
 				$captcha_verified=false;
 			}
-		$_SESSION['passed'][$field_name]=sha1($session_salt.$field_value, true);
+		$_SESSION['reg8log']['passed'][$field_name]=sha1($session_salt.$field_value, true);
 }
 
 }//field exists

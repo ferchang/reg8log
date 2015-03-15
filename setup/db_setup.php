@@ -22,9 +22,9 @@ require_once ROOT.'include/func/func_random.php';
 
 $file_contents=file_get_contents('setup.txt');
 
-if(empty($_SESSION['setup_key']) or strpos($file_contents, $_SESSION['setup_key'])===false) {
+if(empty($_SESSION['reg8log']['setup_key']) or strpos($file_contents, $_SESSION['reg8log']['setup_key'])===false) {
 	$setup_key=random_string(22);
-	$_SESSION['setup_key']=$setup_key;
+	$_SESSION['reg8log']['setup_key']=$setup_key;
 	require ROOT.'setup/include/page_setup_form1.php';
 	exit;
 }
@@ -89,7 +89,7 @@ echo '</td></tr></table>';
 require ROOT.'include/page/page_foot_codes.php';
 echo '</body></html>';
 
-unset($_SESSION['setup_key']);
+unset($_SESSION['reg8log']['setup_key']);
 require ROOT.'include/code/sess/code_sess_destroy.php';
 exit;
 } while(false);

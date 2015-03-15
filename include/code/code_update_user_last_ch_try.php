@@ -34,7 +34,7 @@ if($req_time-$trec['last_ch_pswd_try']>$account_block_period) {
 	if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=1) {
 		$captcha_needed=true;
 		$captcha_verified=false;
-		if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
+		if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 	}
 	if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=1) {
 		require_once ROOT.'include/func/func_random.php';
@@ -61,7 +61,7 @@ $reg8log_db->query($query);
 if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=$ch_pswd_tries) {
 	$captcha_needed=true;
 	$captcha_verified=false;
-	if(isset($_SESSION['captcha_verified'])) unset($_SESSION['captcha_verified']);
+	if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 }
 
 if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=$ch_pswd_tries) {

@@ -21,6 +21,12 @@ else define('HTTPS', false);
 
 require ROOT.'include/class/class_class_loader.php';
 
+if(isset($_COOKIE['reg8log_client_sess_key'])) $client_sess_key=$_COOKIE['reg8log_client_sess_key'];
+else {
+	$client_sess_key=func::random_string(22);
+	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, HTTPS, true);
+}
+
 require ROOT.'include/code/sess/code_sess_start.php';
 
 //----------------------------------
@@ -69,12 +75,6 @@ header("X-Frame-Options: SAMEORIGIN");
 if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
 
 require ROOT.'include/code/code_gather_request_entropy.php';
-
-if(isset($_COOKIE['reg8log_client_sess_key'])) $client_sess_key=$_COOKIE['reg8log_client_sess_key'];
-else {
-	$client_sess_key=func::random_string(22);
-	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, HTTPS, true);
-}
 
 //---------- antixsrf_token ------------
 

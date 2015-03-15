@@ -8,18 +8,7 @@ require ROOT.'include/config/config_identify.php';
 
 @session_write_close();
 
-$old_session_settings['cookie_lifetime']=session_get_cookie_params();
-$old_session_settings['cookie_lifetime']=$old_session_settings['cookie_lifetime']['lifetime'];
-session_set_cookie_params(0);
-$old_session_settings['use_cookies']=ini_set('session.use_cookies', '1');
-$old_session_settings['use_only_cookies']=ini_set('session.use_only_cookies', '1');
-$old_session_settings['gc_maxlifetime']=ini_set('session.gc_maxlifetime', $identify_structs['session']['gc_maxlifetime']);
-$old_session_settings['session_save_path']=session_save_path($identify_structs['session']['save_path']);
-$old_session_settings['session_name']=session_name('reg8log_session');
-$old_session_settings['session_id']=session_id();
-$old_session_settings['httponly']=ini_set("session.cookie_httponly", 1);
-$old_session_settings['trans_sid']=ini_set("session.use_trans_sid", 0);
-if(HTTPS) $old_session_settings['cookie_secure']=ini_set('session.cookie_secure', 'on');
+require ROOT.'include/code/sess/code_set_sess_settings.php';
 
 if(!session_start()) {
 	$failure_msg="session_start failed";
@@ -27,13 +16,15 @@ if(!session_start()) {
 	exit;
 }
 
+//exit(session_id());
+
 session_regenerate_id(true);
 
 if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;
-	if($encrypt_session_files_contents) $session0=$_SESSION;
+	if($encrypt_session_files_contents) $session0=$_SESSION['reg8log_encrypted_session'];
 	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
@@ -44,13 +35,14 @@ if(isset($_SESSION['reg8log_encrypted_session'])) {
 			$session_decryption_error=true;
 			exit;
 		}
-	} else $_SESSION=$tmp5;
+	} else $_SESSION['reg8log']=$tmp5;
 }
-else if($encrypt_session_files_contents and !empty($_SESSION)) {
-	$_SESSION=null;
-	echo 'Warning: Unecrypted session contents! <small>(Session contents cleared)</small><br>';
+else if($encrypt_session_files_contents and !empty($_SESSION['reg8log'])) {
+	$_SESSION['reg8log']=null;
+	echo '<span dir=ltr>Warning: Unecrypted session contents! <small>(Session contents cleared)</small></span><br>';
 }
 
-if($encrypt_session_files_contents) $session1=$_SESSION;
+if($encrypt_session_files_contents) if(isset($_SESSION['reg8log'])) $session1=$_SESSION['reg8log'];
+else $session1=null;
 
 ?>

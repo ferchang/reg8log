@@ -19,46 +19,31 @@ global $old_session_settings;
 global $client_sess_key;
 
 
-if(empty($_SESSION) and 0) {
-	@ setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
-	@ touch(session_save_path().'/sess_'.session_id(), 0, 0);
-	@ session_destroy();
-	@ unlink(session_save_path().'/sess_'.session_id());
-	ini_set('session.use_cookies', $old_session_settings['use_cookies']);
-	ini_set('session.use_only_cookies', $old_session_settings['use_only_cookies']);
-	ini_set('session.gc_maxlifetime', $old_session_settings['gc_maxlifetime']);
-	ini_set('session.cookie_httponly', $old_session_settings['httponly']);
-	ini_set('session.use_trans_sid', $old_session_settings['trans_sid']);
-	if(HTTPS) ini_set('session.cookie_secure', $old_session_settings['cookie_secure']);
-	session_set_cookie_params($old_session_settings['cookie_lifetime']);
-	session_save_path($old_session_settings['session_save_path']);
-	session_name($old_session_settings['session_name']);
-	session_id($old_session_settings['session_id']);
+if(empty($_SESSION)) {
+	setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
+	session_destroy();
+	require ROOT.'include/code/sess/code_restore_old_sess_settings.php';
 	return;
 }
 
 if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
 
 if($encrypt_session_files_contents) {
-	if(isset($session0) and serialize($session1)===serialize($_SESSION)) $_SESSION=$session0;
+	if(isset($session0) and serialize($session1)===serialize($_SESSION['reg8log']))  {
+	$_SESSION['reg8log_encrypted_session']=$session0;
+	unset($_SESSION['reg8log']);
+	}
 	else {
-		$session1=$_SESSION;
-		$_SESSION=null;
+		$session1=$_SESSION['reg8log'];
+		unset($_SESSION['reg8log']);
 		$_SESSION['reg8log_encrypted_session']=encrypt(serialize($session1));
 	}
 }
+else unset($_SESSION['reg8log_encrypted_session']);
 
 session_write_close();
-ini_set('session.use_cookies', $old_session_settings['use_cookies']);
-ini_set('session.use_only_cookies', $old_session_settings['use_only_cookies']);
-ini_set('session.gc_maxlifetime', $old_session_settings['gc_maxlifetime']);
-ini_set('session.use_trans_sid', $old_session_settings['trans_sid']);
-if(HTTPS) ini_set('session.cookie_secure', $old_session_settings['cookie_secure']);
-ini_set('session.cookie_httponly', $old_session_settings['httponly']);
-session_set_cookie_params($old_session_settings['cookie_lifetime']);
-session_save_path($old_session_settings['session_save_path']);
-session_name($old_session_settings['session_name']);
-session_id($old_session_settings['session_id']);
+
+require ROOT.'include/code/sess/code_restore_old_sess_settings.php';
 
 }
 

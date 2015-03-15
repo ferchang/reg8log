@@ -24,7 +24,7 @@ class func {
 			$x__index_file=ROOT.func::$index_file;
 			if(isset($_SESSION['reg8log']['function_index'])) func::$index=$_SESSION['reg8log']['function_index'];
 			else if(!isset($_SESSION['reg8log']['cant_use_file_index_file']) and file_exists($x__index_file)) {
-					//echo "reading index from file...\n";
+					echo "reading index from file...\n";
 					if(is_readable($x__index_file)) func::$index=$_SESSION['reg8log']['function_index']=include $x__index_file;
 					else func::report_index_file_error('Function index file not readable');
 			}
@@ -51,7 +51,7 @@ class func {
 	
 	private static function update_index() {
 		
-		//echo "updating index...\n";
+		echo "updating index...\n";
 		
 		func::$index=array();
 		

@@ -122,7 +122,7 @@ global $site_priv_salt;
 
 require_once ROOT.'include/code/code_fetch_site_vars.php';
 
-$_SESSION['captcha_hash'] = create_secure_hash($site_priv_salt.$captcha_word, 0);
+$_SESSION['reg8log']['captcha_hash'] = create_secure_hash($site_priv_salt.$captcha_word, 0);
 
 //======================================
 	
@@ -149,18 +149,18 @@ function captcha_verify_word() {
 
 	require ROOT.'include/code/sess/code_sess_start.php';
 
-	if(empty($_POST['captcha']) or empty($_SESSION['captcha_hash'])) return false;
+	if(empty($_POST['captcha']) or empty($_SESSION['reg8log']['captcha_hash'])) return false;
 
 	global $site_priv_salt;
 
 	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	
-	if (!verify_secure_hash($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['captcha_hash'])) {
-		unset($_SESSION['captcha_hash']);
+	if (!verify_secure_hash($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['reg8log']['captcha_hash'])) {
+		unset($_SESSION['reg8log']['captcha_hash']);
 		return false;
 	} else {
-		unset($_SESSION['captcha_hash']);
-		$_SESSION['captcha_verified']=true;
+		unset($_SESSION['reg8log']['captcha_hash']);
+		$_SESSION['reg8log']['captcha_verified']=true;
 		return true;
 	}
 	

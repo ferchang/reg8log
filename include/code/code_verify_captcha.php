@@ -10,15 +10,15 @@ $captcha_format=$fields['captcha'];
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
-if(isset($_SESSION['captcha_verified'])) {
+if(isset($_SESSION['reg8log']['captcha_verified'])) {
 	$captcha_verified=true;
-	unset($_SESSION['captcha_verified']);
+	unset($_SESSION['reg8log']['captcha_verified']);
 	return true;
 }
 
 $captcha_verified=false;
 
-if(!isset($_SESSION['captcha_hash'], $_POST['captcha'])) {
+if(!isset($_SESSION['reg8log']['captcha_hash'], $_POST['captcha'])) {
 	$err_msgs[]=$captcha_msg=func::tr('Sorry, you need to enter a security code.');
 	$captcha_err=true;
 }
