@@ -29,6 +29,8 @@ else {
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
+//config::$cc;
+
 //----------------------------------
 
 if($log_errors) {
