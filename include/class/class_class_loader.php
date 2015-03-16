@@ -15,7 +15,7 @@ class class_loader {
 			$x__index_file=ROOT.self::$index_file;
 			if(isset($_SESSION['reg8log']['class_index'])) self::$index=$_SESSION['reg8log']['class_index'];
 			else if(!isset($_SESSION['reg8log']['cant_use_class_index_file']) and file_exists($x__index_file)) {
-					//echo "reading index from file...\n";
+					echo "class loader: reading index from file...\n";
 					if(is_readable($x__index_file)) self::$index=$_SESSION['reg8log']['class_index']=include $x__index_file;
 					else self::report_index_file_error('Class index file not readable');
 			}
@@ -42,7 +42,7 @@ class class_loader {
 	
 	private static function update_index() {
 		
-		//echo "updating index...\n";
+		echo "class loader: updating index...\n";
 		
 		self::$index=array();
 		
