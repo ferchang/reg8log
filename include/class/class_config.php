@@ -4,30 +4,24 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 class config {
 
-	private $vars=array();
+	private static $vars=array();
 	
 	//=========================================================================
 	
-	public function __construct() {
+	public static function v($var_name) {
 		
-		foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
-		unset($filename, $tmp18, $username_php_re, $username_js_re);
-		foreach(get_defined_vars() as $name => $value) $this->vars[$name] = $value;
-		//echo '<pre>';
-		//print_r($vars);
-		//exit;
+		if(empty(self::$vars)) {
+			echo 'loading config vars...';
+			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
+			unset($filename, $tmp18, $username_php_re, $username_js_re);
+			foreach(get_defined_vars() as $name => $value) self::$vars[$name] = $value;
+		}
 		
-	}
-	
-	//=========================================================================
- 
-    public function __get($name) {
-
-		if(isset($this->vars[$name])) return $this->vars[$name];
-		else trigger_error("reg8log: class config: error: '$name' config variable not found!", E_USER_ERROR);
-
-	}
-	
+		if(isset(self::$vars[$var_name])) return self::$vars[$var_name];
+		else trigger_error("reg8log: class config: error: '$var_name' not found!", E_USER_ERROR);
+		
+    }
+		
 	//=========================================================================
 
 }
