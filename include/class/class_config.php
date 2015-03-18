@@ -38,7 +38,8 @@ class config {
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
-			foreach(self::$cache_method as $method) if($method==='sess' or !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache($method);
+			if(self::$cache_method[0]==='file' and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
+			if(self::$cache_method[0]==='sess' or isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('sess');
 		}
 		
 		if(isset(self::$vars[$var_name])) return self::$vars[$var_name];
