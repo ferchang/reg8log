@@ -21,7 +21,8 @@ ini_set('error_log', $error_log_file);
 
 require ROOT.'include/class/class_class_loader.php';
 
-//$config=new config;
+//echo config::v('account_block_threshold');
+//exit;
 
 //-----------------------------
 
