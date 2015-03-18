@@ -14,17 +14,20 @@ class config {
 		
 		foreach(self::$cache_method as $method) {
 			if($method==='file') {
+				if(isset($_SESSION['cant_use_config_cache_file'])) continue;
 				$cache_file=ROOT.self::$cache_file;
-				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid()) {
+				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						echo 'reading config vars from cache file...';
 						self::$vars=unserialize(file_get_contents($cache_file));
+						if(self::$cache_method[0]==='sess') self::update_cache('sess');
 						break;
 				}
 			}
 			else {
-				if(isset($_SESSION['config_cache']) and self::is_cache_valid()) {
+				if(isset($_SESSION['config_cache']) and self::is_cache_valid('sess')) {
 					echo 'reading config vars from session...';
 					self::$vars=$_SESSION['config_cache'];
+					if(self::$cache_method[0]==='file' and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
 					break;
 				}
 			}
@@ -35,7 +38,7 @@ class config {
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
-			if(!empty(self::$cache_method)) self::update_cache();
+			foreach(self::$cache_method as $method) if($method==='sess' or !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache($method);
 		}
 		
 		if(isset(self::$vars[$var_name])) return self::$vars[$var_name];
@@ -45,18 +48,14 @@ class config {
 		
 	//=========================================================================
 
-	private static function update_cache() {
-		foreach(self::$cache_method as $method) {
-			if($method==='file') {
-				$cache_file=ROOT.self::$cache_file;
-				if(!self::is_file_accessible($cache_file, 'write')) continue;
-				file_put_contents($cache_file, serialize(self::$vars));
-				break;
-			}
-			else {
-				$_SESSION['config_cache']=self::$vars;
-				break;
-			}
+	private static function update_cache($method) {
+		if($method==='file') {
+			$cache_file=ROOT.self::$cache_file;
+			if(self::is_file_accessible($cache_file, 'write')) file_put_contents($cache_file, serialize(self::$vars));
+		}
+		else {
+			$_SESSION['config_cache']=self::$vars;
+			$_SESSION['config_cache']['cache_time']=time();
 		}
 	}
 		
@@ -66,7 +65,11 @@ class config {
 		
 		switch($op) {
 			case 'read':
-				if(!file_exists($file) or !is_readable($file)) return false;
+				if(!file_exists($file)) return false;
+				if(!is_readable($file)) {
+					self::report_file_access_error('config cache file not readable');
+					return false;
+				}
 			break;
 			case 'write':
 				if(file_exists($file)) {
@@ -90,12 +93,20 @@ class config {
 	
 	private static function report_file_access_error($str) {
 		trigger_error("reg8log: class config: $str!", E_USER_NOTICE);
+		$_SESSION['cant_use_config_cache_file']=true;
 	}
 	
 	//=========================================================================
 	
-	private static function is_cache_valid() {
+	private static function is_cache_valid($method) {
+		
+		if($method==='file') $cache_time=filemtime(ROOT.self::$cache_file);
+		else $cache_time=$_SESSION['config_cache']['cache_time'];
+		
+		foreach(glob(ROOT.'include/config/config_*.php') as $filename) if(filemtime($filename)>$cache_time) return false;
+
 		return true;
+		
 	}
 	
 	//=========================================================================

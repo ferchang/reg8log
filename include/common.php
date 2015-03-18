@@ -19,10 +19,17 @@ ini_set('display_errors', '1');
 ini_set('log_errors', 1);
 ini_set('error_log', $error_log_file);
 
+//################
+
+session_name('reg8log_session');
+session_start();
+
 require ROOT.'include/class/class_class_loader.php';
 
-//echo config::v('account_block_threshold');
-//exit;
+echo config::v('account_block_threshold');
+exit;
+
+//################
 
 //-----------------------------
 
