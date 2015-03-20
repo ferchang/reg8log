@@ -27,6 +27,7 @@ session_start();
 require ROOT.'include/class/class_class_loader.php';
 
 echo config::v('account_block_threshold');
+
 exit;
 
 //################

@@ -7,6 +7,8 @@ class config {
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
 	private static $cache_file='file_store/config_cache.txt';
+	private static $cache_valid=false;
+	private static $cache_validation_interval=0;
 	
 	//=========================================================================
 	
@@ -100,11 +102,22 @@ class config {
 	
 	private static function is_cache_valid($method) {
 		
+		if(self::$cache_valid) return true;
+		if(
+			self::$cache_validation_interval
+			and isset($_SESSION['last_config_cache_validation'])
+			and (time()-$_SESSION['last_config_cache_validation'])<=self::$cache_validation_interval
+		  ) return true;
+		
+		echo 'proceeding with cache validation...';
+		
 		if($method==='file') $cache_time=filemtime(ROOT.self::$cache_file);
 		else $cache_time=$_SESSION['config_cache']['cache_time'];
 		
 		foreach(glob(ROOT.'include/config/config_*.php') as $filename) if(filemtime($filename)>$cache_time) return false;
-
+		
+		self::$cache_valid=true;
+		if(self::$cache_validation_interval) $_SESSION['last_config_cache_validation']=time();
 		return true;
 		
 	}
