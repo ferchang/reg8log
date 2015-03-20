@@ -288,3 +288,5 @@
 [18-Mar-2015 06:59:32 UTC] PHP Notice:  unserialize() [<a href='function.unserialize'>function.unserialize</a>]: Error at offset 0 of 3914 bytes in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_config.php on line 20
 [18-Mar-2015 07:55:55 UTC] PHP Notice:  Undefined variable: cache_method in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_config.php on line 21
 [18-Mar-2015 07:57:12 UTC] PHP Fatal error:  Call to undefined function update_cache() in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_config.php on line 21
+[20-Mar-2015 03:37:09 UTC] PHP Notice:  reg8log: class config: config cache file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_config.php on line 95
+[20-Mar-2015 03:38:23 UTC] PHP Notice:  reg8log: class config: config cache file not writable! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_config.php on line 95

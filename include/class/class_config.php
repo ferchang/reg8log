@@ -6,7 +6,7 @@ class config {
 
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
-	private static $cache_file='file_store/config_cache.php';
+	private static $cache_file='file_store/config_cache.txt';
 	
 	//=========================================================================
 	
@@ -27,7 +27,6 @@ class config {
 				if(isset($_SESSION['config_cache']) and self::is_cache_valid('sess')) {
 					echo 'reading config vars from session...';
 					self::$vars=$_SESSION['config_cache'];
-					if(self::$cache_method[0]==='file' and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
 					break;
 				}
 			}
@@ -38,8 +37,8 @@ class config {
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
-			if(self::$cache_method[0]==='file' and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
-			if(self::$cache_method[0]==='sess' or isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('sess');
+			if(in_array('file', self::$cache_method) and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
+			if(self::$cache_method[0]==='sess' or (in_array('sess', self::$cache_method) and isset($_SESSION['cant_use_config_cache_file']))) self::update_cache('sess');
 		}
 		
 		if(isset(self::$vars[$var_name])) return self::$vars[$var_name];
