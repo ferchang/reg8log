@@ -2,9 +2,12 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-$setup_page=true;
+define('SETUP_PAGE', true);
 
 require '../include/common.php';
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 $site_encr_key='ff'; //just to prevent func_encryption_with_site8client_keys.php from complaining!
 
@@ -80,6 +83,8 @@ $reg8log_db->query($query);
 $query="insert ignore into `dummy` (`i`) values (1)";
 $reg8log_db->query($query);
 
+require ROOT.'setup/include/check_file_permissions.php';
+
 echo '</h4><center><h3>', func::tr('Setup completed'), '.</h3>';
 echo '<a href="../index.php">', func::tr('Login page'), '</a></center>';
 
@@ -91,6 +96,7 @@ echo '</body></html>';
 
 unset($_SESSION['reg8log']['setup_key']);
 require ROOT.'include/code/sess/code_sess_destroy.php';
+
 exit;
 } while(false);
 

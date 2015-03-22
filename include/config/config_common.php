@@ -11,7 +11,7 @@ $lang='en';
 // Currently, only English (en) and Persian/Farsi (fa) are supported.
 
 $admin_emails_lang='';
-// Default language for admin email alerts
+// Default language for admin alert emails
 // if empty, $lang will be used.
 
 $log_errors=E_ALL;//set to E_ERROR, E_ALL, E_ERROR|E_WARNING, etc. set to false/0 to disable error logging

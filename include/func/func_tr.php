@@ -6,8 +6,6 @@ function tr($str, $add_direction=false, $force_lang='') {
 	
 	global $lang;
 	
-
-
 	static $fa_translations;
 	static $en_translations;
 

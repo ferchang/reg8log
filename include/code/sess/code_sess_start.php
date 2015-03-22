@@ -28,7 +28,7 @@ if(isset($_SESSION['reg8log_encrypted_session'])) {
 	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
-		if(!isset($setup_page)) {
+		if(!defined('SETUP_PAGE')) {
 			setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 			$failure_msg="Session decryption error!";
 			require ROOT.'include/page/page_failure.php';

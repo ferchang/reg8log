@@ -6,7 +6,7 @@ class config {
 
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
-	private static $cache_file='file_store/config_cache.txt';
+	private static $cache_file='file_store/config_cache.txt';//note: this file path is used in setup check_file_permissions.php too. if change it here, change there too.
 	private static $cache_valid=false;
 	private static $cache_validation_interval=0;
 	
@@ -20,6 +20,7 @@ class config {
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						echo 'reading config vars from cache file...';
+						unset($_SESSION['config_cache']);
 						self::$vars=unserialize(file_get_contents($cache_file));
 						if(self::$cache_method[0]==='sess') self::update_cache('sess');
 						break;
@@ -40,7 +41,10 @@ class config {
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
 			if(in_array('file', self::$cache_method) and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
-			if(self::$cache_method[0]==='sess' or (in_array('sess', self::$cache_method) and isset($_SESSION['cant_use_config_cache_file']))) self::update_cache('sess');
+			if(in_array('sess', self::$cache_method)) {
+				if(self::$cache_method[0]==='sess' or isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('sess');
+			} else unset($_SESSION['config_cache']);
+			
 		}
 		
 		if(isset(self::$vars[$var_name])) return self::$vars[$var_name];

@@ -13,7 +13,7 @@ $reg8log_db->query($query);
 $reg8log_db->auto_abort=true;
 
 if($reg8log_db->err_msg) {
-	if(!isset($setup_page)) {
+	if(!defined('SETUP_PAGE')) {
 		$failure_msg='site_vars fetch query failed!';
 		require ROOT.'include/page/page_failure.php';
 		exit;
@@ -24,7 +24,7 @@ if($reg8log_db->err_msg) {
 $num_recs=6;
 
 if($reg8log_db->result_num()!==$num_recs) {
-	if(!isset($setup_page)) {
+	if(!defined('SETUP_PAGE')) {
 		$failure_msg='<h3>Number of records in site_vars table is incorrect! <small>(Failed setup?)</small></h3>';
 		$no_specialchars=true;
 		require ROOT.'include/page/page_failure.php';

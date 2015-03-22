@@ -8,29 +8,7 @@ ob_start();
 
 define('ROOT', str_replace('/include', '', str_replace('\\', '/', __DIR__)).'/');
 
-require ROOT.'include/config/config_common.php';//TBR
-
-$error_log_file=ROOT.'file_store/error_log.txt';
-
-//-----------------------------
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-ini_set('log_errors', 1);
-ini_set('error_log', $error_log_file);
-
-//################
-
-session_name('reg8log_session');
-session_start();
-
-require ROOT.'include/class/class_class_loader.php';
-
-echo config::v('account_block_threshold');
-
-exit;
-
-//################
+require ROOT.'include/config/config_common.php';
 
 //-----------------------------
 
@@ -46,6 +24,7 @@ if($log_errors) {
 	if(!$debug_mode) error_reporting($log_errors);
 	//if debug_mode is on, error reporting level shouldn't be changed (it is set to E_ALL)
 	ini_set('log_errors', 1);
+	$error_log_file=ROOT.'file_store/error_log.txt';
 	ini_set('error_log', $error_log_file);
 	//ini_set('ignore_repeated_errors', 1);
 	//ini_set('ignore_repeated_source', 1);
@@ -80,6 +59,8 @@ else $client_sess_key='';
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
+require ROOT.'include/class/class_class_loader.php';
+
 if(!$client_sess_key) {
 	$client_sess_key=func::random_string(22);
 	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, HTTPS, true);
@@ -101,7 +82,7 @@ if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
 
 require ROOT.'include/code/code_gather_request_entropy.php';
 
-//---------- antixsrf_token ------------
+//---------- antixsrf_token ------------>
 
 if(!isset($_SESSION['reg8log']['antixsrf_token4post'])) {
 	$antixsrf_token=func::random_string(22);
@@ -113,10 +94,10 @@ if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 	$_SESSION['reg8log']['antixsrf_token4get']=$antixsrf_token;
 }
 
-//---------- antixsrf_token ------------
+//---------- antixsrf_token ------------<
 
 if(!$db_installed) {
-	if(isset($setup_page) or isset($change_lang_page)) return;
+	if(defined('SETUP_PAGE') or defined('CHANGE_LANG_PAGE')) return;
 	require ROOT.'include/page/page_not_setup.php';
 	exit;
 }
