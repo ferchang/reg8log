@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-class func {
+class func extends loader_base {
  
 	private static $index=array();
 	private static $index_file='file_store/function_index.php';
@@ -24,10 +24,9 @@ class func {
 			
 			$x__index_file=ROOT.self::$index_file;
 			if(isset($_SESSION['reg8log']['function_index'])) self::$index=$_SESSION['reg8log']['function_index'];
-			else if(!isset($_SESSION['reg8log']['cant_use_file_index_file']) and file_exists($x__index_file)) {
+			else if(!isset($_SESSION['reg8log']['class_func_file_access_error']) and self::is_file_accessible($x__index_file, 'read')) {
 					echo "function loader: reading index from file...\n";
-					if(is_readable($x__index_file)) self::$index=$_SESSION['reg8log']['function_index']=include $x__index_file;
-					else self::report_index_file_error('Function index file not readable');
+					self::$index=$_SESSION['reg8log']['function_index']=include $x__index_file;
 			}
 		}
 		
@@ -64,32 +63,16 @@ class func {
 		
 		$_SESSION['reg8log']['function_index']=self::$index;
 		
-		if(isset($_SESSION['reg8log']['cant_use_file_index_file'])) return;
+		if(isset($_SESSION['reg8log']['class_func_file_access_error'])) return;
 		
 		$index_file=ROOT.self::$index_file;
-		if(file_exists($index_file)) {
-			if(!is_writable($index_file)) {
-				self::report_index_file_error('Function index file not writable');
-				return;
-			}
-		}
-		else if(!is_writable(dirname($index_file))) {
-			self::report_index_file_error('Function index directory not writable');
-			return;
-		}
+		if(!self::is_file_accessible($index_file, 'write')) return;
 		
 		$out="<?php\nreturn array(\n";
 		foreach(self::$index as $key=>$value) $out.="	'$key'=>'$value',\n";
 		$out.=");\n?>";
 		file_put_contents($index_file, $out);
 	
-	}
-	
-	//=========================================================================
-	
-	private static function report_index_file_error($str) {
-		$_SESSION['reg8log']['cant_use_file_index_file']=true;
-		trigger_error("reg8log: class func: $str!", E_USER_NOTICE);
 	}
 	
 	//=========================================================================

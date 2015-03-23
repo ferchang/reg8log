@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-class config {
+class config extends loader_base {
 
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
@@ -16,7 +16,7 @@ class config {
 		
 		foreach(self::$cache_method as $method) {
 			if($method==='file') {
-				if(isset($_SESSION['cant_use_config_cache_file'])) continue;
+				if(isset($_SESSION['reg8log']['class_config_file_access_error'])) continue;
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						echo 'reading config vars from cache file...';
@@ -40,9 +40,9 @@ class config {
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
-			if(in_array('file', self::$cache_method) and !isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('file');
+			if(in_array('file', self::$cache_method) and !isset($_SESSION['reg8log']['class_config_file_access_error'])) self::update_cache('file');
 			if(in_array('sess', self::$cache_method)) {
-				if(self::$cache_method[0]==='sess' or isset($_SESSION['cant_use_config_cache_file'])) self::update_cache('sess');
+				if(self::$cache_method[0]==='sess' or isset($_SESSION['reg8log']['class_config_file_access_error'])) self::update_cache('sess');
 			} else unset($_SESSION['config_cache']);
 			
 		}
@@ -65,43 +65,6 @@ class config {
 		}
 	}
 		
-	//=========================================================================
-	
-	private static function is_file_accessible($file, $op) {
-		
-		switch($op) {
-			case 'read':
-				if(!file_exists($file)) return false;
-				if(!is_readable($file)) {
-					self::report_file_access_error('config cache file not readable');
-					return false;
-				}
-			break;
-			case 'write':
-				if(file_exists($file)) {
-					if(!is_writable($file)) {
-						self::report_file_access_error('config cache file not writable');
-						return false;
-					}
-				}
-				else if(!is_writable(dirname($file))) {
-					self::report_file_access_error('config cache directory not writable');
-					return false;
-				}
-			break;
-		}
-		
-		return true;
-		
-	}
-	
-	//=========================================================================
-	
-	private static function report_file_access_error($str) {
-		trigger_error("reg8log: class config: $str!", E_USER_NOTICE);
-		$_SESSION['cant_use_config_cache_file']=true;
-	}
-	
 	//=========================================================================
 	
 	private static function is_cache_valid($method) {

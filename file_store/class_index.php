@@ -9,6 +9,7 @@ return array(
 	'hm_cookie'=>'class_cookie.php',
 	'reg8log_db'=>'class_db.php',
 	'func'=>'class_function_loader.php',
+	'loader_base'=>'class_loader_base.php',
 	'hm_user'=>'class_user.php',
 );
 ?>
