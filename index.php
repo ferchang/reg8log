@@ -18,7 +18,6 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 	require ROOT.'include/code/code_prevent_xsrf.php';
 
 	if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
-
 	
 	$_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 	

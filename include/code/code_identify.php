@@ -2,9 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_identify.php';
-require_once ROOT.'include/func/func_random.php';
-
 unset($user);
 
 $user=new hm_user($identify_structs);

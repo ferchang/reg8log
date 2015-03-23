@@ -92,7 +92,7 @@ function identify($username=null, $password=null)
 				
 				if($this->user_info['username']=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 				if($change_autologin_key_upon_login) {
-					$new_autologin_key=random_string(43);
+					$new_autologin_key=func::random_string(43);
 					$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$tmp7.' limit 1';
 					$reg8log_db->query($query);
 					$this->user_info['autologin_key']=$new_autologin_key;
@@ -214,7 +214,7 @@ function identify($username=null, $password=null)
 		$this->autologin_cookie_expiration=$cookie->values[$key+1];
 		if($this->user_info['username']=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
 		if($change_autologin_key_upon_login==2) {
-			$new_autologin_key=random_string(43);
+			$new_autologin_key=func::random_string(43);
 			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `auto`=".$this->user_info['auto'].' limit 1';
 			$reg8log_db->query($query);
 			$this->user_info['autologin_key']=$new_autologin_key;
