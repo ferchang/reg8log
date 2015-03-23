@@ -8,9 +8,7 @@ if(!$log_non_existent_accounts_blocks and !$username_exists) return;
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require_once ROOT.'include/func/func_inet.php';
-
-$ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip, $account_block_threshold)";
 

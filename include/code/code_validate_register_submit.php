@@ -2,8 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_yeh8kaaf.php';
-fix_yeh8kaaf($_POST['username']);
+$_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 
 foreach($fields as $field_name=>$specs) {//validate post data
 
@@ -15,8 +14,8 @@ if($field_name=='password' and (strpos($_POST[$field_name], "hashed-$site_salt")
 		$password_error=true;
 	}
 	else if(strpos($_POST[$field_name], "encrypted-$site_salt")===0) {
-		require_once ROOT.'include/func/func_site8client_keys_hmac_verifier.php';
-		if(!verify_hmac(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)))) {
+		
+		if(!func::verify_hmac(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)))) {
 			$err_msgs[]=func::tr('error in password decryption!');
 			$password_error=true;
 		}
@@ -42,9 +41,9 @@ $field_value=$_POST[$field_name];
 
 $fields[$field_name]['value']=$field_value;
 
-if(utf8_strlen($field_value)<$min_length)
+if(func::utf8_strlen($field_value)<$min_length)
 $err_msgs[]=func::tr($field_name).sprintf(func::tr(' is shorter than %d characters!'), $min_length);
-else if(utf8_strlen($field_value)>$max_length)
+else if(func::utf8_strlen($field_value)>$max_length)
 $err_msgs[]=func::tr($field_name).sprintf(func::tr(' is longer than %d characters!'), $max_length);
 else if($re and $field_value!=='' and !preg_match($re, $field_value))
 $err_msgs[]=func::tr($field_name).func::tr(' is invalid!');

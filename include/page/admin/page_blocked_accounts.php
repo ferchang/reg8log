@@ -166,8 +166,6 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_SESSION['reg8log']['antixsrf_token4post'];
 echo '">';
 
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
@@ -240,8 +238,6 @@ echo '</tr>';
 
 require ROOT.'include/config/config_brute_force_protection.php';
 
-require_once ROOT.'include/func/func_inet.php';
-
 $i=0;
 $r=false;
 while($rec=$reg8log_db->fetch_row()) {
@@ -254,9 +250,9 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>', ($rec['username_exists'])? func::tr('Yes') : func::tr('No'), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
-	echo '<td>', inet_ntop2($rec['last_ip']), '</td>';
+	echo '<td>', func::duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::inet_ntop2($rec['last_ip']), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
 		echo '<span style="color: blue" title="', func::tr('Unblocked by admin'), '">', func::tr('Unblocked'), '</span>';
@@ -274,7 +270,7 @@ while($rec=$reg8log_db->fetch_row()) {
 
 	) {
 		echo '<span style="color: red" ';
-		echo 'title="', func::tr('Block lift'), ': ', duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
+		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
 		echo '">', func::tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['ext'.$rec['ext_auto']]))? ' checked ' : ''), '></td>';
 		$currently_blocked=true;

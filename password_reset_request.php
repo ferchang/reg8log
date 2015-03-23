@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 require 'include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
@@ -72,7 +70,7 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $username=$reg8log_db->quote_smart($rec['username']);
 $emails_sent=1;
-$key=random_string(22);
+$key=func::random_string(22);
 $timestamp=$req_time;
 $email=$reg8log_db->quote_smart($email);
 

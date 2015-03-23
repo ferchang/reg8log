@@ -30,7 +30,6 @@ if(isset($password_check_needed)) echo 'password_exists=true;';
 else echo 'password_exists=false;';
 ?>
 
-
 var del_all_toggle_stat=false;
 var unblock_all_toggle_stat=false;
 
@@ -166,8 +165,6 @@ echo '<input type="hidden" name="antixsrf_token" value="';
 echo $_SESSION['reg8log']['antixsrf_token4post'];
 echo '">';
 
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-
 echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
@@ -228,8 +225,6 @@ echo '</tr>';
 
 require ROOT.'include/config/config_brute_force_protection.php';
 
-require_once ROOT.'include/func/func_inet.php';
-
 $i=0;
 $r=false;
 while($rec=$reg8log_db->fetch_row()) {
@@ -240,9 +235,9 @@ while($rec=$reg8log_db->fetch_row()) {
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
-	echo '<td>', inet_ntop2($rec['ip']), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
-	echo '<td>', duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::inet_ntop2($rec['ip']), '</td>';
+	echo '<td>', func::duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
 	echo '<td>', htmlspecialchars($rec['last_username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
@@ -261,7 +256,7 @@ while($rec=$reg8log_db->fetch_row()) {
 
 		) {
 		echo '<span style="color: red" ';
-		echo 'title="', func::tr('Block lift'), ': ', duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
+		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str($ip_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
 		echo '">', func::tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['un'.$rec['auto']]))? ' checked ' : ''), '></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';

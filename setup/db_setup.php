@@ -17,14 +17,10 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 $encrypt_session_files_contents=false;
 
-require ROOT.'include/code/sess/code_sess_start.php';
-
-require_once ROOT.'include/func/func_random.php';
-
 $file_contents=file_get_contents('setup.txt');
 
 if(empty($_SESSION['reg8log']['setup_key']) or strpos($file_contents, $_SESSION['reg8log']['setup_key'])===false) {
-	$setup_key=random_string(22);
+	$setup_key=func::random_string(22);
 	$_SESSION['reg8log']['setup_key']=$setup_key;
 	require ROOT.'setup/include/page_setup_form1.php';
 	exit;
@@ -36,7 +32,7 @@ require ROOT.'include/code/code_fetch_site_vars.php';
 
 if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
 else {
-	$site_salt=random_string(22);
+	$site_salt=func::random_string(22);
 	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, HTTPS, true);
 }
 

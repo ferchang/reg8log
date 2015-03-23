@@ -7,7 +7,7 @@ if(strtolower($_username)=='admin') $change_autologin_key_upon_new_password=$adm
 
 if($change_autologin_key_upon_new_password) {
 
-	$new_autologin_key=random_string(43);
+	$new_autologin_key=func::random_string(43);
 
 	$query='update `accounts` set `password_hash`='.$reg8log_db->quote_smart(bcrypt::hash($_POST['newpass'])).", `autologin_key`='$new_autologin_key'".' where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
 

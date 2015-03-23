@@ -3,8 +3,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 require 'include/common.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
@@ -27,8 +25,8 @@ if($change_autologin_key_upon_logout) {
 		else if(isset($banned_user)) $tmp36=$reg8log_db->quote_smart($banned_user);
 		else $tmp36=$reg8log_db->quote_smart($logged_out_user);
 		require_once ROOT.'include/code/code_db_object.php';
-		require_once ROOT.'include/func/func_random.php';
-		$new_autologin_key=random_string(43);
+		
+		$new_autologin_key=func::random_string(43);
 		$query="update `accounts` set `autologin_key`='$new_autologin_key'";
 		if(isset($flag)) $query.=', `last_activity`='.$req_time;
 		if($log_last_logout) $query.=', `last_logout`='.$req_time;

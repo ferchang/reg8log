@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 $store_request_entropy_probability2=1;
 
 require 'include/common.php';
@@ -27,8 +25,7 @@ if(isset($_POST['username']) and isset($_POST['password'])) {//1
 
 require ROOT.'include/code/code_prevent_repost.php';
 
-require_once ROOT.'include/func/func_yeh8kaaf.php';
-fix_yeh8kaaf($_POST['username']);
+$_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 	
 if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 

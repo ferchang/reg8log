@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
-
 function shutdown_session() {
 
 if(empty($_SESSION)) return;
@@ -29,7 +27,7 @@ if($encrypt_session_files_contents) {
 	else {
 		$session1=$_SESSION['reg8log'];
 		unset($_SESSION['reg8log']);
-		$_SESSION['reg8log_encrypted_session']=encrypt(serialize($session1));
+		$_SESSION['reg8log_encrypted_session']=func::encrypt(serialize($session1));
 	}
 }
 else unset($_SESSION['reg8log_encrypted_session']);

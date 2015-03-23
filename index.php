@@ -19,8 +19,8 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 
 	if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
-	require_once ROOT.'include/func/func_yeh8kaaf.php';
-	fix_yeh8kaaf($_POST['username']);
+	
+	$_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 	
 	$manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 

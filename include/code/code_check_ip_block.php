@@ -42,9 +42,7 @@ if($ip_captcha_threshold==0) {
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require_once ROOT.'include/func/func_inet.php';
-
-$ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query="select count(*) as `n` from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip and `timestamp`>=".($req_time-$ip_block_period);
 $reg8log_db->query($query);

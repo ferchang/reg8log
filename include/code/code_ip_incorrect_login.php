@@ -17,9 +17,7 @@ if($ip_block_threshold==-1 and $ip_captcha_threshold==-1) return;
 
 if(isset($identified_user) or isset($pending_user) or isset($banned_user)) return;
 
-require_once ROOT.'include/func/func_inet.php';
-
-$ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 if($ip_block_threshold!=-1 and $ip_incorrect_count+1>=$ip_block_threshold) {
 	$_username2=$_POST['username'];

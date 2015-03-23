@@ -9,6 +9,7 @@ return array(
 	'get_relative_root_path'=>'func_get_relative_root_path.php',
 	'inet_pton2'=>'func_inet.php',
 	'inet_ntop2'=>'func_inet.php',
+	'fix_kaaf8yeh'=>'func_kaaf8yeh.php',
 	'my_exit'=>'func_my_exit.php',
 	'crypt_random'=>'func_random.php',
 	'random_bytes'=>'func_random.php',
@@ -17,6 +18,5 @@ return array(
 	'verify_hmac'=>'func_site8client_keys_hmac_verifier.php',
 	'tr'=>'func_tr.php',
 	'utf8_strlen'=>'func_utf8.php',
-	'fix_yeh8kaaf'=>'func_yeh8kaaf.php',
 );
 ?>

@@ -93,8 +93,8 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/pag
 <?php echo func::tr('Check your email carefully msg'); ?>
 <?php
 if($max_password_reset_emails!=-1) {
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-$period_msg=duration2friendly_str($password_reset_period, 0);
+
+$period_msg=func::duration2friendly_str($password_reset_period, 0);
 echo '<hr width="90%">', sprintf(func::tr('Max password reset emails msg'), $period_msg, $max_password_reset_emails);
 }
 ?>

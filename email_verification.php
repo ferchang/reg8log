@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 require 'include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
@@ -58,9 +56,9 @@ $query="update `pending_accounts` set `email_verified`=1 where `record_id`=$rid 
 $reg8log_db->query($query);
 
 if(!$rec['admin_confirmed']) {
-  require_once ROOT.'include/func/func_duration2friendly_str.php';
+  
   require ROOT.'include/code/code_set_submitted_forms_cookie.php';
-  $success_msg='<h3>'.sprintf(func::tr('email verified - waiting admin msg'), duration2friendly_str($admin_confirmation_time, 0)).'.</h3>';
+  $success_msg='<h3>'.sprintf(func::tr('email verified - waiting admin msg'), func::duration2friendly_str($admin_confirmation_time, 0)).'.</h3>';
   $no_specialchars=true;
   require ROOT.'include/page/page_success.php';
 }

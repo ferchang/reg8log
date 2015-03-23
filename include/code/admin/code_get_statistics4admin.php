@@ -29,7 +29,6 @@ $query="select count(*) from `pending_accounts` where (`email_verification_key`!
 
 $pending_accounts4email=$reg8log_db->count_star($query);
 
-
 //---------------
 
 $query="select count(*) from `account_block_log`";

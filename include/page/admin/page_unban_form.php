@@ -138,13 +138,13 @@ if($rec['gender']=='n') echo '?';
 else if($rec['gender']=='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-echo '<td>', duration2friendly_str($req_time-$rec['timestamp']), '</td>';
+
+echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 echo '</tr></table><br></td></tr><tr><td >';
 if($ban_reason!=='') echo func::tr('Ban reason'), ': <span style="color: #8fd;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span><br>';
 if($ban_until!=1) {
-	require_once ROOT.'include/func/func_duration2friendly_str.php';
-	echo func::tr('Ban until'), ':  <span style="color: #8fd;">', duration2friendly_str($ban_until-$req_time, 2), '</span> ', func::tr(' later'), '.';
+	
+	echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::duration2friendly_str($ban_until-$req_time, 2), '</span> ', func::tr(' later'), '.';
 }
 else echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::tr('unlimited'), '.</span>';
 echo '<br><br></td></tr>';
@@ -157,7 +157,7 @@ echo '<tr><td><table width=100% style="background: #aaa; padding-top: 5px">';
 if(isset($password_check_needed)) {
 	echo '<tr><td>';
 	echo func::tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
-	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
+	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', func::duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
 	echo '</td></tr>';
 }
 

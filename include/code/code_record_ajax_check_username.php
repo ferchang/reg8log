@@ -4,9 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(!$max_ajax_check_usernames) return;
 
-require_once ROOT.'include/func/func_inet.php';
-
-$ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.$req_time.')';
 

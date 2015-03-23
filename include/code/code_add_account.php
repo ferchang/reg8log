@@ -4,13 +4,11 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require_once ROOT.'include/func/func_random.php';
-
 $table_name='accounts';
 $field_name='uid';
 require ROOT.'include/code/code_generate_unique_random_id.php';
 
-$autologin_key=random_string(43);
+$autologin_key=func::random_string(43);
 
 if($_POST['password']!=='') 
 $fields['password']['value']=bcrypt::hash($_POST['password']);

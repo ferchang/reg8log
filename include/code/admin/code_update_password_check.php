@@ -7,8 +7,8 @@ if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['
 
 if($admin_operations_require_password>1) {
 	if(!isset($password_check_needed) or isset($_POST['remember'])) {
-		require_once ROOT.'include/func/func_random.php';
-		$password_check_key=random_string(22);
+		
+		$password_check_key=func::random_string(22);
 		$query='update `admin` set ';
 		if(isset($password_check_needed)) $query.="`last_password_check`=$req_time, ";
 		$query.="`password_check_key`='$password_check_key' limit 1";

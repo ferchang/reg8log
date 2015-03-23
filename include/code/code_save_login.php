@@ -2,8 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_autologin_ages.php';
-$autologin_ages=get_autologin_ages();
+$autologin_ages=func::get_autologin_ages();
 
 if(isset($_POST['autologin_age'])) {
 	if(!in_array($_POST['autologin_age'], $autologin_ages)) {

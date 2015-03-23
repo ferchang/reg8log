@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 $ban_page=true;
 
 $store_request_entropy_probability2=1;
@@ -27,8 +25,7 @@ do {//1
 
 	if(isset($err_msgs)) break;
 
-	require_once ROOT.'include/func/func_yeh8kaaf.php';
-	fix_yeh8kaaf($_POST['user']);
+	$_POST['user']=func::fix_kaaf8yeh($_POST['user']);
 
 	require_once ROOT.'include/code/code_db_object.php';
 

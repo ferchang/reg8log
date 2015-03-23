@@ -158,8 +158,8 @@ if($rec['gender']=='n') echo '?';
 else if($rec['gender']=='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-echo '<td>', duration2friendly_str($req_time-$rec['timestamp']), '</td>';
+
+echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 ?>
 </tr></table><br>
 </td></tr>
@@ -188,7 +188,7 @@ if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checke
 if(isset($password_check_needed)) {
 	echo '<tr><td>';
 	echo func::tr('Admin password'), ': <input type="password" name="password" size=15>&nbsp;';
-	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
+	if($admin_operations_require_password>1) echo '&nbsp;', func::tr('Remember'), ': <input type=checkbox style="vertical-align: middle" name=remember title="', func::tr('Remember for'), ' ', func::duration2friendly_str($admin_operations_require_password, 0), '"', ((isset($_POST['remember']))? ' checked ' : ' '), '>';
 	echo '</td></tr>';
 }
 

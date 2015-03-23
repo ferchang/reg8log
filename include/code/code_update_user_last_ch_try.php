@@ -39,8 +39,8 @@ if($req_time-$trec['last_ch_pswd_try']>$account_block_period) {
 		if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 	}
 	if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=1) {
-		require_once ROOT.'include/func/func_random.php';
-		$new_autologin_key=random_string(43);
+		
+		$new_autologin_key=func::random_string(43);
 		$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
 		$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
@@ -67,8 +67,8 @@ if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=$ch_pswd_tries
 }
 
 if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=$ch_pswd_tries) {
-	require_once ROOT.'include/func/func_random.php';
-	$new_autologin_key=random_string(43);
+	
+	$new_autologin_key=func::random_string(43);
 	$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';

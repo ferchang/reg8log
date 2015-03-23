@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_random.php';
-
 $autos='';
 $i=0;
 foreach($appr as $auto) {
@@ -43,7 +41,7 @@ foreach($appr as $auto) {
 	$field_name='uid';
 	require ROOT.'include/code/code_generate_unique_random_id.php';
 
-	$autologin_key=random_string(43);
+	$autologin_key=func::random_string(43);
 
 	$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`';
 

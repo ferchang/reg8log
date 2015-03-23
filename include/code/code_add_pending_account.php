@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require_once ROOT.'include/func/func_random.php';
-
 if($_POST['password']!=='') 
 $fields['password']['value']=bcrypt::hash($_POST['password']);
 
@@ -26,7 +24,7 @@ foreach($fields as $field_name=>$specs) {
   $field_values.=', ';
 }
 
-if($email_verification_needed) $email_verification_key=random_string(22);
+if($email_verification_needed) $email_verification_key=func::random_string(22);
 else $email_verification_key='';
 
 if($admin_confirmation_needed) $admin_confirmed=0;
@@ -50,12 +48,12 @@ unset($_SESSION['reg8log']['captcha_verified'], $_SESSION['reg8log']['passed']);
 
 if($email_verification_needed) {
   require ROOT.'include/code/email/code_email_verification_link.php';
-  require_once ROOT.'include/func/func_duration2friendly_str.php';
-  $success_msg=sprintf(func::tr('account activation email sent msg'), duration2friendly_str($email_verification_time, 0));
+  
+  $success_msg=sprintf(func::tr('account activation email sent msg'), func::duration2friendly_str($email_verification_time, 0));
 }
 else if($admin_confirmation_needed) {
-  require_once ROOT.'include/func/func_duration2friendly_str.php';
-  $success_msg=sprintf(func::tr('pending for admin confirmation msg'), duration2friendly_str($admin_confirmation_time, 0));
+  
+  $success_msg=sprintf(func::tr('pending for admin confirmation msg'), func::duration2friendly_str($admin_confirmation_time, 0));
 }
 
 $no_specialchars=true;

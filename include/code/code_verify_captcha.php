@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_captcha.php';
-
 require_once ROOT.'include/config/config_register_fields.php';
 
 $captcha_format=$fields['captcha'];
@@ -38,7 +36,7 @@ else if($captcha_format['php_re'] and !preg_match($captcha_format['php_re'], $_P
 	$err_msgs[]=func::tr('Security code contains invalid characters!');
 	$captcha_err=true;
 }
-else if(!captcha_verify_word()) {
+else if(!func::captcha_verify_word()) {
 	$err_msgs[]=func::tr('The security code was incorrect!');
 	$captcha_err=true;
 }

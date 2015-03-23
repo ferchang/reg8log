@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 require 'include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
@@ -37,7 +35,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 
 	require ROOT.'include/code/code_prevent_xsrf.php';
 
-	require_once ROOT.'include/func/func_utf8.php';
+	
 	
 	if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/code_verify_captcha.php';
 	
@@ -58,8 +56,8 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 		}
 	}
 	
-	if(utf8_strlen($_POST['newemail'])<$email_format['minlength']) $err_msgs[]=sprintf(func::tr('new email is shorter than2'), $email_format['minlength']);
-	else if(utf8_strlen($_POST['newemail'])>$email_format['maxlength'])	$err_msgs[]=sprintf(func::tr('new email is longer than2'), $email_format['maxlength']);
+	if(func::utf8_strlen($_POST['newemail'])<$email_format['minlength']) $err_msgs[]=sprintf(func::tr('new email is shorter than2'), $email_format['minlength']);
+	else if(func::utf8_strlen($_POST['newemail'])>$email_format['maxlength'])	$err_msgs[]=sprintf(func::tr('new email is longer than2'), $email_format['maxlength']);
 	else if($email_format['php_re'] and $_POST['newemail']!=='' and !preg_match($email_format['php_re'], $_POST['newemail'])) $err_msgs[]=func::tr('New email is invalid!');
 	else if($_POST['newemail']!==$_POST['reemail']) $err_msgs[]=func::tr('email fields aren\'t match!');
 	else if(!isset($err_msgs)) {
@@ -87,15 +85,15 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 		}
 		//---------------
 		require ROOT.'include/code/code_add_change_email_request.php';
-		require_once ROOT.'include/func/func_duration2friendly_str.php';
+		
 		if(isset($max_emails_reached)) {
-			if($lang=='fa') $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), duration2friendly_str($verification_time, 0), $max_emails).'.</h3>';
-			else $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), $max_emails, duration2friendly_str($verification_time, 0)).'.</h3>';
+			if($lang=='fa') $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), func::duration2friendly_str($verification_time, 0), $max_emails).'.</h3>';
+			else $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), $max_emails, func::duration2friendly_str($verification_time, 0)).'.</h3>';
 			$no_specialchars=true;
 			require ROOT.'include/page/page_failure.php';
 			exit;
 		}
-		$success_msg='<h3>'.sprintf(func::tr('verification email sent msg3'), $_POST['newemail'], duration2friendly_str($verification_time, 0)).'.</h3>';
+		$success_msg='<h3>'.sprintf(func::tr('verification email sent msg3'), $_POST['newemail'], func::duration2friendly_str($verification_time, 0)).'.</h3>';
 		$no_specialchars=true;
 		require ROOT.'include/page/page_success.php';
 		exit;

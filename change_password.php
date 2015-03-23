@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 require 'include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
@@ -34,7 +32,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 	require ROOT.'include/code/code_prevent_xsrf.php';
 
-	require_once ROOT.'include/func/func_utf8.php';
+	
 
 	if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/code_verify_captcha.php';
 	
@@ -56,11 +54,11 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 	}
 
 	if(strpos($_POST['newpass'], "hashed-$site_salt")!==0 and strpos($_POST['newpass'], "encrypted-$site_salt")!==0) {
-		if(utf8_strlen($_POST['newpass'])<$password_format['minlength']) {
+		if(func::utf8_strlen($_POST['newpass'])<$password_format['minlength']) {
 			$err_msgs[]=sprintf(func::tr('new password is shorter than'), $password_format['minlength']);
 			$password_error=true;
 		}
-		else if(utf8_strlen($_POST['newpass'])>$password_format['maxlength']) {
+		else if(func::utf8_strlen($_POST['newpass'])>$password_format['maxlength']) {
 			$err_msgs[]=sprintf(func::tr('new password is longer than'), $password_format['maxlength']);
 			$password_error=true;
 		}
@@ -79,8 +77,8 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 			$password_error=true;
 		}
 		else if(strpos($_POST['newpass'], "encrypted-$site_salt")===0) {
-			require_once ROOT.'include/func/func_site8client_keys_hmac_verifier.php';
-			if(!verify_hmac(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)))) {
+			
+			if(!func::verify_hmac(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)))) {
 				$err_msgs[]=func::tr('error in password decryption!');
 				$password_error=true;
 			}
@@ -89,8 +87,8 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 	if(!isset($err_msgs)) {
 		if(strpos($_POST['newpass'], "encrypted-$site_salt")===0) {
-			require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
-			$_POST['newpass']=decrypt(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)));
+			
+			$_POST['newpass']=func::decrypt(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)));
 		}
 		else if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
 		$_username=$identified_user;

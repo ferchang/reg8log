@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 $store_request_entropy_probability2=1;
 // I set store_request_entropy_probability2 to 1 on this page, because this page contains the register form and thus its requests have precious entropy (passwords, usernames, ...). Also the traffic on this page is only a tiny fraction of all of the site traffic and thus its entropy update queries contribute to the database overload proportionally less.
 // note: this variable must be set before including common.php, because code_gather_request_entropy.php is included in common.php.
@@ -36,12 +34,9 @@ if(!empty($_POST)) {//Post data (registration fields values) is received
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-require_once ROOT.'include/func/func_utf8.php';
-require_once ROOT.'include/func/func_random.php';
-
 if(isset($_COOKIE['reg8log_register_sess_salt'])) $session_salt=$_COOKIE['reg8log_register_sess_salt'];
 else {
-	$session_salt=random_string(22);
+	$session_salt=func::random_string(22);
 	setcookie('reg8log_register_sess_salt', $session_salt, 0, '/', null, HTTPS, true);
 }
 
@@ -51,8 +46,8 @@ if($err_msgs) require ROOT.'include/page/page_register_form.php';
 else {//Data validated
 
 if(strpos($_POST['password'], "encrypted-$site_salt")===0) {
-	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
-	$_POST['password']=decrypt(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)));
+	
+	$_POST['password']=func::decrypt(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)));
 }
 else if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 

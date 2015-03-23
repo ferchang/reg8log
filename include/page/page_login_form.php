@@ -39,8 +39,6 @@ else echo "<script>\nfunction check_admin(val) { }\n</script>\n";
 
 //--------------------------------------------------------------
 
-require_once ROOT.'include/func/func_duration2friendly_str.php';
-
 echo '<script>';
 
 $str='<select name=autologin_age ';
@@ -49,7 +47,7 @@ $str.='>';
 foreach($autologin_ages as $value) {
 	$str.="<option value=$value style='text-align: center'>";
 	if($value==0) $str.=func::tr('Browser session');
-	else $str.=duration2friendly_str($value, 0);
+	else $str.=func::duration2friendly_str($value, 0);
 }
 echo "\nautologin_ages_select_html=\"$str</select>\";";
 
@@ -59,7 +57,7 @@ $str.='>';
 foreach($admin_autologin_ages as $value) {
 	$str.="<option value=$value style='text-align: center'>";
 	if($value==0) $str.=func::tr('Browser session');
-	else $str.=duration2friendly_str($value, 0);
+	else $str.=func::duration2friendly_str($value, 0);
 }
 echo "\nadmin_autologin_ages_select_html=\"$str</select>\";\n";
 
@@ -288,8 +286,7 @@ echo '</td></tr>';
 <select name=autologin_age 
 <?php
 
-require_once ROOT.'include/func/func_autologin_ages.php';
-$autologin_ages=get_autologin_ages();
+$autologin_ages=func::get_autologin_ages();
 
 if(count($autologin_ages)==1) echo ' disabled >';
 else echo ' >';
@@ -297,7 +294,7 @@ else echo ' >';
 if(count($autologin_ages)==1) {
 	echo "<option value={$autologin_ages[0]}>";
 	if($autologin_ages[0]==0) echo func::tr('Browser session');
-	else echo duration2friendly_str($autologin_ages[0], 0);
+	else echo func::duration2friendly_str($autologin_ages[0], 0);
 }
 else {
 	foreach($autologin_ages as $value) {
@@ -305,7 +302,7 @@ else {
 		if(isset($_POST['autologin_age']) and $value==$_POST['autologin_age']) echo ' selected ';
 		echo '>';
 		if($value==0) echo func::tr('Browser session');
-		else echo duration2friendly_str($value, 0);
+		else echo func::duration2friendly_str($value, 0);
 	}
 }
 
@@ -352,8 +349,8 @@ echo '</td></tr>';
 <tr align="center"><td colspan="3"><br><a href="password_reset_request.php" ><?php echo func::tr('Forgot password/username'); ?></a><br><br></td></tr>
 <?php
 if(isset($err_msg) and $account_block_threshold!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
-	require_once ROOT.'include/func/func_duration2friendly_str.php';
-	$account_block_period_msg=duration2friendly_str($account_block_period, 0);
+	
+	$account_block_period_msg=func::duration2friendly_str($account_block_period, 0);
 	$tmp20=$account_block_threshold-$incorrect_attempts;
 	echo '<tr ><td colspan="3"  style="border: solid thin yellow; font-style: italic">';
 	echo "<span style=\"color: #a32\" >", sprintf(func::tr('login limit warning'), $account_block_threshold, $account_block_period_msg, $account_block_period_msg, $incorrect_attempts, $tmp20), "</span>";

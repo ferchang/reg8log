@@ -24,7 +24,7 @@ if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;
 	if($encrypt_session_files_contents) $session0=$_SESSION['reg8log_encrypted_session'];
 	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
-	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
+	$tmp5=unserialize(func::decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
 		if(!defined('SETUP_PAGE')) {
 			setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);

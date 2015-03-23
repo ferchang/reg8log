@@ -10,9 +10,7 @@ $tmp34=explode(',', $_COOKIE['reg8log_ajax_check_usernames']);
 
 foreach($tmp34 as $auto) if(!is_numeric($auto)) return;
 
-require_once ROOT.'include/func/func_inet.php';
-
-$ip=$reg8log_db->quote_smart(inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query='delete from `ajax_check_usernames` where `auto` in ('.$_COOKIE['reg8log_ajax_check_usernames'].') and `ip`='.$ip.' limit '.$max_ajax_check_usernames;
 

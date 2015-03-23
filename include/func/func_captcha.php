@@ -23,7 +23,7 @@ It's up to you, turn it to false if you don't like it. */
 $captcha_show_credits = false;
 
 #########################################################################
-/* captcha_show_image() - outputs the image to browser and stores a CAPTCHA word in a cookie or a session file. */
+/* func::captcha_show_image() - outputs the image to browser and stores a CAPTCHA word in a cookie or a session file. */
 function captcha_show_image() {
 	
 	global $session1;
@@ -132,7 +132,7 @@ $_SESSION['reg8log']['captcha_hash'] = hash('sha256', $GLOBALS['pepper'].$site_p
 
 }
 
-/* captcha_verify_word() - verifies a word. Returns 'true' or 'false'. */
+/* func::captcha_verify_word() - verifies a word. Returns 'true' or 'false'. */
 function captcha_verify_word() {
 	
 	global $session1;

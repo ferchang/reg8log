@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
-
-
 $store_request_entropy_probability2=1;
 
 require 'include/common.php';
@@ -50,12 +48,10 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-require_once ROOT.'include/func/func_utf8.php';
-
 if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
-	if(utf8_strlen($_POST['newpass'])<$password_format['minlength'])
+	if(func::utf8_strlen($_POST['newpass'])<$password_format['minlength'])
 	$err_msgs[]=sprintf(func::tr('new password is shorter than'), $password_format['minlength']);
-	else if(utf8_strlen($_POST['newpass'])>$password_format['maxlength'])
+	else if(func::utf8_strlen($_POST['newpass'])>$password_format['maxlength'])
 	$err_msgs[]=sprintf(func::tr('new password is longer than'), $password_format['maxlength']);
 	else if($password_format['php_re'] and $_POST['newpass']!=='' and !preg_match($password_format['php_re'], $_POST['newpass']))
 	$err_msgs[]=func::tr('New password is invalid!');
