@@ -215,6 +215,7 @@ xhr.open('POST', 'ajax/check_username_availability.php', true);
 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 xhr.onreadystatechange=function() {
+	//alert(xhr.responseText);
 	if(xhr.readyState == 4) if(xhr.status == 200) {
 	if(xhr.responseText=='y') {
 		report('<?php echo func::tr('Not available!'); ?>', 'orange');

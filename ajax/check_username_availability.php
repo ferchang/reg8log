@@ -4,7 +4,7 @@ define('CAN_INCLUDE', true);
 
 
 
-require_once ROOT.'include/common.php';
+require_once '../include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 
