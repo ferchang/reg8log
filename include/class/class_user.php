@@ -242,19 +242,10 @@ function identify($username=null, $password=null)
 function logout()
 {
 
-	
-	
-	
-
 	$this->err_msg='';
 
 	setcookie('reg8log_autologin', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 	setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);
-
-	if(isset($_COOKIE['reg8log_session'])) {//session cookie exists
-		require ROOT.'include/code/sess/code_sess_start.php';
-		require ROOT.'include/code/sess/code_sess_destroy.php';
-	}//session cookie exists
 
 	if($this->err_msg) return false;
 
@@ -264,8 +255,6 @@ function logout()
 //=======================================
 function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false)
 {
-
-	
 	
 	global $req_time;
 	global $site_key2;
