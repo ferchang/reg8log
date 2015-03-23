@@ -1,0 +1,5 @@
+List of function files that are loaded manually in some files:
+
+- func_encryption_with_site8client_keys.php => code_sess_start.php
+
+if u change these function files, u must update those manual includes too.

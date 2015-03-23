@@ -1,0 +1,7 @@
+List of config files that are loaded manually in some files:
+
+- config_common.php => common.php
+- config_identify.php => code_sess_start.php
+- config_crypto.php => code_sess_start.php
+
+if u change these config files, u must update those manual includes too.

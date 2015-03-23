@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 class loader_base {
 
-	protected static $file_error_sess_var='xxxx';
-
 	//=========================================================================
 	
 	protected static function is_file_accessible($file, $op) {
