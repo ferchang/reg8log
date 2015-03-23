@@ -1,0 +1,58 @@
+[23-Mar-2015 05:39:39 UTC] PHP Fatal error:  reg8log: class class_loader: error: 'Crypt_AES' class file not found! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 26
+[23-Mar-2015 05:43:16 UTC] PHP Fatal error:  reg8log: class class_loader: error: 'hm_cookie' class file not found! in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 26
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 14
+[23-Mar-2015 05:46:01 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 14
+[23-Mar-2015 05:46:14 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15
+[23-Mar-2015 05:49:52 UTC] PHP Warning:  mail() [<a href='function.mail'>function.mail</a>]: Failed to connect to mailserver at &quot;127.0.0.1&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\email\admin\code_email_admin_reg_alert_msg.php on line 25
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 14
+[23-Mar-2015 05:49:57 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15
+[23-Mar-2015 05:57:32 UTC] PHP Fatal error:  Class 'Crypt_AES' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_encryption_with_site8client_keys.php on line 5
+[23-Mar-2015 05:59:20 UTC] PHP Fatal error:  Class 'Crypt_AES' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_encryption_with_site8client_keys.php on line 5
+[23-Mar-2015 06:01:39 UTC] PHP Fatal error:  Class 'reg8log_db' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\code_db_object.php on line 7
+[23-Mar-2015 06:13:51 UTC] PHP Notice:  Undefined variable: ttt in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 62
+[23-Mar-2015 06:21:43 UTC] PHP Notice:  Undefined variable: sess_var in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:21:56 UTC] PHP Notice:  Undefined variable: sess_var in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:22:14 UTC] PHP Notice:  Undefined variable: pending_sess in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:22:17 UTC] PHP Notice:  Undefined variable: pending_sess in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:22:43 UTC] PHP Notice:  Undefined variable: pending_sess in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:23:46 UTC] PHP Warning:  Cannot use a scalar value as an array in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 27
+[23-Mar-2015 06:26:52 UTC] PHP Warning:  Cannot use a scalar value as an array in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 27
+[23-Mar-2015 06:26:52 UTC] PHP Warning:  Cannot use a scalar value as an array in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_class_loader.php on line 70
+[23-Mar-2015 06:36:27 UTC] PHP Notice:  Undefined variable: pending_sess in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 65
+[23-Mar-2015 06:50:45 UTC] PHP Fatal error:  Class 'Crypt_AES' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_encryption_with_site8client_keys.php on line 5
+[23-Mar-2015 06:51:45 UTC] PHP Fatal error:  Class 'reg8log_db' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\code_db_object.php on line 7
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 14
+[23-Mar-2015 06:53:00 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 5
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 6
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 7
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 8
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 9
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 12
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 14
+[23-Mar-2015 06:53:16 UTC] PHP Notice:  Undefined variable: old_session_settings in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_restore_old_sess_settings.php on line 15

@@ -9,8 +9,6 @@ require 'include/common.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-require_once ROOT.'include/class/class_cookie.php';
-require_once ROOT.'include/class/class_user.php';
 require_once ROOT.'include/config/config_identify.php';
 
 if($log_last_activity) $flag=true;

@@ -48,7 +48,7 @@ class class_loader {
 		
 		foreach(glob(ROOT.'include/class/class_*.php') as $filename) {
 			$contents=file_get_contents($filename);
-			preg_match_all('#^\h*class\h*([0-9a-z_]*)\h*\{#im', $contents, $matches);
+			preg_match_all('#^\h*class\h*([0-9a-z_]*).*?\{#sim', $contents, $matches);
 			foreach($matches[1] as $class_name) self::$index[$class_name]=basename($filename);
 		}
 		

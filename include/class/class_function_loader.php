@@ -58,7 +58,7 @@ class func {
 		
 		foreach(glob(ROOT.'include/func/func_*.php') as $filename) {
 			$contents=file_get_contents($filename);
-			preg_match_all('#^\h*function\h*([0-9a-z_]*)\h*\(#im', $contents, $matches);
+			preg_match_all('#^\h*function\h*([0-9a-z_]*).*?\(#sim', $contents, $matches);
 			foreach($matches[1] as $func_name) self::$index[$func_name]=basename($filename);
 		}
 		

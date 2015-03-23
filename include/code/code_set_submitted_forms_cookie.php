@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/class/class_cookie.php';
-
 $cookie=new hm_cookie('reg8log_submitted_forms');
 $cookie->secure=HTTPS;
 $tmp14=$cookie->get();

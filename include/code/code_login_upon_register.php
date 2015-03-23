@@ -6,8 +6,6 @@ $query='select * from `accounts` where `username`='.$reg8log_db->quote_smart($_u
 
 $reg8log_db->query($query);
 
-require_once ROOT.'include/class/class_cookie.php';
-require_once ROOT.'include/class/class_user.php';
 require ROOT.'include/config/config_identify.php';
 
 $tmp13=new hm_user($identify_structs);

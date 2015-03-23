@@ -16,8 +16,6 @@ if(!session_start()) {
 	exit;
 }
 
-//exit(session_id());
-
 session_regenerate_id(true);
 
 if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
