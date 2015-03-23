@@ -10,9 +10,7 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $autologin_key=random_string(43);
 
-require_once ROOT.'include/func/func_secure_hash.php';
-
-$password_hash=$reg8log_db->quote_smart(create_secure_hash($_POST['password']));
+$password_hash=$reg8log_db->quote_smart(bcrypt::hash($_POST['password']));
 $username=$reg8log_db->quote_smart($_POST['username']);
 $email=$reg8log_db->quote_smart($_POST['email']);
 $timestamp=$req_time;

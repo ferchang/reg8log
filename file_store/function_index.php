@@ -13,8 +13,6 @@ return array(
 	'crypt_random'=>'func_random.php',
 	'random_bytes'=>'func_random.php',
 	'random_string'=>'func_random.php',
-	'create_secure_hash'=>'func_secure_hash.php',
-	'verify_secure_hash'=>'func_secure_hash.php',
 	'shutdown_session'=>'func_shutdown_session.php',
 	'verify_hmac'=>'func_site8client_keys_hmac_verifier.php',
 	'tr'=>'func_tr.php',

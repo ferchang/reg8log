@@ -9,7 +9,7 @@ if($change_autologin_key_upon_new_password) {
 
 	$new_autologin_key=random_string(43);
 
-	$query='update `accounts` set `password_hash`='.$reg8log_db->quote_smart(create_secure_hash($_POST['newpass'])).", `autologin_key`='$new_autologin_key'".' where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
+	$query='update `accounts` set `password_hash`='.$reg8log_db->quote_smart(bcrypt::hash($_POST['newpass'])).", `autologin_key`='$new_autologin_key'".' where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
 
 	$reg8log_db->query($query);
 
@@ -22,7 +22,7 @@ if($change_autologin_key_upon_new_password) {
 }
 else {
 
-	$query='update `accounts` set `password_hash`='.$reg8log_db->quote_smart(create_secure_hash($_POST['newpass'])).' where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
+	$query='update `accounts` set `password_hash`='.$reg8log_db->quote_smart(bcrypt::hash($_POST['newpass'])).' where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
 
 	$reg8log_db->query($query);
 

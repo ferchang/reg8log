@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/func/func_secure_hash.php';
-
 /*
  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
 
@@ -116,13 +114,12 @@ function captcha_show_image() {
 //======================================
 
 require ROOT.'include/code/sess/code_sess_start.php';
-require_once ROOT.'include/func/func_secure_hash.php';
 
 global $site_priv_salt;
 
 require_once ROOT.'include/code/code_fetch_site_vars.php';
 
-$_SESSION['reg8log']['captcha_hash'] = create_secure_hash($site_priv_salt.$captcha_word, 0);
+$_SESSION['reg8log']['captcha_hash'] = bcrypt::hash($site_priv_salt.$captcha_word, 4);
 
 //======================================
 	
@@ -155,7 +152,7 @@ function captcha_verify_word() {
 
 	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	
-	if (!verify_secure_hash($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['reg8log']['captcha_hash'])) {
+	if (!bcrypt::verify($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['reg8log']['captcha_hash'])) {
 		unset($_SESSION['reg8log']['captcha_hash']);
 		return false;
 	} else {

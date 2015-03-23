@@ -2,7 +2,8 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 ////
-$secure_hash_rounds=16; //note that actual number of rounds is 2^$secure_hash_rounds
+$bcrypt_hash_rounds=11; //note that actual number of rounds is 2^$bcrypt_hash_rounds
+//note: cannot be less than 4
 
 $pepper="89JPa36HW7Uiq348dX10ks"; //composed of at least 22 chars of upper and lowercase letters + digits
 

@@ -6,10 +6,8 @@ require_once ROOT.'include/code/code_db_object.php';
 
 require_once ROOT.'include/func/func_random.php';
 
-require_once ROOT.'include/func/func_secure_hash.php';
-
 if($_POST['password']!=='') 
-$fields['password']['value']=create_secure_hash($_POST['password']);
+$fields['password']['value']=bcrypt::hash($_POST['password']);
 
 $table_name='pending_accounts';
 $field_name='record_id';

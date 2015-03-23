@@ -3,7 +3,6 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 require_once ROOT.'include/code/code_db_object.php';
-require_once ROOT.'include/func/func_secure_hash.php';
 
 $query='select `password_hash` from `accounts` where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 
@@ -20,6 +19,6 @@ else {
 	$tmp15=func::tr('the account password that you entered was incorrect!');
 }
 
-if(!verify_secure_hash($password, $rec['password_hash'])) $err_msgs[]=$tmp15;
+if(!bcrypt::verify($password, $rec['password_hash'])) $err_msgs[]=$tmp15;
 
 ?>

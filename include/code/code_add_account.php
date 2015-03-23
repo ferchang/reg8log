@@ -12,10 +12,8 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $autologin_key=random_string(43);
 
-require_once ROOT.'include/func/func_secure_hash.php';
-
 if($_POST['password']!=='') 
-$fields['password']['value']=create_secure_hash($_POST['password']);
+$fields['password']['value']=bcrypt::hash($_POST['password']);
 
 $field_names='`uid`, `autologin_key`, `timestamp`, ';
 $field_values="'$rid', '$autologin_key', ".$req_time.', ';

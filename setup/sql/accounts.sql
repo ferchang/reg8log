@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `auto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` char(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL DEFAULT '',
   `username` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
-  `password_hash` varbinary(51) DEFAULT NULL,
+  `password_hash` char(60) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
   `email` varchar(60) CHARACTER SET ascii DEFAULT NULL,
   `gender` char(1) CHARACTER SET ascii DEFAULT NULL,
   `autologin_key` char(43) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,

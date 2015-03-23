@@ -65,8 +65,6 @@ if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
 
 if(isset($err_msgs)) break;
 
-require_once ROOT.'include/func/func_secure_hash.php';
-
 if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
 require ROOT.'include/code/code_change_password.php';
 

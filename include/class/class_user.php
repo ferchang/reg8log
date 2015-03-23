@@ -79,7 +79,7 @@ function identify($username=null, $password=null)
 			$this->user_info=$reg8log_db->fetch_row();
 			$block_disable=$this->user_info['block_disable'];
 			$last_protection=$this->user_info['last_protection'];
-			if(verify_secure_hash($password, $this->user_info['password_hash'])) {
+			if(bcrypt::verify($password, $this->user_info['password_hash'])) {
 			
 				if($tie_login2ip_option_at_login) {
 					$login2ip=isset($_POST['login2ip']);
@@ -118,15 +118,15 @@ function identify($username=null, $password=null)
 				global $rec;
 				$rec=$reg8log_db->fetch_row();
 				$this->user_info=$rec;
-				if(verify_secure_hash($password, $rec['password_hash'])) {
+				if(bcrypt::verify($password, $rec['password_hash'])) {
 					global $pending_user;
 					$pending_user=$rec['username'];
 					return true;
 				}
 			}
-			else {//here we run a verify_secure_hash to prevent information leakage about username existence via timing
-				global $secure_hash_rounds;
-				verify_secure_hash($password, $secure_hash_rounds.'*111111111111111111111111111111111111111111111111');
+			else {//here we run a bcrypt::verify to prevent information leakage about username existence via timing
+				global $bcrypt_hash_rounds;
+				bcrypt::verify($password, '$2a$09$hyMbcpbP6hnjcm9BJBEJ6OxPVNdTiq1HImfK4hx4Rjlb65Ylk1wOS');
 				$username_exists=0;
 			}
 		}

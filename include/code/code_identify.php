@@ -15,7 +15,6 @@ unset($identified_user);
 unset($identify_error);
 
 if(isset($manual_login)) {
-	require_once ROOT.'include/func/func_secure_hash.php';
 	if($user->identify($_POST['username'], $manual_login['password']) and !isset($banned_user) and !isset($pending_user)) $identified_user=$user->user_info['username'];
 }
 else if($user->identify() and !isset($banned_user) and !isset($pending_user)) $identified_user=$user->user_info['username'];

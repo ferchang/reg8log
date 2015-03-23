@@ -24,7 +24,7 @@ $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 require ROOT.'include/code/code_identify.php';
 
-if(isset($identified_user)) my_exit('<center><h3>'.func::tr('Error: You are logged in!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
+if(isset($identified_user)) func::my_exit('<center><h3>'.func::tr('Error: You are logged in!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 require ROOT.'include/config/config_register_fields.php';
 

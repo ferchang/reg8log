@@ -2,6 +2,7 @@
 return array(
 	'Crypt_Hash'=>'class_aes_cipher.php',
 	'Crypt_Rijndael'=>'class_aes_cipher.php',
+	'bcrypt'=>'class_bcrypt.php',
 	'class_loader'=>'class_class_loader.php',
 	'config'=>'class_config.php',
 	'reg8log_db'=>'class_db.php',
