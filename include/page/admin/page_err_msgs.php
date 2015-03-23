@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-define('CAN_INCLUDE', true);
-
 if(isset($password_msg)) {
 	echo '<table><tr align="center"><td colspan="3" style="border: solid thin yellow; font-style: italic; background: #555; padding: 3px;">';
 	echo "<span style=\"color: yellow\" >&nbsp;$password_msg&nbsp;</span><br />";

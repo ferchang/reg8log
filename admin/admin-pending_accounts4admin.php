@@ -60,7 +60,7 @@ $query="select * from `pending_accounts` where (`email_verification_key`='' or `
 if(!$total=$reg8log_db->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">', func::tr('Your command(s) were executed.', true), '</center>';
 	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">', sprintf(func::tr('Info: %d record(s) did not exist.'), $nonexistent_records), '</center>';
-	my_exit('<center><h3>'.func::tr('No pending accounts eligible for admin confirmation found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
+	func::my_exit('<center><h3>'.func::tr('No pending accounts eligible for admin confirmation found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
 }
 
 require ROOT.'include/code/admin/code_pagination_params2.php';

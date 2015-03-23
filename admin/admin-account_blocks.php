@@ -52,7 +52,7 @@ $query="select * from `account_block_log`";
 
 if(!$total=$reg8log_db->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">', func::tr('Your command(s) were executed.', true), '</center>';
-	my_exit('<center><h3>'.func::tr('No account block log records found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
+	func::my_exit('<center><h3>'.func::tr('No account block log records found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
 }
 
 require ROOT.'include/code/admin/code_pagination_params2.php';

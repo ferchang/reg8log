@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-define('CAN_INCLUDE', true);
-
 if(isset($captcha_needed) and !$captcha_verified) echo '<table  align=center style="border: thin solid #000; background: #bbb"><tr><td>';
 else echo '<table  cellspacing=0 cellpadding=0><tr><td>';
 

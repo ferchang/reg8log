@@ -4,6 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require ROOT.'include/code/code_identify.php';
 
-if(!isset($identified_user) or $identified_user!=='Admin') my_exit('<center><h3>'.func::tr('You are not Admin!').'</h3><a href="../index.php">'.func::tr('Login page').'</a></center>');
+if(!isset($identified_user) or $identified_user!=='Admin') func::my_exit('<center><h3>'.func::tr('You are not Admin!').'</h3><a href="../index.php">'.func::tr('Login page').'</a></center>');
 
 ?>

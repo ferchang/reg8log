@@ -25,7 +25,7 @@ $key=$reg8log_db->quote_smart($_GET['key']);
 
 $query='select * from `password_reset` where `record_id`='.$rid." and `key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) my_exit('<center><h3>'.func::tr('Error: No such record found').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
+if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('Error: No such record found').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 $rec=$reg8log_db->fetch_row();
 $_username=$rec['username'];
@@ -34,7 +34,7 @@ require ROOT.'include/config/config_password_change_or_reset.php';
 
 $expired=$req_time-$password_reset_period;
 
-if($rec['timestamp']<$expired) my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
+if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 require ROOT.'include/config/config_register_fields.php';
 

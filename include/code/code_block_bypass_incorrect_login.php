@@ -17,7 +17,7 @@ if($incorrect_logins<$block_bypass_max_incorrect_logins and $incorrect_logins<25
 
 if($incorrect_logins>=$block_bypass_max_incorrect_logins) {
 	setcookie('reg8log_block_bypass_incorrect_logins', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
-	my_exit(func::tr('block-bypass max incorrect logins reached msg').'<br><a href="index.php">'.func::tr('Login page').'</a></center>');
+	func::my_exit(func::tr('block-bypass max incorrect logins reached msg').'<br><a href="index.php">'.func::tr('Login page').'</a></center>');
 }
 
 ?>

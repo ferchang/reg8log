@@ -43,12 +43,12 @@ require ROOT.'include/code/code_check_account_block.php';
 
 if(!isset($account_block)) {
 
-	if(!$block_bypass_system_also4ip_block) my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
+	if(!$block_bypass_system_also4ip_block) func::my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
 	
 	$_username=$_POST['username'];
 	require ROOT.'include/code/code_check_ip_block.php';
 	
-	if(!isset($ip_block)) my_exit('<h3 align=center>'.sprintf(func::tr('account or ip is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), $_SERVER['REMOTE_ADDR']).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
+	if(!isset($ip_block)) func::my_exit('<h3 align=center>'.sprintf(func::tr('account or ip is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), $_SERVER['REMOTE_ADDR']).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 }
 
@@ -57,16 +57,16 @@ require_once ROOT.'include/code/code_db_object.php';
 $_username=$reg8log_db->quote_smart($_POST['username']);
 $query="select * from `block_bypass` where `username`=$_username limit 1";
 
-if(!$reg8log_db->result_num($query)) my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
+if(!$reg8log_db->result_num($query)) func::my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
 
 $rec=$reg8log_db->fetch_row();
 $key=$rec['key'];
 $incorrect_logins=$rec['incorrect_logins'];
 $block_bypass_record_auto=$rec['auto'];
 
-if($_GET['key']!==$key) my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
+if($_GET['key']!==$key) func::my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
 
-if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) my_exit('<center><h3>'.func::tr('max incorrect logins reached msg').'</h3><br><a href="index.php">'.func::tr('Login page').'</a></center>');
+if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) func::my_exit('<center><h3>'.func::tr('max incorrect logins reached msg').'</h3><br><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 unset($identified_user);
 unset($identify_error);

@@ -2,6 +2,8 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
+$index_dir=func::get_relative_root_path();
+
 ?>
 
 <script>
@@ -37,7 +39,7 @@ function check_captcha() {
 	if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
 	else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
 
-	xhr.open('POST', '<?php echo ROOT; ?>ajax/check_captcha_code.php', true);
+	xhr.open('POST', '<?php echo $index_dir; ?>ajax/check_captcha_code.php', true);
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 	xhr.onreadystatechange=function() {

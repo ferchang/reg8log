@@ -34,7 +34,7 @@ require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 $query="select * from `email_change` where `record_id`=$rid and `email_verification_key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) my_exit('<center><h3>'.func::tr('no such email verification record2').'.<br>...</h3>'."$home</center>");
+if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no such email verification record2').'.<br>...</h3>'."$home</center>");
 
 $rec=$reg8log_db->fetch_row();
 
@@ -43,7 +43,7 @@ else $verification_time=$change_email_verification_time;
 
 $expired=$req_time-$verification_time;
 
-if($rec['timestamp']<$expired) my_exit('<center><h3>'.func::tr('Out of email verification time msg2').'</h3>'."$home</center>");
+if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of email verification time msg2').'</h3>'."$home</center>");
 
 $_username=$reg8log_db->quote_smart($rec['username']);
 

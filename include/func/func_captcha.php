@@ -25,12 +25,9 @@ $captcha_show_credits = false;
 #########################################################################
 /* captcha_show_image() - outputs the image to browser and stores a CAPTCHA word in a cookie or a session file. */
 function captcha_show_image() {
-
-	
 	
 	global $session1;
 	global $session0;
-	
 	
 	// Let's create an image
 	$GLOBALS['captcha_show_credits'] ? $captcha_image = imagecreate(200, 51) : $captcha_image = imagecreate(200, 40);
@@ -119,7 +116,7 @@ global $site_priv_salt;
 
 require_once ROOT.'include/code/code_fetch_site_vars.php';
 
-$_SESSION['reg8log']['captcha_hash'] = bcrypt::hash($site_priv_salt.$captcha_word, 4);
+$_SESSION['reg8log']['captcha_hash'] = hash('sha256', $GLOBALS['pepper'].$site_priv_salt.$captcha_word);
 
 //======================================
 	
@@ -137,12 +134,9 @@ $_SESSION['reg8log']['captcha_hash'] = bcrypt::hash($site_priv_salt.$captcha_wor
 
 /* captcha_verify_word() - verifies a word. Returns 'true' or 'false'. */
 function captcha_verify_word() {
-
-	
 	
 	global $session1;
 	global $session0;
-	
 
 	require ROOT.'include/code/sess/code_sess_start.php';
 
@@ -152,7 +146,7 @@ function captcha_verify_word() {
 
 	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	
-	if (!bcrypt::verify($site_priv_salt.strtoupper($_POST['captcha']), $_SESSION['reg8log']['captcha_hash'])) {
+	if(!(hash('sha256', $GLOBALS['pepper'].$site_priv_salt.strtoupper($_POST['captcha']))===$_SESSION['reg8log']['captcha_hash'])) {
 		unset($_SESSION['reg8log']['captcha_hash']);
 		return false;
 	} else {

@@ -34,13 +34,13 @@ $reg8log_db->query("select get_lock('$lock_name', -1)");
 
 $query="select * from `pending_accounts` where `record_id`=$rid and `email_verification_key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) my_exit('<center><h3>'.func::tr('no such email verification record').'.<br>...</h3>'."$home</center>");
+if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no such email verification record').'.<br>...</h3>'."$home</center>");
 
 $rec=$reg8log_db->fetch_row();
 
 $expired=$req_time-$admin_confirmation_time;
 
-if($rec['timestamp']<$expired) my_exit('<center><h3>'.func::tr('Pending account expired msg').'.</h3>'."$home</center>");
+if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Pending account expired msg').'.</h3>'."$home</center>");
 
 if($rec['email_verified']) {
   echo "<center $page_dir><h3>", func::tr('email verification already done msg');
@@ -51,7 +51,7 @@ if($rec['email_verified']) {
 
 $expired=$req_time-$email_verification_time;
 
-if($rec['timestamp']<$expired) my_exit('<center><h3>'.func::tr('Out of email verification time msg').'.</h3>'."$home</center>");
+if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of email verification time msg').'.</h3>'."$home</center>");
 
 $query="update `pending_accounts` set `email_verified`=1 where `record_id`=$rid limit 1";
 
