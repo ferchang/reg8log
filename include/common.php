@@ -106,7 +106,7 @@ func::load_function_definition('shutdown_session');
 
 register_shutdown_function('shutdown_session');
 
-//echo config::v('bcrypt_hash_rounds');
+//echo config::get('bcrypt_hash_rounds');
 //exit;
 
 //func::tt();

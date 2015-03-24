@@ -12,17 +12,17 @@ class config extends loader_base {
 	
 	//=========================================================================
 	
-	public static function v($var_name) {
+	public static function get($var_name) {
 		
-		foreach(self::$cache_method as $method) {
+		if(empty(self::$vars)) foreach(self::$cache_method as $method) {
 			if($method==='file') {
 				if(isset($_SESSION['reg8log']['class_config_file_access_error'])) continue;
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						echo 'reading config vars from cache file...';
-						unset($_SESSION['config_cache']);
 						self::$vars=unserialize(file_get_contents($cache_file));
 						if(self::$cache_method[0]==='sess') self::update_cache('sess');
+						else unset($_SESSION['config_cache']);
 						break;
 				}
 			}
@@ -52,6 +52,13 @@ class config extends loader_base {
 		
     }
 		
+	//=========================================================================
+	
+	public static function set($var_name, $var_value) {
+		config::get($var_name);
+		
+	}
+	
 	//=========================================================================
 
 	private static function update_cache($method) {
