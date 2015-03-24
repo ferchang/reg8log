@@ -55,8 +55,8 @@ class config extends loader_base {
 	//=========================================================================
 	
 	public static function set($var_name, $var_value) {
-		config::get($var_name);
-		
+		if(!isset(self::$vars[$var_name])) config::get($var_name);
+		self::$vars[$var_name]=$var_value;
 	}
 	
 	//=========================================================================
