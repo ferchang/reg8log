@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
+if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
 
 if(!isset($incorrect_logins_auto, $_COOKIE['reg8log_account_incorrect_logins'])) return;
 
@@ -39,7 +39,7 @@ $attempts=unpack("l10", $tmp10['attempts']);
 if($matches) foreach($attempts as $key=>$value) if(in_array($value, $matches)) $attempts[$key]=0;
 
 $count=0;
-foreach($attempts as $value) if(($req_time-$value)<$account_block_period) $count++;
+foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_period')) $count++;
 
 if(!$count) {
 	$query="delete from `account_incorrect_logins` where `auto`=$incorrect_logins_auto limit 1";

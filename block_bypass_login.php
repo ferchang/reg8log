@@ -12,7 +12,7 @@ $block_bypass_mode=true;
 
 require ROOT.'include/config/config_brute_force_protection.php';
 
-if(!$block_bypass_system_enabled) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
+if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
 
 if(!isset($_GET['key'])) exit('<h3 align="center">Error: key parameter is not set!</h3>');
 
@@ -31,16 +31,16 @@ if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hash
 
 $manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
-if($block_bypass_system_enabled==1 and strtolower($_POST['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')==1 and strtolower($_POST['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
 
-if($block_bypass_system_enabled==2 and strtolower($_POST['username'])=='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')==2 and strtolower($_POST['username'])=='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
 
 $_username=$_POST['username'];
 require ROOT.'include/code/code_check_account_block.php';
 
 if(!isset($account_block)) {
 
-	if(!$block_bypass_system_also4ip_block) func::my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
+	if(!config::get('block_bypass_system_also4ip_block')) func::my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
 	
 	$_username=$_POST['username'];
 	require ROOT.'include/code/code_check_ip_block.php';
@@ -63,7 +63,7 @@ $block_bypass_record_auto=$rec['auto'];
 
 if($_GET['key']!==$key) func::my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
 
-if($block_bypass_max_incorrect_logins and $incorrect_logins>=$block_bypass_max_incorrect_logins) func::my_exit('<center><h3>'.func::tr('max incorrect logins reached msg').'</h3><br><a href="index.php">'.func::tr('Login page').'</a></center>');
+if(config::get('block_bypass_max_incorrect_logins') and $incorrect_logins>=config::get('block_bypass_max_incorrect_logins')) func::my_exit('<center><h3>'.func::tr('max incorrect logins reached msg').'</h3><br><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 unset($identified_user);
 unset($identify_error);

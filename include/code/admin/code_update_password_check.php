@@ -5,7 +5,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 $captcha_verified=false;
 if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 
-if($admin_operations_require_password>1) {
+if(config::get('admin_operations_require_password')>1) {
 	if(!isset($password_check_needed) or isset($_POST['remember'])) {
 		
 		$password_check_key=func::random_string(22);

@@ -10,7 +10,7 @@ require_once ROOT.'include/code/code_db_object.php';
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip, $account_block_threshold)";
+$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip, ".config::get('account_block_threshold').")";
 
 $reg8log_db->query($query);
 
@@ -42,8 +42,8 @@ if($alert_admin_about_account_blocks and !($alert_admin_about_account_blocks>3 a
 
 require_once ROOT.'include/config/config_cleanup.php';
 
-if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/cleanup/code_account_block_log_expired_cleanup.php';
+if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/cleanup/code_account_block_log_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_account_block_log_size_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_account_block_log_size_cleanup.php';
 
 ?>

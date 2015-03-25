@@ -186,13 +186,13 @@ function check_captcha_needed(uname) {
 
 <?php
 if(
-($account_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+(config::get('account_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
 or
-($ip_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+(config::get('ip_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
 or
-($account_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+(config::get('account_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
 or 
-($ip_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+(config::get('ip_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
 ) echo "\nreturn;\n";
 ?>
 
@@ -323,13 +323,13 @@ echo '<tr><td colspan="3" id="captcha_form_placeholder">';
 if(
 isset($captcha_needed)
 or
-($account_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+(config::get('account_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
 or
-($ip_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+(config::get('ip_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
 or
-($account_captcha_threshold==0 and $admin_ip_captcha_threshold==0)
+(config::get('account_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
 or 
-($ip_captcha_threshold==0 and $admin_account_captcha_threshold==0)
+(config::get('ip_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
 ) {
 	$captcha_form4login=true;
 	require ROOT.'include/page/page_captcha_form.php';
@@ -348,16 +348,16 @@ echo '</td></tr>';
 </tr>
 <tr align="center"><td colspan="3"><br><a href="password_reset_request.php" ><?php echo func::tr('Forgot password/username'); ?></a><br><br></td></tr>
 <?php
-if(isset($err_msg) and $account_block_threshold!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
+if(isset($err_msg) and config::get('account_block_threshold')!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
 	
-	$account_block_period_msg=func::duration2friendly_str($account_block_period, 0);
-	$tmp20=$account_block_threshold-$incorrect_attempts;
+	$account_block_period_msg=func::duration2friendly_str(config::get('account_block_period'), 0);
+	$tmp20=config::get('account_block_threshold')-$incorrect_attempts;
 	echo '<tr ><td colspan="3"  style="border: solid thin yellow; font-style: italic">';
-	echo "<span style=\"color: #a32\" >", sprintf(func::tr('login limit warning'), $account_block_threshold, $account_block_period_msg, $account_block_period_msg, $incorrect_attempts, $tmp20), "</span>";
+	echo "<span style=\"color: #a32\" >", sprintf(func::tr('login limit warning'), config::get('account_block_threshold'), $account_block_period_msg, $account_block_period_msg, $incorrect_attempts, $tmp20), "</span>";
 	echo '</td></tr>';
 }
 echo '</table>';
-if(isset($block_bypass_mode) and $block_bypass_max_incorrect_logins) echo '<br>', sprintf(func::tr('block_bypass_mode_max_logins'), $block_bypass_max_incorrect_logins);
+if(isset($block_bypass_mode) and config::get('block_bypass_max_incorrect_logins')) echo '<br>', sprintf(func::tr('block_bypass_mode_max_logins'), config::get('block_bypass_max_incorrect_logins'));
 ?>
 </center>
 </form>

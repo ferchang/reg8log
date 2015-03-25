@@ -10,11 +10,11 @@ $reg8log_db->query($query);
 
 $rec=$reg8log_db->fetch_row();
 
-$num=ceil(1/$cleanup_probability);
+$num=ceil(1/config::get('cleanup_probability'));
 
-if(($rec['n']+$num)<=$max_nonexistent_users_records) return;
+if(($rec['n']+$num)<=config::get('max_nonexistent_users_records')) return;
 
-if($rec['n']-$max_nonexistent_users_records>$num) $num=$rec['n']-$max_nonexistent_users_records;
+if($rec['n']-config::get('max_nonexistent_users_records')>$num) $num=$rec['n']-config::get('max_nonexistent_users_records');
 
 $query="delete from `$table_name` where `username_exists`=0 order by `last_attempt` asc limit $num";
 

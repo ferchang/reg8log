@@ -12,15 +12,15 @@ if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not 
 
 require_once ROOT.'include/config/config_brute_force_protection.php';
 
-if(!$allow_users2disable_blocks and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
+if(!config::get('allow_users2disable_blocks') and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
 
 if($identified_user=='Admin') {
-	$account_block_threshold=$admin_account_block_threshold;
-	$account_captcha_threshold=$admin_account_captcha_threshold;
-	$account_block_period=$admin_account_block_period;
-	$ip_block_threshold=$admin_ip_block_threshold;
-	$ip_captcha_threshold=$admin_ip_captcha_threshold;
-	$ip_block_period=$admin_ip_block_period;
+	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
+	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
+	config::set('account_block_period', config::get('admin_account_block_period'));
+	config::set('ip_block_threshold', config::get('admin_ip_block_threshold'));
+	config::set('ip_captcha_threshold', config::get('admin_ip_captcha_threshold'));
+	config::set('ip_block_period', config::get('admin_ip_block_period'));
 }
 
 require ROOT.'include/code/code_check_block_options.php';

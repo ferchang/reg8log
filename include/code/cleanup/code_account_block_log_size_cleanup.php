@@ -8,10 +8,10 @@ $reg8log_db->query($query);
 
 $rec=$reg8log_db->fetch_row();
 
-$num=ceil(1/$cleanup_probability);
+$num=ceil(1/config::get('cleanup_probability'));
 
-if(($rec['n']+$num)>$max_security_logs_records) {
-	if($rec['n']-$max_security_logs_records>$num) $num=$rec['n']-$max_security_logs_records;
+if(($rec['n']+$num)>config::get('max_security_logs_records')) {
+	if($rec['n']-config::get('max_security_logs_records')>$num) $num=$rec['n']-config::get('max_security_logs_records');
 	$query="delete from `account_block_log` order by `last_attempt` asc, `username_exists` asc limit $num";
 	$reg8log_db->query($query);
 }

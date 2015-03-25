@@ -4,8 +4,8 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/config/config_brute_force_protection.php';
 
-if($ch_pswd_captcha_threshold==-1) return;
-if($ch_pswd_captcha_threshold==0) {
+if(config::get('ch_pswd_captcha_threshold')==-1) return;
+if(config::get('ch_pswd_captcha_threshold')==0) {
 	$captcha_needed=true;
 	return;
 }
@@ -23,6 +23,6 @@ if($try_type==='email') {
 	return;
 }
 
-if($trec['ch_pswd_tries']>=$ch_pswd_captcha_threshold and $req_time-$trec['last_ch_pswd_try']<$ch_pswd_period) $captcha_needed=true;
+if($trec['ch_pswd_tries']>=config::get('ch_pswd_captcha_threshold') and $req_time-$trec['last_ch_pswd_try']<config::get('ch_pswd_period')) $captcha_needed=true;
 
 ?>

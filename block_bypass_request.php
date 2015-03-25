@@ -10,13 +10,13 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 require ROOT.'include/config/config_brute_force_protection.php';
 
-if(!$block_bypass_system_enabled) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
+if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
 
 if(!isset($_GET['username'])) exit('<h3 align="center">Error: username parameter is not set</h3>');
 
-if($block_bypass_system_enabled==1 and strtolower($_GET['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')==1 and strtolower($_GET['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
 
-if($block_bypass_system_enabled==2 and strtolower($_GET['username'])=='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')==2 and strtolower($_GET['username'])=='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
 
 if(strtolower($_GET['username'])=='admin') $is_admin=true;
 
@@ -27,7 +27,7 @@ require ROOT.'include/code/code_check_account_block.php';
 
 if(!isset($account_block)) {
 
-	if(!$block_bypass_system_also4ip_block) func::my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_GET['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
+	if(!config::get('block_bypass_system_also4ip_block')) func::my_exit('<h3 align=center>'.sprintf(func::tr('account is not blocked msg'), htmlspecialchars($_GET['username'], ENT_QUOTES, 'UTF-8')).'</h3><center><a href="index.php">'.func::tr('Login page').'</a></center>');
 	
 	$_username=$_GET['username'];
 	$set_last_attempt=true;
@@ -99,7 +99,7 @@ else {
 $new_key=func::random_string(22);
 
 $tmp22=$emails_sent;
-if($_POST['email']===$email and ($max_block_bypass_emails==-1 or $emails_sent<$max_block_bypass_emails)) if($emails_sent<255) $tmp22++;
+if($_POST['email']===$email and (config::get('max_block_bypass_emails')==-1 or $emails_sent<config::get('max_block_bypass_emails'))) if($emails_sent<255) $tmp22++;
 
 if($num_requests<255) $num_requests++;
 
@@ -119,14 +119,14 @@ else {
 
 $reg8log_db->query($query);
 
-if($_POST['email']===$email and ($max_block_bypass_emails==-1 or $emails_sent<$max_block_bypass_emails)) require ROOT.'include/code/email/code_email_bypass_link.php';
+if($_POST['email']===$email and (config::get('max_block_bypass_emails')==-1 or $emails_sent<config::get('max_block_bypass_emails'))) require ROOT.'include/code/email/code_email_bypass_link.php';
 
 if(isset($captcha_needed)) unset($_SESSION['reg8log']['captcha_verified']);
 
 require ROOT.'include/code/code_set_submitted_forms_cookie.php';
 
 $success_msg='<h3>'.sprintf(func::tr('block-bypass email sent msg'), htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($_GET['username'], ENT_QUOTES, 'UTF-8'));
-if($max_block_bypass_emails!=-1) $success_msg.=sprintf(func::tr('max block-bypass emails msg'), $max_block_bypass_emails);
+if(config::get('max_block_bypass_emails')!=-1) $success_msg.=sprintf(func::tr('max block-bypass emails msg'), config::get('max_block_bypass_emails'));
 $success_msg.='.</h3>';
 $no_specialchars=true;
 require ROOT.'include/page/page_success.php';
@@ -135,12 +135,12 @@ require ROOT.'include/config/config_cleanup.php';
 
 if(isset($insert)) {
 
-	if(mt_rand(1, floor(1/$cleanup_probability))==1) {
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 		$table_name='block_bypass';
 		require ROOT.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 	}
 
-	if(mt_rand(1, floor(1/$cleanup_probability))==1) {
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 		$table_name='block_bypass';
 		require ROOT.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 	}

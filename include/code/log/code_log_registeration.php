@@ -20,8 +20,8 @@ if($registeration_alert_type==1) {
 			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
 			$reg8log_db->query($query);
 			require_once ROOT.'include/config/config_cleanup.php';
-			if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
-			if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
+			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
+			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
 		}
 		require ROOT.'include/code/admin/code_check_registerations_admin_email_alert.php';
 	}
@@ -35,8 +35,8 @@ if($registeration_alert_type==1) {
 			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
 			$reg8log_db->query($query);
 			require_once ROOT.'include/config/config_cleanup.php';
-			if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
-			if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
+			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
+			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
 		}
 		require ROOT.'include/code/admin/code_check_registerations_admin_email_alert.php';
 	}

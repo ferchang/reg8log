@@ -8,11 +8,11 @@ $reg8log_db->query($query);
 
 $rec=$reg8log_db->fetch_row();
 
-$num=ceil(1/$cleanup_probability);
+$num=ceil(1/config::get('cleanup_probability'));
 
-if(($rec['n']+$num)<=$max_ip_incorrect_logins_decs_records) return;
+if(($rec['n']+$num)<=config::get('max_ip_incorrect_logins_decs_records')) return;
 
-if($rec['n']-$max_ip_incorrect_logins_decs_records>$num) $num=$rec['n']-$max_ip_incorrect_logins_decs_records;
+if($rec['n']-config::get('max_ip_incorrect_logins_decs_records')>$num) $num=$rec['n']-config::get('max_ip_incorrect_logins_decs_records');
 
 $query="delete from `ip_incorrect_logins_decs` order by `timestamp` asc limit $num";
 

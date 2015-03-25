@@ -60,7 +60,7 @@ $no_specialchars=true;
 
 require ROOT.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	$reg8log_db->query("select release_lock('$lock_name')");
 	require ROOT.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';

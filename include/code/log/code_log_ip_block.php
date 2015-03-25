@@ -6,7 +6,7 @@ require_once ROOT.'include/config/config_security_logs.php';
 
 require_once ROOT.'include/code/code_db_object.php';
 
-$tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-$ip_block_period).' order by `timestamp` asc limit 1';
+$tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
 
 if($reg8log_db->result_num($tmp38)) {
 	$tmp38=$reg8log_db->fetch_row();
@@ -16,7 +16,7 @@ else $ip_first_attempt=$req_time;
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
-$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, $req_time, $_username, $ip_block_threshold)";
+$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, $req_time, $_username, ".config::get('ip_block_threshold').")";
 
 $reg8log_db->query($tmp29);
 
@@ -45,8 +45,8 @@ if($alert_admin_about_ip_blocks) {
 
 require_once ROOT.'include/config/config_cleanup.php';
 
-if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_block_log_expired_cleanup.php';
+if($keep_expired_block_log_records_for!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_block_log_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_block_log_size_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_block_log_size_cleanup.php';
 
 ?>

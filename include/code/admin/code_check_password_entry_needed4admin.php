@@ -4,13 +4,13 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/config/config_admin.php';
 
-if(!$admin_operations_require_password) return;
+if(!config::get('admin_operations_require_password')) return;
 
 $password_check_needed=true;
 
 do {
 
-	if($admin_operations_require_password==1) break;
+	if(config::get('admin_operations_require_password')==1) break;
 
 	if(!isset($_COOKIE['reg8log_password_check_key'])) break;
 
@@ -20,7 +20,7 @@ do {
 
 	$tmp42=$reg8log_db->fetch_row();
 
-	if($req_time>$tmp42['last_password_check']+$admin_operations_require_password) {
+	if($req_time>$tmp42['last_password_check']+config::get('admin_operations_require_password')) {
 		setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		break;
 	}

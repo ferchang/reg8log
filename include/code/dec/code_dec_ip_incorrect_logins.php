@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if($ip_block_threshold==-1  and $ip_captcha_threshold==-1) return;
+if(config::get('ip_block_threshold')==-1  and config::get('ip_captcha_threshold')==-1) return;
 
 if(!isset($_COOKIE['reg8log_ip_incorrect_logins'])) return;
 
@@ -38,8 +38,8 @@ $reg8log_db->query($query);
 
 require_once ROOT.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_decs_expired_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_decs_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_decs_size_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_decs_size_cleanup.php';
 
 ?>

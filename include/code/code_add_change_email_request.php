@@ -63,7 +63,7 @@ require ROOT.'include/code/email/code_email_change_email_verification_link.php';
 
 //-------------
 require_once ROOT.'include/config/config_cleanup.php';
-if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_email_change_expired_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_email_change_expired_cleanup.php';
 //-------------
 
 ?>

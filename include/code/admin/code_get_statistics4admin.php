@@ -37,7 +37,7 @@ $all_account_blocks=$reg8log_db->count_star($query);
 
 require ROOT.'include/config/config_brute_force_protection.php';
 
-$query="select count(*) from `account_block_log` where `unblocked`=0 and  ((`username`!='admin' and `first_attempt`>".($req_time-$account_block_period)." and `block_threshold`>=$account_block_threshold) or (`username`='admin' and `first_attempt`>".($req_time-$admin_account_block_period)." and `block_threshold`>=$admin_account_block_threshold))";
+$query="select count(*) from `account_block_log` where `unblocked`=0 and  ((`username`!='admin' and `first_attempt`>".($req_time-config::get('account_block_period'))." and `block_threshold`>=".config::get('account_block_threshold').") or (`username`='admin' and `first_attempt`>".($req_time-config::get('admin_account_block_period'))." and `block_threshold`>=".config::get('admin_account_block_threshold')."))";
 
 $active_account_blocks=$reg8log_db->count_star($query);
 
@@ -47,7 +47,7 @@ $query="select count(*) from `ip_block_log`";
 
 $all_ip_blocks=$reg8log_db->count_star($query);
 
-$query="select count(*) from `ip_block_log` where `unblocked`=0 and  ((`last_username`!='admin' and `first_attempt`>".($req_time-$ip_block_period)." and `block_threshold`>=$ip_block_threshold) or (`last_username`='admin' and `first_attempt`>".($req_time-$admin_ip_block_period)." and `block_threshold`>=$admin_ip_block_threshold))";
+$query="select count(*) from `ip_block_log` where `unblocked`=0 and  ((`last_username`!='admin' and `first_attempt`>".($req_time-config::get('ip_block_period'))." and `block_threshold`>=".config::get('ip_block_threshold').") or (`last_username`='admin' and `first_attempt`>".($req_time-config::get('admin_ip_block_period'))." and `block_threshold`>=".config::get('admin_ip_block_threshold')."))";
 
 $active_ip_blocks=$reg8log_db->count_star($query);
 

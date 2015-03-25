@@ -61,7 +61,7 @@ require_once ROOT.'include/config/config_brute_force_protection.php';
 require ROOT.'include/code/code_check_block_options.php';
 if(count($block_options)>1)  {
 	echo '<li><a class="li_item" href="change_brute_force_protection_setting.php">', func::tr('Change brute-force protection setting'), '</a>';
-	if(!$allow_users2disable_blocks) echo '<small> (', func::tr('Admin only'), ')</small>';
+	if(!config::get('allow_users2disable_blocks')) echo '<small> (', func::tr('Admin only'), ')</small>';
 }
 
 ?>

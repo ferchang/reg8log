@@ -261,16 +261,16 @@ while($rec=$reg8log_db->fetch_row()) {
 	else if(
 
 	(
-	strtolower($rec['username'])!='admin' and $req_time-$rec['first_attempt']<$account_block_period and $rec['block_threshold']>=$account_block_threshold
+	strtolower($rec['username'])!='admin' and $req_time-$rec['first_attempt']<config::get('account_block_period') and $rec['block_threshold']>=config::get('account_block_threshold')
 	)
 	or
 	(
-	strtolower($rec['username'])=='admin' and $req_time-$rec['first_attempt']<$admin_account_block_period and $rec['block_threshold']>=$admin_account_block_threshold
+	strtolower($rec['username'])=='admin' and $req_time-$rec['first_attempt']<config::get('admin_account_block_period') and $rec['block_threshold']>=config::get('admin_account_block_threshold')
 	)
 
 	) {
 		echo '<span style="color: red" ';
-		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str($account_block_period-($req_time-$rec['first_attempt']), 2), func::tr(' later');
+		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str(config::get('account_block_period')-($req_time-$rec['first_attempt']), 2), func::tr(' later');
 		echo '">', func::tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="ext', $rec['ext_auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['ext'.$rec['ext_auto']]))? ' checked ' : ''), '></td>';
 		$currently_blocked=true;

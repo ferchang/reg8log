@@ -28,7 +28,7 @@ $query2.=' limit 1';
 
 /* if($field_name=='username' and (!$ajax_check_username or $max_ajax_check_usernames)) {
 	require_once ROOT.'include/config/config_brute_force_protection.php';
-	$expired=$req_time-$account_block_period;
+	$expired=$req_time-config::get('account_block_period');
 	$query3="select * from `account_incorrect_logins` where `username`=$tmp8 and `last_attempt` > $expired limit 1";
 } */
 

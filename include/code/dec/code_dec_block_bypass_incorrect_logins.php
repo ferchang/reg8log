@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!$block_bypass_max_incorrect_logins) return;
+if(!config::get('block_bypass_max_incorrect_logins')) return;
 
 if(!isset($_COOKIE['reg8log_block_bypass_incorrect_logins']) or strpos($_COOKIE['reg8log_block_bypass_incorrect_logins'], $block_bypass_record_auto.',')!==0) return;
 

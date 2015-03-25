@@ -12,7 +12,7 @@ require ROOT.'include/code/admin/code_require_admin.php';
 
 require ROOT.'include/config/config_admin.php';
 
-if($show_statistics_in_admin_operations_page) {
+if(config::get('show_statistics_in_admin_operations_page')) {
 	require ROOT.'include/code/admin/code_get_statistics4admin.php';
 	$flag=true;
 }

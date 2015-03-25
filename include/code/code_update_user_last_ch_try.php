@@ -4,10 +4,10 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $index_dir=func::get_relative_root_path();
 
-if($ch_pswd_max_threshold==-1 and $ch_pswd_captcha_threshold==-1) return;
+if(config::get('ch_pswd_max_threshold')==-1 and config::get('ch_pswd_captcha_threshold')==-1) return;
 
 if($try_type==='email') {
-	if($ch_pswd_captcha_threshold==-1) return;
+	if(config::get('ch_pswd_captcha_threshold')==-1) return;
 	require_once ROOT.'include/code/code_db_object.php';
 	$query="update `accounts` set `last_ch_email_try`=".$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
@@ -30,15 +30,15 @@ if(!isset($trec)) {
 
 //--------------------------------
 
-if($req_time-$trec['last_ch_pswd_try']>$account_block_period) {
+if($req_time-$trec['last_ch_pswd_try']>config::get('account_block_period')) {
 	$query='update `accounts` set `ch_pswd_tries`=1, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
-	if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=1) {
+	if(config::get('ch_pswd_captcha_threshold')!=-1 and config::get('ch_pswd_captcha_threshold')<=1) {
 		$captcha_needed=true;
 		$captcha_verified=false;
 		if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 	}
-	if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=1) {
+	if(config::get('ch_pswd_max_threshold')!=-1 and config::get('ch_pswd_max_threshold')<=1) {
 		
 		$new_autologin_key=func::random_string(43);
 		$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
@@ -60,13 +60,13 @@ if($ch_pswd_tries>255) $ch_pswd_tries=255;
 $query='update `accounts` set `ch_pswd_tries`='.$ch_pswd_tries.', `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 $reg8log_db->query($query);
 
-if($ch_pswd_captcha_threshold!=-1 and $ch_pswd_captcha_threshold<=$ch_pswd_tries) {
+if(config::get('ch_pswd_captcha_threshold')!=-1 and config::get('ch_pswd_captcha_threshold')<=$ch_pswd_tries) {
 	$captcha_needed=true;
 	$captcha_verified=false;
 	if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);
 }
 
-if($ch_pswd_max_threshold!=-1 and $ch_pswd_max_threshold<=$ch_pswd_tries) {
+if(config::get('ch_pswd_max_threshold')!=-1 and config::get('ch_pswd_max_threshold')<=$ch_pswd_tries) {
 	
 	$new_autologin_key=func::random_string(43);
 	$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';

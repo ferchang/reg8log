@@ -3,15 +3,15 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 if(strtolower($_POST['username'])=='admin') {
-	$account_block_threshold=$admin_account_block_threshold;
-	$account_captcha_threshold=$admin_account_captcha_threshold;
-	$account_block_period=$admin_account_block_period;
-	$ip_block_threshold=$admin_ip_block_threshold;
-	$ip_captcha_threshold=$admin_ip_captcha_threshold;
-	$ip_block_period=$admin_ip_block_period;
+	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
+	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
+	config::set('account_block_period', config::get('admin_account_block_period'));
+	config::set('ip_block_threshold', config::get('admin_ip_block_threshold'));
+	config::set('ip_captcha_threshold', config::get('admin_ip_captcha_threshold'));
+	config::set('ip_block_period', config::get('admin_ip_block_period'));
 }
 
-if($account_block_threshold==-1  and $account_captcha_threshold==-1) return;
+if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
 
 require ROOT.'include/config/config_register.php';
 
@@ -46,18 +46,18 @@ if(!$reg8log_db->result_num()) {
 	}
 	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 	
-	if($account_block_threshold==1) {
+	if(config::get('account_block_threshold')==1) {
 		$_username2=$_POST['username'];
 		require_once ROOT.'include/code/code_accomodate_block_disable.php';
 		if($block_disable!=2 and $block_disable!=3) {
 			$account_block=$_POST['username'];
-			$block_duration=$account_block_period;
+			$block_duration=config::get('account_block_period');
 			$first_attempt=$req_time;
 			require_once ROOT.'include/code/log/code_log_account_block.php';
 		}
-		else if($account_captcha_threshold==1) $captcha_needed=true;
+		else if(config::get('account_captcha_threshold')==1) $captcha_needed=true;
 	}
-	else if($account_captcha_threshold==1) $captcha_needed=true;
+	else if(config::get('account_captcha_threshold')==1) $captcha_needed=true;
 
 	$incorrect_attempts=1;
 
@@ -72,25 +72,25 @@ $attempts = unpack("l10", $rec5['attempts']);
 
 $count=1; //1 for current incorrect attempt
 $oldest=$req_time;
-foreach($attempts as $value) if(($req_time-$value)<$account_block_period) {
+foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_period')) {
 	$count++;
 	if($value<$oldest) $oldest=$value;
 }
 
 $incorrect_attempts=$count;
 
-if($account_block_threshold!=-1 and $count>=$account_block_threshold) {
+if(config::get('account_block_threshold')!=-1 and $count>=config::get('account_block_threshold')) {
 	$_username2=$_POST['username'];
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
 		$account_block=$_POST['username'];
-		$block_duration=$oldest+$account_block_period-$req_time;
+		$block_duration=$oldest+config::get('account_block_period')-$req_time;
 		$first_attempt=$oldest;
 		require_once ROOT.'include/code/log/code_log_account_block.php';
 	}
-	else if($account_captcha_threshold!=-1 and $count>=$account_captcha_threshold) $captcha_needed=true;
+	else if(config::get('account_captcha_threshold')!=-1 and $count>=config::get('account_captcha_threshold')) $captcha_needed=true;
 }
-else if($account_captcha_threshold!=-1 and $count>=$account_captcha_threshold) $captcha_needed=true;
+else if(config::get('account_captcha_threshold')!=-1 and $count>=config::get('account_captcha_threshold')) $captcha_needed=true;
 
 $pos=$rec5['pos'];
 
@@ -114,12 +114,12 @@ setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HT
 
 require_once ROOT.'include/config/config_cleanup.php';
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 	$table_name='account_incorrect_logins';
 	require ROOT.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 }
 
-if(mt_rand(1, floor(1/$cleanup_probability))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 	$table_name='account_incorrect_logins';
 	require ROOT.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 }

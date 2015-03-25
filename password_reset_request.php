@@ -111,7 +111,7 @@ require ROOT.'include/page/page_success.php';
 
 if(isset($cleanup)) {
 	require ROOT.'include/config/config_cleanup.php';
-	if(mt_rand(1, floor(1/$cleanup_probability))==1) require ROOT.'include/code/cleanup/code_password_reset_expired_cleanup.php';
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_password_reset_expired_cleanup.php';
 }
 
 exit;
