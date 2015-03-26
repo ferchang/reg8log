@@ -57,6 +57,8 @@ else define('HTTPS', false);
 if(isset($_COOKIE['reg8log_client_sess_key'])) $client_sess_key=$_COOKIE['reg8log_client_sess_key'];
 else $client_sess_key='';
 
+require_once ROOT.'include/class/class_db.php';
+
 require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';

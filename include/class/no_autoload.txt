@@ -1,7 +1,7 @@
 List of class files that are loaded manually in some files:
 
 - class_class_loader.php => common.php
-- class_db.php => code_db_object.php
+- class_db.php => common.php
 - class_aes_cipher.php => func_encryption_with_site8client_keys.php
 - class_loader_base.php => class_class_loader.php
 
