@@ -188,7 +188,7 @@ if($sort_by=='timestamp') {
 }
 echo "</th>";
 
-if($log_last_login) {
+if(config::get('log_last_login')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_login&sort_dir=";
 	if($sort_by=='last_login' and $sort_dir=='asc') echo 'desc';
@@ -202,7 +202,7 @@ if($log_last_login) {
 	echo "</th>";
 }
 
-if($log_last_activity) {
+if(config::get('log_last_activity')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_activity&sort_dir=";
 	if($sort_by=='last_activity' and $sort_dir=='asc') echo 'desc';
@@ -216,7 +216,7 @@ if($log_last_activity) {
 	echo "</th>";
 }
 
-if($log_last_logout) {
+if(config::get('log_last_logout')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_logout&sort_dir=";
 	if($sort_by=='last_logout' and $sort_dir=='asc') echo 'desc';
@@ -263,15 +263,15 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
 	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
-	if($log_last_login) {
+	if(config::get('log_last_login')) {
 		if($rec['last_login']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_login'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
-	if($log_last_activity) {
+	if(config::get('log_last_activity')) {
 		if($rec['last_activity']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_activity'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
- 	if($log_last_logout) {
+ 	if(config::get('log_last_logout')) {
 		if($rec['last_logout']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_logout'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
@@ -286,9 +286,9 @@ while($rec=$reg8log_db->fetch_row()) {
 }
 echo '<tr style="background: rgb(209,209,165)" >';
 $colspan=7;
-if($log_last_activity) $colspan++;
-if($log_last_logout) $colspan++;
-if($log_last_login) $colspan++;
+if(config::get('log_last_activity')) $colspan++;
+if(config::get('log_last_logout')) $colspan++;
+if(config::get('log_last_login')) $colspan++;
 echo "<td colspan=\"$colspan\">";
 
 require ROOT.'include/page/admin/page_captcha8password_fields.php';

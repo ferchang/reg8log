@@ -28,9 +28,9 @@ button {
 <script src="js/sha256.js"></script>
 
 <?php
-if($tie_login2ip_option_at_login and ($tie_login2ip==1 or $tie_login2ip==2)) {
+if(config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')==1 or config::get('tie_login2ip')==2)) {
 	echo "<script>\n";
-	if($tie_login2ip==1) echo 'var tie_login2ip=1;';
+	if(config::get('tie_login2ip')==1) echo 'var tie_login2ip=1;';
 	else echo 'var tie_login2ip=2;';
 	echo "\n</script>\n";
 	echo '<script src="js/admin_tie_login2ip.js"></script>';
@@ -52,9 +52,9 @@ foreach($autologin_ages as $value) {
 echo "\nautologin_ages_select_html=\"$str</select>\";";
 
 $str='<select name=autologin_age ';
-if(count($admin_autologin_ages)==1) $str.=' disabled ';
+if(count(config::get('admin_autologin_ages'))==1) $str.=' disabled ';
 $str.='>';
-foreach($admin_autologin_ages as $value) {
+foreach(config::get('admin_autologin_ages') as $value) {
 	$str.="<option value=$value style='text-align: center'>";
 	if($value==0) $str.=func::tr('Browser session');
 	else $str.=func::duration2friendly_str($value, 0);
@@ -314,9 +314,9 @@ else {
 </tr>
 <?php
 
-if($tie_login2ip_option_at_login) {
+if(config::get('tie_login2ip_option_at_login')) {
 	echo "<tr><td colspan=\"3\" $cell_align ";
-	echo ' title="', func::tr('tie login to ip option description'), '">', func::tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and $tie_login2ip>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
+	echo ' title="', func::tr('tie login to ip option description'), '">', func::tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and config::get('tie_login2ip')>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
 }
 
 echo '<tr><td colspan="3" id="captcha_form_placeholder">';

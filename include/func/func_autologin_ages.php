@@ -4,15 +4,12 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 function get_autologin_ages() {
 
-	global $admin_autologin_ages;
-	global $autologin_ages;
-
 	if(isset($_POST['username'])) {
-		if(strtolower($_POST['username'])=='admin') return $admin_autologin_ages;
-		else return $autologin_ages;
+		if(strtolower($_POST['username'])=='admin') return config::get('admin_autologin_ages');
+		else return config::get('autologin_ages');
 	}
 	
-	return $autologin_ages;
+	return config::get('autologin_ages');
 
 }
 

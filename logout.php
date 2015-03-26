@@ -9,17 +9,17 @@ require ROOT.'include/code/code_prevent_xsrf.php';
 
 require_once ROOT.'include/config/config_identify.php';
 
-if($log_last_activity) $flag=true;
+if(config::get('log_last_activity')) $flag=true;
 
-$log_last_activity=false;
+config::set('log_last_activity', false);
 
 $pass_banned_user=true;
 
-if($change_autologin_key_upon_logout or $admin_change_autologin_key_upon_logout) require_once ROOT.'include/code/code_identify.php';
+if(config::get('change_autologin_key_upon_logout') or config::get('admin_change_autologin_key_upon_logout')) require_once ROOT.'include/code/code_identify.php';
 
-if((isset($identified_user) and $identified_user=='Admin') or (isset($logged_out_user) and $logged_out_user=='Admin')) $change_autologin_key_upon_logout=$admin_change_autologin_key_upon_logout;
+if((isset($identified_user) and $identified_user=='Admin') or (isset($logged_out_user) and $logged_out_user=='Admin')) config::set('change_autologin_key_upon_logout', config::get('admin_change_autologin_key_upon_logout'));
 
-if($change_autologin_key_upon_logout) {
+if(config::get('change_autologin_key_upon_logout')) {
 	if(isset($identified_user) or isset($banned_user) or isset($logged_out_user)) {
 		if(isset($identified_user)) $tmp36=$reg8log_db->quote_smart($identified_user);
 		else if(isset($banned_user)) $tmp36=$reg8log_db->quote_smart($banned_user);
@@ -29,13 +29,13 @@ if($change_autologin_key_upon_logout) {
 		$new_autologin_key=func::random_string(43);
 		$query="update `accounts` set `autologin_key`='$new_autologin_key'";
 		if(isset($flag)) $query.=', `last_activity`='.$req_time;
-		if($log_last_logout) $query.=', `last_logout`='.$req_time;
+		if(config::get('log_last_logout')) $query.=', `last_logout`='.$req_time;
 		$query.=' where `username`='.$tmp36.' limit 1';
 		$reg8log_db->query($query);
 	}
 }
 
-if($log_last_logout and !$change_autologin_key_upon_logout) {
+if(config::get('log_last_logout') and !config::get('change_autologin_key_upon_logout')) {
 	require_once ROOT.'include/code/code_identify.php';
 	if(isset($identified_user) or isset($banned_user) or isset($logged_out_user)) {
 		if(isset($identified_user)) $tmp36=$reg8log_db->quote_smart($identified_user);
@@ -49,7 +49,7 @@ if($log_last_logout and !$change_autologin_key_upon_logout) {
 	}
 }
 
-$user=new hm_user($identify_structs);
+$user=new hm_user(config::get('identify_structs'));
 if($user->logout()) header('Location: index.php');
 else {
 	$failure_msg=(config::get('debug_mode'))? $user->err_msg : func::tr('Problem logging out');

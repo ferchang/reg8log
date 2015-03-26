@@ -51,10 +51,10 @@ require ROOT.'include/page/page_sections.php';
 <li><a class="li_item" href="change_email.php"><?php echo func::tr('Change email'); ?></a><br>
 <?php
 
-if($identified_user=='Admin') $change_autologin_key_upon_login=$admin_change_autologin_key_upon_login;//--
-if($change_autologin_key_upon_login!=2 and ($allow_manual_autologin_key_change or $identified_user=='Admin')) {
+if($identified_user=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
+if(config::get('change_autologin_key_upon_login')!=2 and (config::get('allow_manual_autologin_key_change') or $identified_user=='Admin')) {
 	echo '<li><a class="li_item" href="change_autologin_key.php">', func::tr('Logging other systems out'), '</a>';
-	if(!$allow_manual_autologin_key_change) echo '<small> (', func::tr('Admin only'), ')</small>';
+	if(!config::get('allow_manual_autologin_key_change')) echo '<small> (', func::tr('Admin only'), ')</small>';
 }
 
 require_once ROOT.'include/config/config_brute_force_protection.php';

@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 unset($user);
 
-$user=new hm_user($identify_structs);
+$user=new hm_user(config::get('identify_structs'));
 
 unset($identified_user);
 unset($identify_error);
@@ -18,9 +18,9 @@ if($user->err_msg) $identify_error=true;
 
 $log_activity=0;
 
-if($log_last_login and isset($manual_login) and (isset($identified_user) or isset($banned_user))) $log_activity+=1;
+if(config::get('log_last_login') and isset($manual_login) and (isset($identified_user) or isset($banned_user))) $log_activity+=1;
 
-if($log_last_activity and (isset($identified_user) or isset($banned_user)) and !isset($block_bypass_mode)) $log_activity+=2;
+if(config::get('log_last_activity') and (isset($identified_user) or isset($banned_user)) and !isset($block_bypass_mode)) $log_activity+=2;
 
 if($log_activity) require_once ROOT.'include/code/log/code_log_last_login8activity.php';
 
