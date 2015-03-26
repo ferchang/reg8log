@@ -34,9 +34,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 //  crypt_random modified by hamidreza_mz -=At=- yahoo -=Dot=- com
 
-if(!isset($GLOBALS['$entropy']) and $GLOBALS['db_installed']) require ROOT.'include/code/code_fetch_site_vars.php';
+if(!isset($GLOBALS['entropy']) and $GLOBALS['db_installed']) require ROOT.'include/code/code_fetch_site_vars.php';
 
-@$entropy=sha1(config::get('pepper').$request_entropy.$entropy);
+@$entropy=sha1(config::get('pepper').$GLOBALS['request_entropy'].$GLOBALS['entropy']);
 
 function crypt_random($min = 0, $max = 0x7FFFFFFF)
 {
@@ -44,13 +44,11 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
         return $min;
     }
 
-	global $entropy;
-
     if (function_exists('openssl_random_pseudo_bytes')) {
         // openssl_random_pseudo_bytes() is slow on windows per the following:
         // http://stackoverflow.com/questions/1940168/openssl-random-pseudo-bytes-is-slow-php
         if ((PHP_OS & "\xDF\xDF\xDF") !== 'WIN') { // PHP_OS & "\xDF\xDF\xDF" == strtoupper(substr(PHP_OS, 0, 3)), but a lot faster
-            extract(unpack('Nrandom', pack('H*', sha1(openssl_random_pseudo_bytes(4).$entropy.microtime()))));
+            extract(unpack('Nrandom', pack('H*', sha1(openssl_random_pseudo_bytes(4).$GLOBALS['entropy'].microtime()))));
             return abs($random) % ($max - $min) + $min; 
         }
     }
@@ -63,7 +61,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
         $urandom = @fopen('/dev/urandom', 'rb');
     }
     if (!is_bool($urandom)) {
-        extract(unpack('Nrandom', pack('H*', sha1(fread($urandom, 4).$entropy.microtime()))));
+        extract(unpack('Nrandom', pack('H*', sha1(fread($urandom, 4).$GLOBALS['entropy'].microtime()))));
         // say $min = 0 and $max = 3.  if we didn't do abs() then we could have stuff like this:
         // -4 % 3 + 0 = -1, even though -1 < $min
         return abs($random) % ($max - $min) + $min;
@@ -73,7 +71,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
 	if(function_exists('mcrypt_create_iv') and version_compare(PHP_VERSION, '5.3.0', '>=')) {
 		@$tmp16=mcrypt_create_iv(4, MCRYPT_DEV_URANDOM);
 		if($tmp16!==false) {
-			extract(unpack('Nrandom', pack('H*', sha1($tmp16.$entropy.microtime()))));
+			extract(unpack('Nrandom', pack('H*', sha1($tmp16.$GLOBALS['entropy'].microtime()))));
 			return abs($random) % ($max - $min) + $min;
 		}
 	}
@@ -93,7 +91,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
         mt_srand(fmod(time() * getmypid(), 0x7FFFFFFF) ^ fmod(1000000 * lcg_value(), 0x7FFFFFFF));
     }
 
-    extract(unpack('Nrandom', pack('H*', sha1(mt_rand(0, 0x7FFFFFFF).$entropy.microtime()))));
+    extract(unpack('Nrandom', pack('H*', sha1(mt_rand(0, 0x7FFFFFFF).$GLOBALS['entropy'].microtime()))));
     return abs($random) % ($max - $min) + $min;
 
 }

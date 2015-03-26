@@ -83,7 +83,6 @@ function error($err_msg='')
 
 	if($this->auto_abort) {
 		$failure_msg=(config::get('debug_mode'))? $this->err_msg : "Database error";
-		global $page_dir;
 		require ROOT.'include/page/page_failure.php';
 		exit;
 	}

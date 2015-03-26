@@ -12,22 +12,18 @@ if($req_time>=$_until and $_until!=1) {
 	return;
 }
 
-global $banned_user;
-global $ban_until;
-global $ban_reason;
-
-$banned_user=$_username;
-$ban_until=$_until;
+$GLOBALS['banned_user']=$_username;
+$GLOBALS['ban_until']=$_until;
 
 $query='select * from `ban_info` where `username`='.$tmp6.' limit 1';
 
 if($reg8log_db->result_num($query)) {
 	$rec=$reg8log_db->fetch_row();
-	$ban_reason=$rec['reason'];
+	$GLOBALS['ban_reason']=$rec['reason'];
 }
 else {
 	echo 'Warning: No corresponding ban_info record found for banned user!';
-	$ban_reason='';
+	$GLOBALS['ban_reason']='';
 }
 
 ?>

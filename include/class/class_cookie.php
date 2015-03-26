@@ -30,8 +30,6 @@ $this->err_msg=get_class($this).": $err_msg";
 function set($name=null, $values=array(), $value_seperator=null, $age='session', $is_abs_time=false)
 {
 
-global $req_time;
-
 $this->err_msg='';
 
 if(is_null($name)) $name=$this->name;
@@ -54,13 +52,13 @@ else $val=$values;
 
 switch("$age") {
 	case 'permanent':
-		$expire=$req_time+$this->long_age;
+		$expire=$GLOBALS['req_time']+$this->long_age;
 	break;
 	case 'session':
 		$expire=0;
 	break;
 	default:
-		$expire=(($is_abs_time)? $age : (($age)? $age+$req_time : 0));
+		$expire=(($is_abs_time)? $age : (($age)? $age+$GLOBALS['req_time'] : 0));
 	break;
 }
 

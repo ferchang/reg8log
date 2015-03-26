@@ -2,9 +2,9 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!isset($aes)) {
+if(!isset($GLOBALS['aes'])) {
 	require_once ROOT.'include/class/class_aes_cipher.php';
-	$aes = new Crypt_AES();//default mode: CBC
+	$GLOBALS['aes'] = new Crypt_AES();//default mode: CBC
 }
 
 require_once ROOT.'include/code/code_fetch_site_vars.php';
@@ -13,16 +13,14 @@ if(!isset($_COOKIE['reg8log_site_salt'])) setcookie('reg8log_site_salt', $GLOBAL
 
 require_once ROOT.'include/config/config_crypto.php';
 
-$aes->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
+$GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 
 function encrypt($str) {
-	global $aes;
-	return $aes->IvEncryptHmac($str);
+	return $GLOBALS['aes']->IvEncryptHmac($str);
 }
 
 function decrypt($str) {
-	global $aes;
-	return $aes->IvDecryptHmac($str);
+	return $GLOBALS['aes']->IvDecryptHmac($str);
 }
 
 ?>

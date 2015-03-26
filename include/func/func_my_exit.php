@@ -3,10 +3,8 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 function my_exit($string) {
-
-	global $page_dir;
 	
-	exit("<span $page_dir>$string</span>");
+	exit("<span {$GLOBALS['page_dir']}>$string</span>");
 
 }
 
