@@ -18,8 +18,6 @@ if(isset($captcha_needed)) {
 	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 }
 
-require ROOT.'include/config/config_register.php';
-
 do {//goto statement not supported in PHP < 5.3; so i use do ... while(false) + break in this specific scenario instead.
 
 if(!isset($_POST['email']))  break;

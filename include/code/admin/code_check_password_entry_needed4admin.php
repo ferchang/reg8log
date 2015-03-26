@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_admin.php';
-
 if(!config::get('admin_operations_require_password')) return;
 
 $password_check_needed=true;

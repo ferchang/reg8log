@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_brute_force_protection.php';
-
 if(config::get('ch_pswd_captcha_threshold')==-1) return;
 if(config::get('ch_pswd_captcha_threshold')==0) {
 	$captcha_needed=true;

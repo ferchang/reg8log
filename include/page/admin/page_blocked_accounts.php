@@ -236,8 +236,6 @@ echo '<th  class="admin_action">', func::tr('Delete log record'), '</th>';
 
 echo '</tr>';
 
-require ROOT.'include/config/config_brute_force_protection.php';
-
 $i=0;
 $r=false;
 while($rec=$reg8log_db->fetch_row()) {

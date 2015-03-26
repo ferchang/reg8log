@@ -14,8 +14,6 @@ $banned_users=$reg8log_db->count_star($query);;
 
 //---------------
 
-require ROOT.'include/config/config_register.php';
-
 $expired1=$req_time-config::get('email_verification_time');
 $expired2=$req_time-config::get('admin_confirmation_time');
 
@@ -34,8 +32,6 @@ $pending_accounts4email=$reg8log_db->count_star($query);
 $query="select count(*) from `account_block_log`";
 
 $all_account_blocks=$reg8log_db->count_star($query);
-
-require ROOT.'include/config/config_brute_force_protection.php';
 
 $query="select count(*) from `account_block_log` where `unblocked`=0 and  ((`username`!='admin' and `first_attempt`>".($req_time-config::get('account_block_period'))." and `block_threshold`>=".config::get('account_block_threshold').") or (`username`='admin' and `first_attempt`>".($req_time-config::get('admin_account_block_period'))." and `block_threshold`>=".config::get('admin_account_block_threshold')."))";
 

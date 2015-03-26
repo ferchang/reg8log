@@ -17,8 +17,6 @@ require ROOT.'include/code/admin/code_pagination_params.php';
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require ROOT.'include/config/config_register.php';
-
 require ROOT.'include/code/admin/code_check_password_entry_needed4admin.php';
 
 if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
@@ -47,8 +45,6 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 	}
 	
 }
-
-require ROOT.'include/config/config_register.php';
 
 $expired1=$req_time-config::get('email_verification_time');
 $expired2=$req_time-config::get('admin_confirmation_time');

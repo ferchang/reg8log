@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require ROOT.'include/config/config_register.php';
-
 if(!config::get('alert_admin_about_registerations') or (config::get('alert_admin_about_registerations')==1 and isset($pending_reg)) or (config::get('alert_admin_about_registerations')==2 and !isset($pending_reg))) return;
 
 if(config::get('registeration_alert_type')==1) {
@@ -19,7 +17,6 @@ if(config::get('registeration_alert_type')==1) {
 		if(config::get('registerations_alert_threshold_period')) {
 			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
 			$reg8log_db->query($query);
-			require_once ROOT.'include/config/config_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
 		}
@@ -34,7 +31,6 @@ if(config::get('registeration_alert_type')==1) {
 		if(config::get('registerations_alert_threshold_period')) {
 			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
 			$reg8log_db->query($query);
-			require_once ROOT.'include/config/config_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
 		}

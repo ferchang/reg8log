@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_security_logs.php';
-
 require_once ROOT.'include/code/code_db_object.php';
 
 $tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
@@ -42,8 +40,6 @@ if(config::get('alert_admin_about_ip_blocks')) {
 		require ROOT.'include/code/admin/code_check_ip_blocks_admin_email_alert.php';
 	}
 }
-
-require_once ROOT.'include/config/config_cleanup.php';
 
 if(config::get('keep_expired_block_log_records_for')!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_block_log_expired_cleanup.php';
 

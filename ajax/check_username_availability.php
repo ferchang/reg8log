@@ -8,8 +8,6 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-require ROOT.'include/config/config_register.php';
-
 if(!config::get('ajax_check_username') or !config::get('registeration_enabled')) exit('ajax username check or registeration is disabled!');
 
 if(!isset($_POST['value'])) {

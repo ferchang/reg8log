@@ -50,8 +50,6 @@ function identify($username=null, $password=null)
 
 		$query1='select * from `accounts` where `username`='.$tmp7.' limit 1';
 
-		require ROOT.'include/config/config_register.php';
-		
 		$expired1=$req_time-config::get('email_verification_time');
 		$expired2=$req_time-config::get('admin_confirmation_time');
 

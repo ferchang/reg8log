@@ -13,8 +13,6 @@ if(strtolower($_POST['username'])=='admin') {
 
 if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
 
-require ROOT.'include/config/config_register.php';
-
 if(!$username_exists and config::get('registeration_enabled') and config::get('ajax_check_username') and !config::get('max_ajax_check_usernames')) {
 	$no_pretend_user=true;
 	return;
@@ -111,8 +109,6 @@ else {
 	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 }
 setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
-
-require_once ROOT.'include/config/config_cleanup.php';
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 	$table_name='account_incorrect_logins';

@@ -36,8 +36,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(!isset($GLOBALS['$entropy']) and $GLOBALS['db_installed']) require ROOT.'include/code/code_fetch_site_vars.php';
 
-require_once ROOT.'include/config/config_crypto.php';
-
 @$entropy=sha1(config::get('pepper').$request_entropy.$entropy);
 
 function crypt_random($min = 0, $max = 0x7FFFFFFF)

@@ -47,8 +47,6 @@ else {
 }
 setcookie('reg8log_ip_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 
-require_once ROOT.'include/config/config_cleanup.php';
-
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_expired_cleanup.php';
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_size_cleanup.php';

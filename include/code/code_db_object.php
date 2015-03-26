@@ -3,7 +3,6 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 require_once ROOT.'include/class/class_db.php';
-require ROOT.'include/config/config_dbms.php';
 
 $reg8log_dbms_info=config::get('reg8log_dbms_info');
 

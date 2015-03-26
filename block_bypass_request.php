@@ -8,8 +8,6 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/code_prevent_repost.php';
 
-require ROOT.'include/config/config_brute_force_protection.php';
-
 if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
 
 if(!isset($_GET['username'])) exit('<h3 align="center">Error: username parameter is not set</h3>');
@@ -79,8 +77,6 @@ if(isset($err_msgs)) break;
 
 $query1='select * from `accounts` where `username`='.$_username.' limit 1';
 
-require ROOT.'include/config/config_register.php';
-
 $expired1=$req_time-config::get('email_verification_time');
 $expired2=$req_time-config::get('admin_confirmation_time');
 
@@ -130,8 +126,6 @@ if(config::get('max_block_bypass_emails')!=-1) $success_msg.=sprintf(func::tr('m
 $success_msg.='.</h3>';
 $no_specialchars=true;
 require ROOT.'include/page/page_success.php';
-
-require ROOT.'include/config/config_cleanup.php';
 
 if(isset($insert)) {
 

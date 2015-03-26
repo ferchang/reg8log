@@ -11,8 +11,6 @@ if(!empty($_POST)) {
 	require ROOT.'include/code/code_prevent_xsrf.php';
 }
 
-require ROOT.'include/config/config_password_change_or_reset.php';
-
 $captcha_needed=true;
 
 if(isset($captcha_needed)) {
@@ -110,7 +108,6 @@ $no_specialchars=true;
 require ROOT.'include/page/page_success.php';
 
 if(isset($cleanup)) {
-	require ROOT.'include/config/config_cleanup.php';
 	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_password_reset_expired_cleanup.php';
 }
 

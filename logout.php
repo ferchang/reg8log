@@ -7,8 +7,6 @@ require 'include/common.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-require_once ROOT.'include/config/config_identify.php';
-
 if(config::get('log_last_activity')) $flag=true;
 
 config::set('log_last_activity', false);

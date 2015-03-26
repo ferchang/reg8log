@@ -23,8 +23,6 @@ if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and
 	
 	$manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
-	require ROOT.'include/config/config_brute_force_protection.php';
-
 	$_username=$_POST['username'];
 	require ROOT.'include/code/code_check_ip_block.php';
 	if(isset($ip_block)) {

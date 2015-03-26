@@ -17,8 +17,6 @@ if(isset($except_user)) {
 }
 $query1.=' limit 1';
 
-require ROOT.'include/config/config_register.php';
-
 $expired1=$req_time-config::get('email_verification_time');
 $expired2=$req_time-config::get('admin_confirmation_time');
 
@@ -27,7 +25,6 @@ if(isset($except_user)) $query2.=' and `username`!='.$except_user;
 $query2.=' limit 1';
 
 /* if($field_name=='username' and (!config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
-	require_once ROOT.'include/config/config_brute_force_protection.php';
 	$expired=$req_time-config::get('account_block_period');
 	$query3="select * from `account_incorrect_logins` where `username`=$tmp8 and `last_attempt` > $expired limit 1";
 } */

@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_security_logs.php';
-
 if(!config::get('alert_admin_about_account_blocks') and !config::get('alert_admin_about_ip_blocks')) return;
 
 if(isset($_COOKIE['reg8log_dont_disturb']) and $_COOKIE['reg8log_dont_disturb']==='1') return;
@@ -31,8 +29,6 @@ if($rec['new_ip_blocks'] and in_array(config::get('alert_admin_about_ip_blocks')
 }
 
 //----------------------------------------
-
-require ROOT.'include/config/config_register.php';
 
 if(config::get('registeration_alert_type')!=1 and config::get('registeration_alert_type')!=3) return;
 

@@ -16,8 +16,6 @@ if(!isset($_POST['username'])) {
 
 $_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 
-require ROOT.'include/config/config_brute_force_protection.php';
-
 $_username=$_POST['username'];
 require ROOT.'include/code/code_check_ip_block.php';
 if(!isset($captcha_needed)) require ROOT.'include/code/code_check_account_block.php';

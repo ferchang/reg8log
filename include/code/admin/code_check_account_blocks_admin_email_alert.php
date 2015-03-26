@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_security_logs.php';
-
 require_once ROOT.'include/code/code_db_object.php';
 
 $query="select * from `admin_block_alerts` where `for`='email' limit 1";
@@ -50,7 +48,6 @@ if($admin_alert_email_msg) {
 	if(config::get('max_alert_emails')) {
 		$query="insert into `block_alert_emails_history` (`timestamp`) values($req_time)";
 		$reg8log_db->query($query);
-		require_once ROOT.'include/config/config_cleanup.php';
 		if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_expired_cleanup.php';
 		if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_size_cleanup.php';
 	}

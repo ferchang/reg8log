@@ -2,10 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/config/config_brute_force_protection.php';
-
-require_once ROOT.'include/config/config_identify.php';
-
 ?>
 
 <html <?php echo $page_dir; ?>>

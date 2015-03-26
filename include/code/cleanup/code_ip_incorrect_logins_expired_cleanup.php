@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(strtolower($_POST['username'])=='admin') {
 
-	require ROOT.'include/config/config_brute_force_protection.php';
-	
 	$expired=$req_time-config::get('admin_ip_block_period');
 
 	$query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=1";

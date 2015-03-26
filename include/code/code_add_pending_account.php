@@ -58,8 +58,6 @@ else if(config::get('admin_confirmation_needed')) {
 
 $no_specialchars=true;
 
-require ROOT.'include/config/config_cleanup.php';
-
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
 	require_once ROOT.'include/code/code_fetch_site_vars.php';
 	$reg8log_db->query("select release_lock('$lock_name')");

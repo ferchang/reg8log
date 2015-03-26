@@ -33,8 +33,6 @@ $no_specialchars=true;
 $additional_link=array(func::tr('Admin operations'), 'index.php');
 require ROOT.'include/page/page_success.php';
 
-require ROOT.'include/config/config_cleanup.php';
-
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ban_info_expired_cleanup.php';
 
 require ROOT.'include/code/code_set_submitted_forms_cookie.php';

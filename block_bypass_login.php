@@ -10,8 +10,6 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 $block_bypass_mode=true;
 
-require ROOT.'include/config/config_brute_force_protection.php';
-
 if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
 
 if(!isset($_GET['key'])) exit('<h3 align="center">Error: key parameter is not set!</h3>');

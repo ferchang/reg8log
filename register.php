@@ -12,8 +12,6 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/code_prevent_repost.php';
 
-$fields=config::get('fields');
-
 if(!config::get('registeration_enabled')) func::my_exit('<center><h3>'.func::tr('Registration is disabled!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 require ROOT.'include/code/sess/code_sess_start.php';

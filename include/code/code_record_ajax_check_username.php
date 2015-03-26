@@ -20,8 +20,6 @@ if(config::get('reset_clients_ajax_check_usernames_upon_register')) {
 	setcookie('reg8log_ajax_check_usernames', $cookie_contents, 0, '/', null, HTTPS, true);	
 }
 
-require_once ROOT.'include/config/config_cleanup.php';
-
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ajax_check_usernames_expired_cleanup.php';
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ajax_check_usernames_size_cleanup.php';

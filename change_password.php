@@ -10,8 +10,6 @@ require ROOT.'include/code/code_identify.php';
 
 if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not authenticated msg').'.</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-require ROOT.'include/config/config_register.php'; //for password_refill
-
 $fields=config::get('fields');
 
 $password_format=$fields['password'];
@@ -92,7 +90,6 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		}
 		else if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
 		$_username=$identified_user;
-		require ROOT.'include/config/config_password_change_or_reset.php';
 		require ROOT.'include/code/code_change_password.php';
 		require ROOT.'include/code/code_set_submitted_forms_cookie.php';
 		$success_msg='<h3>'.func::tr('Your password changed successfully').'.</h3>';
