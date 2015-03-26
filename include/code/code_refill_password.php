@@ -7,7 +7,7 @@ if(strpos($refill, "hashed-$site_salt")===0) {
 	$refill_output=' value="encrypted-'.$site_salt.'-'.base64_encode(func::encrypt($refill)).'" ';
 }
 else if(strpos($refill, "encrypted-$site_salt")===0) $refill_output=' value="'.$refill.'" ';
-else if($password_refill===2) {
+else if(config::get('password_refill')===2) {
 	$refill='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$refill);
 	
 	$refill_output=' value="encrypted-'.$site_salt.'-'.base64_encode(func::encrypt($refill)).'" ';

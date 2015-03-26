@@ -223,7 +223,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
-	if($can_notify_user_about_admin_action and $rec['notify_user']) {
+	if(config::get('can_notify_user_about_admin_action') and $rec['notify_user']) {
 		echo '<input type="hidden" name="email-', $rec['auto'], '" value="', $rec['email'], '">';
 		echo '<input type="hidden" name="lang-', $rec['auto'], '" value="', $rec['lang'], '">';
 	}

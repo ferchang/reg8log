@@ -14,7 +14,7 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 require ROOT.'include/config/config_register.php';
 
-if(!$registeration_enabled) func::my_exit('<center><h3>'.func::tr('Registration is disabled!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
+if(!config::get('registeration_enabled')) func::my_exit('<center><h3>'.func::tr('Registration is disabled!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
@@ -51,16 +51,16 @@ if(strpos($_POST['password'], "encrypted-$site_salt")===0) {
 }
 else if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 
-if($email_verification_needed or $admin_confirmation_needed) {
+if(config::get('email_verification_needed') or config::get('admin_confirmation_needed')) {
 	require ROOT.'include/code/code_add_pending_account.php';
-	if($admin_confirmation_needed) {
+	if(config::get('admin_confirmation_needed')) {
 		$pending_reg=true;
 		require ROOT.'include/code/log/code_log_registeration.php';
 	}
 }
 else {
 	require ROOT.'include/code/code_add_account.php';
-	if($login_upon_register) {
+	if(config::get('login_upon_register')) {
 	  $_username=$_POST['username'];
 	  require ROOT.'include/code/code_login_upon_register.php';
 	  $success_msg.='(<span style="color: blue">'.func::tr('You are logged in automatically').'</span>)<br>';

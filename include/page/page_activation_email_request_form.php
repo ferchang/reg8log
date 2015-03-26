@@ -99,8 +99,8 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/pag
 </table><br>
 <?php echo func::tr('Check your email carefully msg'); ?>
 <?php
-if($max_activation_emails!=-1) {
-echo '<hr width="90%">', func::tr('Maximum number of activation emails that can be sent'), ': ', $max_activation_emails, '<br>';
+if(config::get('max_activation_emails')!=-1) {
+echo '<hr width="90%">', func::tr('Maximum number of activation emails that can be sent'), ': ', config::get('max_activation_emails'), '<br>';
 echo func::tr('Note that the system will not, for security reasons, tell you if the maximum number of emails is reached.');
 }
 ?>

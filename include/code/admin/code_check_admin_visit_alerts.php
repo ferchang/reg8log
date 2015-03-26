@@ -34,7 +34,7 @@ if($rec['new_ip_blocks'] and in_array($alert_admin_about_ip_blocks, array(1, 3))
 
 require ROOT.'include/config/config_register.php';
 
-if($registeration_alert_type!=1 and $registeration_alert_type!=3) return;
+if(config::get('registeration_alert_type')!=1 and config::get('registeration_alert_type')!=3) return;
 
 $query="select * from `admin_registeration_alerts` where `for`='visit' limit 1";
 
@@ -44,7 +44,7 @@ $rec8=$reg8log_db->fetch_row();
 
 $new_registerations=$rec8['new_registerations'];
 
-if($new_registerations<$registerations_alert_threshold) return;
+if($new_registerations<config::get('registerations_alert_threshold')) return;
 
 if($admin_alert_visit_msg) $admin_alert_visit_msg.="\n";
 $admin_alert_visit_msg.='- '.sprintf(func::tr('There were %d new registeration(s).'), $new_registerations);

@@ -15,7 +15,7 @@ if(config::get('account_block_threshold')==-1  and config::get('account_captcha_
 
 require ROOT.'include/config/config_register.php';
 
-if(!$username_exists and $registeration_enabled and $ajax_check_username and !$max_ajax_check_usernames) {
+if(!$username_exists and config::get('registeration_enabled') and config::get('ajax_check_username') and !config::get('max_ajax_check_usernames')) {
 	$no_pretend_user=true;
 	return;
 }

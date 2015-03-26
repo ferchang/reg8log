@@ -6,14 +6,14 @@ define('CAN_INCLUDE', true);
 $query='select * from `email_change` where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 
 //--------------
-if($max_change_email_emails==-1) {
-	if($max_activation_emails==-1) $max_emails=0;
-	else $max_emails=$max_activation_emails;
+if(config::get('max_change_email_emails')==-1) {
+	if(config::get('max_activation_emails')==-1) $max_emails=0;
+	else $max_emails=config::get('max_activation_emails');
 }
-else $max_emails=$max_change_email_emails;
+else $max_emails=config::get('max_change_email_emails');
 
-if($change_email_verification_time==0) $verification_time=$email_verification_time;
-else $verification_time=$change_email_verification_time;
+if(config::get('change_email_verification_time')==0) $verification_time=config::get('email_verification_time');
+else $verification_time=config::get('change_email_verification_time');
 //--------------
 
 if($reg8log_db->result_num($query)) {

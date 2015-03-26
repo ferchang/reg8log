@@ -69,7 +69,7 @@ force the client to do a captcha test again.
 this is to prevent misusing the system with bots to get knowledge about registered
 unique field values in our members database.
 */
-if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !$ajax_check_username or $max_ajax_check_usernames)) {
+if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
 		if(isset($_SESSION['reg8log']['passed'][$field_name]) and $_SESSION['reg8log']['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
 				unset($_SESSION['reg8log']['captcha_verified']);
 				$err_msgs[]=func::tr('You need to enter a security code again.');

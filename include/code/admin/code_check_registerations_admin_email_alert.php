@@ -10,14 +10,14 @@ $rec6=$reg8log_db->fetch_row();
 
 $last_reg_alert_email=$rec6['last_alert'];
 
-if(!(!$registeration_alert_emails_min_interval or $req_time>=($last_reg_alert_email+$registeration_alert_emails_min_interval))) {
+if(!(!config::get('registeration_alert_emails_min_interval') or $req_time>=($last_reg_alert_email+config::get('registeration_alert_emails_min_interval')))) {
 	$reg8log_db->query("select release_lock($reg_email_alert_lock)");
 	return;
 }
 
-if($max_registeration_alert_emails) {
-	$query='select count(*) from `registeration_alert_emails_history` where `timestamp`>='.($req_time-$max_registeration_alert_emails_period);
-	if($reg8log_db->count_star($query)>=$max_registeration_alert_emails) {
+if(config::get('max_registeration_alert_emails')) {
+	$query='select count(*) from `registeration_alert_emails_history` where `timestamp`>='.($req_time-config::get('max_registeration_alert_emails_period'));
+	if($reg8log_db->count_star($query)>=config::get('max_registeration_alert_emails')) {
 		$reg8log_db->query("select release_lock($reg_email_alert_lock)");
 		return;
 	}
@@ -41,7 +41,7 @@ $reg8log_db->query("select release_lock($reg_email_alert_lock)");
 
 if($admin_reg_alert_email_msg) {
 	require ROOT.'include/code/email/admin/code_email_admin_reg_alert_msg.php';
-	if($max_registeration_alert_emails) {
+	if(config::get('max_registeration_alert_emails')) {
 		$query="insert into `registeration_alert_emails_history` (`timestamp`) values($req_time)";
 		$reg8log_db->query($query);
 		require_once ROOT.'include/config/config_cleanup.php';

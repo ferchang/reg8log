@@ -36,7 +36,7 @@ if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no s
 
 $rec=$reg8log_db->fetch_row();
 
-$expired=$req_time-$admin_confirmation_time;
+$expired=$req_time-config::get('admin_confirmation_time');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Pending account expired msg').'.</h3>'."$home</center>");
 
@@ -47,7 +47,7 @@ if($rec['email_verified']) {
   exit;
 }
 
-$expired=$req_time-$email_verification_time;
+$expired=$req_time-config::get('email_verification_time');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of email verification time msg').'.</h3>'."$home</center>");
 
@@ -58,13 +58,13 @@ $reg8log_db->query($query);
 if(!$rec['admin_confirmed']) {
   
   require ROOT.'include/code/code_set_submitted_forms_cookie.php';
-  $success_msg='<h3>'.sprintf(func::tr('email verified - waiting admin msg'), func::duration2friendly_str($admin_confirmation_time, 0)).'.</h3>';
+  $success_msg='<h3>'.sprintf(func::tr('email verified - waiting admin msg'), func::duration2friendly_str(config::get('admin_confirmation_time'), 0)).'.</h3>';
   $no_specialchars=true;
   require ROOT.'include/page/page_success.php';
 }
 else {
   require ROOT.'include/code/code_activate_pending_account.php';
-  if($login_upon_register) {
+  if(config::get('login_upon_register')) {
     $_username=$rec['username'];
     require ROOT.'include/code/code_login_upon_register.php';
 	$success_msg.='(<span style="color: blue">'.func::tr('You are logged in automatically').'</span>)<br>';

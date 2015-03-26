@@ -178,7 +178,7 @@ var report_args={'1':ws, '2':''};
 function check_username(uname) {
 
 <?php
-if(!$ajax_check_username) echo "
+if(!config::get('ajax_check_username')) echo "
 //ajax username check is disabled on the server!
 return;
 //ajax username check is disabled on the server!\n\n";
@@ -286,7 +286,7 @@ onblur="if(this.value!='') check_username(this.value);" type="text" name="userna
 <td colspan="2">
 <input type="password" name="password" autocomplete="off" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
-if(isset($_POST['password']) and $_POST['password']!=='' and $password_refill and !isset($password_error)) {
+if(isset($_POST['password']) and $_POST['password']!=='' and config::get('password_refill') and !isset($password_error)) {
 	$refill=$_POST['password'];
 	require ROOT.'include/code/code_refill_password.php';
 }
@@ -336,7 +336,7 @@ if(captcha_exists) {
 
 </script>
 <?php
-if($admin_confirmation_needed and $can_notify_user_about_admin_action) {
+if(config::get('admin_confirmation_needed') and config::get('can_notify_user_about_admin_action')) {
 	echo "<tr><td colspan=\"2\" $cell_align>";
 	echo func::tr('notify me admin action msg'), ': ';
 	echo '</td><td><input type="checkbox" name="notify" ';

@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(!$max_ajax_check_usernames) return;
+if(!config::get('max_ajax_check_usernames')) return;
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
@@ -10,7 +10,7 @@ $query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', 
 
 $reg8log_db->query($query);
 
-if($reset_clients_ajax_check_usernames_upon_register) {
+if(config::get('reset_clients_ajax_check_usernames_upon_register')) {
 	$insert_id=mysql_insert_id();
 	if(!isset($_COOKIE['reg8log_ajax_check_usernames'])) $cookie_contents=$insert_id;
 	else {

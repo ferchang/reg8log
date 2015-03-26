@@ -74,8 +74,8 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	
 	if(!isset($err_msgs)) {
 		require ROOT.'include/config/config_register.php';
-		if($identified_user=='Admin') $email_change_needs_email_verification=$admin_email_change_needs_email_verification;
-		if(!$email_change_needs_email_verification or ($email_change_needs_email_verification==2 and !$email_verification_needed)) {
+		if($identified_user=='Admin') config::set('email_change_needs_email_verification', config::get('admin_email_change_needs_email_verification'));
+		if(!config::get('email_change_needs_email_verification') or (config::get('email_change_needs_email_verification')==2 and !config::get('email_verification_needed'))) {
 			require ROOT.'include/code/code_change_email.php';
 			require ROOT.'include/code/code_set_submitted_forms_cookie.php';
 			$success_msg='<h3>'.func::tr('Your email changed successfully').'.</h3>';

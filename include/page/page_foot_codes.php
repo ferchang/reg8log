@@ -8,7 +8,7 @@ if(isset($admin_alert_visit_msg) and $admin_alert_visit_msg) {
 
 	if(!isset($new_account_blocks, $account_blocks_alert_threshold_reached)) $new_account_blocks=0;
 	if(!isset($new_ip_blocks, $ip_blocks_alert_threshold_reached)) $new_ip_blocks=0;
-	if(!isset($new_registerations) or $new_registerations<$registerations_alert_threshold) $new_registerations=0;
+	if(!isset($new_registerations) or $new_registerations<config::get('registerations_alert_threshold')) $new_registerations=0;
 
 	echo "<script src='{ROOT}js/my_alert.js'></script>";
 	

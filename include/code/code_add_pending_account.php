@@ -24,18 +24,18 @@ foreach($fields as $field_name=>$specs) {
   $field_values.=', ';
 }
 
-if($email_verification_needed) $email_verification_key=func::random_string(22);
+if(config::get('email_verification_needed')) $email_verification_key=func::random_string(22);
 else $email_verification_key='';
 
-if($admin_confirmation_needed) $admin_confirmed=0;
+if(config::get('admin_confirmation_needed')) $admin_confirmed=0;
 else $admin_confirmed=1;
 
 $field_names.='`emails_sent`, `email_verification_key`, `email_verified`, `admin_confirmed`, `timestamp`, `notify_user`, `lang`';
 
-if($email_verification_needed) $emails_sent=1;
+if(config::get('email_verification_needed')) $emails_sent=1;
 else $emails_sent=0;
 
-if($can_notify_user_about_admin_action and isset($_POST['notify'])) $notify_user=1;
+if(config::get('can_notify_user_about_admin_action') and isset($_POST['notify'])) $notify_user=1;
 else $notify_user=0;
 
 $field_values.="$emails_sent, '$email_verification_key', 0, $admin_confirmed, $req_time, $notify_user, '".config::get('lang')."'";
@@ -46,14 +46,14 @@ $reg8log_db->query($query);
 
 unset($_SESSION['reg8log']['captcha_verified'], $_SESSION['reg8log']['passed']);
 
-if($email_verification_needed) {
+if(config::get('email_verification_needed')) {
   require ROOT.'include/code/email/code_email_verification_link.php';
   
-  $success_msg=sprintf(func::tr('account activation email sent msg'), func::duration2friendly_str($email_verification_time, 0));
+  $success_msg=sprintf(func::tr('account activation email sent msg'), func::duration2friendly_str(config::get('email_verification_time'), 0));
 }
-else if($admin_confirmation_needed) {
+else if(config::get('admin_confirmation_needed')) {
   
-  $success_msg=sprintf(func::tr('pending for admin confirmation msg'), func::duration2friendly_str($admin_confirmation_time, 0));
+  $success_msg=sprintf(func::tr('pending for admin confirmation msg'), func::duration2friendly_str(config::get('admin_confirmation_time'), 0));
 }
 
 $no_specialchars=true;

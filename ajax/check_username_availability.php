@@ -10,7 +10,7 @@ require ROOT.'include/code/code_prevent_xsrf.php';
 
 require ROOT.'include/config/config_register.php';
 
-if(!$ajax_check_username or !$registeration_enabled) exit('ajax username check or registeration is disabled!');
+if(!config::get('ajax_check_username') or !config::get('registeration_enabled')) exit('ajax username check or registeration is disabled!');
 
 if(!isset($_POST['value'])) {
 	$failure_msg="No value specified";
@@ -32,8 +32,8 @@ $value=$reg8log_db->quote_smart($value);
 
 $query1="select * from `accounts` where `username`=$value limit 1";
 
-$expired1=$req_time-$email_verification_time;
-$expired2=$req_time-$admin_confirmation_time;
+$expired1=$req_time-config::get('email_verification_time');
+$expired2=$req_time-config::get('admin_confirmation_time');
 
 $query2="select * from `pending_accounts` where `username`=$value and (`email_verification_key`='' or `email_verified`=1 or `timestamp` >= $expired1) and (`admin_confirmed`=1 or `timestamp` >= $expired2) limit 1";
 

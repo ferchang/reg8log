@@ -158,7 +158,7 @@ echo '</td></tr>';
 <tr>
 <td <?php echo $cell_align; ?>><?php echo func::tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
 <?php
-if(isset($_POST['newpass']) and $_POST['newpass']!=='' and $password_refill and !isset($password_error)) {
+if(isset($_POST['newpass']) and $_POST['newpass']!=='' and config::get('password_refill') and !isset($password_error)) {
 	$refill=$_POST['newpass'];
 	require ROOT.'include/code/code_refill_password.php';
 }

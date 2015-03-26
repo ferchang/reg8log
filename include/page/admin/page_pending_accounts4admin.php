@@ -187,7 +187,7 @@ if($sort_by=='timestamp') {
 }
 echo "</th>";
 
-if($can_notify_user_about_admin_action) {
+if(config::get('can_notify_user_about_admin_action')) {
 
 	echo '<th title="', func::tr('notify user description'), '">';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=notify_user&sort_dir=";
@@ -222,7 +222,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
-	if($can_notify_user_about_admin_action and $rec['notify_user']) {
+	if(config::get('can_notify_user_about_admin_action') and $rec['notify_user']) {
 		echo '<input type="hidden" name="email-', $rec['auto'], '" value="', $rec['email'], '">';
 		echo '<input type="hidden" name="lang-', $rec['auto'], '" value="', $rec['lang'], '">';
 	}
@@ -233,7 +233,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		else echo '<td style="color: yellow" title="', func::tr('Does not need email verification'), '">', func::tr('No'), '</td>';
 	}
 	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
-	if($can_notify_user_about_admin_action) echo '<td>', ($rec['notify_user'])? func::tr('Yes'):func::tr('No'), '</td>';
+	if(config::get('can_notify_user_about_admin_action')) echo '<td>', ($rec['notify_user'])? func::tr('Yes'):func::tr('No'), '</td>';
 	echo '<td><input type="radio" name="', $rec['auto'], '" id="appr', $row, '" value="appr" onclick="green(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='appr')? ' checked ' : ''), '></td>';
 	echo '<td><input type="radio" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="red(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='del')? ' checked ' : ''), '></td>';
 	echo '<td><input type="radio" name="', $rec['auto'], '" id="undet', $row, '" value="undet"  onclick="normal(', $i,')" ', ((!isset($_POST[$rec['auto']]) or (isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='undet'))? ' checked ' : ''), '></td>';
@@ -248,7 +248,7 @@ echo '<tr ';
 if(!$r) echo ' style="background: ', $color1;
 else echo ' style="background: ', $color2;
 echo '">';
-if($can_notify_user_about_admin_action) echo '<td colspan="8">';
+if(config::get('can_notify_user_about_admin_action')) echo '<td colspan="8">';
 else echo '<td colspan="7">';
 
 require ROOT.'include/page/admin/page_captcha8password_fields.php';
