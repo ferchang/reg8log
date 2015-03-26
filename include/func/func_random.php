@@ -34,9 +34,12 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 //  crypt_random modified by hamidreza_mz -=At=- yahoo -=Dot=- com
 
-if(!isset($GLOBALS['entropy']) and $GLOBALS['db_installed']) require ROOT.'include/code/code_fetch_site_vars.php';
+if(!isset($GLOBALS['entropy'])) {
+	if($GLOBALS['db_installed']) require ROOT.'include/code/code_fetch_site_vars.php';
+	else $GLOBALS['entropy']='';
+}
 
-@$entropy=sha1(config::get('pepper').$GLOBALS['request_entropy'].$GLOBALS['entropy']);
+$entropy=sha1(config::get('pepper').$GLOBALS['request_entropy'].$GLOBALS['entropy']);
 
 function crypt_random($min = 0, $max = 0x7FFFFFFF)
 {

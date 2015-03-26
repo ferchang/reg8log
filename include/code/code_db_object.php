@@ -7,7 +7,7 @@ $_reg8log_dbms_info=config::get('reg8log_dbms_info');
 $reg8log_db=$GLOBALS['reg8log_db']=new reg8log_db($_reg8log_dbms_info['host'], $_reg8log_dbms_info['user'], $_reg8log_dbms_info['pass'], $_reg8log_dbms_info['db'], true);
 
 $reg8log_db->query("SET NAMES 'utf8'");
-@ mysql_set_charset('utf8');
+mysql_set_charset('utf8');
 //Note: i included the "SET NAMES 'utf8'" query too because mysql_set_charset doesn't exist in PHP<5.2.3
 //mysql_set_charset is the more secure way to set charset (see this: http://stackoverflow.com/a/12118602)
 
