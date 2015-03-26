@@ -38,7 +38,7 @@ if(!isset($GLOBALS['$entropy']) and $GLOBALS['db_installed']) require ROOT.'incl
 
 require_once ROOT.'include/config/config_crypto.php';
 
-@$entropy=sha1($pepper.$request_entropy.$entropy);
+@$entropy=sha1(config::get('pepper').$request_entropy.$entropy);
 
 function crypt_random($min = 0, $max = 0x7FFFFFFF)
 {

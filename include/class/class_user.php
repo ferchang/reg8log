@@ -44,7 +44,6 @@ function identify($username=null, $password=null)
 	global $last_protection;
 	$last_protection=-1;
 	global $req_time;
-	global $pepper;
 	global $tie_login2ip_option_at_login;
 	global $dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero;
 	
@@ -125,7 +124,6 @@ function identify($username=null, $password=null)
 				}
 			}
 			else {//here we run a bcrypt::verify to prevent information leakage about username existence via timing
-				global $bcrypt_hash_rounds;
 				bcrypt::verify($password, '$2a$09$hyMbcpbP6hnjcm9BJBEJ6OxPVNdTiq1HImfK4hx4Rjlb65Ylk1wOS');
 				$username_exists=0;
 			}
@@ -201,7 +199,7 @@ function identify($username=null, $password=null)
 		if($this->tie_login2ip($tmp54)) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
 		else $autologin_key=$tmp54['autologin_key'];
 		$this->user_info=$tmp54;
-		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', $pepper.$site_key2.$autologin_key)) {
+		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', config::get('pepper').$site_key2.$autologin_key)) {
 			global $logged_out_user;
 			$logged_out_user=$this->user_info['username'];
 			$cookie->erase();
@@ -258,7 +256,6 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	
 	global $req_time;
 	global $site_key2;
-	global $pepper;
 	global $reg8log_db;
 	global $max_session_autologin_age;
 
@@ -285,7 +282,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	$cookie->values[]=$age;
 	
 	if($cookie->set(null, $cookie->values, null, $age, true)) {
-		setcookie('reg8log_autologin2', hash('sha256', $pepper.$site_key2.$autologin_key), $age, '/', null, HTTPS);
+		setcookie('reg8log_autologin2', hash('sha256', config::get('pepper').$site_key2.$autologin_key), $age, '/', null, HTTPS);
 
 	//----------------
 	if($set_autologin_expiration) {

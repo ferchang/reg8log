@@ -10,16 +10,13 @@ global $session_decryption_error;
 
 if(session_id()==='' or isset($session_decryption_error) or session_name()!=='reg8log_session') return;
 
-global $encrypt_session_files_contents;
 global $session1;
 global $session0;
 
 global $old_session_settings;
 global $client_sess_key;
 
-if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
-
-if($encrypt_session_files_contents) {
+if(config::get('encrypt_session_files_contents')) {
 	if(isset($session0) and serialize($session1)===serialize($_SESSION['reg8log']))  {
 	$_SESSION['reg8log_encrypted_session']=$session0;
 	unset($_SESSION['reg8log']);

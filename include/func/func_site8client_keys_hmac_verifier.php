@@ -8,7 +8,7 @@ require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 require_once ROOT.'include/config/config_crypto.php';
 
-$hamc_verifier->setKey(pack('H*', md5($pepper.$site_encr_key.$client_sess_key)));
+$hamc_verifier->setKey(pack('H*', md5(config::get('pepper').$site_encr_key.$client_sess_key)));
 
 function verify_hmac($ciphertext) {
 	global $hamc_verifier;

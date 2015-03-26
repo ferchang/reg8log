@@ -18,11 +18,9 @@ if(!session_start()) {
 
 session_regenerate_id(true);
 
-if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
-
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$session_contents_were_encrypted=true;
-	if($encrypt_session_files_contents) $session0=$_SESSION['reg8log_encrypted_session'];
+	if(config::get('encrypt_session_files_contents')) $session0=$_SESSION['reg8log_encrypted_session'];
 	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
@@ -35,12 +33,12 @@ if(isset($_SESSION['reg8log_encrypted_session'])) {
 		}
 	} else $_SESSION['reg8log']=$tmp5;
 }
-else if($encrypt_session_files_contents and !empty($_SESSION['reg8log'])) {
+else if(config::get('encrypt_session_files_contents') and !empty($_SESSION['reg8log'])) {
 	$_SESSION['reg8log']=null;
 	echo '<span dir=ltr>Warning: Unecrypted session contents! <small>(Session contents cleared)</small></span><br>';
 }
 
-if($encrypt_session_files_contents) if(isset($_SESSION['reg8log'])) $session1=$_SESSION['reg8log'];
+if(config::get('encrypt_session_files_contents')) if(isset($_SESSION['reg8log'])) $session1=$_SESSION['reg8log'];
 else $session1=null;
 
 ?>

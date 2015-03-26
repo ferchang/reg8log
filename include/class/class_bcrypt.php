@@ -10,15 +10,13 @@ class bcrypt {
       throw new Exception("bcrypt not supported in this installation. See http://php.net/crypt");
     }
 	
-	if($rounds===null) $rounds=$GLOBALS['bcrypt_hash_rounds'];
+	if($rounds===null) $rounds=config::get('bcrypt_hash_rounds');
 	if($rounds<4) {
 		trigger_error('reg8log: class bcrypt: got a rounds count less than 4! Setting it to 4...', E_USER_WARNING);
 		$rounds=4;//apparently, bcrypt doesn't support less than 4 rounds
 	}
   
-	global $pepper;
-  
-    $hash = crypt(hash('sha256', $pepper.$input), self::getSalt($rounds));
+    $hash = crypt(hash('sha256', config::get('pepper').$input), self::getSalt($rounds));
 	//bcrypt uses only 72 chars of its input! By prepending a 22 char pepper, only 50 chars of password are left. this seems too limited to me (hamidreza.mz712 -=At=- gmail -=Dot=- com), so i decided to use hash('sha256', $pepper.$input) before feeding input to bcrypt to address this limitation.
  
     if(strlen($hash) > 13)
@@ -32,9 +30,7 @@ class bcrypt {
  
   public static function verify($input, $existingHash) {
   
-	global $pepper;
-	
-    $hash = crypt(hash('sha256', $pepper.$input), $existingHash);
+    $hash = crypt(hash('sha256', config::get('pepper').$input), $existingHash);
  
     return $hash === $existingHash;
 	
