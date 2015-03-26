@@ -16,7 +16,7 @@ class class_loader extends loader_base {
 		if(empty(self::$index)) {
 			$x__index_file=ROOT.self::$index_file;
 			if(isset($_SESSION['reg8log']['class_index'])) self::$index=$_SESSION['reg8log']['class_index'];
-			else if(!isset($_SESSION['reg8log']['class_class_loader_file_access_error']) and self::is_file_accessible($x__index_file, 'read')) {
+			else if(!isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error']) and self::is_file_accessible($x__index_file, 'read')) {
 					echo "class loader: reading index from file...\n";
 					self::$index=$_SESSION['reg8log']['class_index']=include $x__index_file;
 			}
@@ -55,7 +55,7 @@ class class_loader extends loader_base {
 		
 		$_SESSION['reg8log']['class_index']=self::$index;
 		
-		if(isset($_SESSION['reg8log']['class_class_loader_file_access_error'])) return;
+		if(isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) return;
 		
 		$index_file=ROOT.self::$index_file;
 		if(!self::is_file_accessible($index_file, 'write')) return;

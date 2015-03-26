@@ -24,7 +24,7 @@ class func extends loader_base {
 			
 			$x__index_file=ROOT.self::$index_file;
 			if(isset($_SESSION['reg8log']['function_index'])) self::$index=$_SESSION['reg8log']['function_index'];
-			else if(!isset($_SESSION['reg8log']['class_func_file_access_error']) and self::is_file_accessible($x__index_file, 'read')) {
+			else if(!isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error']) and self::is_file_accessible($x__index_file, 'read')) {
 					echo "function loader: reading index from file...\n";
 					self::$index=$_SESSION['reg8log']['function_index']=include $x__index_file;
 			}
@@ -63,7 +63,7 @@ class func extends loader_base {
 		
 		$_SESSION['reg8log']['function_index']=self::$index;
 		
-		if(isset($_SESSION['reg8log']['class_func_file_access_error'])) return;
+		if(isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) return;
 		
 		$index_file=ROOT.self::$index_file;
 		if(!self::is_file_accessible($index_file, 'write')) return;

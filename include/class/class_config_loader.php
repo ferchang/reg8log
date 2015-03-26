@@ -16,7 +16,7 @@ class config extends loader_base {
 		
 		if(empty(self::$vars)) foreach(self::$cache_method as $method) {
 			if($method==='file') {
-				if(isset($_SESSION['reg8log']['class_config_file_access_error'])) continue;
+				if(isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) continue;
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						//echo 'reading config vars from cache file...';
@@ -40,9 +40,9 @@ class config extends loader_base {
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
-			if(in_array('file', self::$cache_method) and !isset($_SESSION['reg8log']['class_config_file_access_error'])) self::update_cache('file');
+			if(in_array('file', self::$cache_method) and !isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) self::update_cache('file');
 			if(in_array('sess', self::$cache_method)) {
-				if(self::$cache_method[0]==='sess' or isset($_SESSION['reg8log']['class_config_file_access_error'])) self::update_cache('sess');
+				if(self::$cache_method[0]==='sess' or isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) self::update_cache('sess');
 			} else unset($_SESSION['config_cache']);
 			
 		}
