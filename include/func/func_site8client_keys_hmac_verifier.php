@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(!isset($hamc_verifier)) $hamc_verifier = new Crypt_Hash('sha1');
 
-require ROOT.'include/code/code_fetch_site_vars.php';
+require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 $hamc_verifier->setKey(pack('H*', md5(config::get('pepper').$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 
