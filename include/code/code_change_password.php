@@ -3,9 +3,9 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 define('CAN_INCLUDE', true);
 
-if(strtolower($_username)=='admin') $change_autologin_key_upon_new_password=$admin_change_autologin_key_upon_new_password;
+if(strtolower($_username)=='admin') config::set('change_autologin_key_upon_new_password', config::get('admin_change_autologin_key_upon_new_password'));
 
-if($change_autologin_key_upon_new_password) {
+if(config::get('change_autologin_key_upon_new_password')) {
 
 	$new_autologin_key=func::random_string(43);
 

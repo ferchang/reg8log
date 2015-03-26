@@ -37,7 +37,7 @@ if(isset($err_msgs)) break;
 require_once ROOT.'include/code/code_db_object.php';
 
 $time=$req_time;
-$expired=$time-$password_reset_period;
+$expired=$time-config::get('password_reset_period');
 
 $tmp23=$reg8log_db->quote_smart($_POST['email']);
 $query1='select * from `password_reset` where `email`='.$tmp23.' and `timestamp`>'.$expired.' limit 1';
@@ -87,7 +87,7 @@ require ROOT.'include/code/email/code_email_password_reset_link.php';
 $cleanup=true;
 
 }
-else if($emails_sent<$max_password_reset_emails or $max_password_reset_emails==-1) {
+else if($emails_sent<config::get('max_password_reset_emails') or config::get('max_password_reset_emails')==-1) {
 
 	$rid=$rec['record_id'];
 	$key=$rec['key'];

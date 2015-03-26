@@ -30,7 +30,7 @@ $_username=$rec['username'];
 
 require ROOT.'include/config/config_password_change_or_reset.php';
 
-$expired=$req_time-$password_reset_period;
+$expired=$req_time-config::get('password_reset_period');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
