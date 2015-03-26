@@ -30,8 +30,6 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 
 	require ROOT.'include/code/code_prevent_xsrf.php';
 
-	
-
 	if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/code_verify_captcha.php';
 	
 	if($_POST['curpass']==='') $err_msgs[]=func::tr('current password field is empty!');

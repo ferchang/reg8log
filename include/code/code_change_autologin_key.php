@@ -1,7 +1,6 @@
 <?php
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
-define('CAN_INCLUDE', true);
 
 $new_autologin_key=func::random_string(43);
 $query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
