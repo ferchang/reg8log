@@ -15,7 +15,7 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/code_prevent_repost.php';
 
-config::set('encrypt_session_files_contents', false);
+$encrypt_session_files_contents=false;
 
 $file_contents=file_get_contents('setup.txt');
 

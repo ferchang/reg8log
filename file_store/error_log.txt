@@ -1,0 +1,3 @@
+[26-Mar-2015 06:12:26 UTC] PHP Fatal error:  Class 'config' not found in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_sess_start.php on line 36
+[26-Mar-2015 06:14:26 UTC] PHP Notice:  Undefined variable: encrypt_session_files_contents in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_sess_start.php on line 36
+[26-Mar-2015 06:14:26 UTC] PHP Notice:  Undefined variable: encrypt_session_files_contents in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\sess\code_sess_start.php on line 41
