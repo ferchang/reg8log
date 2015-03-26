@@ -51,6 +51,18 @@ else {
 
 //----------- language ------------<
 
+ignore_user_abort(true);
+
+if(get_magic_quotes_gpc()) {
+	$_GET=array_map('stripslashes', $_GET);
+	$_POST=array_map('stripslashes', $_POST);
+	$_COOKIE=array_map('stripslashes', $_COOKIE);
+}
+
+header("X-Frame-Options: SAMEORIGIN");
+
+//----------------------------------
+
 if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS']!=='off' || $_SERVER['SERVER_PORT']==443) define('HTTPS', true);
 else define('HTTPS', false);
 
@@ -65,26 +77,14 @@ require ROOT.'include/class/class_class_loader.php';
 
 config::set('lang', $lang);
 
+if(!config::get('db_installed')) require ROOT.'include/code/code_check_db_setup_status.php';
+
+require ROOT.'include/code/code_gather_request_entropy.php';
+
 if(!$client_sess_key) {
 	$client_sess_key=func::random_string(22);
 	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, HTTPS, true);
 }
-
-//----------------------------------
-
-ignore_user_abort(true);
-
-if(get_magic_quotes_gpc()) {
-	$_GET=array_map('stripslashes', $_GET);
-	$_POST=array_map('stripslashes', $_POST);
-	$_COOKIE=array_map('stripslashes', $_COOKIE);
-}
-
-header("X-Frame-Options: SAMEORIGIN");
-
-if(!config::get('db_installed')) require ROOT.'include/code/code_check_db_setup_status.php';
-
-require ROOT.'include/code/code_gather_request_entropy.php';
 
 //---------- antixsrf_token ------------>
 
