@@ -32,9 +32,9 @@ $expired=$req_time-config::get('password_reset_period');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-$fields=config::get('fields');
+$_fields=config::get('fields');
 
-$password_format=$fields['password'];
+$password_format=$_fields['password'];
 
 require ROOT.'include/code/code_set_site_salt.php';
 

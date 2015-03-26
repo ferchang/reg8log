@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 
-foreach($fields as $field_name=>$specs) {//validate post data
+foreach($_fields as $field_name=>$specs) {//validate post data
 
 $ct=count($err_msgs);
 
@@ -39,7 +39,7 @@ else {//field exists
 
 $field_value=$_POST[$field_name];
 
-$fields[$field_name]['value']=$field_value;
+$_fields[$field_name]['value']=$field_value;
 
 if(func::utf8_strlen($field_value)<$min_length)
 $err_msgs[]=func::tr($field_name).sprintf(func::tr(' is shorter than %d characters!'), $min_length);

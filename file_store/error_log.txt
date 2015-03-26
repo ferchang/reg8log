@@ -10,3 +10,6 @@
 [26-Mar-2015 10:05:22 UTC] PHP Notice:  Undefined variable: client_sess_key in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_site8client_keys_hmac_verifier.php on line 9
 [26-Mar-2015 10:06:26 UTC] PHP Notice:  Undefined variable: client_sess_key in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_site8client_keys_hmac_verifier.php on line 9
 [26-Mar-2015 10:08:15 UTC] PHP Notice:  Constant CAN_INCLUDE already defined in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\code_change_password.php on line 4
+[26-Mar-2015 10:56:07 UTC] PHP Parse error:  syntax error, unexpected T_IF in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\page\page_login_form.php on line 44
+[26-Mar-2015 10:58:53 UTC] PHP Notice:  Undefined variable: autologin_ages in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\common.php on line 61
+[26-Mar-2015 11:16:01 UTC] PHP Warning:  mail() [<a href='function.mail'>function.mail</a>]: Failed to connect to mailserver at &quot;127.0.0.1&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\email\admin\code_email_admin_reg_alert_msg.php on line 25

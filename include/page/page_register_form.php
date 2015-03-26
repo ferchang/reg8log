@@ -40,7 +40,7 @@ return false;
 <?php
 echo "fields=new Array(\n";
 $f=false;
-foreach($fields as $field_name=>$specs)
+foreach($_fields as $field_name=>$specs)
 if($specs['client_validate']) {
   if($f) echo ",\n";
   else $f=true;

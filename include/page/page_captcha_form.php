@@ -32,13 +32,13 @@ $index_dir=func::get_relative_root_path();
 //copy the same code into add_captcha function in page_login_form.php
 captcha_exists=true;
 <?php
-$fields=config::get('fields');
-echo "captcha_min_len={$fields['captcha']['minlength']};\n";
-echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
+$_fields=config::get('fields');
+echo "captcha_min_len={$_fields['captcha']['minlength']};\n";
+echo "captcha_max_len={$_fields['captcha']['maxlength']};\n";
 echo "captcha_re=";
-if($fields['captcha']['js_re']===true) echo $fields['captcha']['php_re'];
-else if($fields['captcha']['js_re']===false) echo 'false';
-else echo $fields['captcha']['js_re'];
+if($_fields['captcha']['js_re']===true) echo $_fields['captcha']['php_re'];
+else if($_fields['captcha']['js_re']===false) echo 'false';
+else echo $_fields['captcha']['js_re'];
 echo ";\n";
 ?>
 </script>

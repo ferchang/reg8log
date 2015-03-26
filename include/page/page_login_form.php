@@ -38,9 +38,9 @@ else echo "<script>\nfunction check_admin(val) { }\n</script>\n";
 echo '<script>';
 
 $str='<select name=autologin_age ';
-if(count($autologin_ages)==1) $str.=' disabled ';
+if(count(config::get('autologin_ages'))==1) $str.=' disabled ';
 $str.='>';
-foreach($autologin_ages as $value) {
+foreach(config::get('autologin_ages') as $value) {
 	$str.="<option value=$value style='text-align: center'>";
 	if($value==0) $str.=func::tr('Browser session');
 	else $str.=func::duration2friendly_str($value, 0);
@@ -156,13 +156,13 @@ function add_captcha(captcha_html) {
 	document.getElementById('captcha_form_placeholder').innerHTML='<table>'+captcha_html+'</table>';
 	captcha_exists=true;
 	<?php
-	$fields=config::get('fields');
-	echo "captcha_min_len={$fields['captcha']['minlength']};\n";
-	echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
+	$_fields=config::get('fields');
+	echo "captcha_min_len={$_fields['captcha']['minlength']};\n";
+	echo "captcha_max_len={$_fields['captcha']['maxlength']};\n";
 	echo "captcha_re=";
-	if($fields['captcha']['js_re']===true) echo $fields['captcha']['php_re'];
-	else if($fields['captcha']['js_re']===false) echo 'false';
-	else echo $fields['captcha']['js_re'];
+	if($_fields['captcha']['js_re']===true) echo $_fields['captcha']['php_re'];
+	else if($_fields['captcha']['js_re']===false) echo 'false';
+	else echo $_fields['captcha']['js_re'];
 	echo ";\n";
 	?>
 	document.getElementById('re_captcha_msg').style.visibility='visible';
@@ -282,18 +282,18 @@ echo '</td></tr>';
 <select name=autologin_age 
 <?php
 
-$autologin_ages=func::get_autologin_ages();
+$_autologin_ages=func::get_autologin_ages();
 
-if(count($autologin_ages)==1) echo ' disabled >';
+if(count($_autologin_ages)==1) echo ' disabled >';
 else echo ' >';
 
-if(count($autologin_ages)==1) {
-	echo "<option value={$autologin_ages[0]}>";
-	if($autologin_ages[0]==0) echo func::tr('Browser session');
-	else echo func::duration2friendly_str($autologin_ages[0], 0);
+if(count($_autologin_ages)==1) {
+	echo "<option value={$_autologin_ages[0]}>";
+	if($_autologin_ages[0]==0) echo func::tr('Browser session');
+	else echo func::duration2friendly_str($_autologin_ages[0], 0);
 }
 else {
-	foreach($autologin_ages as $value) {
+	foreach($_autologin_ages as $value) {
 		echo "<option value=$value style='text-align: center' ";
 		if(isset($_POST['autologin_age']) and $value==$_POST['autologin_age']) echo ' selected ';
 		echo '>';

@@ -5,7 +5,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 require_once ROOT.'include/code/code_db_object.php';
 
 if($_POST['password']!=='') 
-$fields['password']['value']=bcrypt::hash($_POST['password']);
+$_fields['password']['value']=bcrypt::hash($_POST['password']);
 
 $table_name='pending_accounts';
 $field_name='record_id';
@@ -14,10 +14,10 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 $field_names='`record_id`, ';
 $field_values="'$rid', ";
 
-unset($fields['captcha']);
-$fields['password_hash']=$fields['password'];
-unset($fields['password']);
-foreach($fields as $field_name=>$specs) {
+unset($_fields['captcha']);
+$_fields['password_hash']=$_fields['password'];
+unset($_fields['password']);
+foreach($_fields as $field_name=>$specs) {
   $field_names.="`$field_name`";
   $field_values.=$reg8log_db->quote_smart($specs['value']);
   $field_names.=', ';

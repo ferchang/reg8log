@@ -22,7 +22,7 @@ require ROOT.'include/code/code_identify.php';
 
 if(isset($identified_user)) func::my_exit('<center><h3>'.func::tr('Error: You are logged in!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-$fields=config::get('fields');
+$_fields=config::get('fields');
 
 $err_msgs=null;
 

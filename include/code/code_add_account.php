@@ -11,19 +11,19 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 $autologin_key=func::random_string(43);
 
 if($_POST['password']!=='') 
-$fields['password']['value']=bcrypt::hash($_POST['password']);
+$_fields['password']['value']=bcrypt::hash($_POST['password']);
 
 $field_names='`uid`, `autologin_key`, `timestamp`, ';
 $field_values="'$rid', '$autologin_key', ".$req_time.', ';
 $i=0;
 
-unset($fields['captcha']);
-$fields['password_hash']=$fields['password'];
-unset($fields['password']);
-foreach($fields as $field_name=>$specs) {
+unset($_fields['captcha']);
+$_fields['password_hash']=$_fields['password'];
+unset($_fields['password']);
+foreach($_fields as $field_name=>$specs) {
   $field_names.="`$field_name`";
   $field_values.=$reg8log_db->quote_smart($specs['value']);
-  if(++$i==count($fields)) break;
+  if(++$i==count($_fields)) break;
   $field_names.=', ';
   $field_values.=', ';
 }

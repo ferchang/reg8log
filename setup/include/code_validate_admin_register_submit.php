@@ -2,9 +2,9 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$fields=array('password'=>$fields['password'], 'email'=>$fields['email']);
+$_fields=array('password'=>$_fields['password'], 'email'=>$_fields['email']);
 
-foreach($fields as $field_name=>$specs) {//validate post data
+foreach($_fields as $field_name=>$specs) {//validate post data
 
 if($field_name=='password' and strpos($_POST[$field_name], "hashed-$site_salt")===0) continue;
 

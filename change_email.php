@@ -10,9 +10,9 @@ require ROOT.'include/code/code_identify.php';
 
 if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not authenticated msg').'.</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-$fields=config::get('fields');
+$_fields=config::get('fields');
 
-$email_format=$fields['email'];
+$email_format=$_fields['email'];
 
 require ROOT.'include/code/code_set_site_salt.php';
 

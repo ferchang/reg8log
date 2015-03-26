@@ -4,9 +4,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/class/class_db.php';
 
-$reg8log_dbms_info=config::get('reg8log_dbms_info');
+$_reg8log_dbms_info=config::get('reg8log_dbms_info');
 
-$reg8log_db=$GLOBALS['reg8log_db']=new reg8log_db($reg8log_dbms_info['host'], $reg8log_dbms_info['user'], $reg8log_dbms_info['pass'], $reg8log_dbms_info['db'], true);
+$reg8log_db=$GLOBALS['reg8log_db']=new reg8log_db($_reg8log_dbms_info['host'], $_reg8log_dbms_info['user'], $_reg8log_dbms_info['pass'], $_reg8log_dbms_info['db'], true);
 
 $reg8log_db->query("SET NAMES 'utf8'");
 @ mysql_set_charset('utf8');

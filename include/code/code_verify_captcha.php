@@ -2,9 +2,9 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$fields=config::get('fields');
+$_fields=config::get('fields');
 
-$captcha_format=$fields['captcha'];
+$captcha_format=$_fields['captcha'];
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
