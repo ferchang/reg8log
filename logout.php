@@ -52,7 +52,7 @@ if($log_last_logout and !$change_autologin_key_upon_logout) {
 $user=new hm_user($identify_structs);
 if($user->logout()) header('Location: index.php');
 else {
-	$failure_msg=($debug_mode)? $user->err_msg : func::tr('Problem logging out');
+	$failure_msg=(config::get('debug_mode'))? $user->err_msg : func::tr('Problem logging out');
 	require ROOT.'include/page/page_failure.php';
 	exit;
 }

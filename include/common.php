@@ -61,6 +61,8 @@ require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
+config::set('lang', $lang);
+
 if(!$client_sess_key) {
 	$client_sess_key=func::random_string(22);
 	setcookie('reg8log_client_sess_key', $client_sess_key, 0, '/', null, HTTPS, true);
@@ -78,7 +80,7 @@ if(get_magic_quotes_gpc()) {
 
 header("X-Frame-Options: SAMEORIGIN");
 
-if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
+if(!config::get('db_installed')) require ROOT.'include/code/code_check_db_setup_status.php';
 
 require ROOT.'include/code/code_gather_request_entropy.php';
 
@@ -96,7 +98,7 @@ if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 
 //---------- antixsrf_token ------------<
 
-if(!$db_installed) {
+if(!config::get('db_installed')) {
 	if(defined('SETUP_PAGE') or defined('CHANGE_LANG_PAGE')) return;
 	require ROOT.'include/page/page_not_setup.php';
 	exit;
@@ -105,14 +107,5 @@ if(!$db_installed) {
 func::load_function_definition('shutdown_session');
 
 register_shutdown_function('shutdown_session');
-
-echo config::get('bcrypt_hash_rounds');
-config::set('bcrypt_hash_rounds', 10);
-echo config::get('bcrypt_hash_rounds');
-exit;
-
-//func::tt();
-
-//$t=new yy;
 
 ?>

@@ -48,7 +48,7 @@ echo "new Array(\n'$field_name',\n{$specs['minlength']},\n{$specs['maxlength']},
 if($specs['js_re']===true) echo $specs['php_re'];
 else if($specs['js_re']===false) echo 'false';
 else echo $specs['js_re'];
-if($lang=='fa') echo ",\n'", func::tr($field_name), "'";
+if(config::get('lang')=='fa') echo ",\n'", func::tr($field_name), "'";
 else echo ",\n'$field_name'";
 echo "\n)";
 }

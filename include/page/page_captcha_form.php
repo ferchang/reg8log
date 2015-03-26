@@ -12,7 +12,7 @@ $index_dir=func::get_relative_root_path();
 
 <tr>
 <td ><?php echo func::tr('This is the security code'); ?>:<br /><span id="re_captcha_msg" style="visibility: hidden"><?php echo func::tr('If the code is not readable,<br />click on the image to change it'); ?>.</span></td>
-<td align="<?php echo (($lang=='fa')? 'right' : 'left' ); ?>" valign="center">
+<td align="<?php echo ((config::get('lang')=='fa')? 'right' : 'left' ); ?>" valign="center">
 <img src="<?php if(!isset($ajax)) echo $index_dir; ?>captcha/captcha_image.php?1" style="border: 2px solid #000;" onclick="mycaptcha('change');" onload="mycaptcha('loaded');" onerror="mycaptcha('error');" id="captcha_image" title="" />
 </td>
 <td align="">

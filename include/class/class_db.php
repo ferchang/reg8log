@@ -79,13 +79,10 @@ function error($err_msg='')
 {
 
 	
-	global $debug_mode;
-	
-
 	$this->err_msg=get_class($this).': '.(($err_msg)? $err_msg : mysql_error());
 
 	if($this->auto_abort) {
-		$failure_msg=($debug_mode)? $this->err_msg : "Database error";
+		$failure_msg=(config::get('debug_mode'))? $this->err_msg : "Database error";
 		global $page_dir;
 		require ROOT.'include/page/page_failure.php';
 		exit;

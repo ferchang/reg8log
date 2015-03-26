@@ -87,7 +87,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 		require ROOT.'include/code/code_add_change_email_request.php';
 		
 		if(isset($max_emails_reached)) {
-			if($lang=='fa') $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), func::duration2friendly_str($verification_time, 0), $max_emails).'.</h3>';
+			if(config::get('lang')=='fa') $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), func::duration2friendly_str($verification_time, 0), $max_emails).'.</h3>';
 			else $failure_msg='<h3>'.sprintf(func::tr('max emails reached msg'), $max_emails, func::duration2friendly_str($verification_time, 0)).'.</h3>';
 			$no_specialchars=true;
 			require ROOT.'include/page/page_failure.php';

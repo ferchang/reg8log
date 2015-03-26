@@ -25,6 +25,6 @@ $body.="<html $page_dir><body $page_dir><h3 align='center'>$take_no_action_msg<b
 
 mail($email, '=?UTF-8?B?'.base64_encode(func::tr('Block-bypass')).'?=', $body, $headers);
 
-if($debug_mode) echo $link;
+if(config::get('debug_mode')) echo $link;
 
 ?>

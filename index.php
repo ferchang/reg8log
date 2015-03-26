@@ -53,7 +53,7 @@ if(!isset($captcha_err)) {
 	$pass_banned_user=true;
 	require ROOT.'include/code/code_identify.php';
 	if(isset($identify_error)) {
-		$failure_msg=($debug_mode)? $user->err_msg : func::tr('Identification error');
+		$failure_msg=(config::get('debug_mode'))? $user->err_msg : func::tr('Identification error');
 		require ROOT.'include/page/page_failure.php';
 		exit;
 	}

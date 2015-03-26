@@ -9,7 +9,7 @@ do {
 do {
 $rid=func::random_string(8);
 if($i++>1000) {
-$failure_msg=($debug_mode)? $reg8log_db->err_msg : "Unable to generate a random unique  id.";
+$failure_msg=(config::get('debug_mode'))? $reg8log_db->err_msg : "Unable to generate a random unique  id.";
 require ROOT.'include/page/page_failure.php';
 exit;
 }

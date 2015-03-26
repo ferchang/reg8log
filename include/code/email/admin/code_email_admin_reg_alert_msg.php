@@ -24,6 +24,6 @@ $body.="<h3 align='center'>".str_replace("\n", '<br>', $admin_reg_alert_email_ms
 
 mail($email, '=?UTF-8?B?'.base64_encode(func::tr('Registeration(s) alert', false, $admin_emails_lang)).'?=', $body, $headers);
 
-if($debug_mode) echo "Emailed: $admin_reg_alert_email_msg";
+if(config::get('debug_mode')) echo "Emailed: $admin_reg_alert_email_msg";
 
 ?>

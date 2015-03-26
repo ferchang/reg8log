@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 echo '<table cellpadding="5" style="border: thin solid black">';
 
-if($debug_mode) echo '<tr bgcolor="#e1cfa0" title="', func::tr('debug mode turn off instruction msg'),'"><td><div style="border: medium solid #f00; padding: 2px; color: #f00; font-weight: bold; background: yellow; text-align: center">', func::tr('Warning: Debug mode on!'), '</div></td></tr>';
+if(config::get('debug_mode')) echo '<tr bgcolor="#e1cfa0" title="', func::tr('debug mode turn off instruction msg'),'"><td><div style="border: medium solid #f00; padding: 2px; color: #f00; font-weight: bold; background: yellow; text-align: center">', func::tr('Warning: Debug mode on!'), '</div></td></tr>';
 
 $index_dir=func::get_relative_root_path();
 
