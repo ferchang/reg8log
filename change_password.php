@@ -12,7 +12,7 @@ if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not 
 
 require ROOT.'include/config/config_register.php'; //for password_refill
 
-require ROOT.'include/config/config_register_fields.php';
+$fields=config::get('fields');
 
 $password_format=$fields['password'];
 

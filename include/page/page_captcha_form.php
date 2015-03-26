@@ -32,7 +32,7 @@ $index_dir=func::get_relative_root_path();
 //copy the same code into add_captcha function in page_login_form.php
 captcha_exists=true;
 <?php
-require_once ROOT.'include/config/config_register_fields.php';
+$fields=config::get('fields');
 echo "captcha_min_len={$fields['captcha']['minlength']};\n";
 echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
 echo "captcha_re=";

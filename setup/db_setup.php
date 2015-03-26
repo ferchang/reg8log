@@ -26,7 +26,7 @@ if(empty($_SESSION['reg8log']['setup_key']) or strpos($file_contents, $_SESSION[
 	exit;
 }
 
-require ROOT.'include/config/config_register_fields.php';
+$fields=config::get('fields');
 
 require ROOT.'include/code/code_fetch_site_vars.php';
 

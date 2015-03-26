@@ -160,7 +160,7 @@ function add_captcha(captcha_html) {
 	document.getElementById('captcha_form_placeholder').innerHTML='<table>'+captcha_html+'</table>';
 	captcha_exists=true;
 	<?php
-	require_once ROOT.'include/config/config_register_fields.php';
+	$fields=config::get('fields');
 	echo "captcha_min_len={$fields['captcha']['minlength']};\n";
 	echo "captcha_max_len={$fields['captcha']['maxlength']};\n";
 	echo "captcha_re=";

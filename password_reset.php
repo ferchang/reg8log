@@ -34,7 +34,7 @@ $expired=$req_time-config::get('password_reset_period');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-require ROOT.'include/config/config_register_fields.php';
+$fields=config::get('fields');
 
 $password_format=$fields['password'];
 

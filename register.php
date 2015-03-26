@@ -12,7 +12,7 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/code_prevent_repost.php';
 
-require ROOT.'include/config/config_register.php';
+$fields=config::get('fields');
 
 if(!config::get('registeration_enabled')) func::my_exit('<center><h3>'.func::tr('Registration is disabled!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
@@ -24,7 +24,7 @@ require ROOT.'include/code/code_identify.php';
 
 if(isset($identified_user)) func::my_exit('<center><h3>'.func::tr('Error: You are logged in!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-require ROOT.'include/config/config_register_fields.php';
+$fields=config::get('fields');
 
 $err_msgs=null;
 
