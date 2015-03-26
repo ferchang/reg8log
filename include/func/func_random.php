@@ -39,7 +39,7 @@ if(!isset($GLOBALS['entropy'])) {
 	else $GLOBALS['entropy']='';
 }
 
-$entropy=sha1(config::get('pepper').$GLOBALS['request_entropy'].$GLOBALS['entropy']);
+$GLOBALS['entropy']=sha1(config::get('pepper').$GLOBALS['request_entropy'].$GLOBALS['entropy']);
 
 function crypt_random($min = 0, $max = 0x7FFFFFFF)
 {

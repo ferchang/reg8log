@@ -11,7 +11,10 @@ require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 if(!isset($_COOKIE['reg8log_site_salt'])) setcookie('reg8log_site_salt', $GLOBALS['site_salt'], 0, '/', null, HTTPS, true);
 
-require_once ROOT.'include/config/config_crypto.php';
+if(!isset($GLOBALS['pepper'])) {
+	require ROOT.'include/config/config_crypto.php';
+	$GLOBALS['pepper']=$pepper;
+}
 
 $GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 

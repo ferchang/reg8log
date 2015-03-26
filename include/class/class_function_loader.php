@@ -43,7 +43,7 @@ class func extends loader_base {
 			require_once ROOT.'include/func/'.self::$index[$x__func_name];
 		}
 		
-		foreach(get_defined_vars() as $name => $value) $GLOBALS[$name] = &$$name;
+		//foreach(get_defined_vars() as $name => $value) $GLOBALS[$name] = &$$name;
 
 	}
 	

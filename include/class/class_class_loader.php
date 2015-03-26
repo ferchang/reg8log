@@ -35,7 +35,7 @@ class class_loader extends loader_base {
 			require_once ROOT.'include/class/'.self::$index[$x__class_name];
 		}
 		
-		foreach(get_defined_vars() as $name => $value) $GLOBALS[$name] = &$$name;
+		//foreach(get_defined_vars() as $name => $value) $GLOBALS[$name] = &$$name;
 
 	}
 	
