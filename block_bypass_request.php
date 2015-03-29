@@ -35,8 +35,6 @@ if(!isset($account_block)) {
 	
 }
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $lock_name=$reg8log_db->quote_smart('reg8log--block_bypass-'.$_GET['username']."--$site_key");
 $reg8log_db->query("select get_lock($lock_name, -1)");
 

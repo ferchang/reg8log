@@ -8,7 +8,6 @@ if(config::get('ch_pswd_max_threshold')==-1 and config::get('ch_pswd_captcha_thr
 
 if($try_type==='email') {
 	if(config::get('ch_pswd_captcha_threshold')==-1) return;
-	require_once ROOT.'include/code/code_db_object.php';
 	$query="update `accounts` set `last_ch_email_try`=".$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	return;
@@ -22,7 +21,6 @@ else setcookie('reg8log_ch_pswd_try', '1', 0, '/', null, HTTPS, true);
 //--------------------------------
 
 if(!isset($trec)) {
-	require_once ROOT.'include/code/code_db_object.php';
 	$query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	$trec=$reg8log_db->fetch_row();

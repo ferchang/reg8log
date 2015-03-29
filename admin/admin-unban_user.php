@@ -25,8 +25,6 @@ if(isset($err_msgs)) break;
 
 $_POST['user']=func::fix_kaaf8yeh($_POST['user']);
 
-require_once ROOT.'include/code/code_db_object.php';
-	
 $user=$reg8log_db->quote_smart($_POST['user']);
 
 $query="select * from `accounts` where `{$_POST['which']}`=$user limit 1";

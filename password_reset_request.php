@@ -32,8 +32,6 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/cod
 
 if(isset($err_msgs)) break;
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $time=$req_time;
 $expired=$time-config::get('password_reset_period');
 

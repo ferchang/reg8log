@@ -16,8 +16,6 @@ if(!isset($_GET['rid'], $_GET['key'])) exit('<h3 align="center">Error: rid and/o
 
 if($_GET['rid']==='' or $_GET['key']==='') exit('<h3 align="center">Error: rid and/or key parameter is empty!</h3>');
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $rid=$reg8log_db->quote_smart($_GET['rid']);
 $key=$reg8log_db->quote_smart($_GET['key']);
 

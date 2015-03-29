@@ -10,8 +10,6 @@ require ROOT.'include/code/code_encoding8anticache_headers.php';
 
 require ROOT.'include/code/admin/code_require_admin.php';
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $sort_fields=array('table_name', 'num_records');
 
 if(isset($_GET['sort_by']) and in_array($_GET['sort_by'], $sort_fields))  $sort_by=$_GET['sort_by'];

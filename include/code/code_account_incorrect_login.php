@@ -18,8 +18,6 @@ if(!$username_exists and config::get('registeration_enabled') and config::get('a
 	return;
 }
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
 $query="select * from `account_incorrect_logins` where `username`=$_username limit 1";

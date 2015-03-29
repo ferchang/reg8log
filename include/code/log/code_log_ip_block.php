@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
 
 if($reg8log_db->result_num($tmp38)) {

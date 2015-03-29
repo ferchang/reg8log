@@ -13,8 +13,6 @@ require ROOT.'include/code/admin/code_require_admin.php';
 $sort_fields=array('username', 'email', 'gender', 'emails_sent', 'admin_confirmed', 'notify_user', 'timestamp');
 require ROOT.'include/code/admin/code_pagination_params.php';
 
-require_once ROOT.'include/code/code_db_object.php';
-
 require ROOT.'include/code/admin/code_check_password_entry_needed4admin.php';
 
 if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {

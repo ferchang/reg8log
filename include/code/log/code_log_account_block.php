@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(!config::get('log_non_existent_accounts_blocks') and !$username_exists) return;
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip, ".config::get('account_block_threshold').")";

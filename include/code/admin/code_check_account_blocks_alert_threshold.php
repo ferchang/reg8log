@@ -11,8 +11,6 @@ if(strpos(config::get('account_blocks_alert_threshold'), '%')===0) {
 
 	$percent=substr(config::get('account_blocks_alert_threshold'), 1);
 
-	require_once ROOT.'include/code/code_db_object.php';
-
 	$query="select count(*) from `accounts`";	
 	$num_accounts=$reg8log_db->count_star($query);
 	
@@ -27,8 +25,6 @@ if(strpos(config::get('account_blocks_alert_threshold'), '%')===0) {
 }
 
 if($new_account_blocks<config::get('account_blocks_alert_threshold')) return;
-
-require_once ROOT.'include/code/code_db_object.php';
 
 $query='select * from `account_block_log` where `last_attempt`>='.($req_time-config::get('account_blocks_alert_threshold_period'));
 

@@ -18,8 +18,6 @@ if(!config::get('store_request_entropy_probability') or !config::get('db_install
 
 if(config::get('store_request_entropy_probability')!==1 and mt_rand(1, floor(1/config::get('store_request_entropy_probability')))!==1) return;
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $query="update `site_vars` set `value`=sha1(concat(`value`, '$request_entropy')) where name='entropy'";
 
 $reg8log_db->query($query);

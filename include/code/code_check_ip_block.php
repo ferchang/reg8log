@@ -20,7 +20,6 @@ $ip_login_attempt_lock="'".'reg8log--ip_login_attempt-'.$_SERVER['REMOTE_ADDR'].
 $reg8log_db->query("select get_lock($ip_login_attempt_lock, -1)");
 
 if(!isset($last_protection)) {
-	require_once ROOT.'include/code/code_db_object.php';
 	$tmp30=$reg8log_db->quote_smart($_username);
 	$query="select * from `accounts` where `username`=$tmp30 limit 1";
 	$reg8log_db->query($query);
@@ -38,8 +37,6 @@ if(config::get('ip_captcha_threshold')==0) {
 	$captcha_needed=true;
 	if(config::get('ip_block_threshold')==-1) return;
 }
-
-require_once ROOT.'include/code/code_db_object.php';
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 

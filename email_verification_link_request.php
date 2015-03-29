@@ -34,8 +34,6 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/cod
 
 if(isset($err_msgs)) break;
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $expired1=$req_time-config::get('email_verification_time');
 $expired2=$req_time-config::get('admin_confirmation_time');
 

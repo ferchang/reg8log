@@ -45,8 +45,6 @@ if(!isset($account_block)) {
 
 }
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $_username=$reg8log_db->quote_smart($_POST['username']);
 $query="select * from `block_bypass` where `username`=$_username limit 1";
 

@@ -37,8 +37,6 @@ function identify($username=null, $password=null)
 
 	if(!is_null($username)) {//Manual login
 
-		require_once ROOT.'include/code/code_db_object.php';
-
 		$tmp7=$GLOBALS['reg8log_db']->quote_smart($username);
 
 		$query1='select * from `accounts` where `username`='.$tmp7.' limit 1';
@@ -128,8 +126,6 @@ function identify($username=null, $password=null)
 	$cookie->secure=HTTPS;
 
 	if($cookie->get()) {//cookie read successfully
-
-		require_once ROOT.'include/code/code_db_object.php';
 
 		$query='select * from `accounts` where ';
 		foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {

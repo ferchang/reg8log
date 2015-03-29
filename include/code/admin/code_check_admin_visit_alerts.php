@@ -6,8 +6,6 @@ if(!config::get('alert_admin_about_account_blocks') and !config::get('alert_admi
 
 if(isset($_COOKIE['reg8log_dont_disturb']) and $_COOKIE['reg8log_dont_disturb']==='1') return;
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $query="select * from `admin_block_alerts` where `for`='visit' limit 1";
 
 $reg8log_db->query($query);

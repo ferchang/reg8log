@@ -18,7 +18,6 @@ $account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_att
 $reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
 
 if(!isset($last_protection)) {
-	require_once ROOT.'include/code/code_db_object.php';
 	$tmp9=$reg8log_db->quote_smart($_username);
 	$query="select * from `accounts` where `username`=$tmp9 limit 1";
 	$reg8log_db->query($query);
@@ -36,8 +35,6 @@ else if(config::get('account_captcha_threshold')==0) {
 	$captcha_needed=true;
 	if(config::get('account_block_threshold')==-1) return;
 }
-
-require_once ROOT.'include/code/code_db_object.php';
 
 if(!isset($tmp9)) $tmp9=$reg8log_db->quote_smart($_username);
 $query="select * from `account_incorrect_logins` where `username`=$tmp9 limit 1";

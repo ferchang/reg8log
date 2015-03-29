@@ -8,8 +8,6 @@ if(config::get('ch_pswd_captcha_threshold')==0) {
 	return;
 }
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 
 $reg8log_db->query($query);

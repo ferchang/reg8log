@@ -2,8 +2,6 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-require_once ROOT.'include/code/code_db_object.php';
-
 $lock_name='reg8log--register--'.$site_key;
 $reg8log_db->query("select get_lock('$lock_name', -1)");
 
