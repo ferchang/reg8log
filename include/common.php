@@ -69,13 +69,13 @@ else define('HTTPS', false);
 if(isset($_COOKIE['reg8log_client_sess_key'])) $client_sess_key=$_COOKIE['reg8log_client_sess_key'];
 else $client_sess_key='';
 
-require_once ROOT.'include/code/code_db_object.php';
+require ROOT.'include/code/code_db_object.php';
 
 if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
 
-require ROOT.'include/config/config_crypto.php';
-
 require ROOT.'include/config/config_identify.php';
+
+require ROOT.'include/config/config_crypto.php';
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
