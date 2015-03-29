@@ -8,8 +8,6 @@ require_once '../include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 require ROOT.'include/code/admin/code_require_admin.php';
 
 $sort_fields=array('uid', 'username', 'email', 'gender', 'banned', 'timestamp', 'last_activity', 'last_logout', 'last_login');

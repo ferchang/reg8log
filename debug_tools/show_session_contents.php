@@ -16,11 +16,8 @@ if(isset($_COOKIE['reg8log_session'])) {
 		header("Location: {$_SERVER['PHP_SELF']}");
 		exit;
 	}
-	if(isset($session_contents_were_encrypted)) echo '<center style="background: green; color: #FFF; padding: 3px">Encrypted session</center>';
-	else echo '<center style="background: #000; color: #FFF; padding: 3px">Unencrypted session</center>';
-	echo '<br>';
+	
 	echo '<table align="center" cellpadding="10" style="border: thin solid #000"><tr><td><pre>';
-	//unset($_SESSION['reg8log_encrypted_session']);
 	print_r($_SESSION);
 	echo '</pre><br><center><form style="margin-bottom: 0px" method="post" action=""><input type="submit" name="destroy" value="Destroy session"></form></center></td></tr></table>';
 }

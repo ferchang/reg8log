@@ -50,8 +50,6 @@ function identify($username=null, $password=null)
 
 		$GLOBALS['username_exists']=0;
 
-		require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 		$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username']."--{$GLOBALS['site_key']}");
 		$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");
 		
@@ -168,8 +166,6 @@ function identify($username=null, $password=null)
 		if($cookie->err_msg) $this->error($cookie->err_msg);
 		return false;
 	}
-
-	require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 	$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username']."--{$GLOBALS['site_key']}");
 	$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");

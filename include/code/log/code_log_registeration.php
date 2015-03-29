@@ -9,7 +9,6 @@ if(config::get('registeration_alert_type')==1) {
 		$reg8log_db->query($query);
 	}
 	else if(config::get('registeration_alert_type')==2) {
-		if(!isset($site_key)) require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$reg_email_alert_lock="'".'reg8log--admin_registerations_email_alert--'.$site_key."'";
 		$reg8log_db->query("select get_lock($reg_email_alert_lock, -1)");
 		$query="update `admin_registeration_alerts` set `new_registerations`=`new_registerations`+1 where `for`='email' limit 1";
@@ -23,7 +22,6 @@ if(config::get('registeration_alert_type')==1) {
 		require ROOT.'include/code/admin/code_check_registerations_admin_email_alert.php';
 	}
 	else {
-		if(!isset($site_key)) require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$reg_email_alert_lock="'".'reg8log--admin_registerations_email_alert--'.$site_key."'";
 		$reg8log_db->query("select get_lock($reg_email_alert_lock, -1)");
 		$query="update `admin_registeration_alerts` set `new_registerations`=`new_registerations`+1 limit 2";

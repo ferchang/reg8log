@@ -9,8 +9,6 @@ require 'include/common.php';
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and $_POST['password']!=='') { //login attempt
 
 	require ROOT.'include/code/code_prevent_repost.php';

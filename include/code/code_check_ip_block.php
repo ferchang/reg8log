@@ -16,7 +16,6 @@ else $_admin=0;
 if(config::get('ip_block_threshold')==-1  and config::get('ip_captcha_threshold')==-1) return;
 if(isset($captcha_needed) and config::get('ip_block_threshold')==-1) return;
 
-if(!isset($site_key)) require ROOT.'include/code/code_fetch_site_vars.php';
 $ip_login_attempt_lock="'".'reg8log--ip_login_attempt-'.$_SERVER['REMOTE_ADDR']."--$site_key"."'";
 $reg8log_db->query("select get_lock($ip_login_attempt_lock, -1)");
 

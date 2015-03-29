@@ -7,8 +7,8 @@ require_once ROOT.'include/code/code_db_object.php';
 $query="select * from `dummy`";
 
 $reg8log_db->auto_abort=false;
-if($reg8log_db->result_num($query)) config::set('db_installed', true);
-else config::set('db_installed', false);
+if($reg8log_db->result_num($query)) $db_installed=true;
+else $db_installed=false;
 $reg8log_db->auto_abort=true;
 
 ?>

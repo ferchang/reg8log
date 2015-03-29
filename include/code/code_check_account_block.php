@@ -14,7 +14,6 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
 if(isset($captcha_needed) and config::get('account_block_threshold')==-1) return;
 
-if(!isset($site_key)) require ROOT.'include/code/code_fetch_site_vars.php';
 $account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_username)."--$site_key");
 $reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
 

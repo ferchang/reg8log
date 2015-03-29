@@ -24,7 +24,6 @@ if(config::get('alert_admin_about_ip_blocks')) {
 		$reg8log_db->query($query);
 	}
 	else if(config::get('alert_admin_about_ip_blocks')==2) {
-		require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$lock_name3='reg8log--admin_ip_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name3', -1)");
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 where `for`='email' limit 1";
@@ -32,7 +31,6 @@ if(config::get('alert_admin_about_ip_blocks')) {
 		require ROOT.'include/code/admin/code_check_ip_blocks_admin_email_alert.php';
 	}
 	else {
-		require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$lock_name3='reg8log--admin_ip_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name3', -1)");
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 limit 2";

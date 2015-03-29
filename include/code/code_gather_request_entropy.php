@@ -4,7 +4,8 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(isset($store_request_entropy_probability2)) config::set('store_request_entropy_probability', $store_request_entropy_probability2);
 
-$request_entropy=sha1(microtime().config::get('pepper').$_SERVER['REMOTE_ADDR'].$_SERVER['REMOTE_PORT'].$_SERVER['HTTP_USER_AGENT'].serialize($_POST).serialize($_GET).serialize($_COOKIE));
+if(!isset($GLOBALS['request_entropy'])) $GLOBALS['request_entropy']=sha1(microtime().$GLOBALS['pepper'].$_SERVER['REMOTE_ADDR'].$_SERVER['REMOTE_PORT'].$_SERVER['HTTP_USER_AGENT'].serialize($_POST).serialize($_GET).serialize($_COOKIE));
+//similar code in func_random.php
 
 /* using the entropy of GPC data was the idea of Jim Wigginton
 (the author of the phpseclib library)

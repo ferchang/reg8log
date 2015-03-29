@@ -13,8 +13,6 @@ if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not 
 if($identified_user=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
 if(config::get('change_autologin_key_upon_login')==2 or (!config::get('allow_manual_autologin_key_change') and $identified_user!='Admin')) exit('<center><h3>Changing autologin key manually is not allowed!</h3></center>');
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 $try_type='password';
 require ROOT.'include/code/code_check_captcha_needed4user.php';
 

@@ -26,8 +26,6 @@ $_fields=config::get('fields');
 
 $err_msgs=null;
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 if(!empty($_POST)) {//Post data (registration fields values) is received
 
 require ROOT.'include/code/code_prevent_xsrf.php';

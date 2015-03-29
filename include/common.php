@@ -71,13 +71,19 @@ else $client_sess_key='';
 
 require_once ROOT.'include/class/class_db.php';
 
+if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
+
+require ROOT.'include/config/config_crypto.php';
+
+require ROOT.'include/config/config_identify.php';
+
 require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
 config::set('lang', $lang);
 
-if(!config::get('db_installed')) require ROOT.'include/code/code_check_db_setup_status.php';
+if($db_installed) require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 require ROOT.'include/code/code_gather_request_entropy.php';
 
@@ -100,7 +106,7 @@ if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 
 //---------- antixsrf_token ------------<
 
-if(!config::get('db_installed')) {
+if(!$db_installed) {
 	if(defined('SETUP_PAGE') or defined('CHANGE_LANG_PAGE')) return;
 	require ROOT.'include/page/page_not_setup.php';
 	exit;

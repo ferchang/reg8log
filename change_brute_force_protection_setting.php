@@ -24,8 +24,6 @@ if($identified_user=='Admin') {
 require ROOT.'include/code/code_check_block_options.php';
 if(count($block_options)<2) exit('No block options are available!');
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 $try_type='password';
 require ROOT.'include/code/code_check_captcha_needed4user.php';
 

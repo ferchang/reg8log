@@ -17,8 +17,6 @@ if(!isset($_GET['key'])) exit('<h3 align="center">Error: key parameter is not se
 if(isset($_POST['login2ip'])) $login2ip=true;
 else $login2ip=false;
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 if(isset($_POST['username']) and isset($_POST['password'])) {//1
 
 require ROOT.'include/code/code_prevent_repost.php';

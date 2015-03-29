@@ -109,8 +109,6 @@ function captcha_show_image() {
 
 require ROOT.'include/code/sess/code_sess_start.php';
 
-require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 $_SESSION['reg8log']['captcha_hash'] = hash('sha256', $GLOBALS['pepper'].$GLOBALS['site_priv_salt'].$captcha_word);
 
 //======================================
@@ -134,8 +132,6 @@ function captcha_verify_word() {
 
 	if(empty($_POST['captcha']) or empty($_SESSION['reg8log']['captcha_hash'])) return false;
 
-	require_once ROOT.'include/code/code_fetch_site_vars.php';
-	
 	if(!(hash('sha256', $GLOBALS['pepper'].$GLOBALS['site_priv_salt'].strtoupper($_POST['captcha']))===$_SESSION['reg8log']['captcha_hash'])) {
 		unset($_SESSION['reg8log']['captcha_hash']);
 		return false;

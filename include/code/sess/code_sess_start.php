@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(session_id()!=='' and session_name()==='reg8log_session') return;
 
-require ROOT.'include/config/config_identify.php';
-
 @session_write_close();
 
 require ROOT.'include/code/sess/code_set_sess_settings.php';
@@ -18,10 +16,9 @@ if(!session_start()) {
 
 session_regenerate_id(true);
 
-if(!isset($encrypt_session_files_contents)) require ROOT.'include/config/config_crypto.php';
+if(!$db_installed) return;
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
-	$session_contents_were_encrypted=true;
 	if($encrypt_session_files_contents) $session0=$_SESSION['reg8log_encrypted_session'];
 	require_once ROOT.'include/func/func_encryption_with_site8client_keys.php';
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));

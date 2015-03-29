@@ -10,7 +10,7 @@ function tr($str, $add_direction=false, $force_lang='') {
 	$orig_str=$str;
 	$str=strtolower($str);
 	
-	if(!$force_lang) $tmp_lang=config::get('lang');
+	if(!$force_lang) $tmp_lang=$GLOBALS['lang'];
 	else $tmp_lang=$force_lang;
 
 	if($tmp_lang=='en') {

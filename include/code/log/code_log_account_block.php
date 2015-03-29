@@ -21,7 +21,6 @@ if(config::get('alert_admin_about_account_blocks') and !(config::get('alert_admi
 		$reg8log_db->query($query);
 	}
 	else if(in_array(config::get('alert_admin_about_account_blocks'), array(2, 5))) {
-		require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$lock_name2='reg8log--admin_account_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
 		$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`+1 where `for`='email' limit 1";
@@ -29,7 +28,6 @@ if(config::get('alert_admin_about_account_blocks') and !(config::get('alert_admi
 		require ROOT.'include/code/admin/code_check_account_blocks_admin_email_alert.php';
 	}
 	else {
-		require_once ROOT.'include/code/code_fetch_site_vars.php';
 		$lock_name2='reg8log--admin_account_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name2', -1)");
 		$query="update `admin_block_alerts` set `new_account_blocks`=`new_account_blocks`+1 limit 2";

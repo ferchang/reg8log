@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 require_once ROOT.'include/code/code_db_object.php';
 
-require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 $lock_name='reg8log--register--'.$site_key;
 $reg8log_db->query("select get_lock('$lock_name', -1)");
 

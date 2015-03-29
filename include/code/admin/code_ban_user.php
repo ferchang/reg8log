@@ -9,8 +9,6 @@ else $until=1;
 
 if(!is_numeric($until)) exit("<center><h3>Error: Duration not a number!</h3></center>");
 
-require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 $lock_name=$reg8log_db->quote_smart('reg8log--ban-'.strtolower($_POST['username'])."--$site_key");
 $reg8log_db->query("select get_lock($lock_name, -1)");
 

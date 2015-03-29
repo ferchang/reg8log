@@ -23,8 +23,6 @@ require_once ROOT.'include/code/code_db_object.php';
 $rid=$reg8log_db->quote_smart($_GET['rid']);
 $key=$reg8log_db->quote_smart($_GET['key']);
 
-require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 //$lock_name='reg8log--register--'.$site_key;
 //$reg8log_db->query("select get_lock('$lock_name', -1)");
 

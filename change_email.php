@@ -14,8 +14,6 @@ $_fields=config::get('fields');
 
 $email_format=$_fields['email'];
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 $try_type='email';
 require ROOT.'include/code/code_check_captcha_needed4user.php';
 

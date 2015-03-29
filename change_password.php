@@ -14,8 +14,6 @@ $_fields=config::get('fields');
 
 $password_format=$_fields['password'];
 
-require ROOT.'include/code/code_set_site_salt.php';
-
 $try_type='password';
 require ROOT.'include/code/code_check_captcha_needed4user.php';
 
