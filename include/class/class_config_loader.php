@@ -22,14 +22,14 @@ class config extends loader_base {
 						//echo 'reading config vars from cache file...';
 						self::$vars=unserialize(file_get_contents($cache_file));
 						if(self::$cache_method[0]==='sess') self::update_cache('sess');
-						else unset($_SESSION['config_cache']);
+						else unset($_SESSION['reg8log']['config_cache']);
 						break;
 				}
 			}
 			else {
-				if(isset($_SESSION['config_cache']) and self::is_cache_valid('sess')) {
+				if(isset($_SESSION['reg8log']['config_cache']) and self::is_cache_valid('sess')) {
 					//echo 'reading config vars from session...';
-					self::$vars=$_SESSION['config_cache'];
+					self::$vars=$_SESSION['reg8log']['config_cache'];
 					break;
 				}
 			}
@@ -43,7 +43,7 @@ class config extends loader_base {
 			if(in_array('file', self::$cache_method) and !isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) self::update_cache('file');
 			if(in_array('sess', self::$cache_method)) {
 				if(self::$cache_method[0]==='sess' or isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) self::update_cache('sess');
-			} else unset($_SESSION['config_cache']);
+			} else unset($_SESSION['reg8log']['config_cache']);
 			
 		}
 		
@@ -67,8 +67,8 @@ class config extends loader_base {
 			if(self::is_file_accessible($cache_file, 'write')) file_put_contents($cache_file, serialize(self::$vars));
 		}
 		else {
-			$_SESSION['config_cache']=self::$vars;
-			$_SESSION['config_cache']['cache_time']=time();
+			$_SESSION['reg8log']['config_cache']=self::$vars;
+			$_SESSION['reg8log']['config_cache']['cache_time']=time();
 		}
 	}
 		
@@ -79,19 +79,19 @@ class config extends loader_base {
 		if(self::$cache_valid) return true;
 		if(
 			self::$cache_validation_interval
-			and isset($_SESSION['last_config_cache_validation'])
-			and (time()-$_SESSION['last_config_cache_validation'])<=self::$cache_validation_interval
+			and isset($_SESSION['reg8log']['last_config_cache_validation'])
+			and (time()-$_SESSION['reg8log']['last_config_cache_validation'])<=self::$cache_validation_interval
 		  ) return true;
 		
 		//echo 'proceeding with cache validation...';
 		
 		if($method==='file') $cache_time=filemtime(ROOT.self::$cache_file);
-		else $cache_time=$_SESSION['config_cache']['cache_time'];
+		else $cache_time=$_SESSION['reg8log']['config_cache']['cache_time'];
 		
 		foreach(glob(ROOT.'include/config/config_*.php') as $filename) if(filemtime($filename)>$cache_time) return false;
 		
 		self::$cache_valid=true;
-		if(self::$cache_validation_interval) $_SESSION['last_config_cache_validation']=time();
+		if(self::$cache_validation_interval) $_SESSION['reg8log']['last_config_cache_validation']=time();
 		return true;
 		
 	}
