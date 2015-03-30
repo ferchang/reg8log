@@ -73,6 +73,9 @@ require ROOT.'include/code/code_db_object.php';
 
 if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
 
+if($db_installed) require_once ROOT.'include/code/code_fetch_site_vars.php';
+//note that $db_installed is set in code_check_db_setup_status.php again
+
 require ROOT.'include/config/config_identify.php';
 
 require ROOT.'include/config/config_crypto.php';
@@ -82,8 +85,6 @@ require ROOT.'include/code/sess/code_sess_start.php';
 require ROOT.'include/class/class_class_loader.php';
 
 config::set('lang', $lang);
-
-if($db_installed) require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 require ROOT.'include/code/code_gather_request_entropy.php';
 

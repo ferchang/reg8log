@@ -7,11 +7,6 @@ if(!isset($GLOBALS['aes'])) {
 	$GLOBALS['aes'] = new Crypt_AES();//default mode: CBC
 }
 
-if(!isset($GLOBALS['pepper'])) {
-	require ROOT.'include/config/config_crypto.php';
-	$GLOBALS['pepper']=$pepper;
-}
-
 $GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 
 function encrypt($str) {
