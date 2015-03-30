@@ -1,1 +1,0 @@
-[30-Mar-2015 01:55:29 UTC] PHP Notice:  Undefined index: site_encr_key in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\func\func_encryption_with_site8client_keys.php on line 10

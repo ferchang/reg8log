@@ -2,7 +2,11 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 define('CAN_INCLUDE', true);
 
+require '../include/config/config_common.php';
+
 require '../include/code/code_encoding8anticache_headers.php';
+
+if(!$debug_mode) exit('<center><h3>Error: Debug mode is off!</h3><a href="../index.php">Login page</a></center>');
 
 if(isset($_COOKIE['reg8log_session'])) {
 	
