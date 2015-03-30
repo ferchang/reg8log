@@ -12,8 +12,6 @@ if(!isset($GLOBALS['pepper'])) {
 	$GLOBALS['pepper']=$pepper;
 }
 
-require_once ROOT.'include/code/code_fetch_site_vars.php';
-
 $GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
 
 function encrypt($str) {

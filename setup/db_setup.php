@@ -28,8 +28,6 @@ if(empty($_SESSION['reg8log']['setup_key']) or strpos($file_contents, $_SESSION[
 
 $_fields=config::get('fields');
 
-require ROOT.'include/code/code_fetch_site_vars.php';
-
 if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
 else {
 	$site_salt=func::random_string(22);
