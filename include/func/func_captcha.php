@@ -20,7 +20,7 @@ Oct 2011
 
 /* If set to true, an additional small box containing string 'protected by thecaptcha.com' will be added to the bottom of the image. 
 It's up to you, turn it to false if you don't like it. */
-$captcha_show_credits = false;
+$GLOBALS['captcha_show_credits']=$captcha_show_credits=false;
 
 #########################################################################
 /* func::captcha_show_image() - outputs the image to browser and stores a CAPTCHA word in a cookie or a session file. */
