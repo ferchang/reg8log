@@ -1,0 +1,1 @@
+[30-Mar-2015 07:16:20 UTC] PHP Warning:  mail() [<a href='function.mail'>function.mail</a>]: Failed to connect to mailserver at &quot;127.0.0.1&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\email\admin\code_email_admin_reg_alert_msg.php on line 25

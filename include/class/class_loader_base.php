@@ -47,6 +47,12 @@ class loader_base {
 	}
 
 	//=========================================================================
+	
+	protected static function debug_msg($str) {
+		if($GLOBALS['debug_mode'] and !defined('CAPTCHA_IMG')) echo "<span dir=ltr>$str</span>";
+	}
+	
+	//=========================================================================
 
 }
 

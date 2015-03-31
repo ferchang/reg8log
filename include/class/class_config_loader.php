@@ -19,7 +19,7 @@ class config extends loader_base {
 				if(isset($_SESSION['reg8log']['class_'.get_class().'_file_access_error'])) continue;
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
-						//echo 'reading config vars from cache file...';
+						self::debug_msg('config loader: reading config vars from cache file...');
 						self::$vars=unserialize(file_get_contents($cache_file));
 						if(self::$cache_method[0]==='sess') self::update_cache('sess');
 						else unset($_SESSION['reg8log']['config_cache']);
@@ -28,7 +28,7 @@ class config extends loader_base {
 			}
 			else {
 				if(isset($_SESSION['reg8log']['config_cache']) and self::is_cache_valid('sess')) {
-					//echo 'reading config vars from session...';
+					self::debug_msg('config loader: reading config vars from session...');
 					self::$vars=$_SESSION['reg8log']['config_cache'];
 					break;
 				}
@@ -36,7 +36,7 @@ class config extends loader_base {
 		}
 			
 		if(empty(self::$vars)) {
-			//echo 'reading config vars from original config files...';
+			self::debug_msg('config loader: reading config vars from original config files...');
 			foreach(glob(ROOT.'include/config/config_*.php') as $filename) require $filename;
 			unset($filename, $tmp18, $username_php_re, $username_js_re);
 			foreach(get_defined_vars() as $name => $value) self::$vars[$name]=$value;
@@ -83,7 +83,7 @@ class config extends loader_base {
 			and (time()-$_SESSION['reg8log']['last_config_cache_validation'])<=self::$cache_validation_interval
 		  ) return true;
 		
-		//echo 'proceeding with cache validation...';
+		self::debug_msg('config loader: proceeding with cache validation...');
 		
 		if($method==='file') $cache_time=filemtime(ROOT.self::$cache_file);
 		else $cache_time=$_SESSION['reg8log']['config_cache']['cache_time'];
