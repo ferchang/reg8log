@@ -4,8 +4,6 @@ define('CAN_INCLUDE', true);
 
 require_once '../include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 require ROOT.'include/code/code_prevent_xsrf.php';
 
 if(!config::get('ajax_check_username') or !config::get('registeration_enabled')) exit('ajax username check or registeration is disabled!');

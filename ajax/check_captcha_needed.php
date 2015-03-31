@@ -4,8 +4,6 @@ define('CAN_INCLUDE', true);
 
 require_once '../include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 require ROOT.'include/code/code_prevent_xsrf.php';
 
 if(!isset($_POST['username'])) {

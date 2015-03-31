@@ -4,8 +4,6 @@ define('CAN_INCLUDE', true);
 
 require_once '../include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 echo '<h3 align="center">reg8log cookies:</h3><hr>';
 
 foreach($_COOKIE as $name=>$value) if(strpos($name, 'reg8log_')===0) {

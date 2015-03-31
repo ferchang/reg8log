@@ -6,8 +6,6 @@ $store_request_entropy_probability2=1;
 
 require 'include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 $block_bypass_mode=true;
 
 if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');

@@ -7,8 +7,6 @@ define('CAN_INCLUDE', true);
 
 require 'include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 if(isset($_POST['username'], $_POST['password']) and $_POST['username']!=='' and $_POST['password']!=='') { //login attempt
 
 	require ROOT.'include/code/code_prevent_repost.php';

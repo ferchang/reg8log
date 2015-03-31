@@ -6,8 +6,6 @@ $store_request_entropy_probability2=1;
 
 require_once '../include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 require ROOT.'include/code/admin/code_require_admin.php';
 
 $sort_fields=array('username', 'email', 'gender', 'emails_sent', 'email_verified', 'notify_user', 'timestamp');

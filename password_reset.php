@@ -6,12 +6,6 @@ $store_request_entropy_probability2=1;
 
 require 'include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
-////////////////////////
-
-////////////////////////
-
 if(!isset($_GET['rid'], $_GET['key'])) exit('<h3 align="center">Error: rid and/or key parameter is not set!</h3>');
 
 if($_GET['rid']==='' or $_GET['key']==='') exit('<h3 align="center">Error: rid and/or key parameter is empty!</h3>');

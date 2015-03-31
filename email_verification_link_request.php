@@ -4,8 +4,6 @@ define('CAN_INCLUDE', true);
 
 require 'include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 if(!empty($_POST)) {
 	require ROOT.'include/code/code_prevent_repost.php';
 	if(!isset($_POST['form1'])) require ROOT.'include/code/code_prevent_xsrf.php';

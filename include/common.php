@@ -34,6 +34,8 @@ if($log_errors) {
 	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
 }
 
+require ROOT.'include/code/code_encoding8anticache_headers.php';
+
 //----------- language ------------>
 
 if(!$admin_emails_lang) $admin_emails_lang=$lang;

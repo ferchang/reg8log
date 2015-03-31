@@ -11,8 +11,6 @@ ini_set('display_errors', '1');
 
 $site_encr_key='ff'; //just to prevent func_encryption_with_site8client_keys.php from complaining!
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 require ROOT.'include/code/code_prevent_repost.php';
 
 $encrypt_session_files_contents=false;

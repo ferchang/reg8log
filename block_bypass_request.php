@@ -4,8 +4,6 @@ define('CAN_INCLUDE', true);
 
 require 'include/common.php';
 
-require ROOT.'include/code/code_encoding8anticache_headers.php';
-
 require ROOT.'include/code/code_prevent_repost.php';
 
 if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-bypass system is disabled by administrator!</h3>');
