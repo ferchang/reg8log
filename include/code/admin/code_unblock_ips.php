@@ -15,7 +15,7 @@ $i=0;
 foreach($unblock as $item) {
 	if(!is_numeric($item['auto'])) exit('error: auto value not numeric!');
 	$autos.="{$item['auto']}";
-	if(++$i==count($unblock)) break;
+	if(++$i===count($unblock)) break;
 	$autos.=", ";
 }
 

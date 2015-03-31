@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(strtolower($_POST['username'])=='admin') {
+if(strtolower($_POST['username'])==='admin') {
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
 	config::set('account_block_period', config::get('admin_account_block_period'));
@@ -13,7 +13,7 @@ if(strtolower($_POST['username'])=='admin') {
 }
 else $admin=0;
 
-if(config::get('ip_block_threshold')==-1 and config::get('ip_captcha_threshold')==-1) return;
+if(config::get('ip_block_threshold')===-1 and config::get('ip_captcha_threshold')===-1) return;
 
 if(isset($identified_user) or isset($pending_user) or isset($banned_user)) return;
 
@@ -47,8 +47,8 @@ else {
 }
 setcookie('reg8log_ip_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_expired_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_size_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_size_cleanup.php';
 
 ?>

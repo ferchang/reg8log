@@ -30,53 +30,53 @@ function duration2friendly_str($t, $c=2, $abb=false) {
 
 	do {
 
-		if($y and $n+1==$c and $mth>=6) $y++;
+		if($y and $n+1===$c and $mth>=6) $y++;
 
 		if($y) $f=true;
 
-		if($f and ++$n==$c) break;
+		if($f and ++$n===$c) break;
 
-		if(($f or $mth) and $n+1==$c and $d>=15) $mth++;
+		if(($f or $mth) and $n+1===$c and $d>=15) $mth++;
 
 		if($mth) $f=true;
 		
-		if($f and ++$n==$c) break;
+		if($f and ++$n===$c) break;
 		
-		if(($f or $d) and $n+1==$c and $h>=12) $d++;
+		if(($f or $d) and $n+1===$c and $h>=12) $d++;
 
 		if($d) $f=true;
 
-		if($f and ++$n==$c) break;
+		if($f and ++$n===$c) break;
 
-		if(($f or $h) and $n+1==$c and $m>=30) $h++;
+		if(($f or $h) and $n+1===$c and $m>=30) $h++;
 		
 		if($h) $f=true;
 
-		if($f and ++$n==$c) break;
+		if($f and ++$n===$c) break;
 
-		if(($f or $m) and $n+1==$c and $s>=30) $m++;
+		if(($f or $m) and $n+1===$c and $s>=30) $m++;
 
 	} while(false);
 
 //---------------------------
 
 do {
-	if($mth==12) {
+	if($mth===12) {
 		$y++;
 		$mth=0;
 		break;
 	}
-	if($d==30) {
+	if($d===30) {
 		$mth++;
 		$d=0;
 		break;
 	}
-	if($h==24) {
+	if($h===24) {
 		$d++;
 		$h=0;
 		break;
 	}
-	if($m==60) {
+	if($m===60) {
 		$h++;
 		$m=0;
 		break;
@@ -97,7 +97,7 @@ do {
 			if($y>1) $msg.=func::tr('s');
 		}
 
-		if($msg and ++$n==$c) break;
+		if($msg and ++$n===$c) break;
 
 		if($mth) {
 			if($y) $msg.=" ".func::tr('&')." $mth ".func::tr('month');
@@ -105,7 +105,7 @@ do {
 			if($mth>1) $msg.=func::tr('s');
 		}
 		
-		if($msg and ++$n==$c) break;
+		if($msg and ++$n===$c) break;
 		
 		if($d) {
 			if($y or $mth) $msg.=" ".func::tr('&')." $d ".func::tr('day');
@@ -113,7 +113,7 @@ do {
 			if($d>1) $msg.=func::tr('s');
 		}
 
-		if($msg and ++$n==$c) break;
+		if($msg and ++$n===$c) break;
 
 		if($h) {
 			if($y or $mth or $d) $msg.=" ".func::tr('&')." $h ".func::tr('hour');
@@ -121,7 +121,7 @@ do {
 			if($h>1) $msg.=func::tr('s');
 		}
 
-		if($msg and ++$n==$c) break;
+		if($msg and ++$n===$c) break;
 
 		if($m) {
 			if($y or $mth or $d or $h) $msg.=($abb)? " ".func::tr('&')." $m ".func::tr('min'):" ".func::tr('&')." $m ".func::tr('minute');
@@ -129,7 +129,7 @@ do {
 			if($m>1) $msg.=func::tr('s');
 		}
 
-		if($msg and ++$n==$c) break;
+		if($msg and ++$n===$c) break;
 
 		if($s) {
 			if($y or $mth or $d or $h or $m) $msg.=($abb)? " ".func::tr('&')." $s ".func::tr('sec'):" ".func::tr('&')." $s ".func::tr('second');
@@ -141,14 +141,14 @@ do {
 
 //---------------------------
 
-	if($msg=='1 day') $msg='24 hours';
-	else if($msg=='2 days') $msg='48 hours';
-	//else if($msg=='3 days') $msg='72 hours';
-	else if($msg=='1 روز') $msg='24 ساعت';
-	else if($msg=='2 روز') $msg='48 ساعت';
-	//else if($msg=='3 روز') $msg='72 ساعت';
+	if($msg==='1 day') $msg='24 hours';
+	else if($msg==='2 days') $msg='48 hours';
+	//else if($msg==='3 days') $msg='72 hours';
+	else if($msg==='1 روز') $msg='24 ساعت';
+	else if($msg==='2 روز') $msg='48 ساعت';
+	//else if($msg==='3 روز') $msg='72 ساعت';
 
-	if(config::get('lang')=='fa') {
+	if(config::get('lang')==='fa') {
 		$en_num = array('0','1','2','3','4','5','6','7','8','9');
 		$fa_num = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
 		$msg=str_replace($en_num, $fa_num, $msg);

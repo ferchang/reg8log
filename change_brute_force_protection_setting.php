@@ -10,7 +10,7 @@ if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not 
 
 if(!config::get('allow_users2disable_blocks') and $identified_user!='Admin') exit('<center><h3>Changing brute-force protection setting is not allowed!</h3></center>');
 
-if($identified_user=='Admin') {
+if($identified_user==='Admin') {
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
 	config::set('account_block_period', config::get('admin_account_block_period'));
@@ -36,12 +36,12 @@ require ROOT.'include/code/code_prevent_repost.php';
 require ROOT.'include/code/code_prevent_xsrf.php';
 
 $disables=$_POST['disables'];
-if(!in_array($disables, array(0, 1, 2, 3))) exit('Invalid block_disable value!');
+if(!in_array($disables, array('0', '1', '2', '3'), true)) exit('Invalid block_disable value!');
 
 if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/code_verify_captcha.php';
 
 $password=$_POST['password'];
-if($password=='') $err_msgs[]=func::tr('Password field is empty!');
+if($password==='') $err_msgs[]=func::tr('Password field is empty!');
 else if(!isset($captcha_err)) {
 		if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
 		require ROOT.'include/code/code_verify_password.php';

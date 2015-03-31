@@ -29,14 +29,14 @@ return false;
 echo "fields=new Array(\n";
 $f=false;
 foreach($_fields as $field_name=>$specs)
-if($field_name=='password' or $field_name=='email') {
+if($field_name==='password' or $field_name==='email') {
   if($f) echo ",\n";
   else $f=true;
 echo "new Array(\n'$field_name',\n{$specs['minlength']},\n{$specs['maxlength']},\n";
 if($specs['js_re']===true) echo $specs['php_re'];
 else if($specs['js_re']===false) echo 'false';
 else echo $specs['js_re'];
-if(config::get('lang')=='fa') echo ",\n'", func::tr($field_name), "'";
+if(config::get('lang')==='fa') echo ",\n'", func::tr($field_name), "'";
 else echo ",\n'$field_name'";
 echo "\n)";
 }

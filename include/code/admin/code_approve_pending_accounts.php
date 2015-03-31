@@ -7,7 +7,7 @@ $i=0;
 foreach($appr as $auto) {
   if(!is_numeric($auto)) exit('error: auto value not numeric!');
   $autos.="$auto";
-  if(++$i==count($appr)) break;
+  if(++$i===count($appr)) break;
   $autos.=", ";
 }
 
@@ -63,7 +63,7 @@ if(isset($tmp2)) {
 	$i=0;
 	foreach($tmp2 as $auto) {
 	  $autos.="$auto";
-	  if(++$i==count($tmp2)) break;
+	  if(++$i===count($tmp2)) break;
 	  $autos.=", ";
 	}
 	$query='delete from `pending_accounts` where `auto` in ('.$autos.')';

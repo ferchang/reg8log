@@ -22,7 +22,7 @@ function error($err_msg='')
 //=======================================
 function tie_login2ip($user_info) {
 
-	if((config::get('tie_login2ip_option_at_login') and $user_info['tie_login2ip']) or  (!config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')==3 or (config::get('tie_login2ip')==1 and $user_info['username']=='Admin') or (config::get('tie_login2ip')==2 and $user_info['username']!='Admin')))) return true;
+	if((config::get('tie_login2ip_option_at_login') and $user_info['tie_login2ip']) or  (!config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')===3 or (config::get('tie_login2ip')===1 and $user_info['username']==='Admin') or (config::get('tie_login2ip')===2 and $user_info['username']!='Admin')))) return true;
 	else return false;
 }
 //=======================================
@@ -67,7 +67,7 @@ function identify($username=null, $password=null)
 					}
 				}
 				
-				if($this->user_info['username']=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
+				if($this->user_info['username']==='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
 				if(config::get('change_autologin_key_upon_login')) {
 					$new_autologin_key=func::random_string(43);
 					$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$tmp7.' limit 1';
@@ -129,7 +129,7 @@ function identify($username=null, $password=null)
 
 		$query='select * from `accounts` where ';
 		foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
-				if($value=='autologin_key') {
+				if($value==='autologin_key') {
 					$autologin_key=$cookie->values[$key];
 					continue;
 				}
@@ -141,16 +141,16 @@ function identify($username=null, $password=null)
 		if($GLOBALS['reg8log_db']->result_num($query)) {
 			$tmp54=$GLOBALS['reg8log_db']->fetch_row();
 			if($this->tie_login2ip($tmp54)) {
-				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])==$autologin_key) $flag=true;
+				if(hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR'])===$autologin_key) $flag=true;
 			}
-			else if($tmp54['autologin_key']==$autologin_key) $flag=true;
+			else if($tmp54['autologin_key']===$autologin_key) $flag=true;
 			
-			if($tmp54['username']=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
+			if($tmp54['username']==='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
 			if($flag) do {
 				if(!config::get('change_autologin_key_upon_login')) {
-					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')==3) break;
-					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')==2 and $tmp54['username']!='Admin') break;
-					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')==1 and $tmp54['username']=='Admin') break;
+					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===3) break;
+					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===2 and $tmp54['username']!='Admin') break;
+					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===1 and $tmp54['username']==='Admin') break;
 				}
 				if($tmp54['autologin_expiration'] and $tmp54['autologin_expiration']<$GLOBALS['req_time']) $flag=false;
 			} while(false);
@@ -170,7 +170,7 @@ function identify($username=null, $password=null)
 		if($this->tie_login2ip($tmp54)) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
 		else $autologin_key=$tmp54['autologin_key'];
 		$this->user_info=$tmp54;
-		if($_COOKIE['reg8log_autologin2']=='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key)) {
+		if($_COOKIE['reg8log_autologin2']==='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key)) {
 			$GLOBALS['logged_out_user']=$this->user_info['username'];
 			$cookie->erase();
 			setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);
@@ -180,8 +180,8 @@ function identify($username=null, $password=null)
 		$GLOBALS['last_protection']=$this->user_info['last_protection'];
 		if(!is_numeric($cookie->values[$key+1])) exit("<center><h3>Error: expiration time in cookie is not numeric!</h3></center>");
 		$this->autologin_cookie_expiration=$cookie->values[$key+1];
-		if($this->user_info['username']=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
-		if(config::get('change_autologin_key_upon_login')==2) {
+		if($this->user_info['username']==='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
+		if(config::get('change_autologin_key_upon_login')===2) {
 			$new_autologin_key=func::random_string(43);
 			$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `auto`=".$this->user_info['auto'].' limit 1';
 			$GLOBALS['reg8log_db']->query($query);
@@ -235,7 +235,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	$cookie->secure=HTTPS;
 	$autologin_key=$this->user_info['autologin_key'];
 	foreach($this->identify_structs['autologin_cookie'] as $key=>$value) if(is_int($key)) {
-		if($value=='autologin_key' and $this->tie_login2ip($this->user_info)) {
+		if($value==='autologin_key' and $this->tie_login2ip($this->user_info)) {
 			$autologin_key=hash('sha256', $this->user_info['autologin_key'].$_SERVER['REMOTE_ADDR']);
 			$cookie->values[]=$autologin_key;
 		}

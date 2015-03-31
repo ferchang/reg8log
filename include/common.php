@@ -42,7 +42,7 @@ if(!$admin_emails_lang) $admin_emails_lang=$lang;
 
 if(isset($_COOKIE['reg8log_lang']) and preg_match('/^[a-z]{2}$/', $_COOKIE['reg8log_lang'])) $lang=$_COOKIE['reg8log_lang'];
 
-if($lang=='fa') {
+if($lang==='fa') {
 	$page_dir='dir="rtl"';
 	$cell_align='align="left"';
 }

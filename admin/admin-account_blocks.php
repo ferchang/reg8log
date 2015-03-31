@@ -24,8 +24,8 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 		require ROOT.'include/code/admin/code_update_password_check.php';
 
 		foreach($_POST as $auto=>$action) {
-			if($action=='del') $del[]=$auto;
-			else if($action=='unblock') $unblock[]=substr($auto, 3);
+			if($action==='del') $del[]=$auto;
+			else if($action==='unblock') $unblock[]=substr($auto, 3);
 		}
 	
 		if(isset($unblock)) require ROOT.'include/code/admin/code_unblock_accounts.php';

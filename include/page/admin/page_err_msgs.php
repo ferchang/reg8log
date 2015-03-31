@@ -7,7 +7,7 @@ if(isset($password_msg)) {
 	echo "<span style=\"color: yellow\" >&nbsp;$password_msg&nbsp;</span><br />";
 	echo '</td></tr></table>';
 }
-else if(isset($captcha_msg) and count($err_msgs)==1) {
+else if(isset($captcha_msg) and count($err_msgs)===1) {
 	echo '<table><tr align="center"><td colspan="3" style="border: solid thin yellow; font-style: italic; background: #555; padding: 3px;">';
 	echo "<span style=\"color: yellow\" >&nbsp;$captcha_msg&nbsp;</span><br />";
 	echo '</td></tr></table>';

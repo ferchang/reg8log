@@ -24,9 +24,9 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 		require ROOT.'include/code/admin/code_update_password_check.php';
 
 		foreach($_POST as $auto=>$action) {
-			if($action=='undet') continue;
-			if($action=='del') $del[]=$auto;
-			else if($action=='appr') $appr[]=$auto;
+			if($action==='undet') continue;
+			if($action==='del') $del[]=$auto;
+			else if($action==='appr') $appr[]=$auto;
 		}
 		if(isset($appr)) require ROOT.'include/code/admin/code_approve_pending_accounts.php';
 		if(isset($del)) require ROOT.'include/code/admin/code_delete_pending_accounts.php';

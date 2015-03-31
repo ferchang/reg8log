@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(strtolower($_username)=='admin') config::set('change_autologin_key_upon_new_password', config::get('admin_change_autologin_key_upon_new_password'));
+if(strtolower($_username)==='admin') config::set('change_autologin_key_upon_new_password', config::get('admin_change_autologin_key_upon_new_password'));
 
 if(config::get('change_autologin_key_upon_new_password')) {
 

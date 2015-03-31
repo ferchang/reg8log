@@ -11,7 +11,7 @@ $dir=htmlspecialchars($dir, ENT_QUOTES);
 $dir=pathinfo($dir, PATHINFO_DIRNAME);
 $dir=str_replace('\\', '/', $dir);
 
-if(strlen($dir)==1) $dir='';
+if(strlen($dir)===1) $dir='';
 
 $link="http://$host$dir/email_verification.php?rid=$rid&key=$email_verification_key";
 

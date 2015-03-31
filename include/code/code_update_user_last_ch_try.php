@@ -4,10 +4,10 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $index_dir=func::get_relative_root_path();
 
-if(config::get('ch_pswd_max_threshold')==-1 and config::get('ch_pswd_captcha_threshold')==-1) return;
+if(config::get('ch_pswd_max_threshold')===-1 and config::get('ch_pswd_captcha_threshold')===-1) return;
 
 if($try_type==='email') {
-	if(config::get('ch_pswd_captcha_threshold')==-1) return;
+	if(config::get('ch_pswd_captcha_threshold')===-1) return;
 	$query="update `accounts` set `last_ch_email_try`=".$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	return;

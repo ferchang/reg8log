@@ -134,72 +134,72 @@ echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
-if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='username' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Username'), "</a>";
-if($sort_by=='username') {
+if($sort_by==='username') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=gender&sort_dir=";
-if($sort_by=='gender' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='gender' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Gender'), "</a>";
-if($sort_by=='gender') {
+if($sort_by==='gender') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=email&sort_dir=";
-if($sort_by=='email' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='email' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Email'), "</a>";
-if($sort_by=='email') {
+if($sort_by==='email') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=emails_sent&sort_dir=";
-if($sort_by=='emails_sent' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='emails_sent' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Emails sent'), "</a>";
-if($sort_by=='emails_sent') {
+if($sort_by==='emails_sent') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=admin_confirmed&sort_dir=";
-if($sort_by=='admin_confirmed' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='admin_confirmed' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Needs admin confirmation'), "</a>";
-if($sort_by=='admin_confirmed') {
+if($sort_by==='admin_confirmed') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=timestamp&sort_dir=";
-if($sort_by=='timestamp' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='timestamp' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Time'), "</a>";
-if($sort_by=='timestamp') {
+if($sort_by==='timestamp') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -218,8 +218,8 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
-	if($rec['gender']=='n') echo '?';
-	else if($rec['gender']=='m') echo func::tr('Male');
+	if($rec['gender']==='n') echo '?';
+	else if($rec['gender']==='m') echo func::tr('Male');
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';

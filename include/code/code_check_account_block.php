@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or isset($is_admin)) {
+if((isset($_POST['username']) and strtolower($_POST['username'])==='admin') or isset($is_admin)) {
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
 	config::set('account_block_period', config::get('admin_account_block_period'));
@@ -11,8 +11,8 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 	config::set('ip_block_period', config::get('admin_ip_block_period'));
 }
 
-if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
-if(isset($captcha_needed) and config::get('account_block_threshold')==-1) return;
+if(config::get('account_block_threshold')===-1  and config::get('account_captcha_threshold')===-1) return;
+if(isset($captcha_needed) and config::get('account_block_threshold')===-1) return;
 
 $account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_username)."--$site_key");
 $reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
@@ -26,14 +26,14 @@ if(!isset($last_protection)) {
 	$last_protection=$rec['last_protection'];
 }
 
-if(config::get('account_block_threshold')==0) {
+if(config::get('account_block_threshold')===0) {
 	$account_block=$_username;
 	$block_duration=config::get('account_block_period');
 	return;
 }
-else if(config::get('account_captcha_threshold')==0) {
+else if(config::get('account_captcha_threshold')===0) {
 	$captcha_needed=true;
-	if(config::get('account_block_threshold')==-1) return;
+	if(config::get('account_block_threshold')===-1) return;
 }
 
 if(!isset($tmp9)) $tmp9=$reg8log_db->quote_smart($_username);

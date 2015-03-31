@@ -56,7 +56,7 @@ else if(config::get('admin_confirmation_needed')) {
 
 $no_specialchars=true;
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
 	$reg8log_db->query("select release_lock('$lock_name')");
 	require ROOT.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';
 }

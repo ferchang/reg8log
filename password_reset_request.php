@@ -79,7 +79,7 @@ require ROOT.'include/code/email/code_email_password_reset_link.php';
 $cleanup=true;
 
 }
-else if($emails_sent<config::get('max_password_reset_emails') or config::get('max_password_reset_emails')==-1) {
+else if($emails_sent<config::get('max_password_reset_emails') or config::get('max_password_reset_emails')===-1) {
 
 	$rid=$rec['record_id'];
 	$key=$rec['key'];
@@ -102,7 +102,7 @@ $no_specialchars=true;
 require ROOT.'include/page/page_success.php';
 
 if(isset($cleanup)) {
-	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_password_reset_expired_cleanup.php';
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_password_reset_expired_cleanup.php';
 }
 
 exit;

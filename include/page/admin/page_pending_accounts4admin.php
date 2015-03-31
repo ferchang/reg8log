@@ -117,72 +117,72 @@ echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
-if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='username' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Username'), "</a>";
-if($sort_by=='username') {
+if($sort_by==='username') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=gender&sort_dir=";
-if($sort_by=='gender' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='gender' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Gender'), "</a>";
-if($sort_by=='gender') {
+if($sort_by==='gender') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=email&sort_dir=";
-if($sort_by=='email' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='email' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Email'), "</a>";
-if($sort_by=='email') {
+if($sort_by==='email') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=emails_sent&sort_dir=";
-if($sort_by=='emails_sent' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='emails_sent' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Emails sent'), "</a>";
-if($sort_by=='emails_sent') {
+if($sort_by==='emails_sent') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=email_verified&sort_dir=";
-if($sort_by=='email_verified' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='email_verified' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Email verified'), "</a>";
-if($sort_by=='email_verified') {
+if($sort_by==='email_verified') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=timestamp&sort_dir=";
-if($sort_by=='timestamp' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='timestamp' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Time'), "</a>";
-if($sort_by=='timestamp') {
+if($sort_by==='timestamp') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -191,12 +191,12 @@ if(config::get('can_notify_user_about_admin_action')) {
 
 	echo '<th title="', func::tr('notify user description'), '">';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=notify_user&sort_dir=";
-	if($sort_by=='notify_user' and $sort_dir=='asc') echo 'desc';
+	if($sort_by==='notify_user' and $sort_dir==='asc') echo 'desc';
 	else echo 'asc';
 	echo "'>", func::tr('Notify'), "</a>";
-	if($sort_by=='notify_user') {
+	if($sort_by==='notify_user') {
 		echo '&nbsp;';
-		if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+		if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 		else echo '<img src="../image/sort_desc.gif">';
 	}
 	echo "</th>";
@@ -217,8 +217,8 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $row, '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
-	if($rec['gender']=='n') echo '?';
-	else if($rec['gender']=='m') echo func::tr('Male');
+	if($rec['gender']==='n') echo '?';
+	else if($rec['gender']==='m') echo func::tr('Male');
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
@@ -234,14 +234,14 @@ while($rec=$reg8log_db->fetch_row()) {
 	}
 	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
 	if(config::get('can_notify_user_about_admin_action')) echo '<td>', ($rec['notify_user'])? func::tr('Yes'):func::tr('No'), '</td>';
-	echo '<td><input type="radio" name="', $rec['auto'], '" id="appr', $row, '" value="appr" onclick="green(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='appr')? ' checked ' : ''), '></td>';
-	echo '<td><input type="radio" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="red(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='del')? ' checked ' : ''), '></td>';
-	echo '<td><input type="radio" name="', $rec['auto'], '" id="undet', $row, '" value="undet"  onclick="normal(', $i,')" ', ((!isset($_POST[$rec['auto']]) or (isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]=='undet'))? ' checked ' : ''), '></td>';
+	echo '<td><input type="radio" name="', $rec['auto'], '" id="appr', $row, '" value="appr" onclick="green(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]==='appr')? ' checked ' : ''), '></td>';
+	echo '<td><input type="radio" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="red(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]==='del')? ' checked ' : ''), '></td>';
+	echo '<td><input type="radio" name="', $rec['auto'], '" id="undet', $row, '" value="undet"  onclick="normal(', $i,')" ', ((!isset($_POST[$rec['auto']]) or (isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]==='undet'))? ' checked ' : ''), '></td>';
 	echo '</tr>';
 	
 	if(isset($_POST[$rec['auto']]))
-	if($_POST[$rec['auto']]=='appr') $apprs_[]=$i;
-	else if($_POST[$rec['auto']]=='del') $dels_[]=$i;
+	if($_POST[$rec['auto']]==='appr') $apprs_[]=$i;
+	else if($_POST[$rec['auto']]==='del') $dels_[]=$i;
 	
 }
 echo '<tr ';

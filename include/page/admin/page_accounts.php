@@ -130,60 +130,60 @@ echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=uid&sort_dir=";
-if($sort_by=='uid' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='uid' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Uid'), "</a>";
-if($sort_by=='uid') {
+if($sort_by==='uid') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
-if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='username' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Username'), "</a>";
-if($sort_by=='username') {
+if($sort_by==='username') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=gender&sort_dir=";
-if($sort_by=='gender' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='gender' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Gender'), "</a>";
-if($sort_by=='gender') {
+if($sort_by==='gender') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=email&sort_dir=";
-if($sort_by=='email' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='email' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Email'), "</a>";
-if($sort_by=='email') {
+if($sort_by==='email') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=timestamp&sort_dir=";
-if($sort_by=='timestamp' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='timestamp' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Account creation'), "</a>";
-if($sort_by=='timestamp') {
+if($sort_by==='timestamp') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -191,12 +191,12 @@ echo "</th>";
 if(config::get('log_last_login')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_login&sort_dir=";
-	if($sort_by=='last_login' and $sort_dir=='asc') echo 'desc';
+	if($sort_by==='last_login' and $sort_dir==='asc') echo 'desc';
 	else echo 'asc';
 	echo "'>", func::tr('Last login'), "</a>";
-	if($sort_by=='last_login') {
+	if($sort_by==='last_login') {
 		echo '&nbsp;';
-		if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+		if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 		else echo '<img src="../image/sort_desc.gif">';
 	}
 	echo "</th>";
@@ -205,12 +205,12 @@ if(config::get('log_last_login')) {
 if(config::get('log_last_activity')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_activity&sort_dir=";
-	if($sort_by=='last_activity' and $sort_dir=='asc') echo 'desc';
+	if($sort_by==='last_activity' and $sort_dir==='asc') echo 'desc';
 	else echo 'asc';
 	echo "'>", func::tr('Last activity'), "</a>";
-	if($sort_by=='last_activity') {
+	if($sort_by==='last_activity') {
 		echo '&nbsp;';
-		if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+		if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 		else echo '<img src="../image/sort_desc.gif">';
 	}
 	echo "</th>";
@@ -219,12 +219,12 @@ if(config::get('log_last_activity')) {
 if(config::get('log_last_logout')) {
 	echo '<th>';
 	echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_logout&sort_dir=";
-	if($sort_by=='last_logout' and $sort_dir=='asc') echo 'desc';
+	if($sort_by==='last_logout' and $sort_dir==='asc') echo 'desc';
 	else echo 'asc';
 	echo "'>", func::tr('Last logout'), "</a>";
-	if($sort_by=='last_logout') {
+	if($sort_by==='last_logout') {
 		echo '&nbsp;';
-		if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+		if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 		else echo '<img src="../image/sort_desc.gif">';
 	}
 	echo "</th>";
@@ -232,12 +232,12 @@ if(config::get('log_last_logout')) {
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=banned&sort_dir=";
-if($sort_by=='banned' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='banned' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Banned'), "</a>";
-if($sort_by=='banned') {
+if($sort_by==='banned') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -257,8 +257,8 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $rec['uid'], '</td>';
 	echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
-	if($rec['gender']=='n') echo '?';
-	else if($rec['gender']=='m') echo func::tr('Male');
+	if($rec['gender']==='n') echo '?';
+	else if($rec['gender']==='m') echo func::tr('Male');
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
@@ -275,6 +275,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		if($rec['last_logout']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_logout'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
+
 	if($rec['banned']==1 or $rec['banned']>$req_time) echo '<td>', func::tr('Yes'), '</td>';
 	else echo '<td>', func::tr('No'), '</td>';
 	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)"';

@@ -36,7 +36,7 @@ do {//1
 
 	$rec=$reg8log_db->fetch_row();
 
-	if($rec['username']=='Admin') {
+	if($rec['username']==='Admin') {
 		$err_msgs[]=func::tr('Admin account cannot be banned!');
 		break;
 	}

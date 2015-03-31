@@ -49,8 +49,8 @@ require ROOT.'include/page/page_sections.php';
 <li><a class="li_item" href="change_email.php"><?php echo func::tr('Change email'); ?></a><br>
 <?php
 
-if($identified_user=='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
-if(config::get('change_autologin_key_upon_login')!=2 and (config::get('allow_manual_autologin_key_change') or $identified_user=='Admin')) {
+if($identified_user==='Admin') config::set('change_autologin_key_upon_login', config::get('admin_change_autologin_key_upon_login'));
+if(config::get('change_autologin_key_upon_login')!=2 and (config::get('allow_manual_autologin_key_change') or $identified_user==='Admin')) {
 	echo '<li><a class="li_item" href="change_autologin_key.php">', func::tr('Logging other systems out'), '</a>';
 	if(!config::get('allow_manual_autologin_key_change')) echo '<small> (', func::tr('Admin only'), ')</small>';
 }

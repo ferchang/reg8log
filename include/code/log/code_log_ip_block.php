@@ -17,11 +17,11 @@ $tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last
 $reg8log_db->query($tmp29);
 
 if(config::get('alert_admin_about_ip_blocks')) {
-	if(config::get('alert_admin_about_ip_blocks')==1) {
+	if(config::get('alert_admin_about_ip_blocks')===1) {
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 where `for`='visit' limit 1";
 		$reg8log_db->query($query);
 	}
-	else if(config::get('alert_admin_about_ip_blocks')==2) {
+	else if(config::get('alert_admin_about_ip_blocks')===2) {
 		$lock_name3='reg8log--admin_ip_block_email_alert--'.$site_key;
 		$reg8log_db->query("select get_lock('$lock_name3', -1)");
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 where `for`='email' limit 1";
@@ -37,8 +37,8 @@ if(config::get('alert_admin_about_ip_blocks')) {
 	}
 }
 
-if(config::get('keep_expired_block_log_records_for')!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_block_log_expired_cleanup.php';
+if(config::get('keep_expired_block_log_records_for')!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_ip_block_log_expired_cleanup.php';
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_ip_block_log_size_cleanup.php';
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_ip_block_log_size_cleanup.php';
 
 ?>

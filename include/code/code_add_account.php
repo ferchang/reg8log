@@ -21,7 +21,7 @@ unset($_fields['password']);
 foreach($_fields as $field_name=>$specs) {
   $field_names.="`$field_name`";
   $field_values.=$reg8log_db->quote_smart($specs['value']);
-  if(++$i==count($_fields)) break;
+  if(++$i===count($_fields)) break;
   $field_names.=', ';
   $field_values.=', ';
 }

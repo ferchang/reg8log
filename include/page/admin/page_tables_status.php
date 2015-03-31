@@ -35,24 +35,24 @@ echo '<tr style="background: brown; color: #fff"><th>&nbsp;</th>';
 
 echo '<th>';
 echo "<a class='header' href='?sort_by=table_name&sort_dir=";
-if($sort_by=='table_name' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='table_name' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Table name'), "</a>";
-if($sort_by=='table_name') {
+if($sort_by==='table_name') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?sort_by=num_records&sort_dir=";
-if($sort_by=='num_records' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='num_records' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Num records'), "</a>";
-if($sort_by=='num_records') {
+if($sort_by==='num_records') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -67,8 +67,8 @@ foreach(glob(ROOT.'setup/sql/*.sql') as $file) {
 	$tables[$tablename]=$rec['n'];
 }
 
-if($sort_by=='table_name') ($sort_dir=='asc')? ksort($tables) : krsort($tables);
-else if($sort_by=='num_records') ($sort_dir=='asc')? asort($tables) : arsort($tables);
+if($sort_by==='table_name') ($sort_dir==='asc')? ksort($tables) : krsort($tables);
+else if($sort_by==='num_records') ($sort_dir==='asc')? asort($tables) : arsort($tables);
 
 $i=0;
 $r=false;

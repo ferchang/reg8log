@@ -28,7 +28,7 @@ if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no s
 
 $rec=$reg8log_db->fetch_row();
 
-if(config::get('change_email_verification_time')==0) $verification_time=config::get('email_verification_time');
+if(config::get('change_email_verification_time')===0) $verification_time=config::get('email_verification_time');
 else $verification_time=config::get('change_email_verification_time');
 
 $expired=$req_time-$verification_time;

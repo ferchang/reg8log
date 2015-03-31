@@ -15,7 +15,7 @@ $pass_banned_user=true;
 
 if(config::get('change_autologin_key_upon_logout') or config::get('admin_change_autologin_key_upon_logout')) require_once ROOT.'include/code/code_identify.php';
 
-if((isset($identified_user) and $identified_user=='Admin') or (isset($logged_out_user) and $logged_out_user=='Admin')) config::set('change_autologin_key_upon_logout', config::get('admin_change_autologin_key_upon_logout'));
+if((isset($identified_user) and $identified_user==='Admin') or (isset($logged_out_user) and $logged_out_user==='Admin')) config::set('change_autologin_key_upon_logout', config::get('admin_change_autologin_key_upon_logout'));
 
 if(config::get('change_autologin_key_upon_logout')) {
 	if(isset($identified_user) or isset($banned_user) or isset($logged_out_user)) {

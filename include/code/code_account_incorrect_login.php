@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(strtolower($_POST['username'])=='admin') {
+if(strtolower($_POST['username'])==='admin') {
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
 	config::set('account_block_period', config::get('admin_account_block_period'));
@@ -11,7 +11,7 @@ if(strtolower($_POST['username'])=='admin') {
 	config::set('ip_block_period', config::get('admin_ip_block_period'));
 }
 
-if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
+if(config::get('account_block_threshold')===-1  and config::get('account_captcha_threshold')===-1) return;
 
 if(!$username_exists and config::get('registeration_enabled') and config::get('ajax_check_username') and !config::get('max_ajax_check_usernames')) {
 	$no_pretend_user=true;
@@ -42,7 +42,7 @@ if(!$reg8log_db->result_num()) {
 	}
 	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 	
-	if(config::get('account_block_threshold')==1) {
+	if(config::get('account_block_threshold')===1) {
 		$_username2=$_POST['username'];
 		require_once ROOT.'include/code/code_accomodate_block_disable.php';
 		if($block_disable!=2 and $block_disable!=3) {
@@ -51,9 +51,9 @@ if(!$reg8log_db->result_num()) {
 			$first_attempt=$req_time;
 			require_once ROOT.'include/code/log/code_log_account_block.php';
 		}
-		else if(config::get('account_captcha_threshold')==1) $captcha_needed=true;
+		else if(config::get('account_captcha_threshold')===1) $captcha_needed=true;
 	}
-	else if(config::get('account_captcha_threshold')==1) $captcha_needed=true;
+	else if(config::get('account_captcha_threshold')===1) $captcha_needed=true;
 
 	$incorrect_attempts=1;
 
@@ -108,12 +108,12 @@ else {
 }
 setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
 	$table_name='account_incorrect_logins';
 	require ROOT.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 }
 
-if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
+if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
 	$table_name='account_incorrect_logins';
 	require ROOT.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 }

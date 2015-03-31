@@ -46,8 +46,8 @@ if($admin_alert_email_msg) {
 	if(config::get('max_alert_emails')) {
 		$query="insert into `block_alert_emails_history` (`timestamp`) values($req_time)";
 		$reg8log_db->query($query);
-		if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_expired_cleanup.php';
-		if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_size_cleanup.php';
+		if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_expired_cleanup.php';
+		if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_block_alert_emails_history_size_cleanup.php';
 	}
 }
 

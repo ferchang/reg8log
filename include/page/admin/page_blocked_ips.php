@@ -169,48 +169,48 @@ echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=ip&sort_dir=";
-if($sort_by=='ip' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='ip' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>IP</a>";
-if($sort_by=='ip') {
+if($sort_by==='ip') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=first_attempt&sort_dir=";
-if($sort_by=='first_attempt' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='first_attempt' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('First attempt'), "</a>";
-if($sort_by=='first_attempt') {
+if($sort_by==='first_attempt') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_attempt&sort_dir=";
-if($sort_by=='last_attempt' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='last_attempt' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Last attempt'), "</a>";
-if($sort_by=='last_attempt') {
+if($sort_by==='last_attempt') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_username&sort_dir=";
-if($sort_by=='last_username' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='last_username' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Last username'), "</a>";
-if($sort_by=='last_username') {
+if($sort_by==='last_username') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -249,7 +249,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		)
 		or
 		(
-		strtolower($rec['last_username'])=='admin' and $req_time-$rec['first_attempt']<config::get('admin_ip_block_period') and $rec['block_threshold']>=config::get('admin_ip_block_threshold')
+		strtolower($rec['last_username'])==='admin' and $req_time-$rec['first_attempt']<config::get('admin_ip_block_period') and $rec['block_threshold']>=config::get('admin_ip_block_threshold')
 		)
 
 		) {
@@ -259,7 +259,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['un'.$rec['auto']]))? ' checked ' : ''), '></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';
 		echo '<input type="hidden" name="t', $rec['auto'], '" value="', $rec['last_attempt'], '">';
-		echo '<input type="hidden" name="a', $rec['auto'], '" value="', ((strtolower($rec['last_username'])=='admin')? '1':'0'), '">';
+		echo '<input type="hidden" name="a', $rec['auto'], '" value="', ((strtolower($rec['last_username'])==='admin')? '1':'0'), '">';
 		$currently_blocked=true;
 	}
 	else {

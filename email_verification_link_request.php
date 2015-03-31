@@ -46,7 +46,7 @@ if($reg8log_db->result_num($query)) {
 else $email=false;
 
 if($email) {
-	if(config::get('max_activation_emails')==-1 or $emails_sent<config::get('max_activation_emails')) {
+	if(config::get('max_activation_emails')===-1 or $emails_sent<config::get('max_activation_emails')) {
 		$rid=$rec['record_id'];
 		$email_verification_key=$rec['email_verification_key'];
 		require ROOT.'include/code/email/code_email_verification_link.php';

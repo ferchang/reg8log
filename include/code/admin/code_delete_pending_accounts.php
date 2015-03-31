@@ -11,7 +11,7 @@ foreach($del as $auto) {
 		$langs[]=$_POST['lang-'.$auto];
 	}
 	$autos.="$auto";
-	if(++$i==count($del)) break;
+	if(++$i===count($del)) break;
 	$autos.=", ";
 }
 

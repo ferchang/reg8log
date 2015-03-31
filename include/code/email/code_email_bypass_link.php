@@ -11,7 +11,7 @@ $dir=htmlspecialchars($dir, ENT_QUOTES, 'UTF-8');
 $dir=pathinfo($dir, PATHINFO_DIRNAME);
 $dir=str_replace('\\', '/', $dir);
 
-if(strlen($dir)==1) $dir='';
+if(strlen($dir)===1) $dir='';
 
 $link='http://'.$host.$dir.'/block_bypass_login.php?key='.$key;
 

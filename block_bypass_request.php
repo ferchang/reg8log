@@ -10,11 +10,11 @@ if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-b
 
 if(!isset($_GET['username'])) exit('<h3 align="center">Error: username parameter is not set</h3>');
 
-if(config::get('block_bypass_system_enabled')==1 and strtolower($_GET['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')===1 and strtolower($_GET['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
 
-if(config::get('block_bypass_system_enabled')==2 and strtolower($_GET['username'])=='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')===2 and strtolower($_GET['username'])==='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
 
-if(strtolower($_GET['username'])=='admin') $is_admin=true;
+if(strtolower($_GET['username'])==='admin') $is_admin=true;
 
 $_username=$_GET['username'];
 require ROOT.'include/code/code_check_account_block.php';
@@ -89,7 +89,7 @@ else {
 $new_key=func::random_string(22);
 
 $tmp22=$emails_sent;
-if($_POST['email']===$email and (config::get('max_block_bypass_emails')==-1 or $emails_sent<config::get('max_block_bypass_emails'))) if($emails_sent<255) $tmp22++;
+if($_POST['email']===$email and (config::get('max_block_bypass_emails')===-1 or $emails_sent<config::get('max_block_bypass_emails'))) if($emails_sent<255) $tmp22++;
 
 if($num_requests<255) $num_requests++;
 
@@ -109,7 +109,7 @@ else {
 
 $reg8log_db->query($query);
 
-if($_POST['email']===$email and (config::get('max_block_bypass_emails')==-1 or $emails_sent<config::get('max_block_bypass_emails'))) require ROOT.'include/code/email/code_email_bypass_link.php';
+if($_POST['email']===$email and (config::get('max_block_bypass_emails')===-1 or $emails_sent<config::get('max_block_bypass_emails'))) require ROOT.'include/code/email/code_email_bypass_link.php';
 
 if(isset($captcha_needed)) unset($_SESSION['reg8log']['captcha_verified']);
 
@@ -123,12 +123,12 @@ require ROOT.'include/page/page_success.php';
 
 if(isset($insert)) {
 
-	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
 		$table_name='block_bypass';
 		require ROOT.'include/code/cleanup/code_account_incorrect_logins_expired_cleanup.php';
 	}
 
-	if(mt_rand(1, floor(1/config::get('cleanup_probability')))==1) {
+	if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
 		$table_name='block_bypass';
 		require ROOT.'include/code/cleanup/code_account_incorrect_logins_size_cleanup.php';
 	}

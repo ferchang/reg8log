@@ -5,7 +5,8 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 $_autologin_ages=func::get_autologin_ages();
 
 if(isset($_POST['autologin_age'])) {
-	if(!in_array($_POST['autologin_age'], $_autologin_ages)) {
+	$_POST['autologin_age']=intval($_POST['autologin_age']);
+	if(!in_array($_POST['autologin_age'], $_autologin_ages, true)) {
 		$autologin_age_msg=func::tr('illegal autologin_age msg');
 		require ROOT.'include/page/page_login_form.php';
 		exit;

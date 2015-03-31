@@ -7,7 +7,7 @@ $i=0;
 foreach($del as $auto) {
 	if(!is_numeric($auto)) exit('error: auto value not numeric!');
 	$autos.="$auto";
-	if(++$i==count($del)) break;
+	if(++$i===count($del)) break;
 	$autos.=", ";
 }
 

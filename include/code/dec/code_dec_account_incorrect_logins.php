@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(config::get('account_block_threshold')==-1  and config::get('account_captcha_threshold')==-1) return;
+if(config::get('account_block_threshold')===-1  and config::get('account_captcha_threshold')===-1) return;
 
 if(!isset($incorrect_logins_auto, $_COOKIE['reg8log_account_incorrect_logins'])) return;
 

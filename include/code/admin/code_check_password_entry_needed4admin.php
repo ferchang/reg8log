@@ -8,7 +8,7 @@ $password_check_needed=true;
 
 do {
 
-	if(config::get('admin_operations_require_password')==1) break;
+	if(config::get('admin_operations_require_password')===1) break;
 
 	if(!isset($_COOKIE['reg8log_password_check_key'])) break;
 

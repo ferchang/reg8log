@@ -32,14 +32,14 @@ function inet_pton2($address)
 
 function inet_ntop2($address) {
 
-	if(function_exists('inet_ntop') and (strlen($address)==4 or stripos(php_uname(), 'Windows XP')===false)) return inet_ntop($address);
+	if(function_exists('inet_ntop') and (strlen($address)===4 or stripos(php_uname(), 'Windows XP')===false)) return inet_ntop($address);
 
-    if (strlen($address)==4) {
+    if (strlen($address)===4) {
         // ipv4
         list(,$address)=unpack('N', $address);
         $address=long2ip($address);
 		return $address;
-    } elseif(strlen($address)==16) {
+    } elseif(strlen($address)===16) {
         // ipv6
         $address=bin2hex($address);
         $address=substr(chunk_split($address,4,':'),0,-1);
@@ -60,7 +60,7 @@ function inet_ntop2($address) {
                 $res.=($res==''?'':':').'0';
             }
         }*/
-		$res.=($res==''?'':':').$seg;
+		$res.=($res===''?'':':').$seg;
     }
 	
     return $res;

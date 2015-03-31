@@ -24,9 +24,9 @@ button {
 <script src="js/sha256.js"></script>
 
 <?php
-if(config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')==1 or config::get('tie_login2ip')==2)) {
+if(config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')===1 or config::get('tie_login2ip')===2)) {
 	echo "<script>\n";
-	if(config::get('tie_login2ip')==1) echo 'var tie_login2ip=1;';
+	if(config::get('tie_login2ip')===1) echo 'var tie_login2ip=1;';
 	else echo 'var tie_login2ip=2;';
 	echo "\n</script>\n";
 	echo '<script src="js/admin_tie_login2ip.js"></script>';
@@ -38,21 +38,21 @@ else echo "<script>\nfunction check_admin(val) { }\n</script>\n";
 echo '<script>';
 
 $str='<select name=autologin_age ';
-if(count(config::get('autologin_ages'))==1) $str.=' disabled ';
+if(count(config::get('autologin_ages'))===1) $str.=' disabled ';
 $str.='>';
 foreach(config::get('autologin_ages') as $value) {
 	$str.="<option value=$value style='text-align: center'>";
-	if($value==0) $str.=func::tr('Browser session');
+	if($value===0) $str.=func::tr('Browser session');
 	else $str.=func::duration2friendly_str($value, 0);
 }
 echo "\nautologin_ages_select_html=\"$str</select>\";";
 
 $str='<select name=autologin_age ';
-if(count(config::get('admin_autologin_ages'))==1) $str.=' disabled ';
+if(count(config::get('admin_autologin_ages'))===1) $str.=' disabled ';
 $str.='>';
 foreach(config::get('admin_autologin_ages') as $value) {
 	$str.="<option value=$value style='text-align: center'>";
-	if($value==0) $str.=func::tr('Browser session');
+	if($value===0) $str.=func::tr('Browser session');
 	else $str.=func::duration2friendly_str($value, 0);
 }
 echo "\nadmin_autologin_ages_select_html=\"$str</select>\";\n";
@@ -67,7 +67,7 @@ echo '</script>';
 
 <?php
 echo 'var autologin_age_group=';
-if(isset($_POST['username']) and strtolower($_POST['username'])=='admin') echo "'admin';\n";
+if(isset($_POST['username']) and strtolower($_POST['username'])==='admin') echo "'admin';\n";
 else echo "'users';\n";
 ?>
 
@@ -182,13 +182,13 @@ function check_captcha_needed(uname) {
 
 <?php
 if(
-(config::get('account_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
+(config::get('account_captcha_threshold')===0 and config::get('admin_account_captcha_threshold')===0)
 or
-(config::get('ip_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
+(config::get('ip_captcha_threshold')===0 and config::get('admin_ip_captcha_threshold')===0)
 or
-(config::get('account_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
+(config::get('account_captcha_threshold')===0 and config::get('admin_ip_captcha_threshold')===0)
 or 
-(config::get('ip_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
+(config::get('ip_captcha_threshold')===0 and config::get('admin_account_captcha_threshold')===0)
 ) echo "\nreturn;\n";
 ?>
 
@@ -284,12 +284,12 @@ echo '</td></tr>';
 
 $_autologin_ages=func::get_autologin_ages();
 
-if(count($_autologin_ages)==1) echo ' disabled >';
+if(count($_autologin_ages)===1) echo ' disabled >';
 else echo ' >';
 
-if(count($_autologin_ages)==1) {
+if(count($_autologin_ages)===1) {
 	echo "<option value={$_autologin_ages[0]}>";
-	if($_autologin_ages[0]==0) echo func::tr('Browser session');
+	if($_autologin_ages[0]===0) echo func::tr('Browser session');
 	else echo func::duration2friendly_str($_autologin_ages[0], 0);
 }
 else {
@@ -297,7 +297,7 @@ else {
 		echo "<option value=$value style='text-align: center' ";
 		if(isset($_POST['autologin_age']) and $value==$_POST['autologin_age']) echo ' selected ';
 		echo '>';
-		if($value==0) echo func::tr('Browser session');
+		if($value===0) echo func::tr('Browser session');
 		else echo func::duration2friendly_str($value, 0);
 	}
 }
@@ -319,13 +319,13 @@ echo '<tr><td colspan="3" id="captcha_form_placeholder">';
 if(
 isset($captcha_needed)
 or
-(config::get('account_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
+(config::get('account_captcha_threshold')===0 and config::get('admin_account_captcha_threshold')===0)
 or
-(config::get('ip_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
+(config::get('ip_captcha_threshold')===0 and config::get('admin_ip_captcha_threshold')===0)
 or
-(config::get('account_captcha_threshold')==0 and config::get('admin_ip_captcha_threshold')==0)
+(config::get('account_captcha_threshold')===0 and config::get('admin_ip_captcha_threshold')===0)
 or 
-(config::get('ip_captcha_threshold')==0 and config::get('admin_account_captcha_threshold')==0)
+(config::get('ip_captcha_threshold')===0 and config::get('admin_account_captcha_threshold')===0)
 ) {
 	$captcha_form4login=true;
 	require ROOT.'include/page/page_captcha_form.php';

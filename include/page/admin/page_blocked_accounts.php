@@ -170,60 +170,60 @@ echo '<tr style="background: brown; color: #fff"><th></th>';
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username&sort_dir=";
-if($sort_by=='username' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='username' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Username'), "</a>";
-if($sort_by=='username') {
+if($sort_by==='username') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=username_exists&sort_dir=";
-if($sort_by=='username_exists' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='username_exists' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Username exists'), "</a>";
-if($sort_by=='username_exists') {
+if($sort_by==='username_exists') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=first_attempt&sort_dir=";
-if($sort_by=='first_attempt' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='first_attempt' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('First attempt'), "</a>";
-if($sort_by=='first_attempt') {
+if($sort_by==='first_attempt') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_attempt&sort_dir=";
-if($sort_by=='last_attempt' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='last_attempt' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Last attempt'), "</a>";
-if($sort_by=='last_attempt') {
+if($sort_by==='last_attempt') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
 
 echo '<th>';
 echo "<a class='header' href='?per_page=$per_page&page=$page&sort_by=last_ip&sort_dir=";
-if($sort_by=='last_ip' and $sort_dir=='asc') echo 'desc';
+if($sort_by==='last_ip' and $sort_dir==='asc') echo 'desc';
 else echo 'asc';
 echo "'>", func::tr('Last IP'), "</a>";
-if($sort_by=='last_ip') {
+if($sort_by==='last_ip') {
 	echo '&nbsp;';
-	if($sort_dir=='asc') echo '<img src="../image/sort_asc.gif">';
+	if($sort_dir==='asc') echo '<img src="../image/sort_asc.gif">';
 	else echo '<img src="../image/sort_desc.gif">';
 }
 echo "</th>";
@@ -263,7 +263,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	)
 	or
 	(
-	strtolower($rec['username'])=='admin' and $req_time-$rec['first_attempt']<config::get('admin_account_block_period') and $rec['block_threshold']>=config::get('admin_account_block_threshold')
+	strtolower($rec['username'])==='admin' and $req_time-$rec['first_attempt']<config::get('admin_account_block_period') and $rec['block_threshold']>=config::get('admin_account_block_threshold')
 	)
 
 	) {

@@ -100,7 +100,7 @@ if(isset($password_msg)) {
 	echo "<span style=\"color: yellow\" >&nbsp;$password_msg&nbsp;</span><br />";
 	echo '</td></tr>';
 }
-else if(isset($captcha_msg) and count($err_msgs)==1) {
+else if(isset($captcha_msg) and count($err_msgs)===1) {
 	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;">';
 	echo "<span style=\"color: yellow\" >&nbsp;$captcha_msg&nbsp;</span><br />";
 	echo '</td></tr>';
@@ -134,8 +134,8 @@ echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>';
-if($rec['gender']=='n') echo '?';
-else if($rec['gender']=='m') echo func::tr('Male');
+if($rec['gender']==='n') echo '?';
+else if($rec['gender']==='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
 

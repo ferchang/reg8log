@@ -313,9 +313,9 @@ size="30"></td>
 <tr>
 <td <?php echo $cell_align; ?> valign="top"><?php echo func::tr('Gender'); ?>:</td><td colspan="2">
 &nbsp;&nbsp;<input type="radio" name="gender" value="n" <?php if(isset($_POST['gender'])) {
-if($_POST['gender']=='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('Not specified'); ?>
-&nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']=='m') echo ' checked="true" '; ?>><?php echo func::tr('Male'); ?>
-&nbsp;&nbsp;<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']=='f') echo ' checked="true" '; ?>><?php echo func::tr('Female'); ?>
+if($_POST['gender']==='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('Not specified'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']==='m') echo ' checked="true" '; ?>><?php echo func::tr('Male'); ?>
+&nbsp;&nbsp;<input type="radio" name="gender" value="f" <?php if(isset($_POST['gender']) and $_POST['gender']==='f') echo ' checked="true" '; ?>><?php echo func::tr('Female'); ?>
 </td>
 </tr>
 <?php

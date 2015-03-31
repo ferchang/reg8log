@@ -79,7 +79,7 @@ require ROOT.'include/code/code_generate_form_id.php';
 ?>
 <tr>
 <td style=""><input type="radio" name="which" value="username" <?php if(isset($_POST['which'])) {
-if($_POST['which']=='username') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('username'); ?>&nbsp;&nbsp;<input type="radio" name="which" value="uid" <?php if(isset($_POST['which']) and $_POST['which']=='uid') echo ' checked="true" '; ?>><?php echo func::tr('uid'); ?></td>
+if($_POST['which']==='username') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('username'); ?>&nbsp;&nbsp;<input type="radio" name="which" value="uid" <?php if(isset($_POST['which']) and $_POST['which']==='uid') echo ' checked="true" '; ?>><?php echo func::tr('uid'); ?></td>
 </tr>
 <tr>
 <td style=""><?php echo func::tr('User'); ?>:&nbsp;<input type="text" name="user" style="" <?php if(isset($_POST['user'])) echo 'value="', htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30"></td></tr>

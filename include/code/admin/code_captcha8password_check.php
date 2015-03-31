@@ -8,7 +8,7 @@ if(isset($password_check_needed)) {//password_check_needed
 	if(!isset($_POST['password'])) $err_msgs[]=$password_msg=func::tr('Sorry, but entering Admin password is needed!');
 	else {
 		$password=$_POST['password'];
-		if($password=='') $err_msgs[]=func::tr('Password field is empty!');
+		if($password==='') $err_msgs[]=func::tr('Password field is empty!');
 		else if(!isset($captcha_err)) {
 			unset($captcha_verified);
 			if(isset($_SESSION['reg8log']['captcha_verified'])) unset($_SESSION['reg8log']['captcha_verified']);

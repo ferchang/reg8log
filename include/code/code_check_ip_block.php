@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or isset($is_admin)) {
+if((isset($_POST['username']) and strtolower($_POST['username'])==='admin') or isset($is_admin)) {
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
 	config::set('account_block_period', config::get('admin_account_block_period'));
@@ -13,8 +13,8 @@ if((isset($_POST['username']) and strtolower($_POST['username'])=='admin') or is
 }
 else $_admin=0;
 
-if(config::get('ip_block_threshold')==-1  and config::get('ip_captcha_threshold')==-1) return;
-if(isset($captcha_needed) and config::get('ip_block_threshold')==-1) return;
+if(config::get('ip_block_threshold')===-1  and config::get('ip_captcha_threshold')===-1) return;
+if(isset($captcha_needed) and config::get('ip_block_threshold')===-1) return;
 
 $ip_login_attempt_lock="'".'reg8log--ip_login_attempt-'.$_SERVER['REMOTE_ADDR']."--$site_key"."'";
 $reg8log_db->query("select get_lock($ip_login_attempt_lock, -1)");
@@ -28,14 +28,14 @@ if(!isset($last_protection)) {
 	$last_protection=$rec['last_protection'];
 }
 
-if(config::get('ip_block_threshold')==0) {
+if(config::get('ip_block_threshold')===0) {
 	$ip_block=true;
 	return;
 }
 
-if(config::get('ip_captcha_threshold')==0) {
+if(config::get('ip_captcha_threshold')===0) {
 	$captcha_needed=true;
-	if(config::get('ip_block_threshold')==-1) return;
+	if(config::get('ip_block_threshold')===-1) return;
 }
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));

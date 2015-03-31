@@ -20,7 +20,7 @@ $query2="select * from `pending_accounts` where `$field_name`=$tmp8  and (`email
 if(isset($except_user)) $query2.=' and `username`!='.$except_user;
 $query2.=' limit 1';
 
-/* if($field_name=='username' and (!config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
+/* if($field_name==='username' and (!config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
 	$expired=$req_time-config::get('account_block_period');
 	$query3="select * from `account_incorrect_logins` where `username`=$tmp8 and `last_attempt` > $expired limit 1";
 } */

@@ -8,7 +8,7 @@ foreach($_fields as $field_name=>$specs) {//validate post data
 
 $ct=count($err_msgs);
 
-if($field_name=='password' and (strpos($_POST[$field_name], "hashed-$site_salt")===0 or strpos($_POST[$field_name], "encrypted-$site_salt")===0)) {
+if($field_name==='password' and (strpos($_POST[$field_name], "hashed-$site_salt")===0 or strpos($_POST[$field_name], "encrypted-$site_salt")===0)) {
 	if($_POST['password']!==$_POST['repass']) {
 		$err_msgs[]=func::tr('password fields aren\'t match!');
 		$password_error=true;
@@ -23,7 +23,7 @@ if($field_name=='password' and (strpos($_POST[$field_name], "hashed-$site_salt")
 	continue;
 }
 
-if($field_name=='captcha') {
+if($field_name==='captcha') {
 	if($captcha_verified) continue;
 	require ROOT.'include/code/code_verify_captcha.php';
 	continue;
@@ -56,9 +56,9 @@ else if($unique and !isset($captcha_err)) {
 }
 
 if(count($err_msgs)===$ct) {
-	if($field_name=='password' and $field_value!=$_POST['repass']) $err_msgs[]=func::tr('password fields aren\'t match!');
-	else if($field_name=='email' and $field_value!=$_POST['reemail']) $err_msgs[]=func::tr('email fields aren\'t match!');
-	else if($field_name=='username' and strtolower($field_value)==='admin') $err_msgs[]=func::tr('username \'Admin\' is reserved!');
+	if($field_name==='password' and $field_value!=$_POST['repass']) $err_msgs[]=func::tr('password fields aren\'t match!');
+	else if($field_name==='email' and $field_value!=$_POST['reemail']) $err_msgs[]=func::tr('email fields aren\'t match!');
+	else if($field_name==='username' and strtolower($field_value)==='admin') $err_msgs[]=func::tr('username \'Admin\' is reserved!');
 }
 
 /*
@@ -69,7 +69,7 @@ force the client to do a captcha test again.
 this is to prevent misusing the system with bots to get knowledge about registered
 unique field values in our members database.
 */
-if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
+if(count($err_msgs)===$ct and $unique and !isset($captcha_err) and ($field_name!='username' or !config::get('ajax_check_username') or config::get('max_ajax_check_usernames'))) {
 		if(isset($_SESSION['reg8log']['passed'][$field_name]) and $_SESSION['reg8log']['passed'][$field_name]!=sha1($session_salt.$field_value, true)) {
 				unset($_SESSION['reg8log']['captcha_verified']);
 				$err_msgs[]=func::tr('You need to enter a security code again.');
@@ -80,7 +80,7 @@ if(count($err_msgs)==$ct and $unique and !isset($captcha_err) and ($field_name!=
 
 }//field exists
 
-if(count($err_msgs)!==$ct and $field_name=='password') $password_error=true;
+if(count($err_msgs)!==$ct and $field_name==='password') $password_error=true;
 
 }//validate post data
 

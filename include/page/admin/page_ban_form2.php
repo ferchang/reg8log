@@ -111,7 +111,7 @@ if(isset($password_msg)) {
 	echo "<span style=\"color: yellow\" >&nbsp;$password_msg&nbsp;</span><br />";
 	echo '</td></tr>';
 }
-else if(isset($captcha_msg) and count($err_msgs)==1) {
+else if(isset($captcha_msg) and count($err_msgs)===1) {
 	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;">';
 	echo "<span style=\"color: yellow\" >&nbsp;$captcha_msg&nbsp;</span><br />";
 	echo '</td></tr>';
@@ -154,8 +154,8 @@ echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['user
 echo '<td>', $rec['uid'], '</td>';
 echo '<td>', $rec['email'], '</td>';
 echo '<td>';
-if($rec['gender']=='n') echo '?';
-else if($rec['gender']=='m') echo func::tr('Male');
+if($rec['gender']==='n') echo '?';
+else if($rec['gender']==='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
 
@@ -165,15 +165,15 @@ echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp']), '</td>';
 </td></tr>
 <tr>
 <td style=""><?php echo func::tr('Ban for a'); ?> <span class="unit"><?php echo func::tr('duration'); ?></span> <input type="radio" name="ban_type" value="duration" onclick="show_duration_selects(1)" <?php if(isset($_POST['ban_type'])) {
-if($_POST['ban_type']=='duration') echo ' checked="true" '; } else echo ' checked="true" '; ?>> <?php echo func::tr('or'); ?> <span class="unit"><?php echo func::tr('infinitely'); ?></span> <input type="radio" name="ban_type" value="infinite" onclick="show_duration_selects(0)" <?php if(isset($_POST['ban_type']) and $_POST['ban_type']=='infinite') echo ' checked="true" '; ?>><br><br>
+if($_POST['ban_type']==='duration') echo ' checked="true" '; } else echo ' checked="true" '; ?>> <?php echo func::tr('or'); ?> <span class="unit"><?php echo func::tr('infinitely'); ?></span> <input type="radio" name="ban_type" value="infinite" onclick="show_duration_selects(0)" <?php if(isset($_POST['ban_type']) and $_POST['ban_type']==='infinite') echo ' checked="true" '; ?>><br><br>
 </td>
 </tr>
-<tr id="ban_duration" style="display: inline;<?php if(isset($_POST['ban_type']) and $_POST['ban_type']=='infinite') echo ' visibility: hidden'; ?>">
+<tr id="ban_duration" style="display: inline;<?php if(isset($_POST['ban_type']) and $_POST['ban_type']==='infinite') echo ' visibility: hidden'; ?>">
 <td align="left"><?php echo func::tr('Ban for '); ?> 
-<select name="years"><option>0</option><option <?php if(isset($_POST['years']) and $_POST['years']=='1') echo 'selected'; ?>>1</option></select> <span class="unit"><?php echo func::tr('year(s)'); ?></span> <?php echo func::tr('and'); ?> 
-<select name="months"><option>0</option><option <?php if(isset($_POST['months']) and $_POST['months']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['months']) and $_POST['months']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['months']) and $_POST['months']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['months']) and $_POST['months']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['months']) and $_POST['months']=='9') echo 'selected'; ?>>9</option></select> <span class="unit"><?php echo func::tr('month(s)'); ?></span> <?php echo func::tr('and'); ?> 
-<select name="days"><option>0</option><option<?php if(isset($_POST['days']) and $_POST['days']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['days']) and $_POST['days']=='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['days']) and $_POST['days']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['days']) and $_POST['days']=='7') echo 'selected'; ?>>7</option><option <?php if(isset($_POST['days']) and $_POST['days']=='15') echo 'selected'; ?>>15</option><option <?php if(isset($_POST['days']) and $_POST['days']=='25') echo 'selected'; ?>>25</option></select> <span class="unit"><?php echo func::tr('day(s)'); ?></span> <?php echo func::tr('and'); ?> 
-<select name="hours"><option>0</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='12') echo 'selected'; ?>>12</option><option <?php if(isset($_POST['hours']) and $_POST['hours']=='20') echo 'selected'; ?>>20</option></select> <span class="unit"><?php echo func::tr('hour(s)'); ?></span>
+<select name="years"><option>0</option><option <?php if(isset($_POST['years']) and $_POST['years']==='1') echo 'selected'; ?>>1</option></select> <span class="unit"><?php echo func::tr('year(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="months"><option>0</option><option <?php if(isset($_POST['months']) and $_POST['months']==='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['months']) and $_POST['months']==='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['months']) and $_POST['months']==='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['months']) and $_POST['months']==='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['months']) and $_POST['months']==='9') echo 'selected'; ?>>9</option></select> <span class="unit"><?php echo func::tr('month(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="days"><option>0</option><option<?php if(isset($_POST['days']) and $_POST['days']==='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['days']) and $_POST['days']==='2') echo 'selected'; ?>>2</option><option <?php if(isset($_POST['days']) and $_POST['days']==='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['days']) and $_POST['days']==='7') echo 'selected'; ?>>7</option><option <?php if(isset($_POST['days']) and $_POST['days']==='15') echo 'selected'; ?>>15</option><option <?php if(isset($_POST['days']) and $_POST['days']==='25') echo 'selected'; ?>>25</option></select> <span class="unit"><?php echo func::tr('day(s)'); ?></span> <?php echo func::tr('and'); ?> 
+<select name="hours"><option>0</option><option <?php if(isset($_POST['hours']) and $_POST['hours']==='1') echo 'selected'; ?>>1</option><option <?php if(isset($_POST['hours']) and $_POST['hours']==='3') echo 'selected'; ?>>3</option><option <?php if(isset($_POST['hours']) and $_POST['hours']==='6') echo 'selected'; ?>>6</option><option <?php if(isset($_POST['hours']) and $_POST['hours']==='12') echo 'selected'; ?>>12</option><option <?php if(isset($_POST['hours']) and $_POST['hours']==='20') echo 'selected'; ?>>20</option></select> <span class="unit"><?php echo func::tr('hour(s)'); ?></span>
 </td>
 </tr>
 <tr>
