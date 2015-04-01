@@ -23,7 +23,7 @@ do {
 		break;
 	}
 
-	if($tmp42['password_check_key']!=$_COOKIE['reg8log_password_check_key']) {
+	if($tmp42['password_check_key']!==$_COOKIE['reg8log_password_check_key']) {
 		setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		break;
 	}

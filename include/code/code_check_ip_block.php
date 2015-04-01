@@ -46,7 +46,7 @@ $rec=$reg8log_db->fetch_row();
 $count=$rec['n'];
 $ip_incorrect_count=$count;
 
-if(config::get('ip_block_threshold')!=-1 and $count>=config::get('ip_block_threshold')) {
+if(config::get('ip_block_threshold')!==-1 and $count>=config::get('ip_block_threshold')) {
 	$_username2=$_username;
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=1 and $block_disable!=3) {
@@ -61,6 +61,6 @@ if(config::get('ip_block_threshold')!=-1 and $count>=config::get('ip_block_thres
 	}
 }
 
-if(config::get('ip_captcha_threshold')!=-1 and $count>=config::get('ip_captcha_threshold')) $captcha_needed=true;
+if(config::get('ip_captcha_threshold')!==-1 and $count>=config::get('ip_captcha_threshold')) $captcha_needed=true;
 
 ?>

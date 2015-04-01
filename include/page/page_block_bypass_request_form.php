@@ -92,7 +92,7 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/pag
 <span style="color: yellow; font-style: italic" id="cap">&nbsp;</span>
 <?php echo func::tr('Check your email carefully msg2'); ?>
 <?php
-if(config::get('max_block_bypass_emails')!=-1) {
+if(config::get('max_block_bypass_emails')!==-1) {
 echo '<hr width="90%">', func::tr('Maximum number of block-bypass emails that can be sent'), ': ', config::get('max_block_bypass_emails'), '<br>';
 echo func::tr('Note that the system will not, for security reasons, tell you if the maximum number of emails is reached.');
 }

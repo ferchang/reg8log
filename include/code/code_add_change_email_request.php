@@ -20,7 +20,7 @@ if($reg8log_db->result_num($query)) {
 	$rid=$rec['record_id'];
 	$emails_sent=$rec['emails_sent']+1;
 	if($emails_sent>255) $emails_sent=255;
-	if($_POST['newemail']!=$rec['email']) {
+	if($_POST['newemail']!==$rec['email']) {
 		
 		$email_verification_key=func::random_string(22);
 	}

@@ -10,7 +10,7 @@ if(!config::get('block_bypass_system_enabled')) exit('<h3 align="center">Block-b
 
 if(!isset($_GET['username'])) exit('<h3 align="center">Error: username parameter is not set</h3>');
 
-if(config::get('block_bypass_system_enabled')===1 and strtolower($_GET['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')===1 and strtolower($_GET['username'])!=='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
 
 if(config::get('block_bypass_system_enabled')===2 and strtolower($_GET['username'])==='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
 
@@ -116,7 +116,7 @@ if(isset($captcha_needed)) unset($_SESSION['reg8log']['captcha_verified']);
 require ROOT.'include/code/code_set_submitted_forms_cookie.php';
 
 $success_msg='<h3>'.sprintf(func::tr('block-bypass email sent msg'), htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($_GET['username'], ENT_QUOTES, 'UTF-8'));
-if(config::get('max_block_bypass_emails')!=-1) $success_msg.=sprintf(func::tr('max block-bypass emails msg'), config::get('max_block_bypass_emails'));
+if(config::get('max_block_bypass_emails')!==-1) $success_msg.=sprintf(func::tr('max block-bypass emails msg'), config::get('max_block_bypass_emails'));
 $success_msg.='.</h3>';
 $no_specialchars=true;
 require ROOT.'include/page/page_success.php';

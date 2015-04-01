@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $expired=$req_time-config::get('account_block_period');
 
-if(config::get('keep_expired_block_log_records_for')!=-1) $expired-=config::get('keep_expired_block_log_records_for');
+if(config::get('keep_expired_block_log_records_for')!==-1) $expired-=config::get('keep_expired_block_log_records_for');
 
 $query="delete from `account_block_log` where `first_attempt` < $expired";
 

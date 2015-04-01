@@ -22,7 +22,7 @@ function error($err_msg='')
 //=======================================
 function tie_login2ip($user_info) {
 
-	if((config::get('tie_login2ip_option_at_login') and $user_info['tie_login2ip']) or  (!config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')===3 or (config::get('tie_login2ip')===1 and $user_info['username']==='Admin') or (config::get('tie_login2ip')===2 and $user_info['username']!='Admin')))) return true;
+	if((config::get('tie_login2ip_option_at_login') and $user_info['tie_login2ip']) or  (!config::get('tie_login2ip_option_at_login') and (config::get('tie_login2ip')===3 or (config::get('tie_login2ip')===1 and $user_info['username']==='Admin') or (config::get('tie_login2ip')===2 and $user_info['username']!=='Admin')))) return true;
 	else return false;
 }
 //=======================================
@@ -149,7 +149,7 @@ function identify($username=null, $password=null)
 			if($flag) do {
 				if(!config::get('change_autologin_key_upon_login')) {
 					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===3) break;
-					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===2 and $tmp54['username']!='Admin') break;
+					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===2 and $tmp54['username']!=='Admin') break;
 					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===1 and $tmp54['username']==='Admin') break;
 				}
 				if($tmp54['autologin_expiration'] and $tmp54['autologin_expiration']<$GLOBALS['req_time']) $flag=false;
@@ -170,7 +170,7 @@ function identify($username=null, $password=null)
 		if($this->tie_login2ip($tmp54)) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
 		else $autologin_key=$tmp54['autologin_key'];
 		$this->user_info=$tmp54;
-		if($_COOKIE['reg8log_autologin2']==='logout' or $_COOKIE['reg8log_autologin2']!=hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key)) {
+		if($_COOKIE['reg8log_autologin2']==='logout' or $_COOKIE['reg8log_autologin2']!==hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key)) {
 			$GLOBALS['logged_out_user']=$this->user_info['username'];
 			$cookie->erase();
 			setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);

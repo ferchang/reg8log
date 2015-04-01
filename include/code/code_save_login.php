@@ -14,7 +14,7 @@ if(isset($_POST['autologin_age'])) {
 	$autologin_age=$_POST['autologin_age'];
 }
 else {
-	if(count($_autologin_ages)!=1) {
+	if(count($_autologin_ages)!==1) {
 		$autologin_age_msg=func::tr('illegal autologin_age msg');
 		require ROOT.'include/page/page_login_form.php';
 		exit;

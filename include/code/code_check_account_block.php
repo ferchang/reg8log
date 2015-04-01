@@ -56,7 +56,7 @@ foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_pe
 	if($value<$oldest) $oldest=$value;
 }
 
-if(config::get('account_block_threshold')!=-1 and $count>=config::get('account_block_threshold')) {
+if(config::get('account_block_threshold')!==-1 and $count>=config::get('account_block_threshold')) {
 	$_username2=$_username;
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
@@ -66,6 +66,6 @@ if(config::get('account_block_threshold')!=-1 and $count>=config::get('account_b
 	}
 }
 
-if(config::get('account_captcha_threshold')!=-1 and $count>=config::get('account_captcha_threshold')) $captcha_needed=true;
+if(config::get('account_captcha_threshold')!==-1 and $count>=config::get('account_captcha_threshold')) $captcha_needed=true;
 
 ?>

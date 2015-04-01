@@ -34,7 +34,7 @@ if(config::get('alert_admin_about_account_blocks') and !(config::get('alert_admi
 	}
 }
 
-if(config::get('keep_expired_block_log_records_for')!=0 and mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/cleanup/code_account_block_log_expired_cleanup.php';
+if(config::get('keep_expired_block_log_records_for')!==0 and mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/cleanup/code_account_block_log_expired_cleanup.php';
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_account_block_log_size_cleanup.php';
 

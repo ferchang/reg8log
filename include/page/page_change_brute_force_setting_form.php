@@ -135,8 +135,8 @@ require ROOT.'include/code/code_accomodate_block_disable.php';
 //=====================
 
 $block_config=0;
-if(config::get('ip_block_threshold')!=-1) $block_config+=1;
-if(config::get('account_block_threshold')!=-1) $block_config+=2;
+if(config::get('ip_block_threshold')!==-1) $block_config+=1;
+if(config::get('account_block_threshold')!==-1) $block_config+=2;
 
 //echo $block_config;
 

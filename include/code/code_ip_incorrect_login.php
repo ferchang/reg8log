@@ -19,14 +19,14 @@ if(isset($identified_user) or isset($pending_user) or isset($banned_user)) retur
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
-if(config::get('ip_block_threshold')!=-1 and $ip_incorrect_count+1>=config::get('ip_block_threshold')) {
+if(config::get('ip_block_threshold')!==-1 and $ip_incorrect_count+1>=config::get('ip_block_threshold')) {
 	$_username2=$_POST['username'];
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=1 and $block_disable!=3) $ip_block=$_SERVER['REMOTE_ADDR'];
-	else if(config::get('ip_captcha_threshold')!=-1 and $ip_incorrect_count+1>=config::get('ip_captcha_threshold')) $captcha_needed=true;
-	if($ip_incorrect_count<config::get('ip_block_threshold')) if(isset($ip_block) or strtolower($_POST['username'])!='admin') require_once ROOT.'include/code/log/code_log_ip_block.php';
+	else if(config::get('ip_captcha_threshold')!==-1 and $ip_incorrect_count+1>=config::get('ip_captcha_threshold')) $captcha_needed=true;
+	if($ip_incorrect_count<config::get('ip_block_threshold')) if(isset($ip_block) or strtolower($_POST['username'])!=='admin') require_once ROOT.'include/code/log/code_log_ip_block.php';
 }
-else if(config::get('ip_captcha_threshold')!=-1 and $ip_incorrect_count+1>=config::get('ip_captcha_threshold')) $captcha_needed=true;
+else if(config::get('ip_captcha_threshold')!==-1 and $ip_incorrect_count+1>=config::get('ip_captcha_threshold')) $captcha_needed=true;
 
 if($username_exists) $account_auto=$user->user_info['auto'];
 else $account_auto=0;

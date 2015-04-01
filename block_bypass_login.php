@@ -25,7 +25,7 @@ if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hash
 
 $manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 
-if(config::get('block_bypass_system_enabled')===1 and strtolower($_POST['username'])!='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
+if(config::get('block_bypass_system_enabled')===1 and strtolower($_POST['username'])!=='admin') exit('<h3 align="center">Currently, block-bypass system is enabled only for the admin account!</h3>');
 
 if(config::get('block_bypass_system_enabled')===2 and strtolower($_POST['username'])==='admin') exit('<h3 align="center">Currently, block-bypass system is disabled for the admin account!</h3>');
 

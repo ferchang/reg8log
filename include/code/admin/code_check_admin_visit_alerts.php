@@ -28,7 +28,7 @@ if($rec['new_ip_blocks'] and in_array(config::get('alert_admin_about_ip_blocks')
 
 //----------------------------------------
 
-if(config::get('registeration_alert_type')!=1 and config::get('registeration_alert_type')!=3) return;
+if(config::get('registeration_alert_type')!==1 and config::get('registeration_alert_type')!==3) return;
 
 $query="select * from `admin_registeration_alerts` where `for`='visit' limit 1";
 

@@ -245,7 +245,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	else if(
 	
 		(
-		strtolower($rec['last_username'])!='admin' and $req_time-$rec['first_attempt']<config::get('ip_block_period') and $rec['block_threshold']>=config::get('ip_block_threshold')
+		strtolower($rec['last_username'])!=='admin' and $req_time-$rec['first_attempt']<config::get('ip_block_period') and $rec['block_threshold']>=config::get('ip_block_threshold')
 		)
 		or
 		(

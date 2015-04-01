@@ -344,7 +344,7 @@ echo '</td></tr>';
 </tr>
 <tr align="center"><td colspan="3"><br><a href="password_reset_request.php" ><?php echo func::tr('Forgot password/username'); ?></a><br><br></td></tr>
 <?php
-if(isset($err_msg) and config::get('account_block_threshold')!=-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
+if(isset($err_msg) and config::get('account_block_threshold')!==-1 and !isset($captcha_err) and !isset($block_bypass_mode) and !isset($no_pretend_user) and !($block_disable==2 or $block_disable==3)) {
 	
 	$account_block_period_msg=func::duration2friendly_str(config::get('account_block_period'), 0);
 	$tmp20=config::get('account_block_threshold')-$incorrect_attempts;
