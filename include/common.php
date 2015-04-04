@@ -86,6 +86,8 @@ require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
+config::set('debug_mode', $debug_mode);
+
 config::set('lang', $lang);
 
 require ROOT.'include/code/code_gather_request_entropy.php';

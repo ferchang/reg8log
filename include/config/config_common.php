@@ -16,4 +16,7 @@ $admin_emails_lang='';
 
 $log_errors=E_ALL;//set to E_ERROR, E_ALL, E_ERROR|E_WARNING, etc. set to false/0 to disable error logging
 
+$config_cache_validation_interval=15*60;//in secs / a value of 0 means always validate the cache (against original config files by comparing their last modification times with that of the config cache)
+//notice that the value of this config var is ignored when in debug mode ($debug_mode=true) / in debug mode the config cache is always validated (validation happens once per each request)
+
 ?>
