@@ -76,6 +76,7 @@ class config extends loader_base {
 	private static function is_cache_valid($method) {
 		
 		if(self::$cache_valid) return true;
+		
 		if(
 			//-----------------------
 			!$GLOBALS['debug_mode']
@@ -97,10 +98,12 @@ class config extends loader_base {
 		foreach(glob(ROOT.'include/config/config_*.php') as $filename) if(filemtime($filename)>$cache_time) return false;
 		
 		self::$cache_valid=true;
+		
 		if($GLOBALS['config_cache_validation_interval']) {
 			$_SESSION['reg8log']['last_config_cache_validation']=time();
 			$_SESSION['reg8log']['config_cache_version']=$GLOBALS['config_cache_version'];
 		}
+		
 		return true;
 		
 	}
