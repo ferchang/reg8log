@@ -17,7 +17,9 @@ echo '<tr  bgcolor="#e1cfa0" ><td>
 <a href="', $index_dir, 'admin/index.php">', func::tr('Admin operations'), '</a>
 <hr style="background: #000; height: 3px; max-height: 3px; margin-top: 10px; margin-bottom: 5px; color: #000">
 <div dir="ltr"><a href="', $index_dir, 'debug_tools/show_session_contents.php">Show project session contents</a><br>
-<a href="', $index_dir, 'debug_tools/show_cookies.php">Show project cookies</a></div>
+<a href="', $index_dir, 'debug_tools/show_cookies.php">Show project cookies</a><br>
+<a href="', $index_dir, 'debug_tools/dummy_accounts.php">Dummy accounts</a></div>
+</div>
 </td></tr>
 </table>';
 
