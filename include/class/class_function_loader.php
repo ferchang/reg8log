@@ -11,7 +11,7 @@ class func extends loader_base {
  
     public static function __callStatic($func_name, $arguments) {
 		
-		self::load_function_definition($func_name);		
+		if(!function_exists($func_name)) self::load_function_definition($func_name);
         return call_user_func_array($func_name, $arguments);
 		
     }
