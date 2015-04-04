@@ -19,7 +19,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 </style>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;">
+<body bgcolor="#e1cfa0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;">
 
 <table width="100%"  height="95%" cellpadding="5" cellspacing="0">
 <tr valign="middle" align=center><td>
@@ -27,7 +27,7 @@ Dummy accounts are used for some few testing purposes like testing the paginatio
 <br>
 They are just random gibberish and not login-able. Don't forget to delete them when you are done!
 <br><br>
-<table style='border: thin solid #000; padding: 5px;'><tr><td>
+<table style='border: thin solid #000; padding: 5px;' bgcolor="#7587b0"><tr><td>
 <?php
 if(isset($msg)) echo "<div align=center style='background: orange; padding: 5px; color: #000'>$msg</div><br>";
 ?>

@@ -25,7 +25,7 @@ if(!empty($_POST)) {
 		exit;
 	}
 	
-	$num_records=$_POST['num'];
+	$num_records=intval($_POST['num']);
 
 	if(isset($_POST['pending4admin'])) $admin_confirmed=0;
 	else $admin_confirmed=1;
@@ -49,7 +49,7 @@ if(!empty($_POST)) {
 		
 	}
 
-	$msg=$num_records.' dummy account(s) created.';
+	if($num_records) $msg=$num_records.' dummy account(s) created.';
 	
 }
 
