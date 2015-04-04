@@ -77,10 +77,16 @@ class config extends loader_base {
 		
 		if(self::$cache_valid) return true;
 		if(
+			//-----------------------
 			!$GLOBALS['debug_mode']
+			//-----------------------
+			and isset($_SESSION['reg8log']['config_cache_version'])
+			and $_SESSION['reg8log']['config_cache_version']===$GLOBALS['config_cache_version']
+			//-----------------------
 			and $GLOBALS['config_cache_validation_interval']
 			and isset($_SESSION['reg8log']['last_config_cache_validation'])
 			and (time()-$_SESSION['reg8log']['last_config_cache_validation'])<=$GLOBALS['config_cache_validation_interval']
+			//-----------------------
 		  ) return true;
 		
 		self::debug_msg('config loader: proceeding with cache validation...');
@@ -91,7 +97,10 @@ class config extends loader_base {
 		foreach(glob(ROOT.'include/config/config_*.php') as $filename) if(filemtime($filename)>$cache_time) return false;
 		
 		self::$cache_valid=true;
-		if($GLOBALS['config_cache_validation_interval']) $_SESSION['reg8log']['last_config_cache_validation']=time();
+		if($GLOBALS['config_cache_validation_interval']) {
+			$_SESSION['reg8log']['last_config_cache_validation']=time();
+			$_SESSION['reg8log']['config_cache_version']=$GLOBALS['config_cache_version'];
+		}
 		return true;
 		
 	}
