@@ -50,6 +50,7 @@ if(isset($del_msg)) echo "<span align=center style='background: blue; padding: 5
 ?>
 <br><input type=submit name=delete_all value='Delete all dummy accounts'>
 </form>
+<br><br><center><a href="../index.php">Login page</a></center>
 </td></tr>
 </table>
 </body>

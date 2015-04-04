@@ -18,4 +18,4 @@ foreach($_COOKIE as $name=>$value) if(strpos($name, 'reg8log_')===0) {
 
 ?>
 
-<center><a href="../index.php">Login page</a></center>
+<br><center><a href="../index.php">Login page</a></center>
