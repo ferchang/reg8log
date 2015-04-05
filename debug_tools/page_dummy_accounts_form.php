@@ -23,7 +23,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 <table width="100%"  height="95%" cellpadding="5" cellspacing="0">
 <tr valign="middle" align=center><td>
-Dummy accounts are used for some few testing purposes like testing the pagination.
+Dummy accounts are used for some few testing purposes like testing pagination.
 <br>
 They are just random gibberish and not login-able. Don't forget to delete them when you are done!
 <br><br>
@@ -33,7 +33,7 @@ if(isset($msg)) echo "<div align=center style='background: orange; padding: 5px;
 ?>
 <form action="" method="post">
 <center><b>Create some dummy accounts</b></center><br>
-Number of accounts: <input type=text name=num size=5><br>
+Number of accounts: <input type=text name=num size=5 style='text-align: center'><br>
 Pending for email verification: <input type=checkbox name=pending4email><br>
 Pending for admin confirmation: <input type=checkbox name=pending4admin><br>
 <?php

@@ -73,7 +73,7 @@ $reg8log_db->query($query);
 $query="insert ignore into `dummy` (`i`) values (1)";
 $reg8log_db->query($query);
 
-require ROOT.'setup/include/check_file_permissions.php';
+require ROOT.'setup/include/code_check_file_permissions.php';
 
 echo '</h4><center><h3>', func::tr('Setup completed'), '.</h3>';
 echo '<a href="../index.php">', func::tr('Login page'), '</a></center>';

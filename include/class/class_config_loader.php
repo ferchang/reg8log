@@ -6,7 +6,7 @@ class config extends loader_base {
 
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
-	private static $cache_file='file_store/config_cache.txt';//note: this file path is used in setup check_file_permissions.php too. if change it here, change there too.
+	private static $cache_file='file_store/config_cache.txt';//note: this file path is used in setup code_check_file_permissions.php too. if u changed it here, change it there too.
 	private static $cache_valid=false;
 	
 	//=========================================================================
