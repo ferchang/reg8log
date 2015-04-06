@@ -2,11 +2,14 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$index_dir=func::get_relative_root_path();
+require_once ROOT.'include/func/func_get_relative_root_path.php';
+require_once ROOT.'include/func/func_tr.php';
+
+$index_dir=get_relative_root_path();
 
 if(isset($admin_alert_visit_msg) and $admin_alert_visit_msg) {
 
-	echo '<div id="alert_div" style="position: absolute; top: 0px; left: 0px; border: medium double #000; padding: 8px; background: #eee; visibility: hidden;"><div id="alert_title_div" style="font-size: bigger; font-weight: bold" align="center"></div><br><div id="alert_contents_div"></div><br><center>', func::tr('Don\'t disturb me again'), ':<input type="checkbox" onclick="dont_disturb(this.checked)"><br><a href="javascript: hide_alert()" style="margin-top: 5px;">', func::tr('Close'), '</a></center></div>';
+	echo '<div id="alert_div" style="position: absolute; top: 0px; left: 0px; border: medium double #000; padding: 8px; background: #eee; visibility: hidden;"><div id="alert_title_div" style="font-size: bigger; font-weight: bold" align="center"></div><br><div id="alert_contents_div"></div><br><center>', tr('Don\'t disturb me again'), ':<input type="checkbox" onclick="dont_disturb(this.checked)"><br><a href="javascript: hide_alert()" style="margin-top: 5px;">', tr('Close'), '</a></center></div>';
 
 	if(!isset($new_account_blocks, $account_blocks_alert_threshold_reached)) $new_account_blocks=0;
 	if(!isset($new_ip_blocks, $ip_blocks_alert_threshold_reached)) $new_ip_blocks=0;
@@ -16,7 +19,7 @@ if(isset($admin_alert_visit_msg) and $admin_alert_visit_msg) {
 	
 	echo "<script>
 	function admin_alert(msg) {
-	my_alert('", func::tr('Report'), "', msg);
+	my_alert('", tr('Report'), "', msg);
 	if(window.XMLHttpRequest) xhr2 = new XMLHttpRequest();
 	else if(window.ActiveXObject) xhr2 = new ActiveXObject('Microsoft.XMLHTTP');\n";
 
