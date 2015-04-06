@@ -102,6 +102,7 @@ class config extends loader_base {
 		if($GLOBALS['config_cache_validation_interval']) {
 			$_SESSION['reg8log']['last_config_cache_validation']=time();
 			$_SESSION['reg8log']['config_cache_version']=$GLOBALS['config_cache_version'];
+			unset($GLOBALS['session0'], $GLOBALS['session1']);
 		}
 		
 		return true;

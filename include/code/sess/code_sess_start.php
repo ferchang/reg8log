@@ -24,8 +24,10 @@ if(isset($_SESSION['reg8log_encrypted_session'])) {
 	$tmp5=unserialize(decrypt($_SESSION['reg8log_encrypted_session']));
 	if($tmp5===false) {
 		if(!defined('SETUP_PAGE')) {
-			setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
-			$failure_msg="Session decryption error!";
+			//setcookie('reg8log_session', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
+			unset($_SESSION['reg8log_encrypted_session']);
+			$failure_msg="<h3 dir=ltr>Session decryption error!</h3>";
+			$no_specialchars=true;
 			require ROOT.'include/page/page_failure.php';
 			$session_decryption_error=true;
 			exit;
@@ -39,5 +41,7 @@ else if($encrypt_session_files_contents and !empty($_SESSION['reg8log'])) {
 
 if($encrypt_session_files_contents) if(isset($_SESSION['reg8log'])) $session1=$_SESSION['reg8log'];
 else $session1=null;
+
+//unset($GLOBALS['session0'], $GLOBALS['session1']) in class_config_loader.php
 
 ?>
