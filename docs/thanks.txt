@@ -5,6 +5,10 @@ Yousha's username in iranphp.org is Y.P.Y
 
 - some other members of forum.iranphp.org, specially Vahid Sohrabloo (username: admin)
 
+- Mr. Shahraki; the moderator of PHP forum at barnamenevis.org (his username in there: MMSHFE)
+his email address: MMSHFE -=At=- GMail -=Dot=- COM , website: www.ncis.ir
+he suggested some improvements like checking (via ajax) if a user needs to pass a captcha too at the login form (and maybe some other similar things or other details that i don't remember), that made my program more user friendly and advanced looking.
+
 =============================
 
 I am not good at remembering people, so if anyone is omitted please tell me to add him/you.
