@@ -30,9 +30,9 @@ $admin_alert_email_msg='';
 
 if(isset($account_blocks_alert_threshold_reached) or $no_alert_limits) {
 
-	if($no_alert_limits) $admin_alert_email_msg='- '.func::tr('Admin account was blocked.', false, $admin_emails_lang)."\n";
+	if($no_alert_limits) $admin_alert_email_msg='- '.func::tr('Admin account was blocked.', false, config::get('admin_emails_lang'))."\n";
 
-	$admin_alert_email_msg.='- '.sprintf(func::tr('There were %d new account block(s).', false, $admin_emails_lang), $new_account_blocks)."\n";
+	$admin_alert_email_msg.='- '.sprintf(func::tr('There were %d new account block(s).', false, config::get('admin_emails_lang')), $new_account_blocks)."\n";
 	
 	$query='update `admin_block_alerts` set `new_account_blocks`=0, `last_alert`='.$req_time." where `for`='email' limit 1";
 	$reg8log_db->query($query);

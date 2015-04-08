@@ -86,9 +86,11 @@ require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
-config::set('debug_mode', $debug_mode);
+config::set('debug_mode', $debug_mode);//note: this config:set command must come before all other config:set commands, because config vars may be re-read from original config files after config::set('debug_mode', $debug_mode).
 
-config::set('lang', $lang);//dont move this before config::set('debug_mode', $debug_mode)! / all other config::set commands must come after config::set('debug_mode', $debug_mode), because config vars may be re-read from original config files after config::set('debug_mode', $debug_mode).
+config::set('lang', $lang);
+
+config::set('admin_emails_lang', $admin_emails_lang);
 
 require ROOT.'include/code/code_gather_request_entropy.php';
 
