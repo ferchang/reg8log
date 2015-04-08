@@ -43,7 +43,7 @@ if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hash
 
 if(isset($err_msgs)) break;
 
-echo '<html ', $page_dir, '><head><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><META HTTP-EQUIV="EXPIRES" CONTENT="0"><title>', func::tr('DB setup - Final'), '</title></head><body ', $page_dir, ' bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"><table align="center" valign="center" height="100%"><tr><td><h4>';
+echo '<html ', PAGE_DIR, '><head><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><META HTTP-EQUIV="EXPIRES" CONTENT="0"><title>', func::tr('DB setup - Final'), '</title></head><body ', PAGE_DIR, ' bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000"><table align="center" valign="center" height="100%"><tr><td><h4>';
 
 require ROOT.'setup/include/code_create_tables.php';
 

@@ -7,7 +7,7 @@ else $form_color='#55a750';
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -52,7 +52,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 <h4 style="margin-bottom: 3px"><?php echo func::tr('Specify username or uid:'); ?></h4>
 <form name="ban_form" action="" method="post">

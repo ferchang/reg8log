@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -129,7 +129,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo PAGE_DIR; ?>>
 <table width="100%"  height="100%" cellpadding="5" cellspacing="0">
 <tr>
 <td>
@@ -153,10 +153,10 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Your current Password'); ?>:</td><td><input type="password" name="curpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('New password'); ?>:</td><td><input type="password"  autocomplete="off" name="newpass" size="30" style="" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($_POST['newpass']) and $_POST['newpass']!=='' and config::get('password_refill') and !isset($password_error)) {
 	$refill=$_POST['newpass'];
@@ -165,7 +165,7 @@ if(isset($_POST['newpass']) and $_POST['newpass']!=='' and config::get('password
 ?>/></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);" 
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Retype new Password'); ?>:</td><td><input type="password"  autocomplete="off" name="repass" size="30" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);" 
 <?php
 if(isset($refill_output)) echo $refill_output;
 ?>/>

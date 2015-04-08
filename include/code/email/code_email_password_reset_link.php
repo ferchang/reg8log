@@ -22,7 +22,7 @@ $body.="\r\n--==Multipart_Boundary\r\nContent-Type: text/plain; charset=\"utf-8\
 $body.=$take_no_action_msg."\r\n\r\n".func::tr('Username').": {$rec['username']}\r\n".func::tr('Password reset link').": $link\r\n\r\n";
 $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
 $tmp26=htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8');
-$body.="<html $page_dir><body $page_dir><h3 align='center'>$take_no_action_msg<br><br>".func::tr('Username').": $tmp26<br><br><a href=\"$link\">".func::tr('Password reset link')."</a><br><br></h3></body></html>\r\n--==$boundary--";
+$body.="<html ".PAGE_DIR."><body ".PAGE_DIR."><h3 align='center'>$take_no_action_msg<br><br>".func::tr('Username').": $tmp26<br><br><a href=\"$link\">".func::tr('Password reset link')."</a><br><br></h3></body></html>\r\n--==$boundary--";
 
 mail($_POST['email'], '=?UTF-8?B?'.base64_encode(func::tr('Password reset')).'?=', $body, $headers);
 

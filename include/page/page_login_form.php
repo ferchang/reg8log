@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -227,7 +227,7 @@ return true;
 </script>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" <?php echo PAGE_DIR; ?>>
 
 <table width="100%"  cellpadding="5" cellspacing="0">
 <tr>
@@ -270,13 +270,13 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td <?php echo $cell_align; ?> ><?php echo func::tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value); username_change=true; check_autologin_age_options(this.value)" onblur="if(this.value!='') check_captcha_needed(this.value);" ></td>
+<td <?php echo CELL_ALIGN; ?> ><?php echo func::tr('Username'); ?>:</td><td colspan="2"><input type="text" name="username" maxlength="30" style="width: 100%" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> onchange="check_admin(this.value); username_change=true; check_autologin_age_options(this.value)" onblur="if(this.value!='') check_captcha_needed(this.value);" ></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Password'); ?>:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Password'); ?>:</td><td colspan="2"><input type="password" name="password" maxlength="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td colspan="3" <?php echo $cell_align; ?> align="right"><?php echo func::tr('Remember login for'); ?>: 
+<td colspan="3" <?php echo CELL_ALIGN; ?> align="right"><?php echo func::tr('Remember login for'); ?>: 
 
 <span id=autologin_age_select_placeholder>
 <select name=autologin_age 
@@ -311,7 +311,7 @@ else {
 <?php
 
 if(config::get('tie_login2ip_option_at_login')) {
-	echo "<tr><td colspan=\"3\" $cell_align ";
+	echo "<tr><td colspan=\"3\" ".CELL_ALIGN." ";
 	echo ' title="', func::tr('tie login to ip option description'), '">', func::tr('Tie my login to my IP address'), ': <input type="checkbox" value="true" name="login2ip" ', ($login2ip or (empty($_POST) and config::get('tie_login2ip')>1))? 'checked':'', ' onclick="login2ip_change=true" id="login2ip_checkbox"></td></tr>';
 }
 

@@ -33,7 +33,7 @@ $expired=$req_time-config::get('admin_confirmation_time');
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Pending account expired msg').'.</h3>'."$home</center>");
 
 if($rec['email_verified']) {
-  echo "<center $page_dir><h3>", func::tr('email verification already done msg');
+  echo "<center ".PAGE_DIR."><h3>", func::tr('email verification already done msg');
   if(!$rec['admin_confirmed']) echo func::tr('waiting for admin confirmation msg'), '.';
   echo '</h3>'."$home</center>";
   exit;
@@ -70,7 +70,7 @@ exit;
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -78,7 +78,7 @@ exit;
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
 <title><?php echo func::tr('Email verification'); ?></title>
 </head>
-<body bgcolor="#7587b0" <?php echo $page_dir; ?>>
+<body bgcolor="#7587b0" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%">
 <tr><td align="center">
 <form method="post" action="">

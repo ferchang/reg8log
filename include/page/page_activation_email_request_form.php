@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -59,7 +59,7 @@ document.getElementById('captcha').focus();
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" <?php if(isset($_POST['form1'])) echo 'onload="focus_captcha();"'; ?> <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" <?php if(isset($_POST['form1'])) echo 'onload="focus_captcha();"'; ?> <?php echo PAGE_DIR; ?>>
 <table width="100%" >
 <tr>
 <td valign="top">

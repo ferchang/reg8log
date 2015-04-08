@@ -6,7 +6,7 @@ require ROOT.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -22,7 +22,7 @@ require ROOT.'include/page/admin/page_common_list_funcs-js.php';
 ?>
 </script>
 </head>
-<body bgcolor="#7587b0" <?php echo $page_dir; ?>>
+<body bgcolor="#7587b0" <?php echo PAGE_DIR; ?>>
 <center>
 <form action="" method="post" name="banned_users_form">
 <?php

@@ -6,7 +6,7 @@ require ROOT.'include/page/admin/page_pagination_initials.php';
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -26,7 +26,7 @@ require ROOT.'include/page/admin/page_common_list_funcs-js.php';
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 <table bgcolor="#7587b0" border>
 <?php

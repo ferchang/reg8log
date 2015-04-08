@@ -8,7 +8,7 @@ $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -248,7 +248,7 @@ function report(val, bg) {
 </script>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 
 <form name="register_form" action="" method="post">
@@ -271,9 +271,9 @@ echo '">';
 require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
-<tr><td <?php echo $cell_align; ?> valign="top"><?php echo func::tr('Username format'); ?>:</td><td  colspan="2"><?php echo func::tr('username format msg'); ?></td></tr>
+<tr><td <?php echo CELL_ALIGN; ?> valign="top"><?php echo func::tr('Username format'); ?>:</td><td  colspan="2"><?php echo func::tr('username format msg'); ?></td></tr>
 <tr>
-<td <?php echo $cell_align; ?> style=""><?php echo func::tr('Username'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?> style=""><?php echo func::tr('Username'); ?>:</td>
 <td style=""><input
 onkeypress="report('onkeypress', '');"
 onblur="if(this.value!='') check_username(this.value);" type="text" name="username" style="" <?php if(isset($_POST['username'])) echo 'value="', htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="30" onchange="username_change=true;"></td>
@@ -282,7 +282,7 @@ onblur="if(this.value!='') check_username(this.value);" type="text" name="userna
 </td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Password'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Password'); ?>:</td>
 <td colspan="2">
 <input type="password" name="password" autocomplete="off" onfocus="password_focus(this, 1);" onblur="password_blur(this, 1);" onkeydown="password_keydown(event);"
 <?php
@@ -294,7 +294,7 @@ if(isset($_POST['password']) and $_POST['password']!=='' and config::get('passwo
 size="30"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Retype password'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Retype password'); ?>:</td>
 <td colspan="2">
 <input type="password" id="repass" name="repass" autocomplete="off" style="" onfocus="password_focus(this, 2);" onblur="password_blur(this, 2);" onkeydown="password_keydown(event);"
 <?php
@@ -303,15 +303,15 @@ if(isset($refill_output)) echo $refill_output;
 size="30"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Email'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Email'); ?>:</td>
 <td colspan="2"><input type="text" name="email" style="" <?php if(isset($_POST['email'])) echo 'value="', htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Retype email'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Retype email'); ?>:</td>
 <td colspan="2"><input type="text" name="reemail" style="" <?php if(isset($_POST['reemail'])) echo 'value="', htmlspecialchars($_POST['reemail'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="40"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?> valign="top"><?php echo func::tr('Gender'); ?>:</td><td colspan="2">
+<td <?php echo CELL_ALIGN; ?> valign="top"><?php echo func::tr('Gender'); ?>:</td><td colspan="2">
 &nbsp;&nbsp;<input type="radio" name="gender" value="n" <?php if(isset($_POST['gender'])) {
 if($_POST['gender']==='n') echo ' checked="true" '; } else echo ' checked="true" '; ?>><?php echo func::tr('Not specified'); ?>
 &nbsp;&nbsp;<input type="radio" name="gender" value="m" <?php if(isset($_POST['gender']) and $_POST['gender']==='m') echo ' checked="true" '; ?>><?php echo func::tr('Male'); ?>
@@ -337,7 +337,7 @@ if(captcha_exists) {
 </script>
 <?php
 if(config::get('admin_confirmation_needed') and config::get('can_notify_user_about_admin_action')) {
-	echo "<tr><td colspan=\"2\" $cell_align>";
+	echo "<tr><td colspan=\"2\" ".CELL_ALIGN.">";
 	echo func::tr('notify me admin action msg'), ': ';
 	echo '</td><td><input type="checkbox" name="notify" ';
 	if(empty($_POST) or isset($_POST['notify'])) echo ' checked="true" ';

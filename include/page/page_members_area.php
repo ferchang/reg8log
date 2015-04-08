@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -13,7 +13,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 <title><?php echo func::tr('Members area'); ?></title>
 <script src="js/logout.js"></script>
 </head>
-<body bgcolor="#7587b0" <?php echo $page_dir; ?>>
+<body bgcolor="#7587b0" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="80%">
 <tr>
 <td valign="top">

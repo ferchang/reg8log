@@ -6,7 +6,7 @@ $index_dir=func::get_relative_root_path();
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 
    <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -20,7 +20,7 @@ $index_dir=func::get_relative_root_path();
 </script>
 </head>
 
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo $page_dir; ?>><table width="100%" height="100%" style="border: 10px solid #080"><tr><td align="center">
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>><table width="100%" height="100%" style="border: 10px solid #080"><tr><td align="center">
 
 <?php
 

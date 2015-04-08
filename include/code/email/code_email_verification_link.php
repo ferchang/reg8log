@@ -21,7 +21,7 @@ $body=$take_no_action_msg."\r\n\r\n".func::tr('Account activation link').": $lin
 $body.="\r\n--==Multipart_Boundary\r\nContent-Type: text/plain; charset=\"utf-8\"\r\n\r\n";
 $body.="$take_no_action_msg\r\n\r\n".func::tr('Account activation link').": $link\r\n\r\n";
 $body.="\r\n--==$boundary\r\nContent-Type: text/html; charset=\"utf-8\"\r\n\r\n";
-$body.="<html $page_dir><body $page_dir><h3 align='center'>$take_no_action_msg<br><br><a href=\"$link\">".func::tr('Account activation link')."</a><br><br></h3></body></html>\r\n--==$boundary--";
+$body.="<html ".PAGE_DIR."><body ".PAGE_DIR."><h3 align='center'>$take_no_action_msg<br><br><a href=\"$link\">".func::tr('Account activation link')."</a><br><br></h3></body></html>\r\n--==$boundary--";
 
 mail($_POST['email'], '=?UTF-8?B?'.base64_encode(func::tr('Account activation')).'?=', $body, $headers);
 

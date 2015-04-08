@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 function my_exit($string) {
 	
-	exit("<span {$GLOBALS['page_dir']}>$string</span>");
+	exit("<span ".PAGE_DIR.">$string</span>");
 
 }
 

@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -88,7 +88,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#999999" <?php echo $page_dir; ?>>
+<body bgcolor="#999999" <?php echo PAGE_DIR; ?>>
 <table height="100%" align="center"><tr><td align="center">
 <h3><small>((</small> <?php echo func::tr('Setup admin account'); ?> <small>))</small></h3>
 <form action="" method="post" name="admin_register_form">
@@ -111,22 +111,22 @@ require ROOT.'include/code/code_generate_form_id.php';
 
 ?>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Username'); ?>:</td><td><input type="text" name="username" size="7" value="Admin" disabled style="text-align: center; font-weight: bold"><input name="username" type=hidden value=Admin></td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Username'); ?>:</td><td><input type="text" name="username" size="7" value="Admin" disabled style="text-align: center; font-weight: bold"><input name="username" type=hidden value=Admin></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Password'); ?>:</td><td><input type="password" name="password" size="30" autocomplete="off"></td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Password'); ?>:</td><td><input type="password" name="password" size="30" autocomplete="off"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Retype password'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Retype password'); ?>:</td>
 <td>
 <input type="password" id="repass" name="repass" autocomplete="off" size="30"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Email'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Email'); ?>:</td>
 <td><input type="text" name="email" <?php if(isset($_POST['email'])) echo 'value="', htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="45"></td>
 </tr>
 <tr>
-<td <?php echo $cell_align; ?>><?php echo func::tr('Retype email'); ?>:</td>
+<td <?php echo CELL_ALIGN; ?>><?php echo func::tr('Retype email'); ?>:</td>
 <td><input type="text" name="reemail" <?php if(isset($_POST['reemail'])) echo 'value="', htmlspecialchars($_POST['reemail'], ENT_QUOTES, 'UTF-8'), '"'; ?> size="45"></td>
 </tr>
 <tr>

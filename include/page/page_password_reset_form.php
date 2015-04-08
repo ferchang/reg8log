@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -72,7 +72,7 @@ return true;
 
 </script>
 </head>
-<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo $page_dir; ?>>
+<body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0" <?php echo PAGE_DIR; ?>>
 <table width="100%"  height="100%" cellpadding="5" cellspacing="0">
 <tr>
 <td>
@@ -96,10 +96,10 @@ echo '</td></tr>';
 }
 ?>
 <tr>
-<td  <?php echo $cell_align; ?> ><?php echo func::tr('New password'); ?>:</td><td><input type="password" name="newpass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td  <?php echo CELL_ALIGN; ?> ><?php echo func::tr('New password'); ?>:</td><td><input type="password" name="newpass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
-<td  <?php echo $cell_align; ?> ><?php echo func::tr('Retype new Password'); ?>:</td><td><input type="password" name="repass" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td  <?php echo CELL_ALIGN; ?> ><?php echo func::tr('Retype new Password'); ?>:</td><td><input type="password" name="repass" size="30" style="width: 100%"  autocomplete="off" /></td>
 </tr>
 <tr>
 <td></td><td><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>

@@ -16,7 +16,7 @@ else $flag=false;
 
 ?>
 
-<html <?php echo $page_dir; ?>>
+<html <?php echo PAGE_DIR; ?>>
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -35,7 +35,7 @@ color: white;
 }
 </style>
 </head>
-<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" <?php echo $page_dir; ?>>
+<body bgcolor="#7587b0" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" style="margin: 0;" <?php echo PAGE_DIR; ?>>
 <table width="100%"  cellpadding="5" cellspacing="0" style="">
 <tr>
 <td valign="top">
