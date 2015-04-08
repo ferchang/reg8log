@@ -16,7 +16,7 @@ if(!session_start()) {
 
 session_regenerate_id(true);
 
-if(!$db_installed) return;
+if(!DB_INSTALLED) return;
 
 if(isset($_SESSION['reg8log_encrypted_session'])) {
 	if($encrypt_session_files_contents) $session0=$_SESSION['reg8log_encrypted_session'];

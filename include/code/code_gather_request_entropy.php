@@ -14,7 +14,7 @@ using sha1 function for combining entropy of all requests was also his idea
 see: http://www.frostjedi.com/phpbb/viewtopic.php?f=46&t=30875
 */
 
-if(!config::get('store_request_entropy_probability') or !config::get('db_installed')) return;
+if(!config::get('store_request_entropy_probability') or !DB_INSTALLED) return;
 
 if(config::get('store_request_entropy_probability')!==1 and mt_rand(1, floor(1/config::get('store_request_entropy_probability')))!==1) return;
 

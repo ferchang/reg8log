@@ -4,8 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $debug_mode=true;
 
-$db_installed=false;
-
 $lang='en';
 // Default language
 // Currently, only English (en) and Persian/Farsi (fa) are supported.

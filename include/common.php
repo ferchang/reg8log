@@ -73,10 +73,9 @@ else $client_sess_key='';
 
 require ROOT.'include/code/code_db_object.php';
 
-if(!$db_installed) require ROOT.'include/code/code_check_db_setup_status.php';
+require ROOT.'include/code/code_check_db_setup_status.php';
 
-if($db_installed) require_once ROOT.'include/code/code_fetch_site_vars.php';
-//note that $db_installed is set in code_check_db_setup_status.php again
+if(DB_INSTALLED) require_once ROOT.'include/code/code_fetch_site_vars.php';
 
 require ROOT.'include/config/config_identify.php';
 
@@ -113,7 +112,7 @@ if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 
 //---------- antixsrf_token ------------<
 
-if(!$db_installed) {
+if(!DB_INSTALLED) {
 	if(defined('SETUP_PAGE') or defined('CHANGE_LANG_PAGE')) return;
 	require ROOT.'include/page/page_not_setup.php';
 	exit;
