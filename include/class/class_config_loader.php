@@ -63,7 +63,7 @@ class config extends loader_base {
 	private static function update_cache($method) {
 		if($method==='file') {
 			$cache_file=ROOT.self::$cache_file;
-			if(self::is_file_accessible($cache_file, 'write')) file_put_contents($cache_file, serialize(self::$vars));
+			if(self::is_file_accessible($cache_file, 'write')) file_put_contents($cache_file, serialize(self::$vars), LOCK_EX);
 		}
 		else {
 			$_SESSION['reg8log']['config_cache']=self::$vars;

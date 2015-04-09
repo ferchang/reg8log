@@ -63,7 +63,7 @@ class class_loader extends loader_base {
 		$out="<?php\nreturn array(\n";
 		foreach(self::$index as $key=>$value) $out.="	'$key'=>'$value',\n";
 		$out.=");\n?>";
-		file_put_contents($index_file, $out);
+		file_put_contents($index_file, $out, LOCK_EX);
 	
 	}
 	
