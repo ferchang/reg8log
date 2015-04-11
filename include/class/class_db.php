@@ -82,6 +82,7 @@ function error($err_msg='')
 	$this->err_msg=get_class($this).': '.(($err_msg)? $err_msg : mysql_error());
 
 	if($this->auto_abort) {
+		error_log('reg8log: class reg8log_db: error: '.mysql_error());
 		$failure_msg=($GLOBALS['debug_mode'])? $this->err_msg : "Database error";
 		require ROOT.'include/page/page_failure.php';
 		exit;
