@@ -350,20 +350,12 @@ max_ajax_check_usernames_records:
 maximum number of records that r stored for tracking and limiting the number of ajax check username availability requests per ip.
 
 ------------------------------------------------
-config vars in common.php:
+config vars in config_common.php:
 ------------------------------------------------
-
-this file is not just a config file. it contains important instructions too and is included at the begining of every page of the project.
 
 debug_mode:
 
 when debug mode is on all errors and warnings are displayed and technical db error messages are printed and special links that are sent in security emails like password reset or email verification email are echo'ed to the browser too so u can easily and quickly test and debug the program. it is on by default!
-
-db_installed:
-
-when the tables and variables (and also the Admin account) of the program are installed successfully, u can set this var to true to increase the overal performance of the system if needed.
-i don't know if this can have a significant effect, but it is there in case it can.
-when this var is set to false (default), the program itself decides if database is setup fully/successfully by executing a probing query on a dummy table; anyway this should be very fast and have little overhead.
 
 lang:
 
@@ -375,6 +367,12 @@ admin_emails_lang:
 
 Default language for admin email alerts
 if empty, $lang will be used.
+
+log_errors:
+config_cache_validation_interval:
+config_cache_version:
+
+for explanation about thease vars see the corresponding comments in the config file.
 
 ------------------------------------------------
 config vars in config_security_logs.php:

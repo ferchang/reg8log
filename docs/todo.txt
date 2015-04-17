@@ -1,1 +1,3 @@
-please send your suggestions to hamidreza.mz712 -=At=- gmail -=Dot=- com
+- removing all uses of md5 and sha1?
+
+And please send your suggestions to hamidreza.mz712 -=At=- gmail -=Dot=- com
