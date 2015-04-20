@@ -21,13 +21,6 @@ the admin account is used for various management operations like banning/unbanni
 
 =================================
 
-self criticism:
-
-- using tables for HTML layout.
-- not using design patterns like MVC.
-
-=================================
-
 important notes about users accounts backup and restore:
 
 note that users passwords hashes are dependent on site variables stored in site_vars table and also on the pepper variable stored in the include/config/config_crypto.php file. so u must restore site_vars table data and the $pepper value if u want your users be able to login into their accounts again.
@@ -46,9 +39,11 @@ Server PHP version: 5.3.10
 
 =================================
 
-configuration variables (all reside in include/config/config_....php files - except common.php that is directly in the include dir)
+configuration variables (all reside in include/config/config_....php files)
 
 note: in addition to reading this help, see the comments of each config variable in the relevant config file too. there r more info/details there.
+
+note that types of the values of config vars are important. dont change them! e.g. when the value of a config variable is an integer, set to a value like 3 and not '3'.
 
 ------------------------------------------------
 config vars in config_register.php:
@@ -437,6 +432,7 @@ whether to show some statistics in admin operations page.
 u can disable this if performance problems occur.
 
 admin_operations_require_password:
+admin_error_log_access:
 
 see the comments in config_admin.php.
 
