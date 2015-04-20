@@ -18,7 +18,7 @@ $config_cache_validation_interval=15*60;//in seconds / a value of 0 means always
 //notice that the value of this config var is ignored when in debug mode ($debug_mode=true) / in debug mode the config cache is always validated (validation happens once per each request)
 //note that the config cache is re-validated anyway if a client's session is destroyed (e.g. by closing the browser), because config cache's last validation info are stored in session. maybe I should change this at another opportunity.
 
-$config_cache_version=1;
+$config_cache_version=5;
 //increase this number after changing any of config values in any of config files if u want your config changes take effect for all clients immediately (not possibly after up to config_cache_validation_interval seconds)
 //setting config_cache_validation_interval to 0 has the same effect, but that disables performance optimisation completely and also its effect is dependent on clients visiting when it has such a value (if u change it again before a client has visited, that client will not be affected).
 

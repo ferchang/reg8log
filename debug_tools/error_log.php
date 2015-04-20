@@ -4,11 +4,15 @@ define('CAN_INCLUDE', true);
 
 require_once '../include/common.php';
 
-require ROOT.'include/code/admin/code_require_admin.php';
+if(!config::get('debug_mode')) {
+	if(config::get('admin_error_log_access')) require ROOT.'include/code/admin/code_require_admin.php';
+	else exit('Access to error log is not enabled in config file!');
+}
 
 $error_log_file=ROOT.'file_store/error_log.txt';
 
 if(isset($_POST['clear'])) {
+	if(!config::get('debug_mode') and config::get('admin_error_log_access')!==2) exit('Clear access to error log is not enabled in config file!');
 	require ROOT.'include/code/code_prevent_xsrf.php';
 	file_put_contents($error_log_file, '');
 }
@@ -63,7 +67,7 @@ echo '">';
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type=submit value='Reload' onclick='reload(); return false;'>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type=submit name=clear value='Clear error log'>
+<input type=submit name=clear value='Clear error log' <?php if(!config::get('debug_mode') and config::get('admin_error_log_access')!==2) echo 'disabled'; ?>>
 </center>
 </form>
 </body>
