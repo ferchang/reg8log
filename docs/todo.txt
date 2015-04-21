@@ -1,4 +1,5 @@
 - removing all uses of md5 and sha1?
 - making it more cache-friendly
+- adding alert emails capability to error logging facility?
 
 And please send your suggestions to hamidreza.mz712 -=At=- gmail -=Dot=- com
