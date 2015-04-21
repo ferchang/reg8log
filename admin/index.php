@@ -48,34 +48,34 @@ require ROOT.'include/page/page_sections.php';
 </tr>
 </table>
 <center>
-<table bgcolor="#7587b0" style="position: relative; <?php if(config::get('debug_mode')) echo ' top: -170px;'; else echo 'top: -125px;'; ?> ">
+<table bgcolor="#7587b0" style="position: relative; <?php if(config::get('debug_mode')) echo ' top: -130px;'; else echo 'top: -125px;'; ?> ">
 <tr><td>
 <ul>
 <li><?php echo func::tr('Accounts'); ?>:
 <ul>
 <li><a class="li_item" href="admin-accounts.php"><?php echo func::tr('Accounts'); ?></a><?php if($flag) echo "($accounts)"; ?>
-<br><br>
+
 <li><a class="li_item" href="admin-ban_user.php"><?php echo func::tr('Ban a user'); ?></a>
 <li><a class="li_item" href="admin-unban_user.php"><?php echo func::tr('Unban a user'); ?></a>
 <li><a class="li_item" href="admin-banned_users.php"><?php echo func::tr('Banned users'); ?></a><?php if($flag) echo "($banned_users)"; ?>
 </ul>
-<br>
+
 <li><?php echo func::tr('Pending accounts'); ?>:
 <ul>
 <li><a class="li_item" href="admin-pending_accounts4admin.php"><?php echo func::tr('Accounts awaiting admin\'s confirmation'); ?></a><?php if($flag) echo "($pending_accounts4admin)"; ?>
 <li><a class="li_item" href="admin-pending_accounts4email.php"><?php echo func::tr('Accounts awaiting email verification'); ?></a><?php if($flag) echo "($pending_accounts4email)"; ?>
 </ul>
-<br>
+
 <li><?php echo func::tr('Security logs'); ?>:
 <ul>
 <li><a class="li_item" href="admin-account_blocks.php"><?php echo func::tr('Account blocks'); ?></a><?php if($flag) echo '<span title="', func::tr('Active/All'), '">(<span style="color: red">', $active_account_blocks, '</span>/', $all_account_blocks, ')</span>'; ?>
 <li><a class="li_item" href="admin-ip_blocks.php"><?php echo func::tr('IP blocks'); ?></a><?php if($flag) echo '<span title="', func::tr('Active/All'), '">(<span style="color: red">', $active_ip_blocks, '</span>/', $all_ip_blocks, ')</span>'; ?>
 </ul>
-<br>
-<li><?php echo func::tr('Database'); ?>:
-<ul>
+
 <li><a class="li_item" href="admin-tables_status.php"><?php echo func::tr('Tables status'); ?></a>
-</ul>
+<?php
+if(config::get('admin_error_log_access')) echo '<li><a class="li_item" href="../debug_tools/error_log.php">', func::tr('Error log'), '</a>';
+?>
 </ul>
 </td></tr>
 </table>

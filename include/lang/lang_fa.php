@@ -356,6 +356,7 @@ return array(
 'Config cache file not readable!' => 'فایل کش کانفیگ قابل خواندن نیست!',
 'Config cache file not writable!' => 'فایل کش کانفیگ قابل نوشتن نیست!',
 'Config cache directory not writable!' => 'دایرکتوری کش کانفیگ قابل نوشتن نیست!',
+'error log' => 'گزارش خطاها',
 
 );
 
