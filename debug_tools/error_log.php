@@ -62,7 +62,10 @@ a {
 </style>
 <script>
 function reload() {
-	location.href=location.pathname+'?'+(new Date().getTime());
+	target=location.pathname+'?';
+	if(location.search.indexOf('admin_ops')!=-1) target+='admin_ops&';
+	target+=(new Date().getTime());
+	location.href=target;
 }
 </script>
 </head>
@@ -84,6 +87,9 @@ echo $_SESSION['reg8log']['antixsrf_token4post'];
 echo '">';
 ?>
 <center>
+<?php
+if(isset($_GET['admin_ops'])) echo '<a href="../admin/index.php">', func::tr('Admin operations'), '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+?>
 <a href="../index.php">Login page</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type=submit value='Reload' onclick='reload(); return false;'>

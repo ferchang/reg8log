@@ -74,7 +74,7 @@ require ROOT.'include/page/page_sections.php';
 
 <li><a class="li_item" href="admin-tables_status.php"><?php echo func::tr('Tables status'); ?></a>
 <?php
-if(config::get('admin_error_log_access')) echo '<li><a class="li_item" href="../debug_tools/error_log.php">', func::tr('Error log'), '</a>';
+if(config::get('admin_error_log_access')) echo '<li><a class="li_item" href="../debug_tools/error_log.php?admin_ops">', func::tr('Error log'), '</a>';
 
 $error_log_file=ROOT.'file_store/error_log.txt';
 
