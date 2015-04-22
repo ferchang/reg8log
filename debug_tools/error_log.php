@@ -20,11 +20,25 @@ if(isset($_POST['clear'])) {
 	else file_put_contents($error_log_file, '');
 }
 
-if(!is_readable($error_log_file)) $logs=false;
+if(!is_readable($error_log_file)) {
+	$logs=false;
+	$not_readable=true;
+}
 else $logs=file_get_contents($error_log_file);
 
-if($logs===false) $hash='?';
-else $hash=substr(hash('sha256', $logs), 0, 32);
+if(isset($not_readable)) $current_hash='?';
+else $current_hash=substr(hash('sha256', $logs), 0, 32);
+
+//-------------------------
+
+if(!isset($not_readable) and $logs!=='') {
+	$query="select last_hash from error_log_hash limit 1";
+	$reg8log_db->query($query);
+	$rec=$reg8log_db->fetch_row();
+	if($current_hash!==$rec['last_hash']) $new=true;
+}
+
+//-------------------------
 
 ?>
 <html>
@@ -39,12 +53,13 @@ textarea {
 	width: 100%;
 	height: 88%;
 	margin-bottom: 10px;
-	border: thin solid #000;
 	background: #aaa;
 	<?php
-	if($logs===false) echo "color: red;\n";
+	if(isset($new)) echo "border: medium solid #f00;\n";
+	else echo "border: thin solid #000;\n";
+	if(isset($not_readable)) echo "color: red;\n";
 	else echo "color: #000;\n";
-	if($logs==='' or $logs===false) echo "text-align: center;\n"; 
+	if($logs==='' or isset($not_readable)) echo "text-align: center;\n"; 
 	?>
 	padding: 5px;
 	
@@ -76,7 +91,7 @@ if(isset($not_writable)) echo "<center><h4 align=center id=error>$not_writable</
 <textarea readonly>
 <?php
 if($logs==='') echo "\n\nError log file is empty.";
-else if($logs===false) echo "\n\nError log file not readable!";
+else if(isset($not_readable)) echo "\n\nError log file not readable!";
 else echo $logs;
 ?>
 </textarea>
@@ -101,7 +116,7 @@ if(isset($_GET['admin_ops'])) echo '<a href="../admin/index.php">', func::tr('Ad
 </html>
 <?php
 
-$query="update error_log_hash set last_hash='$hash' limit 1";
+$query="update error_log_hash set last_hash='$current_hash' limit 1";
 
 $reg8log_db->query($query);
 
