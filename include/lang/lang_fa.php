@@ -357,6 +357,14 @@ return array(
 'Config cache file not writable!' => 'فایل کش کانفیگ قابل نوشتن نیست!',
 'Config cache directory not writable!' => 'دایرکتوری کش کانفیگ قابل نوشتن نیست!',
 'error log' => 'گزارش خطاها',
+'New logs' => 'حاوی گزارش های جدید',
+'No new logs' => 'بدون گزارشهای جدید',
+'Not readable' => 'قابل خواندن نیست',
+'Empty' => 'خالی',
+'File size' => 'اندازهء فایل',
+'bytes' => 'بایت',
+'Not writable' => 'قابل نوشتن نیست',
+'Error log file' => 'فایل گزارش خطا',
 
 );
 

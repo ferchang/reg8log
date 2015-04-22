@@ -23,6 +23,9 @@ if(isset($_POST['clear'])) {
 if(!is_readable($error_log_file)) $logs=false;
 else $logs=file_get_contents($error_log_file);
 
+if($logs===false) $hash='?';
+else $hash=substr(hash('sha256', $logs), 0, 32);
+
 ?>
 <html>
 <head>
@@ -90,3 +93,10 @@ echo '">';
 </form>
 </body>
 </html>
+<?php
+
+$query="update error_log_hash set last_hash='$hash' limit 1";
+
+$reg8log_db->query($query);
+
+?>
