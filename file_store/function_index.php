@@ -1,4 +1,7 @@
 <?php
+if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
+if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
+
 return array(
 	'get_autologin_ages'=>'func_autologin_ages.php',
 	'captcha_show_image'=>'func_captcha.php',
@@ -19,4 +22,5 @@ return array(
 	'tr'=>'func_tr.php',
 	'utf8_strlen'=>'func_utf8.php',
 );
+
 ?>
