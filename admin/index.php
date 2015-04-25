@@ -74,38 +74,47 @@ require ROOT.'include/page/page_sections.php';
 
 <li><a class="li_item" href="admin-tables_status.php"><?php echo func::tr('Tables status'); ?></a>
 <?php
-if(config::get('admin_error_log_access')) echo '<li><a class="li_item" href="../debug_tools/error_log.php?admin_ops">', func::tr('Error log'), '</a>';
-
-$error_log_file=ROOT.'file_store/error_log.php';
-
-if(!is_writable($error_log_file)) $new='!';
-else if(!is_readable($error_log_file)) $new='?';
-else {
-	$logs=file_get_contents($error_log_file);
-	if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
-	if($logs===false) $logs='';
-	if($logs==='') $new='0';
-	else {
-		$size=strlen($logs);
-		$current_hash=substr(hash('sha256', $logs), 0, 32);
-		$query="select last_hash from error_log_hash limit 1";
-		$reg8log_db->query($query);
-		$rec=$reg8log_db->fetch_row();
-		if($rec['last_hash']==='' or $rec['last_hash']==='?') $new='+';
-		else if($current_hash!==$rec['last_hash']) $new='+';
-		else $new='-';
+if(config::get('admin_error_log_access')) {
+	
+	echo '<li><a class="li_item" href="../debug_tools/error_log.php?admin_ops"';
+	if(!config::get('log_errors')) {
+		echo ' style="color: #bbb" ';
+		echo ' title="', func::tr('Error logging is not enabled.'), '" ';
 	}
+	echo '>', func::tr('Error log'), '</a>';
+
+	$error_log_file=ROOT.'file_store/error_log.php';
+
+	if(!is_writable($error_log_file)) $new='!';
+	else if(!is_readable($error_log_file)) $new='?';
+	else {
+		$logs=file_get_contents($error_log_file);
+		if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
+		if($logs===false) $logs='';
+		if($logs==='') $new='0';
+		else {
+			$size=strlen($logs);
+			$current_hash=substr(hash('sha256', $logs), 0, 32);
+			$query="select last_hash from error_log_hash limit 1";
+			$reg8log_db->query($query);
+			$rec=$reg8log_db->fetch_row();
+			if($rec['last_hash']==='' or $rec['last_hash']==='?') $new='+';
+			else if($current_hash!==$rec['last_hash']) $new='+';
+			else $new='-';
+		}
+	}
+
+	if(isset($size)) $file_size_hint=func::tr('File size').': '.$size.' '.func::tr('bytes');
+
+	echo '(';
+	if($new==='+') echo "<span style='color: f00;' title='$file_size_hint'>", func::tr('New logs'), '</span>';
+	else if($new==='-') echo "<span style='color: #000;' title='$file_size_hint'>", func::tr('No new logs'), '</span>';
+	else if($new==='?') echo '<span style="color: orange;">', func::tr('Error log file'), ' ', func::tr('not readable'), '!</span>';
+	else if($new==='0') echo '<span style="color: #0f0;">', func::tr('Empty'), '</span>';
+	else if($new==='!') echo '<span style="color: #f00;">', func::tr('Error log file'), ' ', func::tr('not writable'), '!</span>';
+	echo ')';
+	
 }
-
-if(isset($size)) $file_size_hint=func::tr('File size').': '.$size.' '.func::tr('bytes');
-
-echo '(';
-if($new==='+') echo "<span style='color: f00;' title='$file_size_hint'>", func::tr('New logs'), '</span>';
-else if($new==='-') echo "<span style='color: #000;' title='$file_size_hint'>", func::tr('No new logs'), '</span>';
-else if($new==='?') echo '<span style="color: orange;">', func::tr('Error log file'), ' ', func::tr('not readable'), '!</span>';
-else if($new==='0') echo '<span style="color: #0f0;">', func::tr('Empty'), '</span>';
-else if($new==='!') echo '<span style="color: #f00;">', func::tr('Error log file'), ' ', func::tr('not writable'), '!</span>';
-echo ')';
 
 ?>
 </ul>
