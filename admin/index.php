@@ -81,11 +81,12 @@ $error_log_file=ROOT.'file_store/error_log.php';
 if(!is_writable($error_log_file)) $new='!';
 else if(!is_readable($error_log_file)) $new='?';
 else {
-	$logs=substr(file_get_contents($error_log_file), strlen(ERROR_LOG_CLEAR_STR));
+	$logs=file_get_contents($error_log_file);
+	if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
 	if($logs===false) $logs='';
 	if($logs==='') $new='0';
 	else {
-		$size=filesize($error_log_file);
+		$size=strlen($logs);
 		$current_hash=substr(hash('sha256', $logs), 0, 32);
 		$query="select last_hash from error_log_hash limit 1";
 		$reg8log_db->query($query);

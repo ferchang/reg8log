@@ -22,9 +22,10 @@ if(isset($_POST['clear'])) {
 
 if(!is_readable($error_log_file)) $not_readable=true;
 else {
-	$logs=substr(file_get_contents($error_log_file), strlen(ERROR_LOG_CLEAR_STR));
+	$logs=file_get_contents($error_log_file);
+	if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
 	if($logs===false) $logs='';
-}
+}//same code in admin/index.php
 
 if(isset($not_readable)) $current_hash='?';
 else $current_hash=substr(hash('sha256', $logs), 0, 32);
