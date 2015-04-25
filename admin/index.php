@@ -76,12 +76,13 @@ require ROOT.'include/page/page_sections.php';
 <?php
 if(config::get('admin_error_log_access')) echo '<li><a class="li_item" href="../debug_tools/error_log.php?admin_ops">', func::tr('Error log'), '</a>';
 
-$error_log_file=ROOT.'file_store/error_log.txt';
+$error_log_file=ROOT.'file_store/error_log.php';
 
 if(!is_writable($error_log_file)) $new='!';
 else if(!is_readable($error_log_file)) $new='?';
 else {
-	$logs=file_get_contents($error_log_file);
+	$logs=substr(file_get_contents($error_log_file), strlen(ERROR_LOG_CLEAR_STR));
+	if($logs===false) $logs='';
 	if($logs==='') $new='0';
 	else {
 		$size=filesize($error_log_file);

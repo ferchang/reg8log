@@ -24,7 +24,7 @@ if($log_errors) {
 	if(!$debug_mode) error_reporting($log_errors);
 	//if debug_mode is on, error reporting level shouldn't be changed (it is set to E_ALL)
 	ini_set('log_errors', 1);
-	$error_log_file=ROOT.'file_store/error_log.txt';//this file path is used in code_check_file_permissions.php too!
+	$error_log_file=ROOT.'file_store/error_log.php';//this file path is used in code_check_file_permissions.php too!
 	ini_set('error_log', $error_log_file);
 	//ini_set('ignore_repeated_errors', 1);
 	//ini_set('ignore_repeated_source', 1);
@@ -33,6 +33,8 @@ if($log_errors) {
 	}
 	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
 }
+
+define('ERROR_LOG_CLEAR_STR', '<?php exit; ?>');
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 
