@@ -104,6 +104,7 @@ echo '">';
 ?>
 <center>
 <?php
+if(!config::get('log_errors')) echo '<span style="color: yellow;">Error logging is not enabled.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 if(isset($_GET['admin_ops'])) echo '<a href="../admin/index.php">', func::tr('Admin operations'), '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 ?>
 <a href="../index.php">Login page</a>
