@@ -6,7 +6,7 @@ class config extends loader_base {
 
 	private static $vars=array();
 	private static $cache_method=array('file', 'sess');
-	private static $cache_file='file_store/config_cache.txt';//note: this file path is used in setup code_check_file_permissions.php too. if u changed it here, change it there too.
+	private static $cache_file='file_store/config_cache.php';//note: this file path is used in setup code_check_file_permissions.php too. if u changed it here, change it there too.
 	private static $cache_valid=false;
 	
 	//=========================================================================
@@ -19,7 +19,7 @@ class config extends loader_base {
 				$cache_file=ROOT.self::$cache_file;
 				if(self::is_file_accessible($cache_file, 'read') and self::is_cache_valid('file')) {
 						self::debug_msg('config loader: reading config vars from cache file...');
-						self::$vars=unserialize(file_get_contents($cache_file));
+						self::$vars=unserialize(require $cache_file);
 						if(self::$cache_method[0]==='sess') self::update_cache('sess');
 						else unset($_SESSION['reg8log']['config_cache']);
 						break;
@@ -63,7 +63,13 @@ class config extends loader_base {
 	private static function update_cache($method) {
 		if($method==='file') {
 			$cache_file=ROOT.self::$cache_file;
-			if(self::is_file_accessible($cache_file, 'write')) file_put_contents($cache_file, serialize(self::$vars), LOCK_EX);
+			if(self::is_file_accessible($cache_file, 'write')) {
+				$out="<?php\nif(ini_get('register_globals')) exit(\"<center><h3>Error: Turn that damned register globals off!</h3></center>\");\nif(!defined('CAN_INCLUDE')) exit(\"<center><h3>Error: Direct access denied!</h3></center>\");";
+				$out.="\n\nreturn <<<'REG8LOG_CONFIG_VARS'\n";
+				$out.=serialize(self::$vars);
+				$out.="\nREG8LOG_CONFIG_VARS;\n\n?>";
+				file_put_contents($cache_file, $out, LOCK_EX);
+			}
 		}
 		else {
 			$_SESSION['reg8log']['config_cache']=self::$vars;

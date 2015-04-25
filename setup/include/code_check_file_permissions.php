@@ -17,7 +17,7 @@ else if(!is_writable(dirname($error_log_file))) $tmp10[]="$warning_tr: ".func::t
 
 //--------------------
 
-$config_cache_file=ROOT.'file_store/config_cache.txt';
+$config_cache_file=ROOT.'file_store/config_cache.php';
 
 if(file_exists($config_cache_file)) {
 		if(!is_readable($config_cache_file)) $tmp10[]="$warning_tr: ".func::tr('Config cache file not readable!');
