@@ -64,7 +64,7 @@ class config extends loader_base {
 		if($method==='file') {
 			$cache_file=ROOT.self::$cache_file;
 			if(self::is_file_accessible($cache_file, 'write')) {
-				$out="<?php\nif(ini_get('register_globals')) exit(\"<center><h3>Error: Turn that damned register globals off!</h3></center>\");\nif(!defined('CAN_INCLUDE')) exit(\"<center><h3>Error: Direct access denied!</h3></center>\");";
+				$out=require ROOT.'include/code/code_php_include_header.php';
 				$out.="\n\nreturn <<<'REG8LOG_CONFIG_VARS'\n";
 				$out.=serialize(self::$vars);
 				$out.="\nREG8LOG_CONFIG_VARS;\n\n?>";

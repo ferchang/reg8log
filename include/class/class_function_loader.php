@@ -68,7 +68,7 @@ class func extends loader_base {
 		$index_file=ROOT.self::$index_file;
 		if(!self::is_file_accessible($index_file, 'write')) return;
 		
-		$out="<?php\nif(ini_get('register_globals')) exit(\"<center><h3>Error: Turn that damned register globals off!</h3></center>\");\nif(!defined('CAN_INCLUDE')) exit(\"<center><h3>Error: Direct access denied!</h3></center>\");";
+		$out=require ROOT.'include/code/code_php_include_header.php';
 		$out.="\n\nreturn array(\n";
 		foreach(self::$index as $key=>$value) $out.="	'$key'=>'$value',\n";
 		$out.=");\n\n?>";
