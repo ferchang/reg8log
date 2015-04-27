@@ -117,7 +117,6 @@ if(!isset($_COOKIE['reg8log_antixsrf_token3'])) {//we use a third token stored c
 	setcookie('reg8log_antixsrf_token3', $antixsrf_token, 0, '/', null, HTTPS, true);
 	$_COOKIE['reg8log_antixsrf_token3']=$antixsrf_token;
 }
-else $_COOKIE['reg8log_antixsrf_token3']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token3'], ENT_QUOTES, 'UTF-8');//this line is just to prevent Acunetix from reporting XSS
 
 define('ANTIXSRF_TOKEN4POST', md5($_SESSION['reg8log']['antixsrf_token4post'].$_COOKIE['reg8log_antixsrf_token3']));
 
