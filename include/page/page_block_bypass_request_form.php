@@ -69,7 +69,7 @@ require ROOT.'include/page/page_sections.php';
 <?php
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['antixsrf_token4post'];
+echo ANTIXSRF_TOKEN4POST;
 echo '">';
 
 if(isset($err_msgs)) {

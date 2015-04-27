@@ -30,7 +30,7 @@ if(isset($admin_alert_visit_msg) and $admin_alert_visit_msg) {
 	//if(xhr2.readyState == 4) alert(xhr2.responseText);
 	}\n";
 	
-	echo "xhr2.send('new_account_blocks=$new_account_blocks&new_ip_blocks=$new_ip_blocks&new_registerations=$new_registerations&antixsrf_token={$_SESSION['reg8log']['antixsrf_token4post']}');\n}\n";
+	echo "xhr2.send('new_account_blocks=$new_account_blocks&new_ip_blocks=$new_ip_blocks&new_registerations=$new_registerations&antixsrf_token=", ANTIXSRF_TOKEN4POST, "');\n}\n";
 
 	$admin_alert_visit_msg=addslashes($admin_alert_visit_msg);
 	$admin_alert_visit_msg=str_replace("\n", '\n', $admin_alert_visit_msg);

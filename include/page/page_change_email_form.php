@@ -93,7 +93,7 @@ return true;
 <?php
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['antixsrf_token4post'];
+echo ANTIXSRF_TOKEN4POST;
 echo '">';
 
 require ROOT.'include/code/code_generate_form_id.php';

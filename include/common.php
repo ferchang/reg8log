@@ -112,6 +112,17 @@ if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
 	$_SESSION['reg8log']['antixsrf_token4get']=$antixsrf_token;
 }
 
+if(!isset($_COOKIE['reg8log_antixsrf_token3'])) {//we use a third token stored client side for increased security
+	$antixsrf_token=func::random_string(22);
+	setcookie('reg8log_antixsrf_token3', $antixsrf_token, 0, '/', null, HTTPS, true);
+	$_COOKIE['reg8log_antixsrf_token3']=$antixsrf_token;
+}
+else $_COOKIE['reg8log_antixsrf_token3']=htmlspecialchars($_COOKIE['reg8log_antixsrf_token3'], ENT_QUOTES, 'UTF-8');//this line is just to prevent Acunetix from reporting XSS
+
+define('ANTIXSRF_TOKEN4POST', md5($_SESSION['reg8log']['antixsrf_token4post'].$_COOKIE['reg8log_antixsrf_token3']));
+
+define('ANTIXSRF_TOKEN4GET', md5($_SESSION['reg8log']['antixsrf_token4get'].$_COOKIE['reg8log_antixsrf_token3']));
+
 //---------- antixsrf_token ------------<
 
 if(!DB_INSTALLED) {

@@ -38,7 +38,7 @@ Pending for email verification: <input type=checkbox name=pending4email><br>
 Pending for admin confirmation: <input type=checkbox name=pending4admin><br>
 <?php
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['antixsrf_token4post'];
+echo ANTIXSRF_TOKEN4POST;
 echo '">';
 ?>
 <br><center><input type=submit value='Create'></center>

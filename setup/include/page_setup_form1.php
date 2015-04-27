@@ -17,7 +17,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 <form action="" method="post">
 <?php
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['antixsrf_token4post'];
+echo ANTIXSRF_TOKEN4POST;
 echo '">';
 ?>
 <h4><?php echo func::tr('setup - Copy the string msg');?>.</h4>

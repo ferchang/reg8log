@@ -67,7 +67,7 @@ function check_captcha() {
 		}
 	}
 
-	xhr.send('captcha='+document.getElementById('captcha').value+'&antixsrf_token=<?php echo $_SESSION['reg8log']['antixsrf_token4post']; ?>');
+	xhr.send('captcha='+document.getElementById('captcha').value+'&antixsrf_token=<?php echo ANTIXSRF_TOKEN4POST; ?>');
 }
 
 </script>

@@ -230,7 +230,7 @@ xhr.onreadystatechange=function() {
 	} else report(ws, '');
 }
 
-xhr.send('value='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo $_SESSION['reg8log']['antixsrf_token4post']; ?>');
+xhr.send('value='+encodeURIComponent(uname)+'&antixsrf_token=<?php echo ANTIXSRF_TOKEN4POST; ?>');
 
 return true;
 }
@@ -265,7 +265,7 @@ echo '</td></tr>';
 }
 
 echo '<input type="hidden" name="antixsrf_token" value="';
-echo $_SESSION['reg8log']['antixsrf_token4post'];
+echo ANTIXSRF_TOKEN4POST;
 echo '">';
 
 require ROOT.'include/code/code_generate_form_id.php';
