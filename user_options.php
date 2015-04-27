@@ -45,6 +45,7 @@ require ROOT.'include/page/page_sections.php';
 <table bgcolor="#7587b0">
 <tr><td>
 <ul>
+<li><a class="li_item" href="account_info.php"><?php echo func::tr('View account information'); ?></a><br>
 <li><a class="li_item" href="change_password.php"><?php echo func::tr('Change password'); ?></a><br>
 <li><a class="li_item" href="change_email.php"><?php echo func::tr('Change email'); ?></a><br>
 <?php

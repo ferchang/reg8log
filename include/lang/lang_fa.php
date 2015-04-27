@@ -366,6 +366,7 @@ return array(
 'Not writable' => 'قابل نوشتن نیست',
 'Error log file' => 'فایل گزارش خطا',
 'Error logging is not enabled.' => 'ثبت گزارش خطاها فعال نیست.',
+'View account information' => 'مشاهدۀ اطلاعات اکانت',
 
 );
 

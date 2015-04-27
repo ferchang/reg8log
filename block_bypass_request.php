@@ -48,10 +48,7 @@ if($reg8log_db->result_num($query)) {
 }
 else $emails_sent=$num_requests=-1;
 
-if(isset($captcha_needed)) {
-	require ROOT.'include/code/sess/code_sess_start.php';
-	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
-}
+if(isset($captcha_needed)) $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 do {//goto statement not supported in PHP < 5.3; so i use do ... while(false) + break in this specific scenario instead.
 

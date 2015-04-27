@@ -12,8 +12,6 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 if(!config::get('registeration_enabled')) func::my_exit('<center><h3>'.func::tr('Registration is disabled!').'</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-require ROOT.'include/code/sess/code_sess_start.php';
-
 $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 require ROOT.'include/code/code_identify.php';

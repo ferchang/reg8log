@@ -25,10 +25,7 @@ if(count($block_options)<2) exit('No block options are available!');
 $try_type='password';
 require ROOT.'include/code/code_check_captcha_needed4user.php';
 
-if(isset($captcha_needed)) {
-	require ROOT.'include/code/sess/code_sess_start.php';
-	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
-}
+if(isset($captcha_needed)) $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 if(isset($_POST['disables'], $_POST['password'])) {
 

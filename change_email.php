@@ -20,10 +20,7 @@ if(!isset($captcha_needed)) {
 	require ROOT.'include/code/code_check_captcha_needed4user.php';
 }
 
-if(isset($captcha_needed)) {
-	require ROOT.'include/code/sess/code_sess_start.php';
-	$captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
-}
+if(isset($captcha_needed)) $captcha_verified=isset($_SESSION['reg8log']['captcha_verified']);
 
 if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 

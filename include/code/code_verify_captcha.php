@@ -6,8 +6,6 @@ $_fields=config::get('fields');
 
 $captcha_format=$_fields['captcha'];
 
-require ROOT.'include/code/sess/code_sess_start.php';
-
 if(isset($_SESSION['reg8log']['captcha_verified'])) {
 	$captcha_verified=true;
 	unset($_SESSION['reg8log']['captcha_verified']);
