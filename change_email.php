@@ -27,8 +27,6 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	require ROOT.'include/code/code_prevent_repost.php';
 
 	require ROOT.'include/code/code_prevent_xsrf.php';
-
-	
 	
 	if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/code_verify_captcha.php';
 	

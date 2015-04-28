@@ -18,12 +18,12 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 <script src="js/sha256.js"></script>
 <script language="javascript">
 function clear_form() {
-document.change_email_form.password.value='';
-document.change_email_form.newemail.value='';
-document.change_email_form.reemail.value='';
-if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
-clear_cap(true);
-return false;
+	document.change_email_form.password.value='';
+	document.change_email_form.newemail.value='';
+	document.change_email_form.reemail.value='';
+	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
+	clear_cap(true);
+	return false;
 }
 
 <?php
@@ -63,12 +63,12 @@ else if(newemail_value!=reemail_value) msgs[i++]='<?php echo func::tr('New email
 if(captcha_exists) validate_captcha(document.change_email_form.captcha.value);
 
 if(msgs.length) {
-clear_cap(false);
-for(i in msgs){
-cap.appendChild(document.createTextNode(msgs[i]));
-cap.appendChild(document.createElement("br"));
-}
-return false;
+	clear_cap(false);
+	for(i in msgs) {
+		cap.appendChild(document.createTextNode(msgs[i]));
+		cap.appendChild(document.createElement("br"));
+	}
+	return false;
 }
 
 if(captcha_exists) {
@@ -133,10 +133,10 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/pag
 </td></tr></table>
 <script>
 if(captcha_exists) {
-document.getElementById('re_captcha_msg').style.visibility='visible';
-captcha_img_style=document.getElementById('captcha_image').style;
-captcha_img_style.cursor='hand';
-if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
+	document.getElementById('re_captcha_msg').style.visibility='visible';
+	captcha_img_style=document.getElementById('captcha_image').style;
+	captcha_img_style.cursor='hand';
+	if(captcha_img_style.cursor!='hand') captcha_img_style.cursor='pointer';
 }
 </script>
 <?php
