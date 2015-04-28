@@ -30,7 +30,7 @@ echo '<th>', func::tr('Email'), '</th>';
 echo '<th>',func::tr('Account creation'), '</th>';
 if(config::get('log_last_login')) echo '<th>', func::tr('Last login'), '</th>';
 if(config::get('log_last_logout')) echo '<th>', func::tr('Last logout'), '</th>';
-echo '<th>', func::tr('Banned'), '</th>';
+if($identified_user!=='Admin') echo '<th>', func::tr('Banned'), '</th>';
 
 echo '</tr><tr align="center" style="background: #35a; color: #fff">';
 
@@ -56,7 +56,7 @@ if(config::get('log_last_logout')) {
 	else echo '<td>', func::tr('N/A'), '</td>';
 }
 
-if($rec['banned']==1 or $rec['banned']>$req_time) echo '<td>', func::tr('Yes'), '</td>';
+if($identified_user!=='Admin') if($rec['banned']==1 or $rec['banned']>$req_time) echo '<td>', func::tr('Yes'), '</td>';
 else echo '<td>', func::tr('No'), '</td>';
 
 echo '</tr></table>';
