@@ -8,7 +8,7 @@ require ROOT.'include/code/code_identify.php';
 
 if(!isset($identified_user)) func::my_exit('<center><h3>'.func::tr('You are not authenticated msg').'.</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-if(!config::get('viewing_account_info_requires_password')) {
+if(!config::get('password_required4viewing_account_info')) {
 	require ROOT.'include/page/page_account_info.php';
 	exit;
 }

@@ -69,8 +69,8 @@ function validate() {
 <table width="100%"  height="100%" cellpadding="5" cellspacing="0">
 <tr>
 <td>
-<table bgcolor="#7587b0" align="center" style='padding: 5px'>
 <form name="pass_form" action="" method="post">
+<table bgcolor="#7587b0" align="center" style='padding: 5px'>
 <?php
 
 echo '<input type="hidden" name="antixsrf_token" value="';

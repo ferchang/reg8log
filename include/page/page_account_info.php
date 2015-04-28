@@ -16,7 +16,6 @@ $rec=$reg8log_db->fetch_row();
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-<link href="../css/list.css" media="screen" rel="stylesheet" type="text/css" />
 <title><?php echo func::tr('Account info'); ?></title>
 </head>
 <body bgcolor="#D1D1E9" <?php echo PAGE_DIR; ?>>
