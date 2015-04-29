@@ -8,7 +8,6 @@ require_once '../include/common.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-$ajax=true;
 require ROOT.'include/code/admin/code_require_admin.php';
 
 if(!isset($_POST['new_account_blocks'])) exit('new_account_blocks parameter is not set');

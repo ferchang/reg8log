@@ -33,6 +33,6 @@ if(isset($banned_user) and !isset($pass_banned_user)) {
 	exit;
 }
 
-if(isset($identified_user) and $identified_user==='Admin' and !isset($ajax)) require ROOT.'include/code/admin/code_check_admin_visit_alerts.php';
+if(isset($identified_user) and $identified_user==='Admin' and !defined('AJAX')) require ROOT.'include/code/admin/code_check_admin_visit_alerts.php';
 
 ?>

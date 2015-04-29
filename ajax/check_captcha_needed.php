@@ -22,7 +22,6 @@ if(!isset($captcha_needed)) require ROOT.'include/code/code_check_account_block.
 
 if(isset($captcha_needed)) {
 	echo '<!-- *add captcha from* -->';
-	$ajax=true;
 	require ROOT.'include/page/page_captcha_form.php';
 }
 else echo 'n';
