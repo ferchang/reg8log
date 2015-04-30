@@ -31,12 +31,6 @@ if($reg8log_db->result_num()!==$num_recs) {
 return;
 }
 
-while($rec=$reg8log_db->fetch_row()) {
-	
-//$$rec['name']=$GLOBALS[$rec['name']]=$rec['value'];	
-
-	define(strtoupper($rec['name']), $rec['value']);
-	
-}
+while($rec=$reg8log_db->fetch_row()) define(strtoupper($rec['name']), $rec['value']);
 
 ?>
