@@ -7,7 +7,7 @@ if(!isset($GLOBALS['aes'])) {
 	$GLOBALS['aes'] = new Crypt_AES();//default mode: CBC
 }
 
-$GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].$GLOBALS['site_encr_key'].$GLOBALS['client_sess_key'])));
+$GLOBALS['aes']->setKey(pack('H*', md5($GLOBALS['pepper'].SITE_ENCR_KEY.$GLOBALS['client_sess_key'])));
 
 function encrypt($str) {
 	return $GLOBALS['aes']->IvEncryptHmac($str);

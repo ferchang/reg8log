@@ -33,7 +33,7 @@ else if($password_format['js_re']===false) echo 'false';
 else echo $password_format['js_re'];
 echo ";\n";
 
-echo "\nsite_salt='$site_salt';\n";
+echo "\nsite_salt='".SITE_SALT."';\n";
 ?>
 
 function hash_password() {

@@ -52,7 +52,7 @@ echo "\n)";
 }
 echo "\n);\n";
 
-echo "\nsite_salt='$site_salt';\n";
+echo "\nsite_salt='".SITE_SALT."';\n";
 ?>
 
 var auto_filled=false;

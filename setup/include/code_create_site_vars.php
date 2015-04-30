@@ -34,7 +34,7 @@ echo sprintf(func::tr('variable created msg'), 'site_encr_key'), ".<br>";
 
 //-------------------------------
 
-$query="insert ignore into `site_vars` (`name`, `value`) values ('site_salt', '$site_salt')";
+$query="insert ignore into `site_vars` (`name`, `value`) values ('site_salt', '".SITE_SALT."')";
 
 $reg8log_db->query($query);
 
@@ -52,7 +52,7 @@ echo sprintf(func::tr('variable created msg'), 'site_priv_salt'), ".<br>";
 
 //-------------------------------
 
-$query="insert ignore into `site_vars` (`name`, `value`) values ('entropy', '$entropy')";
+$query="insert ignore into `site_vars` (`name`, `value`) values ('entropy', '".ENTROPY."')";
 
 $reg8log_db->query($query);
 

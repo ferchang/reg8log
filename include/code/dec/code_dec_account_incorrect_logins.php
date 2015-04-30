@@ -19,7 +19,7 @@ if(!$matches) return;
 
 setcookie('reg8log_account_incorrect_logins', implode(',', $autos), 0, '/', null, HTTPS, true);
 
-$lock_name=$reg8log_db->quote_smart('reg8log--incorrect_login-'.$_POST['username']."--$site_key");
+$lock_name=$reg8log_db->quote_smart('reg8log--incorrect_login-'.$_POST['username'].'--'.SITE_KEY);
 $reg8log_db->query("select get_lock($lock_name, -1)");
 
 $query="select * from `account_incorrect_logins` where `auto`=$incorrect_logins_auto limit 1";

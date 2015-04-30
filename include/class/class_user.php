@@ -48,7 +48,7 @@ function identify($username=null, $password=null)
 
 		$GLOBALS['username_exists']=0;
 
-		$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username']."--{$GLOBALS['site_key']}");
+		$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username'].'--'.SITE_KEY);
 		$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");
 		
 		if($GLOBALS['reg8log_db']->result_num($query1)) {
@@ -163,14 +163,14 @@ function identify($username=null, $password=null)
 		return false;
 	}
 
-	$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username']."--{$GLOBALS['site_key']}");
+	$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.$this->user_info['username'].'--'.SITE_KEY);
 	$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");
 	
 	if($flag) {
 		if($this->tie_login2ip($tmp54)) $autologin_key=hash('sha256', $tmp54['autologin_key'].$_SERVER['REMOTE_ADDR']);
 		else $autologin_key=$tmp54['autologin_key'];
 		$this->user_info=$tmp54;
-		if($_COOKIE['reg8log_autologin2']==='logout' or $_COOKIE['reg8log_autologin2']!==hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key)) {
+		if($_COOKIE['reg8log_autologin2']==='logout' or $_COOKIE['reg8log_autologin2']!==hash('sha256', config::get('pepper').SITE_KEY2.$autologin_key)) {
 			$GLOBALS['logged_out_user']=$this->user_info['username'];
 			$cookie->erase();
 			setcookie('reg8log_autologin2', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS);
@@ -247,7 +247,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	$cookie->values[]=$age;
 	
 	if($cookie->set(null, $cookie->values, null, $age, true)) {
-		setcookie('reg8log_autologin2', hash('sha256', config::get('pepper').$GLOBALS['site_key2'].$autologin_key), $age, '/', null, HTTPS);
+		setcookie('reg8log_autologin2', hash('sha256', config::get('pepper').SITE_KEY2.$autologin_key), $age, '/', null, HTTPS);
 
 	//----------------
 	if($set_autologin_expiration) {

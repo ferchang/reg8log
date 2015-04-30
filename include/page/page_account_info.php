@@ -62,7 +62,7 @@ echo '</tr></table>';
 
 ?>
 <br><a href="user_options.php"><?php echo func::tr('User options'); ?></a><br><br>
-<a href="../index.php"><?php echo func::tr('Login page'); ?></a>
+<a href="index.php"><?php echo func::tr('Login page'); ?></a>
 </center>
 <?php
 require ROOT.'include/page/page_foot_codes.php';

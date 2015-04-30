@@ -8,12 +8,12 @@ foreach($_fields as $field_name=>$specs) {//validate post data
 
 $ct=count($err_msgs);
 
-if($field_name==='password' and (strpos($_POST[$field_name], "hashed-$site_salt")===0 or strpos($_POST[$field_name], "encrypted-$site_salt")===0)) {
+if($field_name==='password' and (strpos($_POST[$field_name], 'hashed-'.SITE_SALT)===0 or strpos($_POST[$field_name], 'encrypted-'.SITE_SALT)===0)) {
 	if($_POST['password']!==$_POST['repass']) {
 		$err_msgs[]=func::tr('password fields aren\'t match!');
 		$password_error=true;
 	}
-	else if(strpos($_POST[$field_name], "encrypted-$site_salt")===0) {
+	else if(strpos($_POST[$field_name], 'encrypted-'.SITE_SALT)===0) {
 		
 		if(!func::verify_hmac(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)))) {
 			$err_msgs[]=func::tr('error in password decryption!');

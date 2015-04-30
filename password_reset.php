@@ -36,7 +36,7 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 require ROOT.'include/code/code_prevent_xsrf.php';
 
-if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
+if(strpos($_POST['newpass'], 'hashed-'.SITE_SALT)!==0) {
 	if(func::utf8_strlen($_POST['newpass'])<$password_format['minlength'])
 	$err_msgs[]=sprintf(func::tr('new password is shorter than'), $password_format['minlength']);
 	else if(func::utf8_strlen($_POST['newpass'])>$password_format['maxlength'])
@@ -49,7 +49,7 @@ if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) {
 
 if(isset($err_msgs)) break;
 
-if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
+if(strpos($_POST['newpass'], 'hashed-'.SITE_SALT)!==0) $_POST['newpass']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['newpass']);
 require ROOT.'include/code/code_change_password.php';
 
 require ROOT.'include/code/code_set_submitted_forms_cookie.php';

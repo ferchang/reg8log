@@ -6,7 +6,7 @@ $limit=config::get('ip_block_threshold')-1;
 
 if($limit<1) return;
 
-$check_decs_lock="'reg8log--check_dec-".$user->user_info['auto']."--$site_key'";
+$check_decs_lock="'reg8log--check_dec-".$user->user_info['auto'].'--'.SITE_KEY."'";
 $reg8log_db->query("select get_lock($check_decs_lock, -1)");
 
 if(!isset($is_pending_account)) $is_pending_account=0;

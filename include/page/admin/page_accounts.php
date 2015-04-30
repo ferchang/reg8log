@@ -22,7 +22,7 @@ require ROOT.'include/page/admin/page_pagination_initials.php';
 <script>
 
 <?php
-echo "\nsite_salt='$site_salt';\n";
+echo "\nsite_salt='".SITE_SALT."';\n";
 ?>
 
 <?php

@@ -25,7 +25,7 @@ function clear_form() {
 }
 
 <?php
-echo "\nsite_salt='$site_salt';\n";
+echo "\nsite_salt='".SITE_SALT."';\n";
 ?>
 
 function hash_password() {

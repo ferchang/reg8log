@@ -16,7 +16,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 <script>
 <?php
-echo "\nsite_salt='$site_salt';\n";
+echo "\nsite_salt='".SITE_SALT."';\n";
 ?>
 
 <?php

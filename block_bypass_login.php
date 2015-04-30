@@ -21,7 +21,7 @@ require ROOT.'include/code/code_prevent_repost.php';
 
 $_POST['username']=func::fix_kaaf8yeh($_POST['username']);
 	
-if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
+if(strpos($_POST['password'], 'hashed-'.SITE_SALT)!==0) $_POST['password']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['password']);
 
 $manual_login=array('username'=>$_POST['username'], 'password'=>$_POST['password']);
 

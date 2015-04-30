@@ -33,7 +33,7 @@ if(!isset($account_block)) {
 	
 }
 
-$lock_name=$reg8log_db->quote_smart('reg8log--block_bypass-'.$_GET['username']."--$site_key");
+$lock_name=$reg8log_db->quote_smart('reg8log--block_bypass-'.$_GET['username'].'--'.SITE_KEY);
 $reg8log_db->query("select get_lock($lock_name, -1)");
 
 $_username=$reg8log_db->quote_smart($_GET['username']);

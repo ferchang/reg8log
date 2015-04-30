@@ -6,7 +6,7 @@ $_fields=array('password'=>$_fields['password'], 'email'=>$_fields['email']);
 
 foreach($_fields as $field_name=>$specs) {//validate post data
 
-if($field_name==='password' and strpos($_POST[$field_name], "hashed-$site_salt")===0) continue;
+if($field_name==='password' and strpos($_POST[$field_name], 'hashed-'.SITE_SALT)===0) continue;
 
 $min_length=$specs['minlength'];
 $max_length=$specs['maxlength'];

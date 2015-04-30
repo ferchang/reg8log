@@ -32,7 +32,7 @@ if(isset($_POST['password'], $_POST['newemail'], $_POST['reemail'])) {
 	
 	if($_POST['password']==='') $err_msgs[]=func::tr('Password field is empty!');
 	else if(!isset($captcha_err)) {
-		if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
+		if(strpos($_POST['password'], 'hashed-'.SITE_SALT)!==0) $_POST['password']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['password']);
 		require ROOT.'include/code/code_verify_password.php';
 		if(isset($err_msgs)) {
 			$try_type='password';

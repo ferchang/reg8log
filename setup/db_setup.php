@@ -9,7 +9,7 @@ require '../include/common.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$site_encr_key='ff'; //just to prevent func_encryption_with_site8client_keys.php from complaining!
+if(!defined('SITE_ENCR_KEY')) define('SITE_ENCR_KEY', 'ff'); //just to prevent func_encryption_with_site8client_keys.php from complaining!
 
 require ROOT.'include/code/code_prevent_repost.php';
 
@@ -26,10 +26,10 @@ if(empty($_SESSION['reg8log']['setup_key']) or strpos($file_contents, $_SESSION[
 
 $_fields=config::get('fields');
 
-if(!isset($site_salt)) if(isset($_COOKIE['reg8log_site_salt'])) $site_salt=$_COOKIE['reg8log_site_salt'];
+if(!defined('SITE_SALT')) if(isset($_COOKIE['reg8log_site_salt'])) define('SITE_SALT', $_COOKIE['reg8log_site_salt']);
 else {
-	$site_salt=func::random_string(22);
-	setcookie('reg8log_site_salt', $site_salt, 0, '/', null, HTTPS, true);
+	define('SITE_SALT', func::random_string(22));
+	setcookie('reg8log_site_salt', SITE_SALT, 0, '/', null, HTTPS, true);
 }
 
 do {
@@ -39,7 +39,7 @@ require ROOT.'include/code/code_prevent_xsrf.php';
 
 require ROOT.'setup/include/code_validate_admin_register_submit.php';
 
-if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
+if(strpos($_POST['password'], 'hashed-'.SITE_SALT)!==0) $_POST['password']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['password']);
 
 if(isset($err_msgs)) break;
 

@@ -34,7 +34,7 @@ $tmp23=$reg8log_db->quote_smart($_POST['email']);
 $query1='select * from `password_reset` where `email`='.$tmp23.' and `timestamp`>'.$expired.' limit 1';
 $query2='select * from `accounts` where `email`='.$tmp23.' limit 1';
 
-$lock_name='reg8log--password_reset--'.$site_key;
+$lock_name='reg8log--password_reset--'.SITE_KEY;
 $reg8log_db->query("select get_lock('$lock_name', -1)");
 
 $email=false;

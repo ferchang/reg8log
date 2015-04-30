@@ -19,7 +19,7 @@ $home='<br /><a href="index.php">'.func::tr('Login page').'</a>';
 $rid=$reg8log_db->quote_smart($_GET['rid']);
 $key=$reg8log_db->quote_smart($_GET['key']);
 
-$lock_name='reg8log--register--'.$site_key;
+$lock_name='reg8log--register--'.SITE_KEY;
 $reg8log_db->query("select get_lock('$lock_name', -1)");
 
 $query="select * from `pending_accounts` where `record_id`=$rid and `email_verification_key`=$key limit 1";

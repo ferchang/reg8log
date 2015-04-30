@@ -37,11 +37,11 @@ require ROOT.'include/code/code_validate_register_submit.php';
 if($err_msgs) require ROOT.'include/page/page_register_form.php';
 else {//Data validated
 
-if(strpos($_POST['password'], "encrypted-$site_salt")===0) {
+if(strpos($_POST['password'], 'encrypted-'.SITE_SALT)===0) {
 	
 	$_POST['password']=func::decrypt(base64_decode(substr($_POST['password'], strrpos($_POST['password'], '-')+1)));
 }
-else if(strpos($_POST['password'], "hashed-$site_salt")!==0) $_POST['password']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['password']);
+else if(strpos($_POST['password'], 'hashed-'.SITE_SALT)!==0) $_POST['password']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['password']);
 
 if(config::get('email_verification_needed') or config::get('admin_confirmation_needed')) {
 	require ROOT.'include/code/code_add_pending_account.php';

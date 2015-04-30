@@ -107,7 +107,7 @@ function captcha_show_image() {
 
 //======================================
 
-$_SESSION['reg8log']['captcha_hash'] = hash('sha256', $GLOBALS['pepper'].$GLOBALS['site_priv_salt'].$captcha_word);
+$_SESSION['reg8log']['captcha_hash'] = hash('sha256', $GLOBALS['pepper'].SITE_PRIV_SALT.$captcha_word);
 
 //======================================
 	
@@ -128,7 +128,7 @@ function captcha_verify_word() {
 	
 	if(empty($_POST['captcha']) or empty($_SESSION['reg8log']['captcha_hash'])) return false;
 
-	if(!(hash('sha256', $GLOBALS['pepper'].$GLOBALS['site_priv_salt'].strtoupper($_POST['captcha']))===$_SESSION['reg8log']['captcha_hash'])) {
+	if(!(hash('sha256', $GLOBALS['pepper'].SITE_PRIV_SALT.strtoupper($_POST['captcha']))===$_SESSION['reg8log']['captcha_hash'])) {
 		unset($_SESSION['reg8log']['captcha_hash']);
 		return false;
 	} else {

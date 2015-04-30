@@ -27,7 +27,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 	
 	if($_POST['curpass']==='') $err_msgs[]=func::tr('current password field is empty!');
 	else if(!isset($captcha_err)) {
-		if(strpos($_POST['curpass'], "hashed-$site_salt")!==0) $_POST['curpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['curpass']);
+		if(strpos($_POST['curpass'], 'hashed-'.SITE_SALT)!==0) $_POST['curpass']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['curpass']);
 		require ROOT.'include/code/code_verify_password.php';
 		if(isset($err_msgs)) {
 			$try_type='password';
@@ -42,7 +42,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		}
 	}
 
-	if(strpos($_POST['newpass'], "hashed-$site_salt")!==0 and strpos($_POST['newpass'], "encrypted-$site_salt")!==0) {
+	if(strpos($_POST['newpass'], 'hashed-'.SITE_SALT)!==0 and strpos($_POST['newpass'], 'encrypted-'.SITE_SALT)!==0) {
 		if(func::utf8_strlen($_POST['newpass'])<$password_format['minlength']) {
 			$err_msgs[]=sprintf(func::tr('new password is shorter than'), $password_format['minlength']);
 			$password_error=true;
@@ -65,7 +65,7 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 			$err_msgs[]=func::tr('password fields aren\'t match!');
 			$password_error=true;
 		}
-		else if(strpos($_POST['newpass'], "encrypted-$site_salt")===0) {
+		else if(strpos($_POST['newpass'], 'encrypted-'.SITE_SALT)===0) {
 			
 			if(!func::verify_hmac(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)))) {
 				$err_msgs[]=func::tr('error in password decryption!');
@@ -75,11 +75,11 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 	}
 
 	if(!isset($err_msgs)) {
-		if(strpos($_POST['newpass'], "encrypted-$site_salt")===0) {
+		if(strpos($_POST['newpass'], 'encrypted-'.SITE_SALT)===0) {
 			
 			$_POST['newpass']=func::decrypt(base64_decode(substr($_POST['newpass'], strrpos($_POST['newpass'], '-')+1)));
 		}
-		else if(strpos($_POST['newpass'], "hashed-$site_salt")!==0) $_POST['newpass']='hashed-'.$site_salt.'-'.hash('sha256', $site_salt.$_POST['newpass']);
+		else if(strpos($_POST['newpass'], 'hashed-'.SITE_SALT)!==0) $_POST['newpass']='hashed-'.SITE_SALT.'-'.hash('sha256', SITE_SALT.$_POST['newpass']);
 		$_username=$identified_user;
 		require ROOT.'include/code/code_change_password.php';
 		require ROOT.'include/code/code_set_submitted_forms_cookie.php';
