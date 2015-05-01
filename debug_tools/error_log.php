@@ -60,7 +60,7 @@ textarea {
 	else echo "border: thin solid #000;\n";
 	if(isset($not_readable)) echo "color: red;\n";
 	else echo "color: #000;\n";
-	if($logs==='' or isset($not_readable)) echo "text-align: center;\n"; 
+	if(isset($not_readable) or $logs==='') echo "text-align: center;\n"; 
 	?>
 	padding: 5px;
 	
@@ -91,8 +91,8 @@ if(isset($not_writable)) echo "<center><h4 align=center id=error>$not_writable</
 ?>
 <textarea readonly>
 <?php
-if($logs==='') echo "\n\nError log file is empty.";
-else if(isset($not_readable)) echo "\n\nError log file not readable!";
+if(isset($not_readable)) echo "\n\nError log file not readable!";
+else if($logs==='') echo "\n\nError log file is empty.";
 else echo $logs;
 ?>
 </textarea>
