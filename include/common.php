@@ -32,6 +32,8 @@ if($log_errors) {
 	//ini_set('ignore_repeated_source', 1);
 	if(file_exists($error_log_file)) {
 		if(!is_writable($error_log_file)) trigger_error('reg8log: Error log file not writable!', E_USER_WARNING);
+		else if(!is_readable($error_log_file)) trigger_error('reg8log: Error log file not readable!', E_USER_WARNING);
+		else if(mt_rand(1, 10)===1) require ROOT.'include/code/check_error_log_file_constraints.php';
 	}
 	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
 	else file_put_contents($error_log_file, ERROR_LOG_HEADER_STR, LOCK_EX);

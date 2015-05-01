@@ -14,6 +14,8 @@ $admin_emails_lang='';
 
 $log_errors=E_ALL;//set to E_ERROR, E_ALL, E_ERROR|E_WARNING, etc. set to false/0 to disable error logging
 
+$error_log_file_max_size=500*1000;//approx max size in bytes / dont set a too small or too big value / note that this is an approx value and isn't enforced strictly/precisely (e.g. about 5% bigger size can occur - see check_error_log_file_constraints.php for coding details).
+
 $config_cache_validation_interval=15*60;//in seconds / a value of 0 means always validate the cache (against original config files by comparing their last modification times with that of the config cache)
 //notice that the value of this config var is ignored when in debug mode ($debug_mode=true) / in debug mode the config cache is always validated (validation happens once per each request)
 //note that the config cache is re-validated anyway if a client's session is destroyed (e.g. by closing the browser), because config cache's last validation info are stored in session. maybe I should change this at another opportunity.
