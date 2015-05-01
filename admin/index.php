@@ -89,7 +89,7 @@ if(config::get('admin_error_log_access')) {
 	else if(!is_readable($error_log_file)) $new='?';
 	else {
 		$logs=file_get_contents($error_log_file);
-		if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
+		if(substr($logs, 0, strlen(ERROR_LOG_HEADER_STR))===ERROR_LOG_HEADER_STR) $logs=substr($logs, strlen(ERROR_LOG_HEADER_STR));
 		if($logs===false) $logs='';
 		if($logs==='') $new='0';
 		else {

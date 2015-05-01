@@ -34,7 +34,7 @@ if($log_errors) {
 	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
 }
 
-define('ERROR_LOG_CLEAR_STR', '<?php exit; ?>');
+define('ERROR_LOG_HEADER_STR', '<?php exit; ?>');
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 

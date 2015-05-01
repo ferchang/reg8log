@@ -17,13 +17,13 @@ if(isset($_POST['clear'])) {
 	if(!config::get('debug_mode') and config::get('admin_error_log_access')!==2) exit('Clear access to error log is not enabled in config file!');
 	require ROOT.'include/code/code_prevent_xsrf.php';
 	if(isset($not_writable)) $not_writable='Cannot clear error log file! Error log file not writable.';
-	else file_put_contents($error_log_file, ERROR_LOG_CLEAR_STR, LOCK_EX);
+	else file_put_contents($error_log_file, ERROR_LOG_HEADER_STR, LOCK_EX);
 }
 
 if(!is_readable($error_log_file)) $not_readable=true;
 else {
 	$logs=file_get_contents($error_log_file);
-	if(substr($logs, 0, strlen(ERROR_LOG_CLEAR_STR))===ERROR_LOG_CLEAR_STR) $logs=substr($logs, strlen(ERROR_LOG_CLEAR_STR));
+	if(substr($logs, 0, strlen(ERROR_LOG_HEADER_STR))===ERROR_LOG_HEADER_STR) $logs=substr($logs, strlen(ERROR_LOG_HEADER_STR));
 	if($logs===false) $logs='';
 }//same code in admin/index.php
 
