@@ -20,6 +20,8 @@ else ini_set('display_errors', '0');
 
 //---------------------------------
 
+define('ERROR_LOG_HEADER_STR', '<?php exit; ?>');
+
 if($log_errors) {
 	if(!$debug_mode) error_reporting($log_errors);
 	//if debug_mode is on, error reporting level shouldn't be changed (it is set to E_ALL)
@@ -32,9 +34,8 @@ if($log_errors) {
 		if(!is_writable($error_log_file)) trigger_error('reg8log: Error log file not writable!', E_USER_WARNING);
 	}
 	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
+	else file_put_contents($error_log_file, ERROR_LOG_HEADER_STR, LOCK_EX);
 }
-
-define('ERROR_LOG_HEADER_STR', '<?php exit; ?>');
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
 
