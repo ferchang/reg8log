@@ -89,7 +89,10 @@ if(isset($err_msgs)) {
 }
 ?>
 <tr>
-<td  <?php echo CELL_ALIGN; ?> ><?php echo func::tr('Password'); ?>:</td><td><input type="password" name="password" size="30" style="width: 100%"  autocomplete="off" /></td>
+<td  <?php echo CELL_ALIGN; ?> ><?php echo func::tr('Password'); ?>:</td><td><input type="password" name="password" size="30" style="width: 100%"  autocomplete="off" />
+<input type="text" name="dummy" style="display: none" disabled />
+<!-- i added this dummy input because, otherwise, IE8 doesn't execute submit button's onclick when the form is submitted with the Enter key -->
+</td>
 </tr>
 <?php
 if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
@@ -100,7 +103,7 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/pag
 <tr>
 <td></td>
 <td align="center"><input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form()" />
-<input type="submit" value="<?php echo func::tr('Submit'); ?>" onClick="return validate()" /></td>
+<input type="submit" value="<?php echo func::tr('Submit'); ?>" onClick="return validate()" ></td>
 </tr>
 </table>
 </form>
