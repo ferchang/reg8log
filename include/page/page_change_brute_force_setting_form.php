@@ -177,7 +177,10 @@ else if($block_disable==2) switch($block_config) {
 else if($block_disable==3) echo '<span style="background: red; padding: 5px;">', func::tr('No protection'), '</span>';
 ?>
 </tr>
-<tr><td align="" style="" colspan="3"><b><?php echo func::tr('Enter your account password'); ?>:</b> <input type="password" name="password"></td></tr>
+<tr><td align="" style="" colspan="3"><b><?php echo func::tr('Enter your account password'); ?>:</b> <input type="password" name="password">
+<input type="text" name="dummy" style="display: none" disabled />
+<!-- i added this dummy input because, otherwise, IE8 doesn't execute submit button's onclick when the form is submitted with the Enter key -->
+</td></tr>
 <?php
 if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
 ?>

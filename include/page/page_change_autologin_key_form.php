@@ -93,7 +93,10 @@ require ROOT.'include/code/code_generate_form_id.php';
 <tr><td align="" style="" colspan="3" width="200">
 <b><?php echo func::tr('change autologin key comments'); ?></b><br><br>
 </td></tr>
-<tr><td align="" style="" colspan="3"><b><?php echo func::tr('Enter your account password'); ?>:</b> <input type="password" name="password"></td></tr>
+<tr><td align="" style="" colspan="3"><b><?php echo func::tr('Enter your account password'); ?>:</b> <input type="password" name="password">
+<input type="text" name="dummy" style="display: none" disabled />
+<!-- i added this dummy input because, otherwise, IE8 doesn't execute submit button's onclick when the form is submitted with the Enter key -->
+</td></tr>
 <?php
 if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/page/page_captcha_form.php';
 ?>
