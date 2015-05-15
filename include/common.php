@@ -26,17 +26,17 @@ if($log_errors) {
 	if(!$debug_mode) error_reporting($log_errors);
 	//if debug_mode is on, error reporting level shouldn't be changed (it is set to E_ALL)
 	ini_set('log_errors', 1);
-	$error_log_file=ROOT.'file_store/error_log.php';//this file path is used in code_check_file_permissions.php too!
-	ini_set('error_log', $error_log_file);
+	define('ERROR_LOG_FILE', ROOT.'file_store/error_log.php');
+	ini_set('error_log', ERROR_LOG_FILE);
 	//ini_set('ignore_repeated_errors', 1);
 	//ini_set('ignore_repeated_source', 1);
-	if(file_exists($error_log_file)) {
-		if(!is_writable($error_log_file)) trigger_error('reg8log: Error log file not writable!', E_USER_WARNING);
-		else if(!is_readable($error_log_file)) trigger_error('reg8log: Error log file not readable!', E_USER_WARNING);
+	if(file_exists(ERROR_LOG_FILE)) {
+		if(!is_writable(ERROR_LOG_FILE)) trigger_error('reg8log: Error log file not writable!', E_USER_WARNING);
+		else if(!is_readable(ERROR_LOG_FILE)) trigger_error('reg8log: Error log file not readable!', E_USER_WARNING);
 		else if(mt_rand(1, 10)===1) require ROOT.'include/code/check_error_log_file_constraints.php';
 	}
-	else if(!is_writable(dirname($error_log_file))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
-	else file_put_contents($error_log_file, ERROR_LOG_HEADER_STR, LOCK_EX);
+	else if(!is_writable(dirname(ERROR_LOG_FILE))) trigger_error('reg8log: Error log directory not writable!', E_USER_WARNING);
+	else file_put_contents(ERROR_LOG_FILE, ERROR_LOG_HEADER_STR, LOCK_EX);
 }
 
 require ROOT.'include/code/code_encoding8anticache_headers.php';
@@ -89,6 +89,8 @@ require ROOT.'include/config/config_crypto.php';
 require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
+
+db_wrapper::$db_obj=$reg8log_db;
 
 config::set('debug_mode', $debug_mode);//note: this config:set command must come before all other config:set commands, because config vars may be re-read from original config files after config::set('debug_mode', $debug_mode).
 

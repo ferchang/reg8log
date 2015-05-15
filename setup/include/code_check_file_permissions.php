@@ -8,12 +8,10 @@ $warning_tr=func::tr('Warning');
 
 //--------------------
 
-$error_log_file=ROOT.'file_store/error_log.php';
-
-if(file_exists($error_log_file)) {
-		if(!is_writable($error_log_file)) $tmp10[]="$warning_tr: ".func::tr('Error log file not writable!');
+if(file_exists(ERROR_LOG_FILE)) {
+		if(!is_writable(ERROR_LOG_FILE)) $tmp10[]="$warning_tr: ".func::tr('Error log file not writable!');
 }
-else if(!is_writable(dirname($error_log_file))) $tmp10[]="$warning_tr: ".func::tr('Error log directory not writable!');
+else if(!is_writable(dirname(ERROR_LOG_FILE))) $tmp10[]="$warning_tr: ".func::tr('Error log directory not writable!');
 
 //--------------------
 

@@ -11,6 +11,7 @@ return array(
 	'config'=>'class_config_loader.php',
 	'hm_cookie'=>'class_cookie.php',
 	'reg8log_db'=>'class_db.php',
+	'db_wrapper'=>'class_db_wrapper.php',
 	'func'=>'class_function_loader.php',
 	'loader_base'=>'class_loader_base.php',
 	'hm_user'=>'class_user.php',

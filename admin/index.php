@@ -83,12 +83,10 @@ if(config::get('admin_error_log_access')) {
 	}
 	echo '>', func::tr('Error log'), '</a>';
 
-	$error_log_file=ROOT.'file_store/error_log.php';
-
-	if(!is_writable($error_log_file)) $new='!';
-	else if(!is_readable($error_log_file)) $new='?';
+	if(!is_writable(ERROR_LOG_FILE)) $new='!';
+	else if(!is_readable(ERROR_LOG_FILE)) $new='?';
 	else {
-		$logs=file_get_contents($error_log_file);
+		$logs=file_get_contents(ERROR_LOG_FILE);
 		if(substr($logs, 0, strlen(ERROR_LOG_HEADER_STR))===ERROR_LOG_HEADER_STR) $logs=substr($logs, strlen(ERROR_LOG_HEADER_STR));
 		if($logs===false) $logs='';
 		if($logs==='') $new='0';

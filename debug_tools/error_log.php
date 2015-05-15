@@ -9,20 +9,18 @@ if(!config::get('debug_mode')) {
 	else exit('Access to error log is not enabled in config file!');
 }
 
-$error_log_file=ROOT.'file_store/error_log.php';
-
-if(!is_writable($error_log_file)) $not_writable='Error log file not writable!';
+if(!is_writable(ERROR_LOG_FILE)) $not_writable='Error log file not writable!';
 
 if(isset($_POST['clear'])) {
 	if(!config::get('debug_mode') and config::get('admin_error_log_access')!==2) exit('Clear access to error log is not enabled in config file!');
 	require ROOT.'include/code/code_prevent_xsrf.php';
 	if(isset($not_writable)) $not_writable='Cannot clear error log file! Error log file not writable.';
-	else file_put_contents($error_log_file, ERROR_LOG_HEADER_STR, LOCK_EX);
+	else file_put_contents(ERROR_LOG_FILE, ERROR_LOG_HEADER_STR, LOCK_EX);
 }
 
-if(!is_readable($error_log_file)) $not_readable=true;
+if(!is_readable(ERROR_LOG_FILE)) $not_readable=true;
 else {
-	$logs=file_get_contents($error_log_file);
+	$logs=file_get_contents(ERROR_LOG_FILE);
 	if(substr($logs, 0, strlen(ERROR_LOG_HEADER_STR))===ERROR_LOG_HEADER_STR) $logs=substr($logs, strlen(ERROR_LOG_HEADER_STR));
 	if($logs===false) $logs='';
 }//same code in admin/index.php

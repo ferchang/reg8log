@@ -60,7 +60,7 @@ function hash_password() {
 //----------------------
 
 function validate() {//client side validator
-	
+
 	clear_cap(true);
 	
 	msgs=new Array();
