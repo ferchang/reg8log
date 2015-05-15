@@ -232,7 +232,7 @@ while($rec=$reg8log_db->fetch_row()) {
 		if($rec['email_verification_key']) echo '<td style="color: red" title="', func::tr('user needs email verification msg'), '">', func::tr('No'), '</td>';
 		else echo '<td style="color: yellow" title="', func::tr('Does not need email verification'), '">', func::tr('No'), '</td>';
 	}
-	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
 	if(config::get('can_notify_user_about_admin_action')) echo '<td>', ($rec['notify_user'])? func::tr('Yes'):func::tr('No'), '</td>';
 	echo '<td><input type="radio" name="', $rec['auto'], '" id="appr', $row, '" value="appr" onclick="green(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]==='appr')? ' checked ' : ''), '></td>';
 	echo '<td><input type="radio" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="red(', $i,')" ', ((isset($_POST[$rec['auto']]) and $_POST[$rec['auto']]==='del')? ' checked ' : ''), '></td>';

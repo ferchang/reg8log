@@ -11,7 +11,7 @@ $autologin_key=func::random_string(43);
 $password_hash=$reg8log_db->quote_smart(bcrypt::hash($_POST['password']));
 $username=$reg8log_db->quote_smart($_POST['username']);
 $email=$reg8log_db->quote_smart($_POST['email']);
-$timestamp=$req_time;
+$timestamp=REQUEST_TIME;
 
 $query="insert into `accounts` (`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`) values ('$rid', $username, $password_hash, $email, 'n', '$autologin_key', $timestamp)";
 

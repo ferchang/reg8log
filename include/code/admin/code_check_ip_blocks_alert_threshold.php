@@ -18,7 +18,7 @@ if(strpos(config::get('ip_blocks_alert_threshold'), '%')===0) {
 	
 	if($new_ip_blocks<$calculated_threshold) return;
 	
-	$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-config::get('ip_blocks_alert_threshold_period'));
+	$query='select * from `ip_block_log` where `last_attempt`>='.(REQUEST_TIME-config::get('ip_blocks_alert_threshold_period'));
 	if($reg8log_db->result_num($query)>=$calculated_threshold)  $ip_blocks_alert_threshold_reached=true;
 	
 	return;
@@ -26,7 +26,7 @@ if(strpos(config::get('ip_blocks_alert_threshold'), '%')===0) {
 
 if($new_ip_blocks<config::get('ip_blocks_alert_threshold')) return;
 
-$query='select * from `ip_block_log` where `last_attempt`>='.($req_time-config::get('ip_blocks_alert_threshold_period'));
+$query='select * from `ip_block_log` where `last_attempt`>='.(REQUEST_TIME-config::get('ip_blocks_alert_threshold_period'));
 
 if($reg8log_db->result_num($query)>=config::get('ip_blocks_alert_threshold')) $ip_blocks_alert_threshold_reached=true;
 

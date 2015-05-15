@@ -28,7 +28,7 @@ if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no s
 
 $rec=$reg8log_db->fetch_row();
 
-$expired=$req_time-config::get('admin_confirmation_time');
+$expired=REQUEST_TIME-config::get('admin_confirmation_time');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Pending account expired msg').'.</h3>'."$home</center>");
 
@@ -39,7 +39,7 @@ if($rec['email_verified']) {
   exit;
 }
 
-$expired=$req_time-config::get('email_verification_time');
+$expired=REQUEST_TIME-config::get('email_verification_time');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of email verification time msg').'.</h3>'."$home</center>");
 

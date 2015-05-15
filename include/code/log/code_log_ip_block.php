@@ -2,17 +2,17 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-$tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.($req_time-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
+$tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.(REQUEST_TIME-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
 
 if($reg8log_db->result_num($tmp38)) {
 	$tmp38=$reg8log_db->fetch_row();
 	$ip_first_attempt=$tmp38['timestamp'];
 }
-else $ip_first_attempt=$req_time;
+else $ip_first_attempt=REQUEST_TIME;
 
 $_username=$reg8log_db->quote_smart($_POST['username']);
 
-$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, $req_time, $_username, ".config::get('ip_block_threshold').")";
+$tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, ".REQUEST_TIME.", $_username, ".config::get('ip_block_threshold').")";
 
 $reg8log_db->query($tmp29);
 

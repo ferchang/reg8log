@@ -2,7 +2,7 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if($_POST['ban_type']==='duration') $until=$req_time+$_POST['years']*(365*24*60*60)+$_POST['months']*(30*24*60*60)+$_POST['days']*(24*60*60)+$_POST['hours']*(60*60);
+if($_POST['ban_type']==='duration') $until=REQUEST_TIME+$_POST['years']*(365*24*60*60)+$_POST['months']*(30*24*60*60)+$_POST['days']*(24*60*60)+$_POST['hours']*(60*60);
 else $until=1;
 
 if(!is_numeric($until)) exit("<center><h3>Error: Duration not a number!</h3></center>");

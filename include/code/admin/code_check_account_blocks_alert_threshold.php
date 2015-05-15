@@ -18,7 +18,7 @@ if(strpos(config::get('account_blocks_alert_threshold'), '%')===0) {
 	
 	if($new_account_blocks<$calculated_threshold) return;
 	
-	$query='select * from `account_block_log` where `last_attempt`>='.($req_time-config::get('account_blocks_alert_threshold_period'));
+	$query='select * from `account_block_log` where `last_attempt`>='.(REQUEST_TIME-config::get('account_blocks_alert_threshold_period'));
 	if($reg8log_db->result_num($query)>=$calculated_threshold)  $account_blocks_alert_threshold_reached=true;
 	
 	return;
@@ -26,7 +26,7 @@ if(strpos(config::get('account_blocks_alert_threshold'), '%')===0) {
 
 if($new_account_blocks<config::get('account_blocks_alert_threshold')) return;
 
-$query='select * from `account_block_log` where `last_attempt`>='.($req_time-config::get('account_blocks_alert_threshold_period'));
+$query='select * from `account_block_log` where `last_attempt`>='.(REQUEST_TIME-config::get('account_blocks_alert_threshold_period'));
 
 if($reg8log_db->result_num($query)>=config::get('account_blocks_alert_threshold')) $account_blocks_alert_threshold_reached=true;
 

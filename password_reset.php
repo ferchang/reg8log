@@ -20,7 +20,7 @@ if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('Erro
 $rec=$reg8log_db->fetch_row();
 $_username=$rec['username'];
 
-$expired=$req_time-config::get('password_reset_period');
+$expired=REQUEST_TIME-config::get('password_reset_period');
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Error: Password reset link is expired').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 

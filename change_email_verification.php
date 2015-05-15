@@ -31,7 +31,7 @@ $rec=$reg8log_db->fetch_row();
 if(config::get('change_email_verification_time')===0) $verification_time=config::get('email_verification_time');
 else $verification_time=config::get('change_email_verification_time');
 
-$expired=$req_time-$verification_time;
+$expired=REQUEST_TIME-$verification_time;
 
 if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of email verification time msg2').'</h3>'."$home</center>");
 

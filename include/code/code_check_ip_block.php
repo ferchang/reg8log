@@ -40,7 +40,7 @@ if(config::get('ip_captcha_threshold')===0) {
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query="select count(*) as `n` from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip and `timestamp`>=".($req_time-config::get('ip_block_period'));
+$query="select count(*) as `n` from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip and `timestamp`>=".(REQUEST_TIME-config::get('ip_block_period'));
 $reg8log_db->query($query);
 $rec=$reg8log_db->fetch_row();
 $count=$rec['n'];

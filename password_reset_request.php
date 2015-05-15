@@ -27,7 +27,7 @@ if(isset($captcha_needed) and !$captcha_verified) require ROOT.'include/code/cod
 
 if(isset($err_msgs)) break;
 
-$time=$req_time;
+$time=REQUEST_TIME;
 $expired=$time-config::get('password_reset_period');
 
 $tmp23=$reg8log_db->quote_smart($_POST['email']);
@@ -60,7 +60,7 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 $username=$reg8log_db->quote_smart($rec['username']);
 $emails_sent=1;
 $key=func::random_string(22);
-$timestamp=$req_time;
+$timestamp=REQUEST_TIME;
 $email=$reg8log_db->quote_smart($email);
 
 $field_names='`record_id`, `username`, `email`, `emails_sent`, `key`, `timestamp`';

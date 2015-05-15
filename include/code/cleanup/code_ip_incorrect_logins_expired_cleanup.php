@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(strtolower($_POST['username'])==='admin') {
 
-	$expired=$req_time-config::get('admin_ip_block_period');
+	$expired=REQUEST_TIME-config::get('admin_ip_block_period');
 
 	$query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=1";
 
@@ -21,7 +21,7 @@ if(strtolower($_POST['username'])==='admin') {
 	
 }
 
-$expired=$req_time-config::get('ip_block_period');
+$expired=REQUEST_TIME-config::get('ip_block_period');
 
 $query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=0";
 

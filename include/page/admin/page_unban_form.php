@@ -126,7 +126,7 @@ require ROOT.'include/code/code_generate_form_id.php';
 <tr align="center"><td>
 <?php
 echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '">';
-if(!$rec['banned'] or ($rec['banned']!=1 and $rec['banned']<$req_time)) echo '<h3>', sprintf(func::tr('User <span style="color: yellow">%s</span> is not banned!'), htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8')), '</h3>';
+if(!$rec['banned'] or ($rec['banned']!=1 and $rec['banned']<REQUEST_TIME)) echo '<h3>', sprintf(func::tr('User <span style="color: yellow">%s</span> is not banned!'), htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8')), '</h3>';
 else {
 echo '<table border style="margin-top: 7px">
 <tr style="background: brown; color: #fff"><th>', func::tr('Username'), '</th><th>', func::tr('Uid'), '</th><th>', func::tr('Email'), '</th><th>', func::tr('Gender'), '</th><th>', func::tr('Member for'), '</th></tr><tr style="background: #ccc" align="center">';
@@ -139,12 +139,12 @@ else if($rec['gender']==='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
 
-echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp']), '</td>';
+echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp']), '</td>';
 echo '</tr></table><br></td></tr><tr><td >';
 if($ban_reason!=='') echo func::tr('Ban reason'), ': <span style="color: #8fd;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span><br>';
 if($ban_until!=1) {
 	
-	echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::duration2friendly_str($ban_until-$req_time, 2), '</span> ', func::tr(' later'), '.';
+	echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::duration2friendly_str($ban_until-REQUEST_TIME, 2), '</span> ', func::tr(' later'), '.';
 }
 else echo func::tr('Ban until'), ':  <span style="color: #8fd;">', func::tr('unlimited'), '.</span>';
 echo '<br><br></td></tr>';

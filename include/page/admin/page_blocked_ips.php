@@ -234,8 +234,8 @@ while($rec=$reg8log_db->fetch_row()) {
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
 	echo '<td>', func::inet_ntop2($rec['ip']), '</td>';
-	echo '<td>', func::duration2friendly_str($req_time-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
-	echo '<td>', func::duration2friendly_str($req_time-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['first_attempt'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['last_attempt'], 2), func::tr(' ago'), '</td>';
 	echo '<td>', htmlspecialchars($rec['last_username'], ENT_QUOTES, 'UTF-8'), '</td>';
 	echo '<td>';
 	if($rec['unblocked']) {
@@ -245,16 +245,16 @@ while($rec=$reg8log_db->fetch_row()) {
 	else if(
 	
 		(
-		strtolower($rec['last_username'])!=='admin' and $req_time-$rec['first_attempt']<config::get('ip_block_period') and $rec['block_threshold']>=config::get('ip_block_threshold')
+		strtolower($rec['last_username'])!=='admin' and REQUEST_TIME-$rec['first_attempt']<config::get('ip_block_period') and $rec['block_threshold']>=config::get('ip_block_threshold')
 		)
 		or
 		(
-		strtolower($rec['last_username'])==='admin' and $req_time-$rec['first_attempt']<config::get('admin_ip_block_period') and $rec['block_threshold']>=config::get('admin_ip_block_threshold')
+		strtolower($rec['last_username'])==='admin' and REQUEST_TIME-$rec['first_attempt']<config::get('admin_ip_block_period') and $rec['block_threshold']>=config::get('admin_ip_block_threshold')
 		)
 
 		) {
 		echo '<span style="color: red" ';
-		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str(config::get('ip_block_period')-($req_time-$rec['first_attempt']), 2), func::tr(' later');
+		echo 'title="', func::tr('Block lift'), ': ', func::duration2friendly_str(config::get('ip_block_period')-(REQUEST_TIME-$rec['first_attempt']), 2), func::tr(' later');
 		echo '">', func::tr('Blocked'), '</span>';
 		echo '<td><input type="checkbox" name="un', $rec['auto'], '" id="unblock', $row, '" value="unblock" onclick="unblock_click(', $i, ', ', 'this.checked)" ', ((isset($_POST['un'.$rec['auto']]))? ' checked ' : ''), '></td>';
 		echo '<input type="hidden" name="ip', $rec['auto'], '" value="', bin2hex($rec['ip']), '">';

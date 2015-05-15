@@ -41,7 +41,7 @@ if(!empty($_POST)) {
 		
 		$email=func::random_string(8).'@site.com';
 
-		if(!$admin_confirmed or $email_verification_key!=='') $query="insert into pending_accounts values(null, '$uid', '$username', 'dummy account', '$email', '', 0, '$email_verification_key', 0, $admin_confirmed, $req_time, 0, '')";
+		if(!$admin_confirmed or $email_verification_key!=='') $query="insert into pending_accounts values(null, '$uid', '$username', 'dummy account', '$email', '', 0, '$email_verification_key', 0, $admin_confirmed, ".REQUEST_TIME.", 0, '')";
 		else $query="insert into accounts values(null, '$uid', '$username', 'dummy account', '$email', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
 		
 		$reg8log_db->query($query);

@@ -68,8 +68,8 @@ if(isset($err_msgs)) break;
 
 $query1='select * from `accounts` where `username`='.$_username.' limit 1';
 
-$expired1=$req_time-config::get('email_verification_time');
-$expired2=$req_time-config::get('admin_confirmation_time');
+$expired1=REQUEST_TIME-config::get('email_verification_time');
+$expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 $query2='select * from `pending_accounts` where `username`='.$_username." and (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.') limit 1';
 

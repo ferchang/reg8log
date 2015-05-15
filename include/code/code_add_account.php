@@ -12,7 +12,7 @@ if($_POST['password']!=='')
 $_fields['password']['value']=bcrypt::hash($_POST['password']);
 
 $field_names='`uid`, `autologin_key`, `timestamp`, ';
-$field_values="'$rid', '$autologin_key', ".$req_time.', ';
+$field_values="'$rid', '$autologin_key', ".REQUEST_TIME.', ';
 $i=0;
 
 unset($_fields['captcha']);

@@ -8,7 +8,7 @@ if(config::get('ch_pswd_max_threshold')===-1 and config::get('ch_pswd_captcha_th
 
 if($try_type==='email') {
 	if(config::get('ch_pswd_captcha_threshold')===-1) return;
-	$query="update `accounts` set `last_ch_email_try`=".$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
+	$query="update `accounts` set `last_ch_email_try`=".REQUEST_TIME.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	return;
 }
@@ -28,8 +28,8 @@ if(!isset($trec)) {
 
 //--------------------------------
 
-if($req_time-$trec['last_ch_pswd_try']>config::get('account_block_period')) {
-	$query='update `accounts` set `ch_pswd_tries`=1, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
+if(REQUEST_TIME-$trec['last_ch_pswd_try']>config::get('account_block_period')) {
+	$query='update `accounts` set `ch_pswd_tries`=1, `last_ch_pswd_try`='.REQUEST_TIME.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	if(config::get('ch_pswd_captcha_threshold')!==-1 and config::get('ch_pswd_captcha_threshold')<=1) {
 		$captcha_needed=true;
@@ -41,7 +41,7 @@ if($req_time-$trec['last_ch_pswd_try']>config::get('account_block_period')) {
 		$new_autologin_key=func::random_string(43);
 		$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
-		$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
+		$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.REQUEST_TIME.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 		$reg8log_db->query($query);
 		setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		header("Location: {$index_dir}index.php");
@@ -55,7 +55,7 @@ if($req_time-$trec['last_ch_pswd_try']>config::get('account_block_period')) {
 $ch_pswd_tries=$trec['ch_pswd_tries']+1;
 if($ch_pswd_tries>255) $ch_pswd_tries=255;
 
-$query='update `accounts` set `ch_pswd_tries`='.$ch_pswd_tries.', `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
+$query='update `accounts` set `ch_pswd_tries`='.$ch_pswd_tries.', `last_ch_pswd_try`='.REQUEST_TIME.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 $reg8log_db->query($query);
 
 if(config::get('ch_pswd_captcha_threshold')!==-1 and config::get('ch_pswd_captcha_threshold')<=$ch_pswd_tries) {
@@ -69,7 +69,7 @@ if(config::get('ch_pswd_max_threshold')!==-1 and config::get('ch_pswd_max_thresh
 	$new_autologin_key=func::random_string(43);
 	$query="update `accounts` set `autologin_key`='".$new_autologin_key."' where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
-	$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.$req_time.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
+	$query='update `accounts` set `ch_pswd_tries`=0, `last_ch_pswd_try`='.REQUEST_TIME.' where `username`='.$reg8log_db->quote_smart($identified_user).' limit 1';
 	$reg8log_db->query($query);
 	setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 	header("Location: {$index_dir}index.php");

@@ -27,7 +27,7 @@ echo '<h3 style="color: red">', func::tr('Your account has been banned by Admin!
 if($ban_reason!=='') echo '<h4>', func::tr('Ban reason'), ': <span style="color: #84f;">', htmlspecialchars($ban_reason, ENT_QUOTES, 'UTF-8'), '</span></h4>';
 if($ban_until!=1) {
 	
-	echo '<h4>', func::tr('Ban will be lifted at'),':  <span style="color: #84f;">', func::duration2friendly_str($ban_until-$req_time, 2), '</span>', func::tr(' later'), '.</h4>';
+	echo '<h4>', func::tr('Ban will be lifted at'),':  <span style="color: #84f;">', func::duration2friendly_str($ban_until-REQUEST_TIME, 2), '</span>', func::tr(' later'), '.</h4>';
 }
 else echo '<h4>', func::tr('Ban will be lifted at'), ':  <span style="color: #84f;">', func::tr('Unlimited'), '.</span></h4>';
 echo '<br>';

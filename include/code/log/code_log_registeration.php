@@ -14,7 +14,7 @@ if(config::get('registeration_alert_type')===1) {
 		$query="update `admin_registeration_alerts` set `new_registerations`=`new_registerations`+1 where `for`='email' limit 1";
 		$reg8log_db->query($query);
 		if(config::get('registerations_alert_threshold_period')) {
-			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
+			$query="insert into `registerations_history` (`timestamp`) values(".REQUEST_TIME.")";
 			$reg8log_db->query($query);
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';
@@ -27,7 +27,7 @@ if(config::get('registeration_alert_type')===1) {
 		$query="update `admin_registeration_alerts` set `new_registerations`=`new_registerations`+1 limit 2";
 		$reg8log_db->query($query);
 		if(config::get('registerations_alert_threshold_period')) {
-			$query="insert into `registerations_history` (`timestamp`) values($req_time)";
+			$query="insert into `registerations_history` (`timestamp`) values(".REQUEST_TIME.")";
 			$reg8log_db->query($query);
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_registerations_history_expired_cleanup.php';
 			if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_registerations_history_size_cleanup.php';

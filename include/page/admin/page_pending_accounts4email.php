@@ -230,7 +230,7 @@ while($rec=$reg8log_db->fetch_row()) {
 	echo '<td>', $rec['emails_sent'], '</td>';
 	if($rec['admin_confirmed']) echo '<td style="color: green">', func::tr('No'), '</td>';
 	else echo '<td style="color: red">', func::tr('Yes'), '</td>';
-	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
 	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)"', ((isset($_POST[$rec['auto']]))? ' checked ' : ''),'"></td>';
 	echo '</tr>';
 	if(isset($_POST[$rec['auto']])) $checkeds[]=$i;

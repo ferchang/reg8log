@@ -52,13 +52,13 @@ else $val=$values;
 
 switch("$age") {
 	case 'permanent':
-		$expire=$GLOBALS['req_time']+$this->long_age;
+		$expire=REQUEST_TIME+$this->long_age;
 	break;
 	case 'session':
 		$expire=0;
 	break;
 	default:
-		$expire=(($is_abs_time)? $age : (($age)? $age+$GLOBALS['req_time'] : 0));
+		$expire=(($is_abs_time)? $age : (($age)? $age+REQUEST_TIME : 0));
 	break;
 }
 

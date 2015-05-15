@@ -38,8 +38,8 @@ if(isset($_POST['admin_action']) or isset($_POST['captcha'])) {
 
 }
 
-$expired1=$req_time-config::get('email_verification_time');
-$expired2=$req_time-config::get('admin_confirmation_time');
+$expired1=REQUEST_TIME-config::get('email_verification_time');
+$expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 $query="select * from `pending_accounts` where (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.')';
 

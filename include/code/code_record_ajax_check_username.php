@@ -6,7 +6,7 @@ if(!config::get('max_ajax_check_usernames')) return;
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.$req_time.')';
+$query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.REQUEST_TIME.')';
 
 $reg8log_db->query($query);
 

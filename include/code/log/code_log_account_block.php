@@ -6,7 +6,7 @@ if(!config::get('log_non_existent_accounts_blocks') and !$username_exists) retur
 
 $ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
-$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, $req_time, $ip, ".config::get('account_block_threshold').")";
+$query='insert into `account_block_log` (`ext_auto`, `username`, `username_exists`, `first_attempt`, `last_attempt`, `last_ip`, `block_threshold`) values ('."$insert_id, $_username, $username_exists, $first_attempt, ".REQUEST_TIME.", $ip, ".config::get('account_block_threshold').")";
 
 $reg8log_db->query($query);
 

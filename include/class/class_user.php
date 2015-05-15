@@ -41,8 +41,8 @@ function identify($username=null, $password=null)
 
 		$query1='select * from `accounts` where `username`='.$tmp7.' limit 1';
 
-		$expired1=$GLOBALS['req_time']-config::get('email_verification_time');
-		$expired2=$GLOBALS['req_time']-config::get('admin_confirmation_time');
+		$expired1=REQUEST_TIME-config::get('email_verification_time');
+		$expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 		$query2='select * from `pending_accounts` where `username`='.$tmp7." and (`email_verification_key`='' or `email_verified`=1 or `timestamp`>". $expired1.') and (`admin_confirmed`=1 or `timestamp`>'.$expired2.') limit 1';
 
@@ -152,7 +152,7 @@ function identify($username=null, $password=null)
 					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===2 and $tmp54['username']!=='Admin') break;
 					if(config::get('dont_enforce_autoloign_age_sever_side_when_change_autologin_key_upon_login_is_zero')===1 and $tmp54['username']==='Admin') break;
 				}
-				if($tmp54['autologin_expiration'] and $tmp54['autologin_expiration']<$GLOBALS['req_time']) $flag=false;
+				if($tmp54['autologin_expiration'] and $tmp54['autologin_expiration']<REQUEST_TIME) $flag=false;
 			} while(false);
 			
 		}
@@ -242,7 +242,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 		else $cookie->values[]=$this->user_info[$value];
 	}
 
-	$age=(($is_abs_time)? $age : (($age)? $age+$GLOBALS['req_time'] : 0));
+	$age=(($is_abs_time)? $age : (($age)? $age+REQUEST_TIME : 0));
 	
 	$cookie->values[]=$age;
 	
@@ -252,7 +252,7 @@ function save_identity($age, $is_abs_time=false, $set_autologin_expiration=false
 	//----------------
 	if($set_autologin_expiration) {
 		if(!$age) {
-			if(config::get('max_session_autologin_age')) $autologin_expiration=$GLOBALS['req_time']+config::get('max_session_autologin_age');
+			if(config::get('max_session_autologin_age')) $autologin_expiration=REQUEST_TIME+config::get('max_session_autologin_age');
 			else $autologin_expiration=0;
 		}
 		else $autologin_expiration=$age;

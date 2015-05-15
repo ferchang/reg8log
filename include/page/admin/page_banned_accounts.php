@@ -142,10 +142,10 @@ while($rec=$reg8log_db->fetch_row()) {
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
-	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), '</td>';
 	echo '<td>';
 	if($rec['banned']==1) echo func::tr('Unlimited');
-	else echo func::duration2friendly_str($rec['banned']-$req_time, 2), func::tr(' later');
+	else echo func::duration2friendly_str($rec['banned']-REQUEST_TIME, 2), func::tr(' later');
 	echo '</td>';
 	if(is_null($rec['reason'])) echo '<td title="', func::tr('No corresponding ban_info record found'), '"><span style="color: yellow">?</span>';
 	else if($rec['reason']!=='') echo '<td>', $rec['reason'];

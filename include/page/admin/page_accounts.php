@@ -262,21 +262,21 @@ while($rec=$reg8log_db->fetch_row()) {
 	else echo func::tr('Female');
 	echo '</td>';
 	echo '<td>', $rec['email'], '</td>';
-	echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
+	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
 	if(config::get('log_last_login')) {
-		if($rec['last_login']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_login'], 2), func::tr(' ago'), '</td>';
+		if($rec['last_login']) echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['last_login'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
 	if(config::get('log_last_activity')) {
-		if($rec['last_activity']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_activity'], 2), func::tr(' ago'), '</td>';
+		if($rec['last_activity']) echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['last_activity'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
  	if(config::get('log_last_logout')) {
-		if($rec['last_logout']) echo '<td>', func::duration2friendly_str($req_time-$rec['last_logout'], 2), func::tr(' ago'), '</td>';
+		if($rec['last_logout']) echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['last_logout'], 2), func::tr(' ago'), '</td>';
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
 
-	if($rec['banned']==1 or $rec['banned']>$req_time) echo '<td>', func::tr('Yes'), '</td>';
+	if($rec['banned']==1 or $rec['banned']>REQUEST_TIME) echo '<td>', func::tr('Yes'), '</td>';
 	else echo '<td>', func::tr('No'), '</td>';
 	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)"';
 	if(isset($_POST[$rec['auto']])) {

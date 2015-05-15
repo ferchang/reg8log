@@ -35,7 +35,7 @@ $attempts=unpack("l10", $tmp10['attempts']);
 if($matches) foreach($attempts as $key=>$value) if(in_array($value, $matches)) $attempts[$key]=0;
 
 $count=0;
-foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_period')) $count++;
+foreach($attempts as $value) if((REQUEST_TIME-$value)<config::get('account_block_period')) $count++;
 
 if(!$count) {
 	$query="delete from `account_incorrect_logins` where `auto`=$incorrect_logins_auto limit 1";

@@ -50,8 +50,8 @@ $last_attempt=$rec['last_attempt'];
 $attempts = unpack("l10", $rec['attempts']); //it's not 110. it is L10 (lowercase L).
 
 $count=0;
-$oldest=$req_time;
-foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_period')) {
+$oldest=REQUEST_TIME;
+foreach($attempts as $value) if((REQUEST_TIME-$value)<config::get('account_block_period')) {
 	$count++;
 	if($value<$oldest) $oldest=$value;
 }
@@ -61,7 +61,7 @@ if(config::get('account_block_threshold')!==-1 and $count>=config::get('account_
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
 		$account_block=$_username;
-		$block_duration=$oldest+config::get('account_block_period')-$req_time;
+		$block_duration=$oldest+config::get('account_block_period')-REQUEST_TIME;
 		return;
 	}
 }

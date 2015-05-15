@@ -32,7 +32,7 @@ if($affected_rows===count($tmp37)) setcookie('reg8log_ip_incorrect_logins', fals
 
 if($affected_rows<1) return;
 
-$query='insert into `ip_incorrect_logins_decs` (`ip`, `account_auto`, `num_dec`, `timestamp`, `pending_account`) values '."($ip, {$user->user_info['auto']}, $affected_rows, $req_time, $is_pending_account)";
+$query='insert into `ip_incorrect_logins_decs` (`ip`, `account_auto`, `num_dec`, `timestamp`, `pending_account`) values '."($ip, {$user->user_info['auto']}, $affected_rows, ".REQUEST_TIME.", $is_pending_account)";
 
 $reg8log_db->query($query);
 

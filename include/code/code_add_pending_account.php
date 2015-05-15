@@ -36,7 +36,7 @@ else $emails_sent=0;
 if(config::get('can_notify_user_about_admin_action') and isset($_POST['notify'])) $notify_user=1;
 else $notify_user=0;
 
-$field_values.="$emails_sent, '$email_verification_key', 0, $admin_confirmed, $req_time, $notify_user, '".config::get('lang')."'";
+$field_values.="$emails_sent, '$email_verification_key', 0, $admin_confirmed, ".REQUEST_TIME.", $notify_user, '".config::get('lang')."'";
 
 $query="replace into `pending_accounts` ($field_names) values ($field_values)";
 

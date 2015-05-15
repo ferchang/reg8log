@@ -25,7 +25,7 @@ if($reg8log_db->result_num($query)) {
 		$email_verification_key=func::random_string(22);
 	}
 	else $email_verification_key=$rec['email_verification_key'];
-	if($rec['timestamp']>$req_time-$verification_time) {
+	if($rec['timestamp']>REQUEST_TIME-$verification_time) {
 		if($max_emails and $rec['emails_sent']>=$max_emails) {
 			$max_emails_reached=true;
 			return;
@@ -33,7 +33,7 @@ if($reg8log_db->result_num($query)) {
 		$timestamp=$rec['timestamp'];
 	}
 	else {
-		$timestamp=$req_time;
+		$timestamp=REQUEST_TIME;
 		$emails_sent=1;
 		
 		$email_verification_key=func::random_string(22);
@@ -55,7 +55,7 @@ $username=$reg8log_db->quote_smart($identified_user);
 $email=$reg8log_db->quote_smart($_POST['newemail']);
 $email_verification_key=func::random_string(22);
 
-$query="replace into `email_change` (`record_id`, `username`, `email`, `emails_sent`, `email_verification_key`, `timestamp`) values ('$rid', $username, $email, 1, '$email_verification_key', $req_time)";
+$query="replace into `email_change` (`record_id`, `username`, `email`, `emails_sent`, `email_verification_key`, `timestamp`) values ('$rid', $username, $email, 1, '$email_verification_key', ".REQUEST_TIME.")";
 
 $reg8log_db->query($query);
 require ROOT.'include/code/email/code_email_change_email_verification_link.php';

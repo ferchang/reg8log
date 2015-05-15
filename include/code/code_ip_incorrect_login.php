@@ -33,7 +33,7 @@ else $account_auto=0;
 
 if(!isset($is_pending_account)) $is_pending_account=0;
 
-$query='insert into `ip_incorrect_logins` (`ip`, `account_auto`, `timestamp`, `admin`, `pending_account`) values '."($ip, $account_auto, $req_time, $admin, $is_pending_account)";
+$query='insert into `ip_incorrect_logins` (`ip`, `account_auto`, `timestamp`, `admin`, `pending_account`) values '."($ip, $account_auto, ".REQUEST_TIME.", $admin, $is_pending_account)";
 
 $reg8log_db->query($query);
 

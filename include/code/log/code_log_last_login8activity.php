@@ -9,13 +9,13 @@ $query='update `accounts` set ';
 
 switch($log_activity) {
 	case 1:
-		$query.='`last_login`='.$req_time;
+		$query.='`last_login`='.REQUEST_TIME;
 	break;
 	case 2:
-		$query.='`last_activity`='.$req_time;
+		$query.='`last_activity`='.REQUEST_TIME;
 	break;
 	case 3:
-		$query.='`last_login`='.$req_time.', `last_activity`='.$req_time;
+		$query.='`last_login`='.REQUEST_TIME.', `last_activity`='.REQUEST_TIME;
 	break;
 }
 

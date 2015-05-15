@@ -18,7 +18,7 @@ do {
 
 	$tmp42=$reg8log_db->fetch_row();
 
-	if($req_time>$tmp42['last_password_check']+config::get('admin_operations_require_password')) {
+	if(REQUEST_TIME>$tmp42['last_password_check']+config::get('admin_operations_require_password')) {
 		setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		break;
 	}

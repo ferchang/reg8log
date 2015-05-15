@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $reg8log_db->query("lock tables `$table_name` write");
 
-$expired=$req_time-config::get('account_block_period');
+$expired=REQUEST_TIME-config::get('account_block_period');
 
 $query="delete from `$table_name` where `last_attempt` < $expired and `username`!='Admin'";
 

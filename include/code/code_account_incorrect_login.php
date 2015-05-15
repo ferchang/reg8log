@@ -27,17 +27,17 @@ $reg8log_db->query($query);
 $cookie_capacity=30;
 
 if(!$reg8log_db->result_num()) {
-	$attempts=$reg8log_db->quote_smart(pack('l10', $req_time, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+	$attempts=$reg8log_db->quote_smart(pack('l10', REQUEST_TIME, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 	$pos=2;
-	$field_values="$_username, $username_exists, $attempts, $pos, $req_time";
+	$field_values="$_username, $username_exists, $attempts, $pos, ".REQUEST_TIME;
 	$query="insert into `account_incorrect_logins` (`username`, `username_exists`, `attempts`, `pos`, `last_attempt`) values($field_values)";
 	$reg8log_db->query($query);
 
 	$insert_id=mysql_insert_id();
 	
-	if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+	if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.REQUEST_TIME;
 	else {
-		$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
+		$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.REQUEST_TIME;
 		$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 	}
 	setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);
@@ -48,7 +48,7 @@ if(!$reg8log_db->result_num()) {
 		if($block_disable!=2 and $block_disable!=3) {
 			$account_block=$_POST['username'];
 			$block_duration=config::get('account_block_period');
-			$first_attempt=$req_time;
+			$first_attempt=REQUEST_TIME;
 			require_once ROOT.'include/code/log/code_log_account_block.php';
 		}
 		else if(config::get('account_captcha_threshold')===1) $captcha_needed=true;
@@ -67,8 +67,8 @@ $insert_id=$rec5['auto'];
 $attempts = unpack("l10", $rec5['attempts']);
 
 $count=1; //1 for current incorrect attempt
-$oldest=$req_time;
-foreach($attempts as $value) if(($req_time-$value)<config::get('account_block_period')) {
+$oldest=REQUEST_TIME;
+foreach($attempts as $value) if((REQUEST_TIME-$value)<config::get('account_block_period')) {
 	$count++;
 	if($value<$oldest) $oldest=$value;
 }
@@ -80,7 +80,7 @@ if(config::get('account_block_threshold')!==-1 and $count>=config::get('account_
 	require_once ROOT.'include/code/code_accomodate_block_disable.php';
 	if($block_disable!=2 and $block_disable!=3) {
 		$account_block=$_POST['username'];
-		$block_duration=$oldest+config::get('account_block_period')-$req_time;
+		$block_duration=$oldest+config::get('account_block_period')-REQUEST_TIME;
 		$first_attempt=$oldest;
 		require_once ROOT.'include/code/log/code_log_account_block.php';
 	}
@@ -90,20 +90,20 @@ else if(config::get('account_captcha_threshold')!==-1 and $count>=config::get('a
 
 $pos=$rec5['pos'];
 
-$attempts[$pos]=$req_time;
+$attempts[$pos]=REQUEST_TIME;
 
 $attempts=$reg8log_db->quote_smart(pack('l10', $attempts[1], $attempts[2], $attempts[3], $attempts[4], $attempts[5], $attempts[6], $attempts[7], $attempts[8], $attempts[9], $attempts[10]));
 
 $pos++;
 if($pos>10) $pos=1;
 
-$query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, `last_attempt`=$req_time where `username`=$_username limit 1";
+$query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, `last_attempt`=".REQUEST_TIME." where `username`=$_username limit 1";
 
 $reg8log_db->query($query);
 
-if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.$req_time;
+if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.REQUEST_TIME;
 else {
-	$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.$req_time;
+	$cookie_contents=$_COOKIE['reg8log_account_incorrect_logins'].','.$insert_id.','.REQUEST_TIME;
 	$cookie_contents=implode(',', array_slice(explode(',', $cookie_contents), -2*$cookie_capacity));
 }
 setcookie('reg8log_account_incorrect_logins', $cookie_contents, 0, '/', null, HTTPS, true);

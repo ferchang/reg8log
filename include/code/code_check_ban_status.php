@@ -4,7 +4,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $tmp6=$reg8log_db->quote_smart($_username);
 
-if($req_time>=$_until and $_until!=1) {
+if(REQUEST_TIME>=$_until and $_until!=1) {
 	$query='update `accounts` set `banned`=0 where `username`='.$tmp6.' limit 1';
 	$reg8log_db->query($query);
 	$query='delete from `ban_info` where `username`='.$tmp6.' limit 1';

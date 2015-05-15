@@ -159,7 +159,7 @@ else if($rec['gender']==='m') echo func::tr('Male');
 else echo func::tr('Female');
 echo '</td>';
 
-echo '<td>', func::duration2friendly_str($req_time-$rec['timestamp']), '</td>';
+echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp']), '</td>';
 ?>
 </tr></table><br>
 </td></tr>
