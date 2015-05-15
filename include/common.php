@@ -90,8 +90,6 @@ require ROOT.'include/code/sess/code_sess_start.php';
 
 require ROOT.'include/class/class_class_loader.php';
 
-db_wrapper::$db_obj=$reg8log_db;
-
 config::set('debug_mode', $debug_mode);//note: this config:set command must come before all other config:set commands, because config vars may be re-read from original config files after config::set('debug_mode', $debug_mode).
 
 config::set('lang', $lang);
@@ -107,15 +105,9 @@ if(!$client_sess_key) {
 
 //---------- antixsrf_token ------------>
 
-if(!isset($_SESSION['reg8log']['antixsrf_token4post'])) {
-	$antixsrf_token=func::random_string(22);
-	$_SESSION['reg8log']['antixsrf_token4post']=$antixsrf_token;
-}
+if(!isset($_SESSION['reg8log']['antixsrf_token4post'])) $_SESSION['reg8log']['antixsrf_token4post']=func::random_string(22);
 
-if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) {
-	$antixsrf_token=func::random_string(22);
-	$_SESSION['reg8log']['antixsrf_token4get']=$antixsrf_token;
-}
+if(!isset($_SESSION['reg8log']['antixsrf_token4get'])) $_SESSION['reg8log']['antixsrf_token4get']=func::random_string(22);
 
 if(!isset($_COOKIE['reg8log_antixsrf_token3'])) {//we use a third token stored client side for increased security
 	$antixsrf_token=func::random_string(22);
