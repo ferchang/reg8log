@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `pending_accounts` (
   `auto` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `record_id` char(8) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `username` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `password_hash` varbinary(51) NOT NULL,
+  `password_hash` char(60) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
   `email` varchar(60) CHARACTER SET ascii NOT NULL,
   `gender` char(1) CHARACTER SET ascii NOT NULL,
   `emails_sent` tinyint(4) unsigned NOT NULL,
