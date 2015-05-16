@@ -8,20 +8,17 @@ function duration2friendly_str($t, $c=2, $abb=false) {
 
 	$y=$mth=$d=$h=$m=$s=0;
 
-	do {
+	$y=floor($t/(365*24*60*60));
+	if($y) $t=$t%(365*24*60*60);
+	$mth=floor($t/(30*24*60*60));
+	if($mth) $t=$t%(30*24*60*60);
+	$d=floor($t/(24*60*60));
+	if($d) $t=$t%(24*60*60);
+	$h=floor($t/(60*60));
+	if($h) $t=$t%(60*60);
+	$m=floor($t/60);
+	$s=$t%60;
 
-		$y=floor($t/(365*24*60*60));
-		if($y) $t=$t%(365*24*60*60);
-		$mth=floor($t/(30*24*60*60));
-		if($mth) $t=$t%(30*24*60*60);
-		$d=floor($t/(24*60*60));
-		if($d) $t=$t%(24*60*60);
-		$h=floor($t/(60*60));
-		if($h) $t=$t%(60*60);
-		$m=floor($t/60);
-		$s=$t%60;
-
-	} while(false);
 
 //---------------------------
 
@@ -61,22 +58,22 @@ function duration2friendly_str($t, $c=2, $abb=false) {
 //---------------------------
 
 do {
-	if($mth===12) {
+	if($mth==12) {
 		$y++;
 		$mth=0;
 		break;
 	}
-	if($d===30) {
+	if($d==30) {
 		$mth++;
 		$d=0;
 		break;
 	}
-	if($h===24) {
+	if($h==24) {
 		$d++;
 		$h=0;
 		break;
 	}
-	if($m===60) {
+	if($m==60) {
 		$h++;
 		$m=0;
 		break;
