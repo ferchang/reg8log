@@ -72,7 +72,7 @@ do {//2
 
 		require ROOT.'include/code/admin/code_ban_user.php';
 		
-		exit;	
+		exit;
 
 	}
 	

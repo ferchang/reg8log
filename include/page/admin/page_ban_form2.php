@@ -201,6 +201,8 @@ if(isset($captcha_needed) and !$captcha_verified) {
 <?php
 if(isset($password_check_needed)) echo '<br>';
 ?>
+<input type="text" name="dummy" style="display: none" disabled />
+<!-- i added this dummy input because, otherwise, IE8 doesn't execute submit button's onclick when the form is submitted with the Enter key -->
 <input id=hid type="submit" name=ban onClick="return validate()" />
 <input type="submit" value="<?php echo func::tr('Cancel'); ?>" name="cancel" />
 <input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();" />

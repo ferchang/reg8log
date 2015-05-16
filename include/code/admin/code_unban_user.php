@@ -17,7 +17,7 @@ $GLOBALS['reg8log_db']->query($query);
 
 $GLOBALS['reg8log_db']->query("select release_lock($lock_name)");
 
-$success_msg='<h3>'.func::tr('User').' <span style="color: orange">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> '.func::tr('unbanned successfully.').'</h3>';
+$success_msg='<h3><span style="background: #4a7; padding: 5px; border: medium solid #88d">'.func::tr('User').' <span style="color: yellow">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> '.func::tr('unbanned successfully.').'</span></h3>';
 $no_specialchars=true;
 $additional_link=array(func::tr('Admin operations'), 'index.php');
 require ROOT.'include/page/page_success.php';
