@@ -14,9 +14,9 @@ do {
 
 	$query='select * from `admin` limit 1';
 
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 
-	$tmp42=$reg8log_db->fetch_row();
+	$tmp42=$GLOBALS['reg8log_db']->fetch_row();
 
 	if(REQUEST_TIME>$tmp42['last_password_check']+config::get('admin_operations_require_password')) {
 		setcookie('reg8log_password_check_key', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);

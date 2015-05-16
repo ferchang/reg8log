@@ -17,7 +17,7 @@ $_fields['password_hash']=$_fields['password'];
 unset($_fields['password']);
 foreach($_fields as $field_name=>$specs) {
   $field_names.="`$field_name`";
-  $field_values.=$reg8log_db->quote_smart($specs['value']);
+  $field_values.=$GLOBALS['reg8log_db']->quote_smart($specs['value']);
   $field_names.=', ';
   $field_values.=', ';
 }
@@ -40,7 +40,7 @@ $field_values.="$emails_sent, '$email_verification_key', 0, $admin_confirmed, ".
 
 $query="replace into `pending_accounts` ($field_names) values ($field_values)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 unset($_SESSION['reg8log']['captcha_verified'], $_SESSION['reg8log']['passed']);
 
@@ -57,7 +57,7 @@ else if(config::get('admin_confirmation_needed')) {
 $no_specialchars=true;
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) {
-	$reg8log_db->query("select release_lock('$lock_name')");
+	$GLOBALS['reg8log_db']->query("select release_lock('$lock_name')");
 	require ROOT.'include/code/cleanup/code_pending_accounts_expired_cleanup.php';
 }
 

@@ -17,7 +17,7 @@ foreach($del as $auto) {
 
 $query='delete from `pending_accounts` where `auto` in ('.$autos.')';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if(isset($emails)) for($j=0; $j<count($emails); $j++) {
 	$_email=$emails[$j];

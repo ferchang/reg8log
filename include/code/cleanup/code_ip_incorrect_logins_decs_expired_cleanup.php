@@ -4,6 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query='delete from `ip_incorrect_logins_decs` where `timestamp`<'.(REQUEST_TIME-config::get('ip_block_period'));
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

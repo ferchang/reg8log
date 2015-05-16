@@ -56,25 +56,25 @@ require ROOT.'setup/include/code_add_admin_account.php';
 echo func::tr('Account <span style="color: green">Admin</span> created'), '.<br>';
 
 $query="insert into `admin_block_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('visit', 0, 0)";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert into `admin_block_alerts` (`for`, `new_account_blocks`, `new_ip_blocks`) values ('email', 0, 0)";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('visit', 0)";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert into `admin_registeration_alerts` (`for`, `new_registerations`) values ('email', 0)";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert into `admin` (`last_password_check`, `password_check_key`) values (0, '')";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert into `error_log_hash` (`last_hash`) values ('')";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query="insert ignore into `dummy` (`i`) values (1)";
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 require ROOT.'setup/include/code_check_file_permissions.php';
 

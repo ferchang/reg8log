@@ -4,9 +4,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query="select `email` from `accounts` where `username`='Admin' limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$rec7=$reg8log_db->fetch_row();
+$rec7=$GLOBALS['reg8log_db']->fetch_row();
 
 $email=$rec7['email'];
 

@@ -8,6 +8,6 @@ if(config::get('keep_expired_block_log_records_for')!==-1) $expired-=config::get
 
 $query="delete from `ip_block_log` where `last_attempt` < $expired";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

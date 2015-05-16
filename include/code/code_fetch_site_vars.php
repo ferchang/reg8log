@@ -4,13 +4,11 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query='select * from `site_vars`';
 
-$reg8log_db=$GLOBALS['reg8log_db'];
+$GLOBALS['reg8log_db']->auto_abort=false;
+$GLOBALS['reg8log_db']->query($query);
+$GLOBALS['reg8log_db']->auto_abort=true;
 
-$reg8log_db->auto_abort=false;
-$reg8log_db->query($query);
-$reg8log_db->auto_abort=true;
-
-if($reg8log_db->err_msg) {
+if($GLOBALS['reg8log_db']->err_msg) {
 	if(!defined('SETUP_PAGE')) {
 		$failure_msg='site_vars fetch query failed!';
 		require ROOT.'include/page/page_failure.php';
@@ -21,7 +19,7 @@ if($reg8log_db->err_msg) {
 
 $num_recs=6;
 
-if($reg8log_db->result_num()!==$num_recs) {
+if($GLOBALS['reg8log_db']->result_num()!==$num_recs) {
 	if(!defined('SETUP_PAGE')) {
 		$failure_msg='<h3>Number of records in site_vars table is incorrect! <small>(Failed setup?)</small></h3>';
 		$no_specialchars=true;
@@ -31,6 +29,6 @@ if($reg8log_db->result_num()!==$num_recs) {
 return;
 }
 
-while($rec=$reg8log_db->fetch_row()) define(strtoupper($rec['name']), $rec['value']);
+while($rec=$GLOBALS['reg8log_db']->fetch_row()) define(strtoupper($rec['name']), $rec['value']);
 
 ?>

@@ -3,12 +3,12 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 $lock_name='reg8log--register--'.SITE_KEY;
-$reg8log_db->query("select get_lock('$lock_name', -1)");
+$GLOBALS['reg8log_db']->query("select get_lock('$lock_name', -1)");
 
-$tmp8=$reg8log_db->quote_smart($field_value);
+$tmp8=$GLOBALS['reg8log_db']->quote_smart($field_value);
 $query1='select * from `accounts` where `'.$field_name.'`='.$tmp8;
 if(isset($except_user)) {
-	$except_user=$reg8log_db->quote_smart($except_user);
+	$except_user=$GLOBALS['reg8log_db']->quote_smart($except_user);
 	$query1.=' and `username`!='.$except_user;
 }
 $query1.=' limit 1';
@@ -27,9 +27,9 @@ $query2.=' limit 1';
 
 unset($uniqueness_err);
 if(
-$reg8log_db->result_num($query1) or
-$reg8log_db->result_num($query2) or
-(isset($query3) and $reg8log_db->result_num($query3))
+$GLOBALS['reg8log_db']->result_num($query1) or
+$GLOBALS['reg8log_db']->result_num($query2) or
+(isset($query3) and $GLOBALS['reg8log_db']->result_num($query3))
 ) {
 	$err_msgs[]=sprintf(func::tr('already registered msg'), func::tr($field_name), func::tr($field_name));
 	$uniqueness_err=true;

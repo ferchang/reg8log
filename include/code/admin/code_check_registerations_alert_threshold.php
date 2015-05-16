@@ -11,6 +11,6 @@ if($new_registerations<config::get('registerations_alert_threshold')) return;
 
 $query='select count(*) from `registerations_history` where `timestamp`>='.(REQUEST_TIME-config::get('registerations_alert_threshold_period'));
 
-if($reg8log_db->count_star($query)>=config::get('registerations_alert_threshold')) $registerations_alert_threshold_reached=true;
+if($GLOBALS['reg8log_db']->count_star($query)>=config::get('registerations_alert_threshold')) $registerations_alert_threshold_reached=true;
 
 ?>

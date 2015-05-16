@@ -30,25 +30,25 @@ if(isset($err_msgs)) break;
 $time=REQUEST_TIME;
 $expired=$time-config::get('password_reset_period');
 
-$tmp23=$reg8log_db->quote_smart($_POST['email']);
+$tmp23=$GLOBALS['reg8log_db']->quote_smart($_POST['email']);
 $query1='select * from `password_reset` where `email`='.$tmp23.' and `timestamp`>'.$expired.' limit 1';
 $query2='select * from `accounts` where `email`='.$tmp23.' limit 1';
 
 $lock_name='reg8log--password_reset--'.SITE_KEY;
-$reg8log_db->query("select get_lock('$lock_name', -1)");
+$GLOBALS['reg8log_db']->query("select get_lock('$lock_name', -1)");
 
 $email=false;
 
-if($reg8log_db->result_num($query1)) {
-  $rec=$reg8log_db->fetch_row();
+if($GLOBALS['reg8log_db']->result_num($query1)) {
+  $rec=$GLOBALS['reg8log_db']->fetch_row();
   $emails_sent=$rec['emails_sent'];
   $email=$rec['email'];
 }
-else if($reg8log_db->result_num($query2)) {
-  $rec=$reg8log_db->fetch_row();
+else if($GLOBALS['reg8log_db']->result_num($query2)) {
+  $rec=$GLOBALS['reg8log_db']->fetch_row();
   $emails_sent=0;
   $email=$rec['email'];
-  $reg8log_db->query("select release_lock('$lock_name')");
+  $GLOBALS['reg8log_db']->query("select release_lock('$lock_name')");
 }
 
 if($email) if(!$emails_sent) {//add record to password_reset
@@ -57,11 +57,11 @@ $table_name='password_reset';
 $field_name='record_id';
 require ROOT.'include/code/code_generate_unique_random_id.php';
 
-$username=$reg8log_db->quote_smart($rec['username']);
+$username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 $emails_sent=1;
 $key=func::random_string(22);
 $timestamp=REQUEST_TIME;
-$email=$reg8log_db->quote_smart($email);
+$email=$GLOBALS['reg8log_db']->quote_smart($email);
 
 $field_names='`record_id`, `username`, `email`, `emails_sent`, `key`, `timestamp`';
 
@@ -69,7 +69,7 @@ $field_values="'$rid', $username, $email, $emails_sent, '$key', $timestamp";
 
 $query='replace into `password_reset` '."($field_names) values ($field_values)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 require ROOT.'include/code/email/code_email_password_reset_link.php';
 
@@ -85,7 +85,7 @@ else if($emails_sent<config::get('max_password_reset_emails') or config::get('ma
 	if($emails_sent<255) {
 		$emails_sent++;
 		$query='update ignore `password_reset` set `emails_sent`='.$emails_sent.' where `record_id`='."'{$rec['record_id']}'";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 	}
 
 }

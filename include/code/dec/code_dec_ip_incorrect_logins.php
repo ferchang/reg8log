@@ -6,7 +6,7 @@ if(config::get('ip_block_threshold')===-1  and config::get('ip_captcha_threshold
 
 if(!isset($_COOKIE['reg8log_ip_incorrect_logins'])) return;
 
-$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$GLOBALS['reg8log_db']->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 require ROOT.'include/code/code_check_ip_incorrect_logins_num_decs.php';
 
@@ -24,7 +24,7 @@ if(!isset($is_pending_account)) $is_pending_account=0;
 
 $query='delete from `ip_incorrect_logins` where `auto` in '."($autos)".' and `ip`='.$ip.' and `account_auto`='.$user->user_info['auto']." and `pending_account`=$is_pending_account limit $limit";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $affected_rows=mysql_affected_rows();
 
@@ -34,7 +34,7 @@ if($affected_rows<1) return;
 
 $query='insert into `ip_incorrect_logins_decs` (`ip`, `account_auto`, `num_dec`, `timestamp`, `pending_account`) values '."($ip, {$user->user_info['auto']}, $affected_rows, ".REQUEST_TIME.", $is_pending_account)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if(mt_rand(1, floor(1/config::get('cleanup_probability')))===1) require ROOT.'include/code/cleanup/code_ip_incorrect_logins_decs_expired_cleanup.php';
 

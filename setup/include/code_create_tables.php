@@ -5,7 +5,7 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 foreach (glob('sql/*.sql') as $file) {
   $contents=file_get_contents($file);
   $query=substr($contents, strpos($contents, 'CREATE TABLE IF NOT EXISTS'));
-  $reg8log_db->query($query);
+  $GLOBALS['reg8log_db']->query($query);
   $tablename=basename($file, '.sql');
   echo sprintf(func::tr('table created msg'), $tablename), '.<br>';
 }

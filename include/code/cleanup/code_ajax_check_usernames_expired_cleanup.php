@@ -6,6 +6,6 @@ $expired=REQUEST_TIME-config::get('max_ajax_check_usernames_period');
 
 $query="delete from `ajax_check_usernames` where `timestamp` < $expired";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

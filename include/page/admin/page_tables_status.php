@@ -62,8 +62,8 @@ echo '</tr>';
 foreach(glob(ROOT.'setup/sql/*.sql') as $file) {
 	$tablename=basename($file, '.sql');
 	$query="select count(*) as `n` from `$tablename`";
-	$reg8log_db->query($query);
-	$rec=$reg8log_db->fetch_row();
+	$GLOBALS['reg8log_db']->query($query);
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 	$tables[$tablename]=$rec['n'];
 }
 

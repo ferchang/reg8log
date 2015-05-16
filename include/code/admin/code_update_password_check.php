@@ -12,7 +12,7 @@ if(config::get('admin_operations_require_password')>1) {
 		$query='update `admin` set ';
 		if(isset($password_check_needed)) $query.="`last_password_check`=".REQUEST_TIME.", ";
 		$query.="`password_check_key`='$password_check_key' limit 1";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		setcookie('reg8log_password_check_key', $password_check_key, 0, '/', null, HTTPS, true);
 		$_COOKIE['reg8log_password_check_key']=$password_check_key;
 		unset($password_check_needed, $captcha_needed);

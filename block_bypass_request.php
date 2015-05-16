@@ -33,13 +33,13 @@ if(!isset($account_block)) {
 	
 }
 
-$lock_name=$reg8log_db->quote_smart('reg8log--block_bypass-'.$_GET['username'].'--'.SITE_KEY);
-$reg8log_db->query("select get_lock($lock_name, -1)");
+$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--block_bypass-'.$_GET['username'].'--'.SITE_KEY);
+$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");
 
-$_username=$reg8log_db->quote_smart($_GET['username']);
+$_username=$GLOBALS['reg8log_db']->quote_smart($_GET['username']);
 $query='select * from `block_bypass` where `username`='.$_username.' limit 1';
-if($reg8log_db->result_num($query)) {
-  $rec=$reg8log_db->fetch_row();
+if($GLOBALS['reg8log_db']->result_num($query)) {
+  $rec=$GLOBALS['reg8log_db']->fetch_row();
   $num_requests=$rec['num_requests'];
   $emails_sent=$rec['emails_sent'];
   $key=$rec['key'];
@@ -73,9 +73,9 @@ $expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 $query2='select * from `pending_accounts` where `username`='.$_username." and (`email_verification_key`='' or `email_verified`=1 or `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.') limit 1';
 
-if($reg8log_db->result_num($query1) or $reg8log_db->result_num($query2)) {
+if($GLOBALS['reg8log_db']->result_num($query1) or $GLOBALS['reg8log_db']->result_num($query2)) {
   $username_exists=1;
-  $rec=$reg8log_db->fetch_row();
+  $rec=$GLOBALS['reg8log_db']->fetch_row();
   $email=$rec['email'];
 }
 else {
@@ -104,7 +104,7 @@ else {
   $query='insert into `block_bypass` (`username`, `username_exists`, `num_requests`, `emails_sent`, `key`, `last_attempt`, `incorrect_logins`) values'."($_username, $username_exists, 1, 0, '$key', $last_attempt, 0)";
 }
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if($_POST['email']===$email and (config::get('max_block_bypass_emails')===-1 or $emails_sent<config::get('max_block_bypass_emails'))) require ROOT.'include/code/email/code_email_bypass_link.php';
 

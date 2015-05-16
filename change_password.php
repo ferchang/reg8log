@@ -35,8 +35,8 @@ if(isset($_POST['curpass'], $_POST['newpass'], $_POST['repass'])) {
 		}
 		else if(isset($_COOKIE['reg8log_ch_pswd_try'])) {
 			if(is_numeric($_COOKIE['reg8log_ch_pswd_try'])) {
-				$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$_COOKIE['reg8log_ch_pswd_try'].' where `username`='.$reg8log_db->quote_smart($identified_user)." and `ch_pswd_tries`>={$_COOKIE['reg8log_ch_pswd_try']} limit 1";
-				$reg8log_db->query($query);
+				$query='update `accounts` set `ch_pswd_tries`=`ch_pswd_tries`-'.$_COOKIE['reg8log_ch_pswd_try'].' where `username`='.$GLOBALS['reg8log_db']->quote_smart($identified_user)." and `ch_pswd_tries`>={$_COOKIE['reg8log_ch_pswd_try']} limit 1";
+				$GLOBALS['reg8log_db']->query($query);
 			}
 			setcookie('reg8log_ch_pswd_try', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 		}

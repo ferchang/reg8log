@@ -7,7 +7,7 @@ if(!config::get('block_bypass_max_incorrect_logins')) return;
 if($incorrect_logins<config::get('block_bypass_max_incorrect_logins') and $incorrect_logins<255) {
 	$incorrect_logins++;
 	$query='update `block_bypass` set `incorrect_logins`=`incorrect_logins`+1 where `auto`='.$block_bypass_record_auto.' limit 1';
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 
 	if(isset($_COOKIE['reg8log_block_bypass_incorrect_logins']) and strpos($_COOKIE['reg8log_block_bypass_incorrect_logins'], $block_bypass_record_auto.',')===0) $tmp32=substr($_COOKIE['reg8log_block_bypass_incorrect_logins'], strpos($_COOKIE['reg8log_block_bypass_incorrect_logins'], ',')+1)+1;
 	else $tmp32=1;

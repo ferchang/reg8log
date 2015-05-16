@@ -4,9 +4,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query='select count(*) as `n` from `block_alert_emails_history`';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$tmp39=$reg8log_db->fetch_row();
+$tmp39=$GLOBALS['reg8log_db']->fetch_row();
 
 $num=ceil(1/config::get('cleanup_probability'));
 
@@ -16,6 +16,6 @@ if($tmp39['n']-config::get('max_block_alert_emails_history_records')>$num) $num=
 
 $query="delete from `block_alert_emails_history` order by `timestamp` asc limit $num";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

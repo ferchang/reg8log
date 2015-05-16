@@ -20,6 +20,6 @@ if(config::get('store_request_entropy_probability')!==1 and mt_rand(1, floor(1/c
 
 $query="update `site_vars` set `value`=sha1(concat(`value`, '$request_entropy')) where name='entropy'";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

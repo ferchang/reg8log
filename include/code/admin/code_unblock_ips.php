@@ -4,10 +4,10 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 foreach($unblock as $item) {
 	$query='delete from `ip_incorrect_logins` where ';
-	$query.=' `admin`='.$reg8log_db->quote_smart($item['admin']);
-	$query.=' and `ip`='.$reg8log_db->quote_smart($item['ip']);
-	$query.=' and `timestamp`<='.$reg8log_db->quote_smart($item['last_attempt']);
-	$reg8log_db->query($query);
+	$query.=' `admin`='.$GLOBALS['reg8log_db']->quote_smart($item['admin']);
+	$query.=' and `ip`='.$GLOBALS['reg8log_db']->quote_smart($item['ip']);
+	$query.=' and `timestamp`<='.$GLOBALS['reg8log_db']->quote_smart($item['last_attempt']);
+	$GLOBALS['reg8log_db']->query($query);
 }
 
 $autos='';
@@ -21,7 +21,7 @@ foreach($unblock as $item) {
 
 $query='update `ip_block_log` set `unblocked`=1 where `auto` in ('.$autos.")";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $queries_executed=true;
 

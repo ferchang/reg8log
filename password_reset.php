@@ -10,14 +10,14 @@ if(!isset($_GET['rid'], $_GET['key'])) exit('<h3 align="center">Error: rid and/o
 
 if($_GET['rid']==='' or $_GET['key']==='') exit('<h3 align="center">Error: rid and/or key parameter is empty!</h3>');
 
-$rid=$reg8log_db->quote_smart($_GET['rid']);
-$key=$reg8log_db->quote_smart($_GET['key']);
+$rid=$GLOBALS['reg8log_db']->quote_smart($_GET['rid']);
+$key=$GLOBALS['reg8log_db']->quote_smart($_GET['key']);
 
 $query='select * from `password_reset` where `record_id`='.$rid." and `key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('Error: No such record found').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
+if(!$GLOBALS['reg8log_db']->result_num($query)) func::my_exit('<center><h3>'.func::tr('Error: No such record found').'!</h3><a href="index.php">'.func::tr('Login page').'</a></center>');
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 $_username=$rec['username'];
 
 $expired=REQUEST_TIME-config::get('password_reset_period');
@@ -58,8 +58,8 @@ $success_msg='<h3>'.func::tr('Your password changed successfully').'.</h3>';
 $no_specialchars=true;
 require ROOT.'include/page/page_success.php';
 
-$query='delete from `password_reset` where `username`='.$reg8log_db->quote_smart($_username).' limit 1';
-$reg8log_db->query($query);
+$query='delete from `password_reset` where `username`='.$GLOBALS['reg8log_db']->quote_smart($_username).' limit 1';
+$GLOBALS['reg8log_db']->query($query);
 
 exit;
 

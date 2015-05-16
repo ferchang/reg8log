@@ -4,7 +4,7 @@ if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
 //set the information needed for connecting to MySQL DBMS here
-$reg8log_dbms_info=array(
+$dbms_info=array(
 	'host'=>'localhost',
 	'user'=>'root',
 	'pass'=>'',

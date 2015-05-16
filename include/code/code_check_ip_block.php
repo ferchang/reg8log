@@ -17,13 +17,13 @@ if(config::get('ip_block_threshold')===-1  and config::get('ip_captcha_threshold
 if(isset($captcha_needed) and config::get('ip_block_threshold')===-1) return;
 
 $ip_login_attempt_lock="'".'reg8log--ip_login_attempt-'.$_SERVER['REMOTE_ADDR'].'--'.SITE_KEY."'";
-$reg8log_db->query("select get_lock($ip_login_attempt_lock, -1)");
+$GLOBALS['reg8log_db']->query("select get_lock($ip_login_attempt_lock, -1)");
 
 if(!isset($last_protection)) {
-	$tmp30=$reg8log_db->quote_smart($_username);
+	$tmp30=$GLOBALS['reg8log_db']->quote_smart($_username);
 	$query="select * from `accounts` where `username`=$tmp30 limit 1";
-	$reg8log_db->query($query);
-	$rec=$reg8log_db->fetch_row();
+	$GLOBALS['reg8log_db']->query($query);
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 	$block_disable=$rec['block_disable'];
 	$last_protection=$rec['last_protection'];
 }
@@ -38,11 +38,11 @@ if(config::get('ip_captcha_threshold')===0) {
 	if(config::get('ip_block_threshold')===-1) return;
 }
 
-$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$GLOBALS['reg8log_db']->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query="select count(*) as `n` from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip and `timestamp`>=".(REQUEST_TIME-config::get('ip_block_period'));
-$reg8log_db->query($query);
-$rec=$reg8log_db->fetch_row();
+$GLOBALS['reg8log_db']->query($query);
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 $count=$rec['n'];
 $ip_incorrect_count=$count;
 
@@ -53,8 +53,8 @@ if(config::get('ip_block_threshold')!==-1 and $count>=config::get('ip_block_thre
 		$ip_block=$_SERVER['REMOTE_ADDR'];
 		if(isset($set_last_attempt)) {
 			$query="select * from `ip_incorrect_logins` where `admin`=$_admin and `ip`=$ip order by `timestamp` desc limit 1";
-			$reg8log_db->query($query);
-			$rec=$reg8log_db->fetch_row();
+			$GLOBALS['reg8log_db']->query($query);
+			$rec=$GLOBALS['reg8log_db']->fetch_row();
 			$last_attempt=$rec['timestamp'];
 		}
 		return;

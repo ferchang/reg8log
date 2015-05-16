@@ -6,6 +6,6 @@ $expired=REQUEST_TIME-config::get('password_reset_period');
 
 $query="delete from `password_reset` where `timestamp` < $expired";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

@@ -13,7 +13,7 @@ foreach($del as $auto) {
 
 $query='delete from `accounts` where `auto` in ('.$autos.") and `username`!='Admin'";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $queries_executed=true;
 

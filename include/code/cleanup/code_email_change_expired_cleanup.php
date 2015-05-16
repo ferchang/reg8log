@@ -4,6 +4,6 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $expired=REQUEST_TIME-$verification_time;
 
-$reg8log_db->query("delete from `email_change` where `timestamp` < $expired");
+$GLOBALS['reg8log_db']->query("delete from `email_change` where `timestamp` < $expired");
 
 ?>

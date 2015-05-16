@@ -8,7 +8,7 @@ if(strtolower($_POST['username'])==='admin') {
 
 	$query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=1";
 
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 
 	config::set('account_block_threshold', config::get('admin_account_block_threshold'));
 	config::set('account_captcha_threshold', config::get('admin_account_captcha_threshold'));
@@ -25,6 +25,6 @@ $expired=REQUEST_TIME-config::get('ip_block_period');
 
 $query="delete from `ip_incorrect_logins` where `timestamp` < $expired and `admin`=0";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

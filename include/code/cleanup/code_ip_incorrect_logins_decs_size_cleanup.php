@@ -4,9 +4,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query='select count(*) as `n` from `ip_incorrect_logins_decs`';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 $num=ceil(1/config::get('cleanup_probability'));
 
@@ -16,6 +16,6 @@ if($rec['n']-config::get('max_ip_incorrect_logins_decs_records')>$num) $num=$rec
 
 $query="delete from `ip_incorrect_logins_decs` order by `timestamp` asc limit $num";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

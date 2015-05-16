@@ -13,13 +13,13 @@ require ROOT.'include/code/admin/code_pagination_params.php';
 
 $query='select * from `accounts` where `banned`=1 or `banned`>='.REQUEST_TIME;
 
-if(!$total=$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('No banned users found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
+if(!$total=$GLOBALS['reg8log_db']->result_num($query)) func::my_exit('<center><h3>'.func::tr('No banned users found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
 
 require ROOT.'include/code/admin/code_pagination_params2.php';
 
 $query='select accounts.*, ban_info.reason from `accounts` left join `ban_info` on accounts.username=ban_info.username where `banned`=1 or `banned`>='.REQUEST_TIME." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 require ROOT.'include/page/admin/page_banned_accounts.php';
 

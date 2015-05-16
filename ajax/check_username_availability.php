@@ -24,7 +24,7 @@ require ROOT.'include/code/code_check_max_ajax_check_usernames.php';
 
 require ROOT.'include/code/code_record_ajax_check_username.php';
 
-$value=$reg8log_db->quote_smart($value);
+$value=$GLOBALS['reg8log_db']->quote_smart($value);
 
 $query1="select * from `accounts` where `username`=$value limit 1";
 
@@ -33,7 +33,7 @@ $expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 $query2="select * from `pending_accounts` where `username`=$value and (`email_verification_key`='' or `email_verified`=1 or `timestamp` >= $expired1) and (`admin_confirmed`=1 or `timestamp` >= $expired2) limit 1";
 
-if($reg8log_db->result_num($query1) or $reg8log_db->result_num($query2)) echo 'y';
+if($GLOBALS['reg8log_db']->result_num($query1) or $GLOBALS['reg8log_db']->result_num($query2)) echo 'y';
 else echo 'n';
 
 ?>

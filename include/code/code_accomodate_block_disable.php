@@ -21,8 +21,8 @@ if(($protection>$last_protection and !($protection>=($last_protection+2))) or $p
 	}
 
 if($block_disable!=$tmp35) {
-	$query='update `accounts` set `block_disable`='.intval($block_disable).' where `username`='.$reg8log_db->quote_smart($_username2).' limit 1';
-	$reg8log_db->query($query);
+	$query='update `accounts` set `block_disable`='.intval($block_disable).' where `username`='.$GLOBALS['reg8log_db']->quote_smart($_username2).' limit 1';
+	$GLOBALS['reg8log_db']->query($query);
 }
 
 ?>

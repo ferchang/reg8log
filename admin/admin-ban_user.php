@@ -25,16 +25,16 @@ do {//1
 
 	$_POST['user']=func::fix_kaaf8yeh($_POST['user']);
 
-	$user=$reg8log_db->quote_smart($_POST['user']);
+	$user=$GLOBALS['reg8log_db']->quote_smart($_POST['user']);
 
 	$query="select * from `accounts` where `{$_POST['which']}`=$user limit 1";
 
-	if(!$reg8log_db->result_num($query)) {
+	if(!$GLOBALS['reg8log_db']->result_num($query)) {
 		$err_msgs[]=func::tr('no such user found in the accounts table!');
 		break;
 	}
 
-	$rec=$reg8log_db->fetch_row();
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 	if($rec['username']==='Admin') {
 		$err_msgs[]=func::tr('Admin account cannot be banned!');
@@ -76,9 +76,9 @@ do {//2
 
 	}
 	
-	$query='select * from `accounts` where `username`='.$reg8log_db->quote_smart($_POST['username']).' limit 1';
-	$reg8log_db->query($query);
-	$rec=$reg8log_db->fetch_row();
+	$query='select * from `accounts` where `username`='.$GLOBALS['reg8log_db']->quote_smart($_POST['username']).' limit 1';
+	$GLOBALS['reg8log_db']->query($query);
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 	require ROOT.'include/page/admin/page_ban_form2.php';
 	exit;
 

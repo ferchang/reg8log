@@ -20,7 +20,7 @@ $_fields['password_hash']=$_fields['password'];
 unset($_fields['password']);
 foreach($_fields as $field_name=>$specs) {
   $field_names.="`$field_name`";
-  $field_values.=$reg8log_db->quote_smart($specs['value']);
+  $field_values.=$GLOBALS['reg8log_db']->quote_smart($specs['value']);
   if(++$i===count($_fields)) break;
   $field_names.=', ';
   $field_values.=', ';
@@ -28,7 +28,7 @@ foreach($_fields as $field_name=>$specs) {
 
 $query="insert into `accounts` ($field_names) values ($field_values)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 unset($_SESSION['reg8log']['captcha_verified'], $_SESSION['reg8log']['passed']);
 
 $success_msg=func::tr('account created msg');

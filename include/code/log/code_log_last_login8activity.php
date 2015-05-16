@@ -2,8 +2,8 @@
 if(ini_get('register_globals')) exit("<center><h3>Error: Turn that damned register globals off!</h3></center>");
 if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3></center>");
 
-if(isset($identified_user)) $tmp28=$reg8log_db->quote_smart($identified_user);
-else if(isset($banned_user)) $tmp28=$reg8log_db->quote_smart($banned_user);
+if(isset($identified_user)) $tmp28=$GLOBALS['reg8log_db']->quote_smart($identified_user);
+else if(isset($banned_user)) $tmp28=$GLOBALS['reg8log_db']->quote_smart($banned_user);
 
 $query='update `accounts` set ';
 
@@ -21,6 +21,6 @@ switch($log_activity) {
 
 $query.=' where `username`='.$tmp28.' limit 1';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

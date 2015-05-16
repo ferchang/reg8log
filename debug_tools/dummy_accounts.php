@@ -15,10 +15,10 @@ if(!empty($_POST)) {
 	if(isset($_POST['delete_all'])) {
 		$deleted=0;
 		$query="delete from accounts where password_hash='dummy account'";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		$deleted+=mysql_affected_rows();
 		$query="delete from pending_accounts where password_hash='dummy account'";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		$deleted+=mysql_affected_rows();
 		$del_msg=$deleted.' dummy account(s) deleted.';
 		require 'page_dummy_accounts_form.php';
@@ -44,7 +44,7 @@ if(!empty($_POST)) {
 		if(!$admin_confirmed or $email_verification_key!=='') $query="insert into pending_accounts values(null, '$uid', '$username', 'dummy account', '$email', '', 0, '$email_verification_key', 0, $admin_confirmed, ".REQUEST_TIME.", 0, '')";
 		else $query="insert into accounts values(null, '$uid', '$username', 'dummy account', '$email', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
 		
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		
 	}
 

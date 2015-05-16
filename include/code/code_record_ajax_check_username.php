@@ -4,11 +4,11 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 if(!config::get('max_ajax_check_usernames')) return;
 
-$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$GLOBALS['reg8log_db']->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 $query='insert into `ajax_check_usernames` (`ip`, `timestamp`) values ('.$ip.', '.REQUEST_TIME.')';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if(config::get('reset_clients_ajax_check_usernames_upon_register')) {
 	$insert_id=mysql_insert_id();

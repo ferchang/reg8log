@@ -126,7 +126,7 @@ echo '</tr>';
 
 $i=0;
 $r=false;
-while($rec=$reg8log_db->fetch_row()) {
+while($rec=$GLOBALS['reg8log_db']->fetch_row()) {
 	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
 	$i++;

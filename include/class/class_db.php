@@ -10,7 +10,7 @@ class reg8log_db {
 	var $auto_abort=false;
 
 	//=======================================
-	function reg8log_db($host='', $user='', $pass='', $reg8log_db_name='', $auto_abort=null)
+	function reg8log_db($host='', $user='', $pass='', $db_name='', $auto_abort=null)
 	{
 		if(!is_null($auto_abort)) $this->auto_abort=$auto_abort;
 
@@ -20,13 +20,13 @@ class reg8log_db {
 			return;
 		}
 
-		if($reg8log_db_name) $this->select($reg8log_db_name);
+		if($db_name) $this->select($db_name);
 	}
 	//=======================================
-	function select($reg8log_db_name)
+	function select($db_name)
 	{
 		$this->err_msg='';
-		if( @ mysql_select_db($reg8log_db_name)) return true;
+		if( @ mysql_select_db($db_name)) return true;
 		$this->error();
 		return false;
 	}

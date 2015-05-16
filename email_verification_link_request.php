@@ -32,11 +32,11 @@ if(isset($err_msgs)) break;
 $expired1=REQUEST_TIME-config::get('email_verification_time');
 $expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
-$tmp21=$reg8log_db->quote_smart($_POST['email']);
+$tmp21=$GLOBALS['reg8log_db']->quote_smart($_POST['email']);
 $query='select * from `pending_accounts` where `email`='.$tmp21." and (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>".$expired1.') and (`admin_confirmed`=1 or `timestamp`>'.$expired2.') limit 1';
 
-if($reg8log_db->result_num($query)) {
-  $rec=$reg8log_db->fetch_row();
+if($GLOBALS['reg8log_db']->result_num($query)) {
+  $rec=$GLOBALS['reg8log_db']->fetch_row();
   $emails_sent=$rec['emails_sent'];
   $email=$rec['email'];
 }
@@ -49,9 +49,9 @@ if($email) {
 		require ROOT.'include/code/email/code_email_verification_link.php';
 		if($emails_sent<255) {
 			$emails_sent++;
-			$tmp21=$reg8log_db->quote_smart($rec['username']);
+			$tmp21=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 			$query='update `pending_accounts` set `emails_sent`='.$emails_sent.' where `username`='.$tmp21.' limit 1';
-			$reg8log_db->query($query);
+			$GLOBALS['reg8log_db']->query($query);
 		}
 	}
 }

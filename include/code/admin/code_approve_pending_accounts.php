@@ -13,7 +13,7 @@ foreach($appr as $auto) {
 
 $query='update `pending_accounts` set `admin_confirmed`=1 where `auto` in ('.$autos.')';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $nonexistent_records=0;
 
@@ -21,12 +21,12 @@ foreach($appr as $auto) {
 
 	$query="select * from `pending_accounts` where `auto`=$auto";
 
-	if(!$reg8log_db->result_num($query)) {
+	if(!$GLOBALS['reg8log_db']->result_num($query)) {
 	  $nonexistent_records++;
 	  continue;
 	}
 
-	$rec=$reg8log_db->fetch_row();
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 	if(isset($_POST['email-'.$auto])) {
 		$emails[]=$_POST['email-'.$auto];
@@ -45,16 +45,16 @@ foreach($appr as $auto) {
 
 	$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`';
 
-	$username=$reg8log_db->quote_smart($rec['username']);
-	$email=$reg8log_db->quote_smart($rec['email']);
+	$username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
+	$email=$GLOBALS['reg8log_db']->quote_smart($rec['email']);
 	$gender=$rec['gender'];
 	$timestamp=REQUEST_TIME; // should we use $rec['timestamp'] instead?
-	$password_hash=$reg8log_db->quote_smart($rec['password_hash']);
+	$password_hash=$GLOBALS['reg8log_db']->quote_smart($rec['password_hash']);
 
 	$field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp";
 
 	$query="insert into `accounts` ($field_names) values ($field_values)";
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 
 }
 
@@ -67,7 +67,7 @@ if(isset($tmp2)) {
 	  $autos.=", ";
 	}
 	$query='delete from `pending_accounts` where `auto` in ('.$autos.')';
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 }
 
 if(isset($emails)) for($j=0; $j<count($emails); $j++) {

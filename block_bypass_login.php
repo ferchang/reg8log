@@ -43,12 +43,12 @@ if(!isset($account_block)) {
 
 }
 
-$_username=$reg8log_db->quote_smart($_POST['username']);
+$_username=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 $query="select * from `block_bypass` where `username`=$_username limit 1";
 
-if(!$reg8log_db->result_num($query)) func::my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
+if(!$GLOBALS['reg8log_db']->result_num($query)) func::my_exit('<h3 align="center">'.func::tr('Error: Block-bypass link not verified!').'</h3>');
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 $key=$rec['key'];
 $incorrect_logins=$rec['incorrect_logins'];
 $block_bypass_record_auto=$rec['auto'];

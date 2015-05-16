@@ -7,22 +7,22 @@ else $until=1;
 
 if(!is_numeric($until)) exit("<center><h3>Error: Duration not a number!</h3></center>");
 
-$lock_name=$reg8log_db->quote_smart('reg8log--ban-'.strtolower($_POST['username']).'--'.SITE_KEY);
-$reg8log_db->query("select get_lock($lock_name, -1)");
+$lock_name=$GLOBALS['reg8log_db']->quote_smart('reg8log--ban-'.strtolower($_POST['username']).'--'.SITE_KEY);
+$GLOBALS['reg8log_db']->query("select get_lock($lock_name, -1)");
 
-$username=$reg8log_db->quote_smart($_POST['username']);
+$username=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 
 $query='update `accounts` set `banned`='.$until.' where `username`='.$username.' limit 1';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$reason=$reg8log_db->quote_smart($_POST['reason']);
+$reason=$GLOBALS['reg8log_db']->quote_smart($_POST['reason']);
 
 $query='replace into `ban_info` (`username`, `until`, `reason`) values('."$username, $until, $reason)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$reg8log_db->query("select release_lock($lock_name)");
+$GLOBALS['reg8log_db']->query("select release_lock($lock_name)");
 
 $success_msg='<h3>'.func::tr('User').' <span style="color: orange">'.htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8').'</span> '.func::tr('banned successfully.').'</h3>';
 $no_specialchars=true;

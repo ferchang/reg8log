@@ -94,8 +94,8 @@ if(config::get('admin_error_log_access')) {
 			$size=strlen($logs);
 			$current_hash=substr(hash('sha256', $logs), 0, 32);
 			$query="select last_hash from error_log_hash limit 1";
-			$reg8log_db->query($query);
-			$rec=$reg8log_db->fetch_row();
+			$GLOBALS['reg8log_db']->query($query);
+			$rec=$GLOBALS['reg8log_db']->fetch_row();
 			if($rec['last_hash']==='' or $rec['last_hash']==='?') $new='+';
 			else if($current_hash!==$rec['last_hash']) $new='+';
 			else $new='-';

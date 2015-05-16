@@ -4,9 +4,9 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $query="select * from `dummy`";
 
-$reg8log_db->auto_abort=false;
-if($reg8log_db->result_num($query)) define('DB_INSTALLED', true);
+$GLOBALS['reg8log_db']->auto_abort=false;
+if($GLOBALS['reg8log_db']->result_num($query)) define('DB_INSTALLED', true);
 else define('DB_INSTALLED', false);
-$reg8log_db->auto_abort=true;
+$GLOBALS['reg8log_db']->auto_abort=true;
 
 ?>

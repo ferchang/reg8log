@@ -8,9 +8,9 @@ if(isset($_COOKIE['reg8log_dont_disturb']) and $_COOKIE['reg8log_dont_disturb']=
 
 $query="select * from `admin_block_alerts` where `for`='visit' limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 $admin_alert_visit_msg='';
 
@@ -32,9 +32,9 @@ if(config::get('registeration_alert_type')!==1 and config::get('registeration_al
 
 $query="select * from `admin_registeration_alerts` where `for`='visit' limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$rec8=$reg8log_db->fetch_row();
+$rec8=$GLOBALS['reg8log_db']->fetch_row();
 
 $new_registerations=$rec8['new_registerations'];
 

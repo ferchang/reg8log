@@ -8,11 +8,11 @@ if(config::get('ch_pswd_captcha_threshold')===0) {
 	return;
 }
 
-$query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$reg8log_db->quote_smart($identified_user).' limit 1';
+$query="select `last_ch_email_try`, `ch_pswd_tries`, `last_ch_pswd_try` from `accounts` where `username`=".$GLOBALS['reg8log_db']->quote_smart($identified_user).' limit 1';
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
-$trec=$reg8log_db->fetch_row();
+$trec=$GLOBALS['reg8log_db']->fetch_row();
 
 if($try_type==='email') {
 	if($trec['last_ch_email_try']+12*60*60>REQUEST_TIME) $captcha_needed=true;

@@ -13,11 +13,11 @@ foreach($unblock as $auto) {
 
 $query='delete from `account_incorrect_logins` where `auto` in ('.$autos.")";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $query='update `account_block_log` set `unblocked`=1 where `ext_auto` in ('.$autos.")";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $queries_executed=true;
 

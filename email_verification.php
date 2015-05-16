@@ -16,17 +16,17 @@ require ROOT.'include/code/code_prevent_xsrf.php';
 
 $home='<br /><a href="index.php">'.func::tr('Login page').'</a>';
 
-$rid=$reg8log_db->quote_smart($_GET['rid']);
-$key=$reg8log_db->quote_smart($_GET['key']);
+$rid=$GLOBALS['reg8log_db']->quote_smart($_GET['rid']);
+$key=$GLOBALS['reg8log_db']->quote_smart($_GET['key']);
 
 $lock_name='reg8log--register--'.SITE_KEY;
-$reg8log_db->query("select get_lock('$lock_name', -1)");
+$GLOBALS['reg8log_db']->query("select get_lock('$lock_name', -1)");
 
 $query="select * from `pending_accounts` where `record_id`=$rid and `email_verification_key`=$key limit 1";
 
-if(!$reg8log_db->result_num($query)) func::my_exit('<center><h3>'.func::tr('no such email verification record').'.<br>...</h3>'."$home</center>");
+if(!$GLOBALS['reg8log_db']->result_num($query)) func::my_exit('<center><h3>'.func::tr('no such email verification record').'.<br>...</h3>'."$home</center>");
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 $expired=REQUEST_TIME-config::get('admin_confirmation_time');
 
@@ -45,7 +45,7 @@ if($rec['timestamp']<$expired) func::my_exit('<center><h3>'.func::tr('Out of ema
 
 $query="update `pending_accounts` set `email_verified`=1 where `record_id`=$rid limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if(!$rec['admin_confirmed']) {
   

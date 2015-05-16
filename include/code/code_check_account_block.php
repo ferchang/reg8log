@@ -14,14 +14,14 @@ if((isset($_POST['username']) and strtolower($_POST['username'])==='admin') or i
 if(config::get('account_block_threshold')===-1  and config::get('account_captcha_threshold')===-1) return;
 if(isset($captcha_needed) and config::get('account_block_threshold')===-1) return;
 
-$account_login_attempt_lock=$reg8log_db->quote_smart('reg8log--account_login_attempt-'.strtolower($_username).'--'.SITE_KEY);
-$reg8log_db->query("select get_lock($account_login_attempt_lock, -1)");
+$account_login_attempt_lock=$GLOBALS['reg8log_db']->quote_smart('reg8log--account_login_attempt-'.strtolower($_username).'--'.SITE_KEY);
+$GLOBALS['reg8log_db']->query("select get_lock($account_login_attempt_lock, -1)");
 
 if(!isset($last_protection)) {
-	$tmp9=$reg8log_db->quote_smart($_username);
+	$tmp9=$GLOBALS['reg8log_db']->quote_smart($_username);
 	$query="select * from `accounts` where `username`=$tmp9 limit 1";
-	$reg8log_db->query($query);
-	$rec=$reg8log_db->fetch_row();
+	$GLOBALS['reg8log_db']->query($query);
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 	$block_disable=$rec['block_disable'];
 	$last_protection=$rec['last_protection'];
 }
@@ -36,12 +36,12 @@ else if(config::get('account_captcha_threshold')===0) {
 	if(config::get('account_block_threshold')===-1) return;
 }
 
-if(!isset($tmp9)) $tmp9=$reg8log_db->quote_smart($_username);
+if(!isset($tmp9)) $tmp9=$GLOBALS['reg8log_db']->quote_smart($_username);
 $query="select * from `account_incorrect_logins` where `username`=$tmp9 limit 1";
 
-if(!$reg8log_db->result_num($query)) return;
+if(!$GLOBALS['reg8log_db']->result_num($query)) return;
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 $incorrect_logins_auto=$rec['auto'];
 

@@ -4,35 +4,35 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 $tmp38='select * from `ip_incorrect_logins` where `ip`='.$ip.' and `timestamp`>='.(REQUEST_TIME-config::get('ip_block_period')).' order by `timestamp` asc limit 1';
 
-if($reg8log_db->result_num($tmp38)) {
-	$tmp38=$reg8log_db->fetch_row();
+if($GLOBALS['reg8log_db']->result_num($tmp38)) {
+	$tmp38=$GLOBALS['reg8log_db']->fetch_row();
 	$ip_first_attempt=$tmp38['timestamp'];
 }
 else $ip_first_attempt=REQUEST_TIME;
 
-$_username=$reg8log_db->quote_smart($_POST['username']);
+$_username=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 
 $tmp29='insert into `ip_block_log` (`ip`, `first_attempt`, `last_attempt`, `last_username`, `block_threshold`) values '."($ip, $ip_first_attempt, ".REQUEST_TIME.", $_username, ".config::get('ip_block_threshold').")";
 
-$reg8log_db->query($tmp29);
+$GLOBALS['reg8log_db']->query($tmp29);
 
 if(config::get('alert_admin_about_ip_blocks')) {
 	if(config::get('alert_admin_about_ip_blocks')===1) {
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 where `for`='visit' limit 1";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 	}
 	else if(config::get('alert_admin_about_ip_blocks')===2) {
 		$lock_name3='reg8log--admin_ip_block_email_alert--'.SITE_KEY;
-		$reg8log_db->query("select get_lock('$lock_name3', -1)");
+		$GLOBALS['reg8log_db']->query("select get_lock('$lock_name3', -1)");
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 where `for`='email' limit 1";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		require ROOT.'include/code/admin/code_check_ip_blocks_admin_email_alert.php';
 	}
 	else {
 		$lock_name3='reg8log--admin_ip_block_email_alert--'.SITE_KEY;
-		$reg8log_db->query("select get_lock('$lock_name3', -1)");
+		$GLOBALS['reg8log_db']->query("select get_lock('$lock_name3', -1)");
 		$query="update `admin_block_alerts` set `new_ip_blocks`=`new_ip_blocks`+1 limit 2";
-		$reg8log_db->query($query);
+		$GLOBALS['reg8log_db']->query($query);
 		require ROOT.'include/code/admin/code_check_ip_blocks_admin_email_alert.php';
 	}
 }

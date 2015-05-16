@@ -18,20 +18,20 @@ if(!$username_exists and config::get('registeration_enabled') and config::get('a
 	return;
 }
 
-$_username=$reg8log_db->quote_smart($_POST['username']);
+$_username=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 
 $query="select * from `account_incorrect_logins` where `username`=$_username limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $cookie_capacity=30;
 
-if(!$reg8log_db->result_num()) {
-	$attempts=$reg8log_db->quote_smart(pack('l10', REQUEST_TIME, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+if(!$GLOBALS['reg8log_db']->result_num()) {
+	$attempts=$GLOBALS['reg8log_db']->quote_smart(pack('l10', REQUEST_TIME, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 	$pos=2;
 	$field_values="$_username, $username_exists, $attempts, $pos, ".REQUEST_TIME;
 	$query="insert into `account_incorrect_logins` (`username`, `username_exists`, `attempts`, `pos`, `last_attempt`) values($field_values)";
-	$reg8log_db->query($query);
+	$GLOBALS['reg8log_db']->query($query);
 
 	$insert_id=mysql_insert_id();
 	
@@ -60,7 +60,7 @@ if(!$reg8log_db->result_num()) {
 	return;
 }
 
-$rec5=$reg8log_db->fetch_row();
+$rec5=$GLOBALS['reg8log_db']->fetch_row();
 
 $insert_id=$rec5['auto'];
 
@@ -92,14 +92,14 @@ $pos=$rec5['pos'];
 
 $attempts[$pos]=REQUEST_TIME;
 
-$attempts=$reg8log_db->quote_smart(pack('l10', $attempts[1], $attempts[2], $attempts[3], $attempts[4], $attempts[5], $attempts[6], $attempts[7], $attempts[8], $attempts[9], $attempts[10]));
+$attempts=$GLOBALS['reg8log_db']->quote_smart(pack('l10', $attempts[1], $attempts[2], $attempts[3], $attempts[4], $attempts[5], $attempts[6], $attempts[7], $attempts[8], $attempts[9], $attempts[10]));
 
 $pos++;
 if($pos>10) $pos=1;
 
 $query="update `account_incorrect_logins` set `attempts`=$attempts, `pos`=$pos, `last_attempt`=".REQUEST_TIME." where `username`=$_username limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 if(!isset($_COOKIE['reg8log_account_incorrect_logins'])) $cookie_contents=$insert_id.','.REQUEST_TIME;
 else {

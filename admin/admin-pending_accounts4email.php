@@ -43,7 +43,7 @@ $expired2=REQUEST_TIME-config::get('admin_confirmation_time');
 
 $query="select * from `pending_accounts` where (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.')';
 
-if(!$total=$reg8log_db->result_num($query)) {
+if(!$total=$GLOBALS['reg8log_db']->result_num($query)) {
 	if(isset($queries_executed)) echo '<center style="color: #fff; background: green; padding: 3px; font-weight: bold; margin-bottom: 5px">', func::tr('Your command(s) were executed.', true), '</center>';
 	if(!empty($nonexistent_records)) echo '<center style="color: orange; background: #000; padding: 3px; font-weight: bold">', sprintf(func::tr('Info: %d record(s) did not exist.'), $nonexistent_records), '</center>';
 	func::my_exit('<center><h3>'.func::tr('No pending accounts awaiting for email verification found.').'</h3><a href="index.php">'.func::tr('Admin operations').'</a><br><br><a href="../index.php">'.func::tr('Login page').'</a></center>');
@@ -53,7 +53,7 @@ require ROOT.'include/code/admin/code_pagination_params2.php';
 
 $query="select * from `pending_accounts` where (`email_verification_key`!='' and `email_verified`=0 and `timestamp`>=".$expired1.') and (`admin_confirmed`=1 or `timestamp`>='.$expired2.')'." order by `$sort_by` $sort_dir, `auto` limit $per_page offset $offset";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 require ROOT.'include/page/admin/page_pending_accounts4email.php';
 

@@ -32,8 +32,8 @@ else $current_hash=substr(hash('sha256', $logs), 0, 32);
 
 if(!isset($not_readable) and $logs!=='') {
 	$query="select last_hash from error_log_hash limit 1";
-	$reg8log_db->query($query);
-	$rec=$reg8log_db->fetch_row();
+	$GLOBALS['reg8log_db']->query($query);
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 	if($current_hash!==$rec['last_hash']) $new=true;
 }
 
@@ -118,6 +118,6 @@ if(isset($_GET['admin_ops'])) echo '<a href="../admin/index.php">', func::tr('Ad
 
 $query="update error_log_hash set last_hash='$current_hash' limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 ?>

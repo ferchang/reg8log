@@ -23,16 +23,16 @@ if(isset($err_msgs)) break;
 
 $_POST['user']=func::fix_kaaf8yeh($_POST['user']);
 
-$user=$reg8log_db->quote_smart($_POST['user']);
+$user=$GLOBALS['reg8log_db']->quote_smart($_POST['user']);
 
 $query="select * from `accounts` where `{$_POST['which']}`=$user limit 1";
 
-if(!$reg8log_db->result_num($query)) {
+if(!$GLOBALS['reg8log_db']->result_num($query)) {
 	$err_msgs[]=func::tr('no such user found in the accounts table!');
 	break;
 }
 
-$rec=$reg8log_db->fetch_row();
+$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 if($rec['username']==='Admin') {
 	$err_msgs[]=func::tr('Admin account cannot be banned!');
@@ -44,11 +44,11 @@ $ban_until=$rec['banned'];
 $ban_reason ='';
 
 if($rec['banned']) {
-	$username=$reg8log_db->quote_smart($rec['username']);
+	$username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 	$query="select * from `ban_info` where `username`=$username limit 1";
-	if(!$reg8log_db->result_num($query)) echo func::tr('Info: No corresponding ban_info record found for the banned user!');
+	if(!$GLOBALS['reg8log_db']->result_num($query)) echo func::tr('Info: No corresponding ban_info record found for the banned user!');
 	else {
-		$rec2=$reg8log_db->fetch_row();
+		$rec2=$GLOBALS['reg8log_db']->fetch_row();
 		$ban_reason =$rec2['reason'];
 	}
 }
@@ -90,16 +90,16 @@ do {//2
 
 	}
 
-	$user=$reg8log_db->quote_smart($_POST['username']);
+	$user=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 
 	$query="select * from `accounts` where `username`=$user limit 1";
 
-	if(!$reg8log_db->result_num($query)) {
+	if(!$GLOBALS['reg8log_db']->result_num($query)) {
 		$err_msgs[]=func::tr('no such user found in the accounts table!');
 		break;
 	}
 
-	$rec=$reg8log_db->fetch_row();
+	$rec=$GLOBALS['reg8log_db']->fetch_row();
 
 	if(strtolower($rec['username'])==='admin') {
 		$err_msgs[]=func::tr('Admin account cannot be banned!');
@@ -111,11 +111,11 @@ do {//2
 	$ban_reason ='';
 
 	if($rec['banned']) {
-		$username=$reg8log_db->quote_smart($rec['username']);
+		$username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 		$query="select * from `ban_info` where `username`=$username limit 1";
-		if(!$reg8log_db->result_num($query)) echo func::tr('Info: No corresponding ban_info record found for the banned user!');
+		if(!$GLOBALS['reg8log_db']->result_num($query)) echo func::tr('Info: No corresponding ban_info record found for the banned user!');
 		else {
-			$rec2=$reg8log_db->fetch_row();
+			$rec2=$GLOBALS['reg8log_db']->fetch_row();
 			$ban_reason =$rec2['reason'];
 		}
 	}

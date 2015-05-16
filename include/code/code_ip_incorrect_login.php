@@ -17,7 +17,7 @@ if(config::get('ip_block_threshold')===-1 and config::get('ip_captcha_threshold'
 
 if(isset($identified_user) or isset($pending_user) or isset($banned_user)) return;
 
-$ip=$reg8log_db->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
+$ip=$GLOBALS['reg8log_db']->quote_smart(func::inet_pton2($_SERVER['REMOTE_ADDR']));
 
 if(config::get('ip_block_threshold')!==-1 and $ip_incorrect_count+1>=config::get('ip_block_threshold')) {
 	$_username2=$_POST['username'];
@@ -35,7 +35,7 @@ if(!isset($is_pending_account)) $is_pending_account=0;
 
 $query='insert into `ip_incorrect_logins` (`ip`, `account_auto`, `timestamp`, `admin`, `pending_account`) values '."($ip, $account_auto, ".REQUEST_TIME.", $admin, $is_pending_account)";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 $insert_id2=mysql_insert_id();
 

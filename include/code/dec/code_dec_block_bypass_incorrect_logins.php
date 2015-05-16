@@ -12,7 +12,7 @@ if(!is_numeric($tmp33)) return;
 
 $query="update `block_bypass` set `incorrect_logins`=`incorrect_logins`-$tmp33 where `auto`=".$block_bypass_record_auto." and `incorrect_logins`>=$tmp33 limit 1";
 
-$reg8log_db->query($query);
+$GLOBALS['reg8log_db']->query($query);
 
 setcookie('reg8log_block_bypass_incorrect_logins', false, mktime(12,0,0,1, 1, 1990), '/', null, HTTPS, true);
 
