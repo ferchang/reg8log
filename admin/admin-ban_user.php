@@ -53,7 +53,12 @@ do {//1
 
 do {//2
 
-	if((!isset($_POST['ban_form2']) and !isset($_POST['captcha'])) or isset($_POST['cancel'])) break;
+	if(isset($_POST['cancel'])) break;
+
+	if(!isset($_POST['ban']) and !isset($_POST['captcha'])) {
+		
+		break;
+	}
 
 	if(strtolower($_POST['username'])==='admin') {
 		$err_msgs[]=func::tr('Admin account cannot be banned!');

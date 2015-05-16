@@ -207,7 +207,7 @@ if(isset($password_check_needed)) echo '<br>';
 ?>
 <input type="submit" value="<?php echo func::tr('Cancel'); ?>" name="cancel" />
 <input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();"  />
-<input type="submit" value="<?php echo func::tr('Ban'); ?>" name="ban_form2" onClick="return validate()" /></td>
+<input type="submit" value="<?php echo func::tr('Ban'); ?>" name="ban" onClick="return validate()" /></td>
 </td></tr></table></tr>
 <tr><td align="center"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>

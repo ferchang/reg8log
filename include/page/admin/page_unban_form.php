@@ -26,8 +26,8 @@ else echo 'password_exists=false;';
 
 function clear_form() {
 	//--------------
-	if(password_exists) document.ban_form2.password.value='';
-	if(document.ban_form2.remember) document.ban_form2.remember.checked=false;
+	if(password_exists) document.unban_form.password.value='';
+	if(document.unban_form.remember) document.unban_form.remember.checked=false;
 	if(captcha_exists) document.getElementById('captcha_check_status').innerHTML='<?php echo func::tr('(Not case-sensitive)'); ?>';
 	//--------------
 	clear_cap(true);
@@ -37,7 +37,7 @@ function clear_form() {
 //----------------------
 
 function hash_password() {
-	document.ban_form2.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.ban_form2.password.value);
+	document.unban_form.password.value='hashed-'+site_salt+'-'+hex_sha256(site_salt+document.unban_form.password.value);
 }
 
 //----------------------
@@ -52,9 +52,9 @@ function validate() {//client side validator
 
 	//----------------
 	
-	if(password_exists) if(!document.ban_form2.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
+	if(password_exists) if(!document.unban_form.password.value.length) msgs[i++]="<?php echo func::tr('password field is empty!'); ?>";
 
-	if(captcha_exists) validate_captcha(document.ban_form2.captcha.value);
+	if(captcha_exists) validate_captcha(document.unban_form.captcha.value);
 	
 	//----------------
 	
@@ -69,7 +69,7 @@ function validate() {//client side validator
 	}
 	
 	if(captcha_exists) {
-		form_obj=document.ban_form2;
+		form_obj=document.unban_form;
 		check_captcha();
 		return false;
 	}
@@ -90,7 +90,7 @@ function validate() {//client side validator
 </head>
 <body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%"><tr><td align="center">
-<form name="ban_form2" action="" method="post">
+<form name="unban_form" action="" method="post">
 <table bgcolor="#7587b0" style="padding: 5px" >
 <?php
 
