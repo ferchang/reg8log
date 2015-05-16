@@ -1,3 +1,1 @@
-<?php exit; ?>[15-May-2015 23:25:26 UTC] PHP Notice:  Undefined index: req_time in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\class\class_user.php on line 155
-[15-May-2015 23:25:26 UTC] PHP Notice:  Undefined variable: req_time in D:\Program Files\EasyPHP-5.3.9\www\reg8log\include\code\log\code_log_last_login8activity.php on line 15
-[15-May-2015 23:25:26 UTC] reg8log: class reg8log_db: error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where `username`='Admin' limit 1' at line 1 (update `accounts` set `last_activity`= where `username`='Admin' limit 1)
+<?php exit; ?>
