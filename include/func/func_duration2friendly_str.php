@@ -19,66 +19,80 @@ function duration2friendly_str($t, $c=2, $abb=false) {
 	$m=(int)floor($t/60);
 	$s=$t%60;
 
-
 //---------------------------
+
+//echo "<br>$y-$mth-$d-$h-$m-$s<br>";
 
 	$n=0;
 	$f=false;
 
 	do {
 
-		if($y and $n+1===$c and $mth>=6) $y++;
+		if($y and $n+1===$c and $mth>=6) {
+			$y++;
+			$mth=0;
+		}
 
 		if($y) $f=true;
 
 		if($f and ++$n===$c) break;
 
-		if(($f or $mth) and $n+1===$c and $d>=15) $mth++;
+		if(($f or $mth) and $n+1===$c and $d>=15) {
+			$mth++;
+			$d=0;
+		}
 
 		if($mth) $f=true;
 		
 		if($f and ++$n===$c) break;
 		
-		if(($f or $d) and $n+1===$c and $h>=12) $d++;
+		if(($f or $d) and $n+1===$c and $h>=12) {
+			$d++;
+			$h=0;
+		}
 
 		if($d) $f=true;
 
 		if($f and ++$n===$c) break;
 
-		if(($f or $h) and $n+1===$c and $m>=30) $h++;
+		if(($f or $h) and $n+1===$c and $m>=30) {
+			$h++;
+			$m=0;
+		}
 		
 		if($h) $f=true;
 
 		if($f and ++$n===$c) break;
 
-		if(($f or $m) and $n+1===$c and $s>=30) $m++;
+		if(($f or $m) and $n+1===$c and $s>=30) {
+			$m++;
+			$s=0;
+		}
 
 	} while(false);
 
+//echo "$y-$mth-$d-$h-$m-$s<br>";
+	
 //---------------------------
 
-do {
+while($mth===12 or $d===30 or $h===24 or $m===60) {
 	if($mth===12) {
 		$y++;
 		$mth=0;
-		break;
 	}
 	if($d===30) {
 		$mth++;
 		$d=0;
-		break;
 	}
 	if($h===24) {
 		$d++;
 		$h=0;
-		break;
 	}
 	if($m===60) {
 		$h++;
 		$m=0;
-		break;
 	}
-} while(false);
+}
 
 //---------------------------
 
@@ -140,10 +154,8 @@ do {
 
 	if($msg==='1 day') $msg='24 hours';
 	else if($msg==='2 days') $msg='48 hours';
-	//else if($msg==='3 days') $msg='72 hours';
 	else if($msg==='1 روز') $msg='24 ساعت';
 	else if($msg==='2 روز') $msg='48 ساعت';
-	//else if($msg==='3 روز') $msg='72 ساعت';
 
 	if(config::get('lang')==='fa') {
 		$en_num = array('0','1','2','3','4','5','6','7','8','9');
