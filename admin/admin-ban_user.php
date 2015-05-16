@@ -16,7 +16,7 @@ if(!empty($_POST)) require ROOT.'include/code/code_prevent_xsrf.php';
 
 do {//1
 
-	if(!isset($_POST['ban_form1']) or isset($_POST['cancel'])) break;
+	if(!isset($_POST['ban_form1'])) break;
 
 	if($_POST['user']==='') $err_msgs[]=func::tr('user field is empty!');
 	if($_POST['which']!=='username' and $_POST['which']!=='uid') $err_msgs[]='which field value is incorrect!';
@@ -53,12 +53,7 @@ do {//1
 
 do {//2
 
-	if(isset($_POST['cancel'])) break;
-
-	if(!isset($_POST['ban']) and !isset($_POST['captcha'])) {
-		
-		break;
-	}
+	if(isset($_POST['cancel']) or (!isset($_POST['ban']) and !isset($_POST['ban2']))) break;
 
 	if(strtolower($_POST['username'])==='admin') {
 		$err_msgs[]=func::tr('Admin account cannot be banned!');

@@ -6,6 +6,13 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 
 <html <?php echo PAGE_DIR; ?>>
 <head>
+<style>
+#hid {
+ width: 0;  height: 0; margin: 0; padding: 0; position: absolute; top: -5000px; left: -5000px;
+ /* submit button with display:none doesn't work at all in IE8 and chrome */
+ /* i need it clicked with Enter */
+}
+</style>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
@@ -91,6 +98,8 @@ function validate() {//client side validator
 <body bgcolor="#D1D1E9" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000" <?php echo PAGE_DIR; ?>>
 <table width="100%" height="100%"><tr><td align="center">
 <form name="unban_form" action="" method="post">
+<input type="text" name="dummy" style="display: none" disabled />
+<!-- i added this dummy input because, otherwise, IE8 doesn't execute submit button's onclick when the form is submitted with the Enter key -->
 <table bgcolor="#7587b0" style="padding: 5px" >
 <?php
 
@@ -170,10 +179,11 @@ if(isset($captcha_needed) and !$captcha_verified) {
 
 //---------------------
 
+echo '<input type="submit" id=hid name="unban" onClick="return validate()" />';
 echo '<tr><td align="center"><br><input type="submit" value="', func::tr('Cancel'), '" name="cancel">&nbsp;';
 if($rec['banned']) {
 	if(isset($password_check_needed)) echo '<input type="reset" value="', func::tr('Clear'), '" onClick="return clear_form();"  />&nbsp;';
-	echo '<input type="submit" value="', func::tr('Unban'), '" name="unban_form" onclick="return validate()">';
+	echo '<input type="submit" value="', func::tr('Unban'), '" onclick="return validate()" name=unban2>';
 }
 ?>
 <br><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span>

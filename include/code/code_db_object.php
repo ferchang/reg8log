@@ -6,7 +6,7 @@ require ROOT.'include/config/config_dbms.php';
 
 require ROOT.'include/class/class_db.php';
 
-$GLOBALS['reg8log_db']=$GLOBALS['reg8log_db']=new reg8log_db($dbms_info['host'], $dbms_info['user'], $dbms_info['pass'], $dbms_info['db'], true);
+$GLOBALS['reg8log_db']=new reg8log_db($dbms_info['host'], $dbms_info['user'], $dbms_info['pass'], $dbms_info['db'], true);
 
 $GLOBALS['reg8log_db']->query("SET NAMES 'utf8'");
 mysql_set_charset('utf8');

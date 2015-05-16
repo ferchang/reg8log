@@ -15,6 +15,11 @@ if(!defined('CAN_INCLUDE')) exit("<center><h3>Error: Direct access denied!</h3><
 .unit {
 	color: #8fd;
 }
+#hid {
+ width: 0;  height: 0; margin: 0; padding: 0; position: absolute; top: -5000px; left: -5000px;
+ /* submit button with display:none doesn't work at all in IE8 and chrome */
+ /* i need it clicked with Enter */
+}
 </style>
 <script src="../js/forms_common.js"></script>
 <?php require ROOT.'include/code/code_validate_captcha_field-js.php'; ?>
@@ -128,15 +133,6 @@ else if(!empty($err_msgs)) {
 ?>
 <?php
 
-/* if(!empty($err_msgs)) {
-	echo '<tr align="center"><td colspan="3"  style="border: solid thin yellow; font-style: italic;"><span style="color: #800">', func::tr('Errors'), ':</span><br />';
-	foreach($err_msgs as $err_msg) {
-		$err_msg[0]=strtoupper($err_msg[0]);
-		echo "<span style=\"color: yellow\" >$err_msg</span><br />";
-	}
-	echo '</td></tr>';
-} */
-
 echo '<input type="hidden" name="antixsrf_token" value="';
 echo ANTIXSRF_TOKEN4POST;
 echo '">';
@@ -205,9 +201,10 @@ if(isset($captcha_needed) and !$captcha_verified) {
 <?php
 if(isset($password_check_needed)) echo '<br>';
 ?>
+<input id=hid type="submit" name=ban onClick="return validate()" />
 <input type="submit" value="<?php echo func::tr('Cancel'); ?>" name="cancel" />
-<input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();"  />
-<input type="submit" value="<?php echo func::tr('Ban'); ?>" name="ban" onClick="return validate()" /></td>
+<input type="reset" value="<?php echo func::tr('Clear'); ?>" onClick="return clear_form();" />
+<input type="submit" name=ban2 value="<?php echo func::tr('Ban'); ?>" onClick="return validate()" /></td>
 </td></tr></table></tr>
 <tr><td align="center"><span style="color: yellow; font-style: italic" id="cap">&nbsp;</span></td>
 </tr>
