@@ -436,4 +436,10 @@ admin_error_log_access:
 
 see the comments in config_admin.php.
 
+------------------------------------------------
+config vars in config_admin.php:
+------------------------------------------------
+
+password_required4viewing_account_info
+
 ################ High security register and login system ###################
