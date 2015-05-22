@@ -75,7 +75,7 @@ this way, cookie theft would be useless for attackers, unless they can use the s
 this option can be useful when more security is demanded.
 */
 
-$tie_login2ip_option_at_login=true;
+$tie_login2ip_option_at_login=false;
 //with this enabled, all users have the option of tying or not tying their logins to their IPs.
 //note that this is regardless of the setting of $tie_login2ip, but $tie_login2ip value affects the default state of the corresponding checkbox on the login form
 
