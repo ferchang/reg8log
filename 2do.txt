@@ -1,0 +1,4 @@
+- search user facility?
+- add ban button to accounts page?
+- show banned accounts orange in accounts page
+- show tooltip informing whether email was verified

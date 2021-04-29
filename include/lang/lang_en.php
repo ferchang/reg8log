@@ -3,6 +3,7 @@ if(ini_get('register_globals')) exit("<center><h3>error: turn that damned regist
 if(!defined('CAN_INCLUDE')) exit("<center><h3>error: direct access denied!</h3></center>");
 
 return array(
+'unban2' => 'Unban',
 'password_autofill_msg' => 'Note:\nYour selected password is automatically filled into the password field in an encrypted form.\nYou don\\\'t need to type it again unless you want to change it.',
 'email_take_no_action_msg' => 'Warning: Dear receiver, this email has been sent to you by a user account system. It is possible that someone has inadvertently (or intentionally) introduced your email address as his own email address to the system. So if you didn\'t cause sending of this email and don\'t know for what reason it is sent to you, then please take no action and just ignore/delete it.',
 'debug mode turn off instruction msg' => 'To turn off debug mode, set the debug_mode variable in config_common.php file to false',

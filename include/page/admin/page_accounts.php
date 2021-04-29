@@ -300,6 +300,7 @@ else echo '&nbsp;&nbsp;&nbsp;';
 echo '<span style="color: red; font-style: italic" id="cap"></span></td></tr></table>';
 
 echo '</td><td valign=top><input type="button" onclick="check_all(\'del\')" value="', func::tr('All'), '" disabled id="check_all2"></td></tr>';
+
 echo '</table>';
 
 echo '<script>';
