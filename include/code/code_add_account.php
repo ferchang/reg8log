@@ -11,8 +11,8 @@ $autologin_key=func::random_string(43);
 if($_POST['password']!=='') 
 $_fields['password']['value']=bcrypt::hash($_POST['password']);
 
-$field_names='`uid`, `autologin_key`, `timestamp`, ';
-$field_values="'$rid', '$autologin_key', ".REQUEST_TIME.', ';
+$field_names='`uid`, `autologin_key`, `timestamp`, `email_verified`, ';
+$field_values="'$rid', '$autologin_key', ".REQUEST_TIME.', 0, ';
 $i=0;
 
 unset($_fields['captcha']);

@@ -244,7 +244,7 @@ while($rec=$GLOBALS['reg8log_db']->fetch_row()) {
 	else if($rec['gender']==='m') echo func::tr('Male');
 	else echo func::tr('Female');
 	echo '</td>';
-	echo '<td>', $rec['email'], '</td>';
+	func::print_email_td($rec);
 	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), '</td>';
 	echo '<td>';
 	if($rec['banned']==1) echo func::tr('Unlimited');

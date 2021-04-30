@@ -141,7 +141,7 @@ echo '<table border style="margin-top: 7px">
 <tr style="background: brown; color: #fff"><th>', func::tr('Username'), '</th><th>', func::tr('Uid'), '</th><th>', func::tr('Email'), '</th><th>', func::tr('Gender'), '</th><th>', func::tr('Member for'), '</th></tr><tr style="background: #ccc" align="center">';
 echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<td>', $rec['uid'], '</td>';
-echo '<td>', $rec['email'], '</td>';
+func::print_email_td($rec);
 echo '<td>';
 if($rec['gender']==='n') echo '?';
 else if($rec['gender']==='m') echo func::tr('Male');

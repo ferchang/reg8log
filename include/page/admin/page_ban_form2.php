@@ -148,7 +148,7 @@ require ROOT.'include/code/code_generate_form_id.php';
 echo '<td>', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '</td>';
 echo '<input type="hidden" name="username" value="', htmlspecialchars($rec['username'], ENT_QUOTES, 'UTF-8'), '">';
 echo '<td>', $rec['uid'], '</td>';
-echo '<td>', $rec['email'], '</td>';
+func::print_email_td($rec);
 echo '<td>';
 if($rec['gender']==='n') echo '?';
 else if($rec['gender']==='m') echo func::tr('Male');

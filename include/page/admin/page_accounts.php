@@ -247,10 +247,12 @@ echo '<th  class="admin_action">', func::tr('Delete'), '</th></tr>';
 $i=0;
 $r=false;
 while($rec=$GLOBALS['reg8log_db']->fetch_row()) {
-	if(!$r) echo '<tr align="center" style="background: ', $color1,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
-	else echo '<tr align="center" style="background: ', $color2,'" onmouseover="highlight(this);" onmouseout="unhighlight(this);"';
+	echo '<tr align="center" ';
+	if($rec['banned']==1 or $rec['banned']>REQUEST_TIME) echo 'style="background: orange" ';
+	if(!$r) echo "style='background: $color1' ";
+	else echo "style='background: $color2' ";
 	$i++;
-	echo ' id="row', $i, '">';
+	echo 'onmouseover="highlight(this);" onmouseout="unhighlight(this);" id="row', $i, '">';
 	$r=!$r;
 	$row=($page-1)*$per_page+$i;
 	echo '<td>', $row, '</td>';
@@ -261,7 +263,9 @@ while($rec=$GLOBALS['reg8log_db']->fetch_row()) {
 	else if($rec['gender']==='m') echo func::tr('Male');
 	else echo func::tr('Female');
 	echo '</td>';
-	echo '<td>', $rec['email'], '</td>';
+	
+	func::print_email_td($rec);
+	
 	echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['timestamp'], 2), func::tr(' ago'), '</td>';
 	if(config::get('log_last_login')) {
 		if($rec['last_login']) echo '<td>', func::duration2friendly_str(REQUEST_TIME-$rec['last_login'], 2), func::tr(' ago'), '</td>';

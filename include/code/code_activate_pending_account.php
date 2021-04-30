@@ -8,15 +8,16 @@ require ROOT.'include/code/code_generate_unique_random_id.php';
 
 $autologin_key=func::random_string(43);
 
-$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`';
+$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`, `email_verified`';
 
 $username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 $email=$GLOBALS['reg8log_db']->quote_smart($rec['email']);
 $gender=$rec['gender'];
 $timestamp=REQUEST_TIME; // should we use $rec['timestamp'] instead?
 $password_hash=$GLOBALS['reg8log_db']->quote_smart($rec['password_hash']);
+$email_verified=$rec['email_verified'];
 
-$field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp";
+$field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp, $email_verified";
 /* note: rid in the $field_values is not $_GET['rid'];
 it was generated in the code_generate_unique_random_id.php */
 

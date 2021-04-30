@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `last_protection` tinyint(4) NOT NULL DEFAULT '-1',
   `tie_login2ip` tinyint(1) NOT NULL DEFAULT '0',
   `autologin_expiration` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'unix timestamp',
+  `email_verified` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`auto`),
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `username` (`username`),

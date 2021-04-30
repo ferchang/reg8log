@@ -13,7 +13,7 @@ $username=$GLOBALS['reg8log_db']->quote_smart($_POST['username']);
 $email=$GLOBALS['reg8log_db']->quote_smart($_POST['email']);
 $timestamp=REQUEST_TIME;
 
-$query="insert into `accounts` (`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`) values ('$rid', $username, $password_hash, $email, 'n', '$autologin_key', $timestamp)";
+$query="insert into `accounts` (`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`, `email_verified`) values ('$rid', $username, $password_hash, $email, 'n', '$autologin_key', $timestamp, 0)";
 
 $GLOBALS['reg8log_db']->query($query);
 

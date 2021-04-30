@@ -55,6 +55,7 @@ if(!$rec['admin_confirmed']) {
   require ROOT.'include/page/page_success.php';
 }
 else {
+  $rec['email_verified']=1;
   require ROOT.'include/code/code_activate_pending_account.php';
   if(config::get('login_upon_register')) {
     $_username=$rec['username'];

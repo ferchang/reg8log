@@ -1,8 +1,4 @@
-- search user facility?
 - add ban button to accounts page?
-- show banned accounts orange in accounts page
-- show tooltip informing whether email was verified
-- removing all uses of md5 and sha1?
-- making it more cache-friendly
+- search user facility?
 - adding alert emails capability to error logging facility?
 - supporting parallel login from multiple machines?

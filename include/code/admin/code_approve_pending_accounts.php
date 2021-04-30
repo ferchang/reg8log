@@ -43,15 +43,16 @@ foreach($appr as $auto) {
 
 	$autologin_key=func::random_string(43);
 
-	$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`';
+	$field_names='`uid`, `username`, `password_hash`, `email`, `gender`, `autologin_key`, `timestamp`, `email_verified`';
 
 	$username=$GLOBALS['reg8log_db']->quote_smart($rec['username']);
 	$email=$GLOBALS['reg8log_db']->quote_smart($rec['email']);
 	$gender=$rec['gender'];
 	$timestamp=REQUEST_TIME; // should we use $rec['timestamp'] instead?
 	$password_hash=$GLOBALS['reg8log_db']->quote_smart($rec['password_hash']);
+	$email_verified=$rec['email_verified'];
 
-	$field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp";
+	$field_values="'$rid', $username, $password_hash, $email, '$gender', '$autologin_key', $timestamp, $email_verified";
 
 	$query="insert into `accounts` ($field_names) values ($field_values)";
 	$GLOBALS['reg8log_db']->query($query);

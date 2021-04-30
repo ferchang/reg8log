@@ -16,6 +16,7 @@ return array(
 	'inet_ntop2'=>'func_inet.php',
 	'fix_kaaf8yeh'=>'func_kaaf8yeh.php',
 	'my_exit'=>'func_my_exit.php',
+	'print_email_td'=>'func_print_email_td.php',
 	'crypt_random'=>'func_random.php',
 	'random_bytes'=>'func_random.php',
 	'random_string'=>'func_random.php',
