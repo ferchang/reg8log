@@ -1,4 +1,3 @@
-- add ban button to accounts page?
 - search user facility?
 - adding alert emails capability to error logging facility?
 - supporting parallel login from multiple machines?
