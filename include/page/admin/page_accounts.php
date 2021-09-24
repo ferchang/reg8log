@@ -280,8 +280,8 @@ while($rec=$GLOBALS['reg8log_db']->fetch_row()) {
 		else echo '<td>', func::tr('N/A'), '</td>';
 	}
 
-	if($rec['banned']==1 or $rec['banned']>REQUEST_TIME) echo '<td>', func::tr('Yes'), '</td>';
-	else echo '<td>', func::tr('No'), '</td>';
+	if($rec['banned']==1 or $rec['banned']>REQUEST_TIME) echo '<td><a href="admin-unban_user.php?uid=', $rec['uid'], '" target=_blank>', func::tr('Yes'), '</a></td>';
+	else echo '<td><a href="admin-ban_user.php?uid=', $rec['uid'], '" target=_blank>', func::tr('No'), '</a></td>';
 	echo '<td><input type="checkbox" name="', $rec['auto'], '" id="del', $row, '" value="del" onclick="delete_click(', $i, ', ', 'this.checked)"';
 	if(isset($_POST[$rec['auto']])) {
 		echo ' checked ';
